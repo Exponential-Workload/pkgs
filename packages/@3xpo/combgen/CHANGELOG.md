@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.2
+
+### Patch Changes
+
+- bump
+
 ## 0.2.1
 
 ### Patch Changes

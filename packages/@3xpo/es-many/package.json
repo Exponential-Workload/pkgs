@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/es-many",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Making esbuild not need 20 scripts in your package.json",
   "source": "src/lib.ts",
   "main": "dist/lib.bundle.cjs",
