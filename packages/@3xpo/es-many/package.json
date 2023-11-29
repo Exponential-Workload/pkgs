@@ -1,0 +1,89 @@
+{
+  "name": "@3xpo/es-many",
+  "version": "0.2.1",
+  "description": "Making esbuild not need 20 scripts in your package.json",
+  "source": "src/lib.ts",
+  "main": "dist/lib.bundle.cjs",
+  "module": "dist/lib.bundle.mjs",
+  "types": "dist/lib.d.ts",
+  "scripts": {
+    "build": "concurrently \"tsc --emitDeclarationOnly\" \"npm:build:es:cli\" \"npm:build:es:lib\"",
+    "build:es:lib": "npm run build:exec -- --minify true,false --platform node,browser,neutral --format cjs,esm --bundle true --args \"src/lib.ts --sourcemap --packages=external\" --output dist/lib",
+    "build:es:cli": "npm run build:exec -- --minify true,false --platform node --format esm --bundle true --args \"src/cli.ts --sourcemap --packages=external\" --output dist/cli",
+    "build:exec": "esbuild src/cli.ts --bundle --format=esm --platform=node | node - ",
+    "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
+    "prepublishOnly": "pnpm build",
+    "test": "jest"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/lib.bundle.mjs",
+      "require": "./dist/lib.bundle.cjs",
+      "types": "./dist/lib.d.ts",
+      "node": "./dist/lib.node.bundle.mjs",
+      "default": "./dist/lib.bundle.mjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.node.bundle.mjs",
+      "require": "./dist/cli.node.bundle.cjs",
+      "types": "./dist/cli.node.bundle.d.ts",
+      "node": "./dist/cli.node.bundle.mjs",
+      "default": "./dist/cli.node.bundle.mjs"
+    }
+  },
+  "author": "Expo",
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/Written.git",
+    "directory": "packages/@3xpo/es-many/"
+  },
+  "homepage": "https://codeberg.org/Expo/Written/src/branch/senpai/packages/@3xpo/es-many/",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/Written/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@3xpo/argparser": "^1.1.2",
+    "@3xpo/combgen": "workspace:^",
+    "esbuild": "^0.19.8",
+    "zod": "^3.22.4"
+  },
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "bin": {
+    "esmany": "./dist/cli.node.bundle.mjs",
+    "es-many": "./dist/cli.node.bundle.mjs"
+  },
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.10",
+    "concurrently": "^8.2.2",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "ts-jest": "^29.1.1"
+  }
+}

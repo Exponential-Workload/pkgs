@@ -1,0 +1,78 @@
+{
+  "name": "@3xpo/buildtools",
+  "version": "0.1.0",
+  "description": "Build Tool THings",
+  "scripts": {
+    "build": "nx run-many -t build --parallel=8",
+    "test": "nx run-many -t test --parallel=16",
+    "dev": "nx run-many -t dev --parallel=8192",
+    "many": "pnpm run -r --filter \"./packages/@*/*\"",
+    "rexec": "pnpm -r --filter \"./packages/@*/*\" exec",
+    "preinstall": "node scripts/pk",
+    "pub-prepare": "pnpm build && pnpm test && pnpm changeset version && node scripts/pk",
+    "pub-git": "git add . && git commit -m \"chore(release): Update Repository\" && git push || true && git push --tags || true",
+    "pub-release": "pnpm publish -r --filter \"./packages/@*/*\"",
+    "pub": "pnpm pub-prepare && pnpm pub-git && pnpm pub-release",
+    "new": "node scripts/new"
+  },
+  "keywords": [
+    "written",
+    "appwrite",
+    "making-appwrite-easier",
+    "routing",
+    "server",
+    "backend"
+  ],
+  "author": "Expo",
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/Written.git"
+  },
+  "homepage": "https://codeberg.org/Expo/Written",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/Written/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@3xpo/es-many": "workspace:^",
+    "@changesets/cli": "^2.27.1",
+    "@types/fs-extra": "^11.0.4",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.19.8",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0",
+    "prompts": "^2.4.2",
+    "@nx/js": "17.1.3",
+    "nx": "17.1.3"
+  },
+  "private": true,
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist/",
+    "declaration": true,
+    "sourceMap": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "noImplicitOverride": false
+  },
+  "include": ["src/**/*", "src/*"],
+  "exclude": ["dist/**/*", "dist/*", "src/*.test.ts", "src/**/*.test.ts"]
+}
