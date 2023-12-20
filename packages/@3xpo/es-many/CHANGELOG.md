@@ -1,5 +1,13 @@
 # @3xpo/es-many
 
+## 0.2.4
+
+### Patch Changes
+
+- 24efbb5: fix: Update the repo url
+- Updated dependencies [24efbb5]
+  - @3xpo/combgen@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes
