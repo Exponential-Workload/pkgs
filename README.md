@@ -1,10 +1,10 @@
-# devtools
+# @3xpo/devtools
 
 TypeScript tools for creating things.
 
 ## ToC
 
-- [devtools](#devtools)
+- [@3xpo/devtools](#3xpodevtools)
   - [ToC](#toc)
   - [Libraries](#libraries)
   - [Tools](#tools)
