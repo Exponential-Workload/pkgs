@@ -40,11 +40,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/Written.git"
+    "url": "https://codeberg.org/Expo/devtools.git"
   },
-  "homepage": "https://codeberg.org/Expo/Written",
+  "homepage": "https://codeberg.org/Expo/devtools",
   "bugs": {
-    "url": "https://codeberg.org/Expo/Written/issues",
+    "url": "https://codeberg.org/Expo/devtools/issues",
     "email": "expo@expo.moe"
   },
   "license": "MIT",

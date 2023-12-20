@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/Written.git",
+    "url": "https://codeberg.org/Expo/devtools.git",
     "directory": "packages/@3xpo/combgen/"
   },
-  "homepage": "https://codeberg.org/Expo/Written/src/branch/senpai/packages/@3xpo/combgen/",
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/combgen/",
   "bugs": {
-    "url": "https://codeberg.org/Expo/Written/issues",
+    "url": "https://codeberg.org/Expo/devtools/issues",
     "email": "expo@expo.moe"
   },
   "license": "MIT",
