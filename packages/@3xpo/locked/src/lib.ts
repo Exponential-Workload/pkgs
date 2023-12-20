@@ -17,11 +17,14 @@ export class BubblingException extends LockException {
   }
 }
 
+/** The lock class */
 export class Locked {
   protected activeLocks: Record<symbol | string, LockPromise[]> = {};
 
-  public throwOnLockFuncErr = false;
+  /** For {@link Locked.lockFunc}, this determines if we should throw an error before unlocking for lock errors, leaving the lock in a state of limbo - if false, we unlock first. */
+  public throwBeforeUnlockOnLockFuncErr = false;
 
+  /** Wraps a function in a lock */
   public lockFunc<
     Rt extends any,
     Arg extends any[],
@@ -34,7 +37,7 @@ export class Locked {
         unlock();
         return rt;
       } catch (error) {
-        if (this.throwOnLockFuncErr)
+        if (this.throwBeforeUnlockOnLockFuncErr)
           throw new BubblingException(
             `Threw error in lockFunc callback, not unlocking. Key: ${JSON.stringify(
               key,
@@ -51,6 +54,7 @@ export class Locked {
     };
   }
 
+  /** Creates a lock, returning the unlocking method */
   public lock<ReturnType = undefined>(
     key: symbol | string,
   ): Promise<LockResolutionFunction<ReturnType>> {
