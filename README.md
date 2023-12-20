@@ -1,3 +1,20 @@
 # devtools
 
 TypeScript tools for creating things.
+
+## ToC
+
+- [devtools](#devtools)
+  - [ToC](#toc)
+  - [Libraries](#libraries)
+  - [Tools](#tools)
+
+## Libraries
+
+- [@3xpo/combgen](./packages/@3xpo/combgen/): A Combination Generation Library
+- [@3xpo/resolvablepromise](./packages/@3xpo/resolvablepromise/): Promises which can be resolved from their object.
+- [@3xpo/locked](./packages/@3xpo/locked/): 21st Century Locking Library
+
+## Tools
+
+- [@3xpo/es-many](./packages/@3xpo/es-many/): Call esbuild with many input/output variants.
