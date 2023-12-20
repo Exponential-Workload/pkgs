@@ -1,3 +1,3 @@
-# buildtools
+# devtools
 
-Tools primarily for building things
+TypeScript tools for creating things.

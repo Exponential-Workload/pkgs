@@ -1,7 +1,7 @@
 {
-  "name": "@3xpo/buildtools",
+  "name": "@3xpo/devtools",
   "version": "0.1.0",
-  "description": "Build Tool THings",
+  "description": "Development Tool Things",
   "scripts": {
     "build": "nx run-many -t build --parallel=8",
     "test": "nx run-many -t test --parallel=16",
