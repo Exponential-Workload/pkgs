@@ -1,5 +1,3 @@
-## ToC
-
 - [@3xpo/devtools](#3xpodevtools)
   - [Libraries](#libraries)
   - [Tools](#tools)
