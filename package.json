@@ -56,7 +56,10 @@
     "fs-extra": "^11.2.0"
   },
   "devDependencies": {
+    "@3xpo/combgen": "workspace:^",
     "@3xpo/es-many": "workspace:^",
+    "@3xpo/locked": "workspace:^",
+    "@3xpo/resolvablepromise": "workspace:^",
     "@changesets/cli": "^2.27.1",
     "@nx/js": "17.2.6",
     "@types/fs-extra": "^11.0.4",

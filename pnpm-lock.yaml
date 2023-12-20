@@ -12,9 +12,18 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0
     devDependencies:
+      '@3xpo/combgen':
+        specifier: workspace:^
+        version: link:packages/@3xpo/combgen
       '@3xpo/es-many':
         specifier: workspace:^
         version: link:packages/@3xpo/es-many
+      '@3xpo/locked':
+        specifier: workspace:^
+        version: link:packages/@3xpo/locked
+      '@3xpo/resolvablepromise':
+        specifier: workspace:^
+        version: link:packages/@3xpo/resolvablepromise
       '@changesets/cli':
         specifier: ^2.27.1
         version: 2.27.1
