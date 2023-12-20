@@ -2,7 +2,7 @@
   - [Libraries](#libraries)
   - [Tools](#tools)
 
-![](https://codeberg.org/Expo/devtools/raw/branch/senpai/social.png)
+[![](https://codeberg.org/Expo/devtools/raw/branch/senpai/social.png)](#3xpo-devtools)
 
 # @3xpo/devtools
 
