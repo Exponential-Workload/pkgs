@@ -1,5 +1,13 @@
 # @3xpo/es-many
 
+## 0.2.3
+
+### Patch Changes
+
+- 51808db: Upgrade Dependencies
+- Updated dependencies [51808db]
+  - @3xpo/combgen@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
