@@ -50,4 +50,41 @@ describe('ResolvablePromise', () => {
 
     expect(callback).toHaveBeenCalled();
   });
+
+  it('should resolve when called via a method', async () => {
+    const callback = jest.fn();
+    const promise = new ResolvablePromise<undefined>();
+
+    promise.then(callback);
+
+    setTimeout(() => promise.resolve());
+
+    await promise;
+
+    expect(callback).toHaveBeenCalled();
+  });
+
+  it('should reject when called via a method', async () => {
+    const thenHandler = jest.fn();
+    const catchHandler = jest.fn();
+    const tryCatchHandler = jest.fn();
+    const promise = new ResolvablePromise<undefined>();
+
+    promise.then(thenHandler);
+    promise.catch(catchHandler);
+
+    const err = new Error('fake error');
+
+    setTimeout(() => promise.reject(err));
+
+    try {
+      await promise;
+    } catch (error) {
+      tryCatchHandler(error);
+    }
+
+    expect(thenHandler).toHaveBeenCalledTimes(0);
+    expect(catchHandler).toHaveBeenCalledWith(err);
+    expect(tryCatchHandler).toHaveBeenCalledWith(err);
+  });
 });

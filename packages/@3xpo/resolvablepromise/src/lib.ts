@@ -1,4 +1,6 @@
-export type PromiseResolutionFunction<T> = (value: T | PromiseLike<T>) => void;
+export type PromiseResolutionFunction<T> = T extends undefined
+  ? () => void
+  : (value: T | PromiseLike<T>) => void;
 export type PromiseRejectionFunction = (reason?: any) => void;
 export type PromiseCallbackFunction<T> = (
   resolve: PromiseResolutionFunction<T>,
@@ -30,11 +32,12 @@ class RawStatePromise<
   public constructor(callback: PromiseCallbackFunction<T>) {
     super(((res, rej) => {
       return callback(
+        // @ts-ignore
         (value: T) => {
           const p = this as RawStatePromise<T, true, false>;
           p.resolved = true;
           p.value = value;
-          return res(value);
+          return res(value ?? void 0);
         },
         reason => {
           if (RawStatePromise.catchNewlyCreatedPromises)
@@ -74,6 +77,7 @@ export class ResolvablePromise<T> extends StatePromise<T> {
       this.resolve = resolve;
       this.reject = reject;
     }
+    setRsRj = _setRsRj;
   }
 }
 export default ResolvablePromise;
