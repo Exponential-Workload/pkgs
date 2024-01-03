@@ -85,6 +85,10 @@ importers:
       '@3xpo/events':
         specifier: ^1.0.7
         version: 1.0.7
+    optionalDependencies:
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
     devDependencies:
       '@3xpo/es-many':
         specifier: workspace:^
