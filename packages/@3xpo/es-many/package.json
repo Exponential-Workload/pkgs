@@ -57,7 +57,7 @@
   "dependencies": {
     "@3xpo/argparser": "^1.1.2",
     "@3xpo/combgen": "workspace:^",
-    "esbuild": "^0.19.10",
+    "esbuild": "^0.19.11",
     "zod": "^3.22.4"
   },
   "files": [
