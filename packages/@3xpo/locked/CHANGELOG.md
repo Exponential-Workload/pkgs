@@ -1,5 +1,13 @@
 # @3xpo/locked
 
+## 0.1.2
+
+### Patch Changes
+
+- Upgrade Dependencies
+- Updated dependencies
+  - @3xpo/resolvablepromise@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

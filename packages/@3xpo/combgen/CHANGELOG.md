@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.5
+
+### Patch Changes
+
+- Upgrade Dependencies
+
 ## 0.2.4
 
 ### Patch Changes

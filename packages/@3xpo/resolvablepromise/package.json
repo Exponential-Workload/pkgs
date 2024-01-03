@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/resolvablepromise",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Promises which can be resolved from their object",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
@@ -76,6 +76,7 @@
     }
   },
   "displayName": "ResolvablePromise",
+  "dependencies": {},
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@types/jest": "^29.5.11",
