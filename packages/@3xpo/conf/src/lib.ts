@@ -1,5 +1,5 @@
 import EventEmitter from '@3xpo/events';
-import { type ZodType, type ZodObject } from 'zod';
+import type { ZodType, ZodObject } from 'zod';
 
 const clone =
   typeof structuredClone !== 'undefined'
