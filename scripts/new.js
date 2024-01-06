@@ -144,9 +144,9 @@ import { execSync } from 'child_process';
   pkg.exports = pkg.exports ?? {};
   pkg.exports['.'] = pkg.exports['.'] ?? {};
   Object.entries({
+    types: pkg.types,
     import: pkg.module,
     require: pkg.main,
-    types: pkg.types,
     node: pkg.module,
     default: pkg.module,
   }).forEach(([k, v]) => (pkg.exports['.'][k] = v));

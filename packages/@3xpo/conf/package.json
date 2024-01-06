@@ -47,15 +47,15 @@
     "tsconfig.json"
   ],
   "source": "./src/lib.ts",
-  "types": "./dist/lib.d.ts",
   "main": "./dist/lib.bundle.min.cjs",
   "module": "./dist/lib.bundle.min.mjs",
+  "types": "./dist/lib.d.ts",
   "typings": "./dist/lib.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/lib.d.ts",
       "import": "./dist/lib.bundle.min.mjs",
       "require": "./dist/lib.bundle.min.cjs",
-      "types": "./dist/lib.d.ts",
       "node": "./dist/lib.node.bundle.min.mjs",
       "default": "./dist/lib.bundle.min.mjs"
     }

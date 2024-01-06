@@ -5,6 +5,7 @@
   "source": "src/lib.ts",
   "main": "dist/lib.bundle.cjs",
   "module": "dist/lib.bundle.mjs",
+  "typings": "dist/lib.d.ts",
   "types": "dist/lib.d.ts",
   "scripts": {
     "build": "concurrently \"tsc --emitDeclarationOnly\" \"npm:build:es:cli\" \"npm:build:es:lib\"",
@@ -17,16 +18,16 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/lib.d.ts",
       "import": "./dist/lib.bundle.mjs",
       "require": "./dist/lib.bundle.cjs",
-      "types": "./dist/lib.d.ts",
       "node": "./dist/lib.node.bundle.mjs",
       "default": "./dist/lib.bundle.mjs"
     },
     "./cli": {
+      "types": "./dist/cli.node.bundle.d.ts",
       "import": "./dist/cli.node.bundle.mjs",
       "require": "./dist/cli.node.bundle.cjs",
-      "types": "./dist/cli.node.bundle.d.ts",
       "node": "./dist/cli.node.bundle.mjs",
       "default": "./dist/cli.node.bundle.mjs"
     }

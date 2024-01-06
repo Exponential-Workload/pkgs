@@ -54,23 +54,23 @@
   "typings": "./dist/lib.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/lib.d.ts",
       "import": "./dist/lib.bundle.min.mjs",
       "require": "./dist/lib.bundle.min.cjs",
-      "types": "./dist/lib.d.ts",
       "node": "./dist/lib.node.bundle.min.mjs",
       "default": "./dist/lib.bundle.min.mjs"
     },
     "./node": {
+      "types": "./dist/lib.d.ts",
       "import": "./dist/lib.node.bundle.min.mjs",
       "require": "./dist/lib.node.bundle.min.cjs",
-      "types": "./dist/lib.d.ts",
       "node": "./dist/lib.node.bundle.min.mjs",
       "default": "./dist/lib.node.bundle.min.mjs"
     },
     "./browser": {
+      "types": "./dist/lib.d.ts",
       "import": "./dist/lib.browser.bundle.min.mjs",
       "require": "./dist/lib.browser.bundle.min.cjs",
-      "types": "./dist/lib.d.ts",
       "node": "./dist/lib.node.bundle.min.mjs",
       "default": "./dist/lib.browser.bundle.min.mjs"
     }
