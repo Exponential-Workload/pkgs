@@ -35,9 +35,7 @@
     "email": "expo@expo.moe"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=v20.0.0"
-  },
+  "engines": {},
   "type": "module",
   "sideEffects": false,
   "files": [
@@ -57,7 +55,7 @@
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.bundle.min.mjs",
       "require": "./dist/lib.bundle.min.cjs",
-      "node": "./dist/lib.node.bundle.min.mjs",
+      "node": "./dist/lib.bundle.min.mjs",
       "default": "./dist/lib.bundle.min.mjs"
     }
   },
