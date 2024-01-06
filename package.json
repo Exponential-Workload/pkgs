@@ -6,10 +6,11 @@
     "build": "nx run-many -t build --parallel=8",
     "test": "nx run-many -t test --parallel=16",
     "dev": "nx run-many -t dev --parallel=8192",
+    "plint": "nx exec publint",
     "many": "pnpm run -r --filter \"./packages/@*/*\"",
     "rexec": "pnpm -r --filter \"./packages/@*/*\" exec",
     "preinstall": "node scripts/pk",
-    "pub-prepare": "pnpm build && pnpm test && pnpm changeset version && node scripts/pk",
+    "pub-prepare": "pnpm build && concurrently \"npm:test\" \"npm:plint\" && pnpm changeset version && node scripts/pk",
     "pub-git": "git add . && git commit -m \"chore(release): Update Repository\" && git push || true && git push --tags || true",
     "pub-release": "pnpm publish -r --filter \"./packages/@*/*\" --access public",
     "pub": "pnpm pub-prepare && pnpm pub-git && pnpm pub-release",
@@ -69,7 +70,8 @@
     "nodemon": "^3.0.2",
     "nx": "17.2.8",
     "prettier": "^3.1.1",
-    "prompts": "^2.4.2"
+    "prompts": "^2.4.2",
+    "publint": "^0.2.7"
   },
   "private": true,
   "files": [
