@@ -10,9 +10,11 @@ TypeScript tools for creating things.
 
 ## Libraries
 
-- [@3xpo/combgen](./packages/@3xpo/combgen/): A Combination Generation Library
+- [@3xpo/combgen](./packages/@3xpo/combgen/): A Combination Generation Library.
 - [@3xpo/resolvablepromise](./packages/@3xpo/resolvablepromise/): Promises which can be resolved from their object.
-- [@3xpo/locked](./packages/@3xpo/locked/): 21st Century Locking Library
+- [@3xpo/locked](./packages/@3xpo/locked/): 21st Century Locking Library.
+- [@3xpo/promi](./packages/@3xpo/promi/): Promisify callback-based functions with ease.
+- [@3xpo/conf](./packages/@3xpo/conf/): Microscopic wrapper around a configuration object.
 
 ## Tools
 
