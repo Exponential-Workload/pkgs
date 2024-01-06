@@ -32,9 +32,7 @@
     "email": "expo@expo.moe"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=v20.0.0"
-  },
+  "engines": {},
   "type": "module",
   "exports": {
     ".": {
