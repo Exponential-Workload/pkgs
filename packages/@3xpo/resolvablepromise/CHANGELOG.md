@@ -1,5 +1,11 @@
 # @3xpo/resolvablepromise
 
+## 0.2.1
+
+### Patch Changes
+
+- 6a6e86a: Add ResolvablePromise.all and ResolvablePromise.race, which just wrap the builtins
+
 ## 0.2.0
 
 ### Minor Changes
