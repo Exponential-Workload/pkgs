@@ -1,5 +1,11 @@
 # @3xpo/conf
 
+## 0.2.2
+
+### Patch Changes
+
+- cabca24: remove node engine requirement
+
 ## 0.2.1
 
 ### Patch Changes

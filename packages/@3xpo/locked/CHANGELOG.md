@@ -1,5 +1,13 @@
 # @3xpo/locked
 
+## 0.1.4
+
+### Patch Changes
+
+- cabca24: remove node engine requirement
+- Updated dependencies [8063558]
+  - @3xpo/resolvablepromise@0.2.0
+
 ## 0.1.3
 
 ### Patch Changes

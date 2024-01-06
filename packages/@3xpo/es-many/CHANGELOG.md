@@ -1,5 +1,12 @@
 # @3xpo/es-many
 
+## 0.2.7
+
+### Patch Changes
+
+- Updated dependencies [cabca24]
+  - @3xpo/combgen@0.2.7
+
 ## 0.2.6
 
 ### Patch Changes

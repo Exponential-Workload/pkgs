@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.7
+
+### Patch Changes
+
+- cabca24: remove node engine requirement
+
 ## 0.2.6
 
 ### Patch Changes

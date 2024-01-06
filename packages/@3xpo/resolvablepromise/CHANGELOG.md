@@ -1,5 +1,11 @@
 # @3xpo/resolvablepromise
 
+## 0.2.0
+
+### Minor Changes
+
+- 8063558: the non-neutral builds are identical to neutral, so they've been removed
+
 ## 0.1.3
 
 ### Patch Changes
