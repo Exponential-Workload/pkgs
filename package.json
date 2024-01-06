@@ -6,7 +6,7 @@
     "build": "nx run-many -t build --parallel=8",
     "test": "nx run-many -t test --parallel=16",
     "dev": "nx run-many -t dev --parallel=8192",
-    "plint": "nx exec publint",
+    "plint": "nx exec -- publint",
     "many": "pnpm run -r --filter \"./packages/@*/*\"",
     "rexec": "pnpm -r --filter \"./packages/@*/*\" exec",
     "preinstall": "node scripts/pk",
