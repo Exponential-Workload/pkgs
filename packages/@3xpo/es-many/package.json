@@ -10,7 +10,7 @@
   "scripts": {
     "build": "concurrently \"tsc --emitDeclarationOnly\" \"npm:build:es:cli\" \"npm:build:es:lib\"",
     "build:es:lib": "npm run build:exec -- --minify true,false --platform node,browser,neutral --format cjs,esm --bundle true --args \"src/lib.ts --sourcemap --packages=external\" --output dist/lib",
-    "build:es:cli": "npm run build:exec -- --minify true,false --platform node --format esm --bundle true --args \"src/cli.ts --sourcemap --packages=external\" --output dist/cli",
+    "build:es:cli": "npm run build:exec -- --minify true,false --platform node --format esm,cjs --bundle true --args \"src/cli.ts --sourcemap --packages=external\" --output dist/cli",
     "build:exec": "esbuild src/cli.ts --bundle --format=esm --platform=node | node - ",
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
     "prepublishOnly": "pnpm build",
@@ -25,7 +25,7 @@
       "default": "./dist/lib.bundle.mjs"
     },
     "./cli": {
-      "types": "./dist/cli.node.bundle.d.ts",
+      "types": "./dist/cli.d.ts",
       "import": "./dist/cli.node.bundle.mjs",
       "require": "./dist/cli.node.bundle.cjs",
       "node": "./dist/cli.node.bundle.mjs",
