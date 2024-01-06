@@ -46,7 +46,6 @@ const copyFields = [
   'homepage',
   'bugs',
   'license',
-  'engines',
   'type',
 ];
 const copyFieldsIfNull = [
@@ -58,6 +57,7 @@ const copyFieldsIfNull = [
   'version',
   'dependencies',
   'devDependencies',
+  'engines',
   'files',
 ];
 
