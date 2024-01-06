@@ -87,4 +87,91 @@ describe('ResolvablePromise', () => {
     expect(catchHandler).toHaveBeenCalledWith(err);
     expect(tryCatchHandler).toHaveBeenCalledWith(err);
   });
+
+  const delayedPromise = <T>(
+    value: T,
+    delay: number,
+    isBuiltinImpl = false,
+  ): Promise<T> | ResolvablePromise<T> =>
+    new (isBuiltinImpl ? Promise : ResolvablePromise)(resolve =>
+      setTimeout(() => resolve(value), delay),
+    );
+  describe('ResolvablePromiseConstructor.all', () => {
+    test('should be instanceof Promise', async () => {
+      expect(ResolvablePromise.all([Promise.resolve('hi')])).toBeInstanceOf(
+        Promise,
+      );
+    });
+
+    test('should be instanceof ResovlablePromise', async () => {
+      expect(ResolvablePromise.all([Promise.resolve('hi')])).toBeInstanceOf(
+        ResolvablePromise,
+      );
+    });
+
+    test('should resolve with an array of resolved values', async () => {
+      const promises = [
+        delayedPromise('one', 100),
+        delayedPromise('two', 200, true),
+        delayedPromise('three', 300),
+      ];
+
+      const result = await (ResolvablePromise.all(
+        promises,
+      ) satisfies ResolvablePromise<string[]>);
+
+      expect(result).toEqual(['one', 'two', 'three']);
+    });
+
+    test('should reject if any promise in the array rejects', async () => {
+      const promises = [
+        delayedPromise('success', 100),
+        Promise.reject('error'),
+        delayedPromise('another success', 200, true),
+      ];
+
+      await expect(
+        ResolvablePromise.all(promises) satisfies ResolvablePromise<string[]>,
+      ).rejects.toEqual('error');
+    });
+  });
+
+  describe('ResolvablePromiseConstructor.race', () => {
+    test('should be instanceof Promise', async () => {
+      expect(ResolvablePromise.race([Promise.resolve('hi')])).toBeInstanceOf(
+        Promise,
+      );
+    });
+
+    test('should be instanceof ResovlablePromise', async () => {
+      expect(ResolvablePromise.race([Promise.resolve('hi')])).toBeInstanceOf(
+        ResolvablePromise,
+      );
+    });
+
+    test('should resolve with the first resolved value', async () => {
+      const promises = [
+        delayedPromise('one', 200),
+        delayedPromise('two', 100, true),
+        delayedPromise('three', 300),
+      ];
+
+      const result = await ResolvablePromise.race(promises);
+
+      expect(result).toEqual('two');
+    });
+
+    test('should reject with the first rejected value', async () => {
+      const promises = [
+        delayedPromise('success', 200),
+        Promise.reject('first error'),
+        delayedPromise('another success', 100),
+        Promise.reject('second error'),
+      ];
+
+      await expect(ResolvablePromise.race(promises)).rejects.toEqual(
+        'first error',
+      );
+    });
+  });
 });

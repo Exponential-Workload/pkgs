@@ -31,6 +31,8 @@ export type PromiseCallbackFunction<T> = (
   reject: PromiseRejectionFunction,
 ) => void;
 
+export type InferPromiseResult<T> = T extends Promise<infer U> ? U : never;
+
 /** Promise Wrapper with .state to check if it's resolved, rejected or nothing - aswell as getting the return value */
 class RawStatePromise<
   T,
@@ -102,6 +104,18 @@ export class ResolvablePromise<T> extends StatePromise<T> {
       this.reject = reject;
     }
     setRsRj = _setRsRj;
+  }
+  public static race<T extends Promise<any>[]>(promises: T) {
+    return new ResolvablePromise<InferPromiseResult<T[number]>>((rs, rj) =>
+      Promise.race(promises).then(rs).catch(rj),
+    );
+  }
+  public static all<T extends readonly unknown[] | []>(promises: T) {
+    return new ResolvablePromise<any>((rs, rj) =>
+      Promise.all(promises).then(rs).catch(rj),
+    ) as ResolvablePromise<
+      InferPromiseResult<ReturnType<typeof Promise.all<T>>>
+    >;
   }
 }
 export default ResolvablePromise;
