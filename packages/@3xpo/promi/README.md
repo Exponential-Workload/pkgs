@@ -10,6 +10,8 @@ pnpm i @3xpo/promi
 
 ## Usage
 
+The below `brotliCompress`/`brotliDecompress` functions are just used as an example. You can use any function where the last value is a callback (ie `arg1,arg2,arg3,callback`).
+
 ### Promi.wrap
 
 Wraps a function. Depends on the first parameter being an error of some kind. Returns a function that returns a promise.
