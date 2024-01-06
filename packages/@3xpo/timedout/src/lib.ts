@@ -1,6 +1,6 @@
 export const timeout = <T>(
   promise: Promise<T>,
-  timeoutError = `Timed out`,
+  timeoutError: string | Error = `Timed out`,
   timeout = 1000,
   /** What to call on a timeout - Useful for cancelling any pending work */
   onTimeout?: () => void,
@@ -19,7 +19,11 @@ export const timeout = <T>(
         if (resolved) rs(void 0 as unknown as never);
         else {
           if (onTimeout) onTimeout();
-          rj(new Error(timeoutError));
+          rj(
+            timeoutError instanceof Error
+              ? timeoutError
+              : new Error(timeoutError),
+          );
         }
       }, timeout);
       promise.then(() => {
