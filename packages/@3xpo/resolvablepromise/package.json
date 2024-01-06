@@ -6,7 +6,7 @@
     "build": "concurrently \"npm:build:*\"",
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
     "build:ts": "tsc --emitDeclarationOnly",
-    "build:js": "esmany --args \"\\\"src/lib.ts\\\" --sourcemap --packages=external\" --platform node,browser,neutral --format esm,cjs --bundle true --output dist/lib",
+    "build:js": "esmany --args \"\\\"src/lib.ts\\\" --sourcemap --packages=external\" --platform neutral --format esm,cjs --bundle true --output dist/lib",
     "test": "jest"
   },
   "author": "Expo",
@@ -59,20 +59,6 @@
       "require": "./dist/lib.bundle.min.cjs",
       "node": "./dist/lib.node.bundle.min.mjs",
       "default": "./dist/lib.bundle.min.mjs"
-    },
-    "./node": {
-      "types": "./dist/lib.d.ts",
-      "import": "./dist/lib.node.bundle.min.mjs",
-      "require": "./dist/lib.node.bundle.min.cjs",
-      "node": "./dist/lib.node.bundle.min.mjs",
-      "default": "./dist/lib.node.bundle.min.mjs"
-    },
-    "./browser": {
-      "types": "./dist/lib.d.ts",
-      "import": "./dist/lib.browser.bundle.min.mjs",
-      "require": "./dist/lib.browser.bundle.min.cjs",
-      "node": "./dist/lib.node.bundle.min.mjs",
-      "default": "./dist/lib.browser.bundle.min.mjs"
     }
   },
   "displayName": "ResolvablePromise",
