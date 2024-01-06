@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.6
+
+### Patch Changes
+
+- 859102a: Types should be the first export
+
 ## 0.2.5
 
 ### Patch Changes

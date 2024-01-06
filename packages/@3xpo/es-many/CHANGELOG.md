@@ -1,5 +1,14 @@
 # @3xpo/es-many
 
+## 0.2.6
+
+### Patch Changes
+
+- ede0028: Fix export issues
+- 859102a: Types should be the first export
+- Updated dependencies [859102a]
+  - @3xpo/combgen@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes

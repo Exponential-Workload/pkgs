@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/promi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Promisify a callback function",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
@@ -36,7 +36,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=v19.0.0"
+    "node": ">=v20.0.0"
   },
   "type": "module",
   "files": [
