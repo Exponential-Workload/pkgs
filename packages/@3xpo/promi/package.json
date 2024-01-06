@@ -3,8 +3,8 @@
   "version": "0.1.1",
   "description": "Promisify a callback function",
   "scripts": {
-    "build": "concurrently \"npm:build:*\"",
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build && npm run test\"",
+    "build": "concurrently \"npm:build:*\"",
     "build:ts": "tsc --emitDeclarationOnly",
     "build:js": "esmany --args \"\\\"src/lib.ts\\\" --sourcemap --packages=external\" --platform neutral --format esm,cjs --bundle true --output dist/lib",
     "test": "jest"
@@ -59,6 +59,7 @@
   },
   "displayName": "Promi",
   "dependencies": {},
+  "engines": {},
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@types/jest": "^29.5.11",
