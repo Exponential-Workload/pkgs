@@ -1,0 +1,77 @@
+{
+  "name": "@3xpo/timedout",
+  "version": "0.1.0",
+  "description": "Promises with timeouts",
+  "scripts": {
+    "build": "concurrently \"npm:build:*\"",
+    "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build && npm run test\"",
+    "build:ts": "tsc --emitDeclarationOnly",
+    "build:js": "esmany --args \"\\\"src/lib.ts\\\" --sourcemap --packages=external\" --platform node --format esm,cjs --bundle true --output dist/lib",
+    "test": "jest"
+  },
+  "author": "Expo",
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/devtools.git",
+    "directory": "packages/@3xpo/timedout/"
+  },
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/timedout/",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/devtools/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "source": "./src/lib.ts",
+  "types": "./dist/lib.d.ts",
+  "main": "./dist/lib.node.bundle.min.cjs",
+  "module": "./dist/lib.node.bundle.min.mjs",
+  "typings": "./dist/lib.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib.d.ts",
+      "import": "./dist/lib.node.bundle.min.mjs",
+      "require": "./dist/lib.node.bundle.min.cjs",
+      "node": "./dist/lib.node.bundle.min.mjs",
+      "default": "./dist/lib.node.bundle.min.mjs"
+    }
+  },
+  "displayName": "Timed Out",
+  "devDependencies": {
+    "@3xpo/es-many": "workspace:^",
+    "@3xpo/resolvablepromise": "workspace:^",
+    "@types/jest": "^29.5.11",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.19.11",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "ts-jest": "^29.1.1"
+  },
+  "optionalDependencies": {
+    "@3xpo/resolvablepromise": "workspace:^"
+  }
+}
