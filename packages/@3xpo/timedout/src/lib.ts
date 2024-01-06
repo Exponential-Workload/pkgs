@@ -16,8 +16,6 @@ export const timeout = <T>(
     promise,
     new PromiseImplementation<T>((rs, rj) => {
       const t = setTimeout(() => {
-        console.warn('reached timeout');
-
         if (resolved) rs(void 0 as unknown as never);
         else {
           if (onTimeout) onTimeout();
