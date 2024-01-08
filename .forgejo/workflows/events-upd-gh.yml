@@ -20,6 +20,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.PRIVK }}" > ~/.ssh/id_ed25519
           echo "${{ secrets.PUBK }}" > ~/.ssh/id_ed25519.pub
+          echo "Host github.com" > ~/.ssh/config
+          echo "  User git" >> ~/.ssh/config
+          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
       - name: Clone repository
         run: |
           git clone -b master --single-branch git@github.com:Exponential-Workload/events.git ../ev-repo
