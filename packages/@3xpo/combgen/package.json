@@ -10,7 +10,7 @@
   "scripts": {
     "build": "concurrently \"tsc --emitDeclarationOnly -p ./tsconfig.json \" \"esbuild src/main.ts --outfile=dist/main.mjs --format=esm --platform=neutral --minify --bundle --packages=external --sourcemap\" \"esbuild src/main.ts --outfile=dist/main.cjs --format=cjs --platform=neutral --minify --bundle --packages=external --sourcemap\"",
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
-    "prepublishOnly": "pnpm build",
+    "prepare": "pnpm build",
     "test": "jest"
   },
   "author": "Expo",
