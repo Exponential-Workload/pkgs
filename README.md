@@ -4,7 +4,7 @@
     - [Tools](#tools-1)
   - [Developing](#developing)
 
-[![](https://codeberg.org/Expo/devtools/raw/branch/senpai/social.png)](#3xpo-devtools)
+[![](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/devtools.png)](#3xpo-devtools)
 
 # @3xpo/devtools
 
