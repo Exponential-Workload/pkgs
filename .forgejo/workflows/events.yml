@@ -4,7 +4,6 @@ on: [push]
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
       image: node:slim
@@ -18,7 +17,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm postclone
       - name: Build
-        run: pnpm build
+        run: pnpm nx @3xpo/events:build
       - name: Upload Build
         uses: actions/upload-artifact@v3
         with:
@@ -26,7 +25,6 @@ jobs:
           path: packages/@3xpo/events/dist
           retention-days: 5
   test:
-    if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     needs: build
     container:
