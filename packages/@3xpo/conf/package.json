@@ -60,7 +60,7 @@
   },
   "displayName": "conf",
   "dependencies": {
-    "@3xpo/events": "^1.0.7"
+    "@3xpo/events": "workspace:^"
   },
   "optionalDependencies": {
     "zod": "^3.22.4"
