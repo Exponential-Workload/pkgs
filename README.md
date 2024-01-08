@@ -28,4 +28,4 @@ TypeScript libraries & tools for creating things.
 
 ## Developing
 
-Many tools depend on @3xpo/es-many, which needs to be built & installed prior to anything else - to do this, simply run `pnpm i; nx run @3xpo/es-many:build; pnpm i;` - for convenience, you can run the `pnpm postclone` script which does the same thing. This usually only needs to be done once.
+Many tools depend on @3xpo/es-many, which needs to be built & installed prior to anything else - this is done in install scripts. You will see prepare scripts build it & it's dependency on `pnpm i`.

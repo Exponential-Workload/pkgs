@@ -14,8 +14,7 @@
     "pub-git": "git add . && git commit -m \"chore(release): Update Repository\" && git push || true && git push --tags || true",
     "pub-release": "pnpm publish -r --filter \"./packages/@*/*\" --access public",
     "pub": "pnpm pub-prepare && pnpm pub-git && pnpm pub-release",
-    "new": "node scripts/new",
-    "postclone": "pnpm i;nx run @3xpo/es-many:build;pnpm i;"
+    "new": "node scripts/new"
   },
   "keywords": [
     "written",
