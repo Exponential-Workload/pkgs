@@ -1,11 +1,10 @@
 name: Update Events GH
 run-name: Update GH
-on:
-  push:
-    - senpai
+on: [push]
 
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
       image: node:slim
