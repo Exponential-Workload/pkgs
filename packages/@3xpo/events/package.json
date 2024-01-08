@@ -16,7 +16,7 @@
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
     "build:dts": "tsc --declaration --emitDeclarationOnly --declarationMap",
-    "build:js": "esmany --args \"src/lib.ts --sourcemap --packages=external\" --output dist/lib --minify true --bundle true --format cjs,esm --platform neutral",
+    "build:js": "es-many --args \"src/lib.ts --sourcemap --packages=external\" --output dist/lib --minify true --bundle true --format cjs,esm --platform neutral",
     "prepublish": "pnpm build",
     "mkdocs": "typedoc src",
     "mkdoc": "typedoc src",
@@ -60,6 +60,7 @@
     "README.md",
     "tsconfig.json"
   ],
+  "dependencies": {},
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@types/jest": "^29.5.2",
