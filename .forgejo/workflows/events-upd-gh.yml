@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Clone repository with PAT
         run: |
-          git clone -b master --single-branch https://github.com/Exponential-Workload/events.git ../ev-repo
+          git clone -b master --single-branch https://exponential-workload:${{ secrets.EVENT_PAT }}@github.com/Exponential-Workload/events.git ../ev-repo
           cd ../ev-repo
           git config user.email "actions@codeberg.org"
           git config user.name "Codeberg Actions"
