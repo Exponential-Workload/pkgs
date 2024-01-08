@@ -35,11 +35,11 @@ jobs:
       - name: Install dependencies
         run: pnpm i --no-frozen-lockfile
       - name: Build
-        run: cd packages/@3xpo/events && pnpm build
+        run: pnpm nx build @3xpo/events
       - name: Test
-        run: cd packages/@3xpo/events && pnpm test
+        run: pnpm nx run @3xpo/events:test
       - name: Make Documentation
-        run: cd packages/@3xpo/events && pnpm mkdocs
+        run: pnpm nx run @3xpo/events:mkdocs
       - name: Copy Docs
         run: cd packages/@3xpo/events && cp -r docs/* ./
       - name: Destroy Node Modules
