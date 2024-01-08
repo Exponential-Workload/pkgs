@@ -3,14 +3,13 @@
     "rootDir": "src",
     "outDir": "dist",
     "declaration": true,
-    "target": "es6",
-    "module": "NodeNext"
+    "sourceMap": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "module": "es6",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true
   },
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/*.test.ts",
-    "node_modules/**/*",
-    "dist/**/*",
-    "dist/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/**/*", "dist/**/*", "dist/*"]
 }

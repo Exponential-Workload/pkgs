@@ -1,0 +1,15 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "extends": ["./tsconfig.json"],
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true
+  },
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/*.test.ts",
+    "test/**/*",
+    "node_modules/**/*"
+  ]
+}

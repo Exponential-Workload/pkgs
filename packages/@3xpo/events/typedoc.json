@@ -1,12 +1,8 @@
 {
   "$schema": "https://typedoc.org/schema.json",
+  "extends": ["./tsconfig.json"],
   "compilerOptions": {
-    "declaration": false,
-    // dont check dependencies
-    "skipLibCheck": true,
+    "declaration": false
   },
-  "exclude": [
-    "test/**/*",
-    "node_modules/**/*"
-  ]
+  "exclude": ["node_modules/**/*"]
 }
