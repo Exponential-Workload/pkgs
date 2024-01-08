@@ -15,9 +15,14 @@ jobs:
         run: apt update && apt install git -y
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Configure Git
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVK }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.PUBK }}" > ~/.ssh/id_ed25519.pub
       - name: Clone repository with PAT
         run: |
-          git clone -b master --single-branch https://exponential-workload:${{ secrets.EVENT_PAT }}@github.com/Exponential-Workload/events.git ../ev-repo
+          git clone -b master --single-branch git@github.com/Exponential-Workload/events.git ../ev-repo
           cd ../ev-repo
           git config user.email "actions@codeberg.org"
           git config user.name "Codeberg Actions"
