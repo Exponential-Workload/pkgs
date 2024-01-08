@@ -2,8 +2,17 @@
   "name": "@3xpo/events",
   "version": "1.0.7",
   "description": "NodeJS EventEmitter Polyfill in TS, with event type support",
-  "main": "dist/lib.js",
+  "main": "dist/lib.bundle.min.cjs",
+  "module": "dist/lib.bundle.min.mjs",
   "types": "dist/lib.d.ts",
+  "typings": "dist/lib.d.ts",
+  "exports": {
+    "types": "./dist/lib.d.ts",
+    "import": "./dist/lib.bundle.min.mjs",
+    "require": "./dist/lib.bundle.min.cjs",
+    "node": "./dist/lib.bundle.min.mjs",
+    "default": "./dist/lib.bundle.min.mjs"
+  },
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
     "build:dts": "tsc --declaration --emitDeclarationOnly --declarationMap",
