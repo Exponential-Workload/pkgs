@@ -1,14 +1,20 @@
+<div align="center">
+
+[![Header: @3xpo/devtools - 21st Century Typescript Devtools](https://codeberg.org/Expo/devtools/raw/branch/senpai/social.png)](#3xpo-devtools)
+
+# @3xpo/devtools
+
+TypeScript libraries & tools for creating things.
+
+</div
+
 - [@3xpo/devtools](#3xpodevtools)
   - [Tools](#tools)
     - [Libraries](#libraries)
     - [Tools](#tools-1)
   - [Developing](#developing)
-
-[![](https://codeberg.org/Expo/devtools/raw/branch/senpai/social.png)](#3xpo-devtools)
-
-# @3xpo/devtools
-
-TypeScript libraries & tools for creating things.
+    - [Es-Many](#es-many)
+    - [pnpm](#pnpm)
 
 ## Tools
 
@@ -26,4 +32,10 @@ TypeScript libraries & tools for creating things.
 
 ## Developing
 
-Many tools depend on @3xpo/es-many, which needs to be built & installed prior to anything else - to do this, simply run `pnpm i; nx run @3xpo/es-many:build; pnpm i;` - for convenience, you can run the `pnpm postclone` script which does the same thing. This usually only needs to be done once.
+### Es-Many
+
+Many tools depend on @3xpo/es-many, which needs to be built & installed prior to anything else - to do this, simply run `pnpm i; nx run @3xpo/es-many:build;` - for convenience, you can run the `pnpm postclone` script which does the same thing. This usually only needs to be done once. In some edge-cases, you may need to run `pnpm i` again afterwards.
+
+### pnpm
+
+This repository heavily relies on [pnpm](https://pnpm.io). Good luck without it.
