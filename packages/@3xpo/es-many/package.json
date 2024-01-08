@@ -13,7 +13,7 @@
     "build:es:cli": "npm run build:exec -- --minify true,false --platform node --format esm,cjs --bundle true --args \"src/cli.ts --sourcemap --packages=external\" --output dist/cli",
     "build:exec": "esbuild src/cli.ts --bundle --format=esm --platform=node | node - ",
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
-    "prepublishOnly": "pnpm build",
+    "prepare": "pnpm build",
     "test": "jest"
   },
   "exports": {

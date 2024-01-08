@@ -15,7 +15,7 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
       - name: Install Dependencies
-        run: pnpm postclone
+        run: pnpm i
       - name: Build
         run: pnpm build
       - name: Test
