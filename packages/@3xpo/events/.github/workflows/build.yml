@@ -21,34 +21,37 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Clone Repo
+        run: |
+          git clone https://codeberg.org/Expo/devtools.git
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3.6.0
         with:
           node-version: 20
+      - name: Enable Corepack
+        run: corepack enable
       - name: Install dependencies
-        run: npm install
+        run: pnpm i
       - name: Build
-        run: npm run build
+        run: cd packages/@3xpo/events && pnpm build
       - name: Test
-        run: npm run test
+        run: cd packages/@3xpo/events && pnpm test
       - name: Make Documentation
-        run: npm run mkdocs
+        run: cd packages/@3xpo/events && pnpm mkdocs
       - name: Copy Docs
-        run: cp -r docs/* ./
+        run: cd packages/@3xpo/events && cp -r docs/* ./
       - name: Destroy Node Modules
-        run: rm -rf node_modules
+        run: cd packages/@3xpo/events && rm -rf node_modules
       - name: Create Indexes
         uses: Exponential-Workload/create-index-action@master
         with:
-          dir: '.'
+          dir: 'packages/@3xpo/events'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: '.'
+          path: 'packages/@3xpo/events'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
