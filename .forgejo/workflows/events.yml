@@ -25,7 +25,7 @@ jobs:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
-      image: debian:stable-slim
+      image: node:slim
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -44,7 +44,7 @@ jobs:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
-      image: debian:stable-slim
+      image: node:slim
     steps:
       - name: Install Git
         run: apt update && apt install git openssh-client -y

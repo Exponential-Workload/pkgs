@@ -6,4 +6,6 @@ This is a Github mirror of [this codeberg repo](https://codeberg.org/Expo/devtoo
 
 This repository is read-only. Please use the above repository for forking, contributing and opening issues.
 
+The original README is attached below for reference purposes. It may be outdated and not reflect the current README.
+
 </div>
