@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/events",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "NodeJS EventEmitter Polyfill in TS, with event type support",
   "main": "dist/lib.bundle.min.cjs",
   "module": "dist/lib.bundle.min.mjs",
@@ -60,6 +60,7 @@
     "README.md",
     "tsconfig.json"
   ],
+  "dependencies": {},
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@types/jest": "^29.5.11",

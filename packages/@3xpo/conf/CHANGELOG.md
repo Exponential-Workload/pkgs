@@ -1,5 +1,14 @@
 # @3xpo/conf
 
+## 0.2.3
+
+### Patch Changes
+
+- c2d398c: Use in-repo events package
+- Updated dependencies [f410e51]
+- Updated dependencies [963292a]
+  - @3xpo/events@1.0.8
+
 ## 0.2.2
 
 ### Patch Changes
