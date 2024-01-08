@@ -1,50 +1,8 @@
-name: Build & Deploy
-run-name: Build & Deploy
+name: Deploy @3xpo/events
+run-name: Deploy @3xpo/events
 on: [push]
 
 jobs:
-  build:
-    runs-on: docker
-    container:
-      image: node:slim
-    steps:
-      - name: Install Git
-        run: apt update && apt install git -y
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Install Dependencies
-        run: pnpm postclone
-      - name: Build
-        run: pnpm nx @3xpo/events:build
-      - name: Upload Build
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: packages/@3xpo/events/dist
-          retention-days: 5
-  test:
-    runs-on: docker
-    needs: build
-    container:
-      image: node:slim
-    steps:
-      - name: Install Git
-        run: apt update && apt install git -y
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Download Build
-        uses: actions/download-artifact@v3
-        with:
-          name: build
-          download-path: packages/@3xpo/events/dist
-      - name: Install Dependencies
-        run: pnpm i
-      - name: Test
-        run: pnpm nx run @3xpo/events:test
   deploy:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker

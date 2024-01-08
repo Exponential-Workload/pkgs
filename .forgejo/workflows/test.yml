@@ -1,0 +1,22 @@
+name: Build & Test Packages
+run-name: Build & Test Packages
+on: [push]
+
+jobs:
+  build:
+    runs-on: docker
+    container:
+      image: node:slim
+    steps:
+      - name: Install Git
+        run: apt update && apt install git -y
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install Dependencies
+        run: pnpm postclone
+      - name: Build
+        run: pnpm build
+      - name: Test
+        run: pnpm test
