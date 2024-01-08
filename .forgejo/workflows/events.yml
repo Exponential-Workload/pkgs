@@ -46,7 +46,7 @@ jobs:
       - name: Install Dependencies
         run: pnpm i
       - name: Test
-        run: pnpm nx run events:test
+        run: pnpm nx run @3xpo/events:test
   deploy:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
