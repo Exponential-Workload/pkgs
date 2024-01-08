@@ -57,6 +57,9 @@ importers:
       publint:
         specifier: ^0.2.7
         version: 0.2.7
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
 
   packages/@3xpo/combgen:
     dependencies:
