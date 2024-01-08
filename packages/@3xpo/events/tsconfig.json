@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "declaration": true,
+    "target": "es6",
+    "module": "NodeNext",
+  },
+  "exclude": [
+    "test/**/*",
+    "node_modules/**/*"
+  ]
+}

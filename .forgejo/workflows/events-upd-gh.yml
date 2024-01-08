@@ -1,0 +1,37 @@
+name: Update Events GH
+run-name: Update GH
+on:
+  push:
+    - senpai
+
+jobs:
+  deploy:
+    runs-on: docker
+    container:
+      image: node:slim
+    steps:
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Install Git
+        run: apt update && apt install git -y
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Clone repository with PAT
+        run: |
+          git clone -b master --single-branch Exponential-Workload:${{ secrets.EVENT_PAT }}@github.com:Exponential-Workload/events.git ../ev-repo
+          cd ../ev-repo
+          git config user.email "actions@codeberg.org"
+          git config user.name "Codeberg Actions"
+          git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
+          cd -
+      - name: Setup package
+        run: |
+          cp -r packages/@3xpo/events ../ev-out
+          cp -r ../ev-repo/.git ../ev-out/.git
+
+      - name: Commit and push changes
+        run: |
+          cd ../ev-out
+          git add .
+          git commit -m "chore: Update from Codeberg"
+          git push --force git@github.com:Exponential-Workload/events.git master

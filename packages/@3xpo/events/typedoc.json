@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "compilerOptions": {
+    "declaration": false,
+    // dont check dependencies
+    "skipLibCheck": true,
+  },
+  "exclude": [
+    "test/**/*",
+    "node_modules/**/*"
+  ]
+}

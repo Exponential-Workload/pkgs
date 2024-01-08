@@ -1,0 +1,63 @@
+{
+  "name": "@3xpo/events",
+  "version": "1.0.7",
+  "description": "NodeJS EventEmitter Polyfill in TS, with event type support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublish": "rollup -c",
+    "mkdocs": "typedoc src",
+    "mkdoc": "typedoc src",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Expo",
+  "license": "MIT",
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/events/",
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/devtools.git",
+    "directory": "packages/@3xpo/events/"
+  },
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "bugs": {
+    "url": "https://codeberg.org/Expo/devtools/issues",
+    "email": "expo@expo.moe"
+  },
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "dependencies": {},
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@types/jest": "^29.5.2",
+    "jest": "^29.5.0",
+    "rollup": "^3.25.1",
+    "ts-jest": "^29.1.0",
+    "tslib": "^2.5.3",
+    "typedoc": "^0.24.8",
+    "typescript": "^5.1.3"
+  }
+}
