@@ -2,11 +2,11 @@
   "name": "@3xpo/events",
   "version": "1.0.7",
   "description": "NodeJS EventEmitter Polyfill in TS, with event type support",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/lib.js",
+  "types": "dist/lib.d.ts",
   "scripts": {
-    "build": "rollup -c",
-    "prepublish": "rollup -c",
+    "build": "esmany --args \"src/lib.ts --sourcemap --packages=external\" --output dist/lib --minify",
+    "prepublish": "pnpm build",
     "mkdocs": "typedoc src",
     "mkdoc": "typedoc src",
     "test": "jest"
@@ -42,7 +42,6 @@
     "node": ">=v20.0.0"
   },
   "type": "module",
-  "dependencies": {},
   "files": [
     "dist/**/*",
     "dist/*",
@@ -51,6 +50,7 @@
     "tsconfig.json"
   ],
   "devDependencies": {
+    "@3xpo/es-many": "workspace:^",
     "@rollup/plugin-typescript": "^11.1.1",
     "@types/jest": "^29.5.2",
     "jest": "^29.5.0",

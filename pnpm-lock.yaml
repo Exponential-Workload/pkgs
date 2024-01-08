@@ -148,6 +148,9 @@ importers:
 
   packages/@3xpo/events:
     devDependencies:
+      '@3xpo/es-many':
+        specifier: workspace:^
+        version: link:../es-many
       '@rollup/plugin-typescript':
         specifier: ^11.1.1
         version: 11.1.5(rollup@3.29.4)(tslib@2.6.2)(typescript@5.3.3)
