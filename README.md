@@ -1,9 +1,3 @@
-- [@3xpo/devtools](#3xpodevtools)
-  - [Tools](#tools)
-    - [Libraries](#libraries)
-    - [Tools](#tools-1)
-  - [Developing](#developing)
-
 [![](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/devtools.png)](#3xpo-devtools)
 
 # @3xpo/devtools
