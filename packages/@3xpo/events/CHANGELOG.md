@@ -1,5 +1,11 @@
 # @3xpo/events
 
+## 1.0.9
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+
 ## 1.0.8
 
 ### Patch Changes

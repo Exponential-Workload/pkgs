@@ -1,5 +1,11 @@
 # @3xpo/timedout
 
+## 0.1.5
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+
 ## 0.1.4
 
 ### Patch Changes

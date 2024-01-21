@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/locked",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Locking Library for the 21st Century",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
@@ -61,6 +61,9 @@
   "displayName": "Locked",
   "dependencies": {
     "@3xpo/resolvablepromise": "workspace:^"
+  },
+  "engines": {
+    "node": ">=v20.0.0"
   },
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",

@@ -1,5 +1,11 @@
 # @3xpo/promi
 
+## 0.1.3
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+
 ## 0.1.2
 
 ### Patch Changes

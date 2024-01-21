@@ -1,5 +1,13 @@
 # @3xpo/conf
 
+## 0.2.4
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+- Updated dependencies [f51b90c]
+  - @3xpo/events@1.0.9
+
 ## 0.2.3
 
 ### Patch Changes

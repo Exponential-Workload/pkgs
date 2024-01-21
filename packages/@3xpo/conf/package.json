@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/conf",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A Configuration Library",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
@@ -63,6 +63,9 @@
   },
   "optionalDependencies": {
     "zod": "^3.22.4"
+  },
+  "engines": {
+    "node": ">=v20.0.0"
   },
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",

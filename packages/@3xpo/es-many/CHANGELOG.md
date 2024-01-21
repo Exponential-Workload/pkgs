@@ -1,5 +1,13 @@
 # @3xpo/es-many
 
+## 0.2.8
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+- Updated dependencies [f51b90c]
+  - @3xpo/combgen@0.2.8
+
 ## 0.2.7
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @3xpo/locked
 
+## 0.1.6
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+- Updated dependencies [f51b90c]
+  - @3xpo/resolvablepromise@0.2.2
+
 ## 0.1.5
 
 ### Patch Changes

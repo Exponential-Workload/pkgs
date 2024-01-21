@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.8
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+
 ## 0.2.7
 
 ### Patch Changes

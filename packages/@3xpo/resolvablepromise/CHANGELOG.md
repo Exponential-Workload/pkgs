@@ -1,5 +1,11 @@
 # @3xpo/resolvablepromise
 
+## 0.2.2
+
+### Patch Changes
+
+- f51b90c: Bump Dependencies
+
 ## 0.2.1
 
 ### Patch Changes
