@@ -1,5 +1,11 @@
 # @3xpo/timedout
 
+## 0.1.3
+
+### Patch Changes
+
+- accept error arg
+
 ## 0.1.2
 
 ### Patch Changes
