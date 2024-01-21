@@ -97,6 +97,7 @@ pkgs.forEach(pkgPath => {
         v.includes('github.com') ? 'blob' : 'src/branch'
       }/senpai/${pkgPath.replace(/package.json/giu, '')}`;
     }
+    if (JSON.stringify(pkgFile[k]) == '{}') delete pkgFile[k];
   });
 
   // Ensure devDeps is at the bottom
