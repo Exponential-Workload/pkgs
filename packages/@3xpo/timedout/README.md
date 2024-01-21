@@ -1,6 +1,6 @@
 # @3xpo/timedout
 
-Microlibrary for making promises with timeouts.
+Compromise-less Microlibrary for making promises with timeouts.
 
 ## Installation
 
