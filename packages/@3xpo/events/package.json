@@ -60,7 +60,6 @@
     "README.md",
     "tsconfig.json"
   ],
-  "dependencies": {},
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@types/jest": "^29.5.11",

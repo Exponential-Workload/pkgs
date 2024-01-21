@@ -64,7 +64,6 @@
   "optionalDependencies": {
     "@3xpo/resolvablepromise": "workspace:^"
   },
-  "dependencies": {},
   "keywords": [
     "microlibrary",
     "timeout",
@@ -83,7 +82,7 @@
     "concurrently": "^8.2.2",
     "esbuild": "^0.19.11",
     "jest": "^29.7.0",
-    "nodemon": "^3.0.2",
+    "nodemon": "^3.0.3",
     "ts-jest": "^29.1.1"
   }
 }
