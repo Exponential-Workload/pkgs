@@ -7,7 +7,8 @@ import fse from '../..';
 
 describe('mkdirp: issue-209, win32, when bad path, should return a cleaner error', () => {
   // only seems to be an issue on Windows.
-  if (process.platform !== 'win32') return;
+  if (process.platform !== 'win32')
+    return test('skip on non-windows', () => expect(true).toEqual(true));
 
   it('should return a callback', done => {
     const file = './bad?dir';

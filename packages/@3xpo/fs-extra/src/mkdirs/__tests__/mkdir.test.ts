@@ -19,19 +19,13 @@ describe('fs-extra', () => {
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('+ mkdirs()', () => {
-    it('should make the directory', done => {
+    it('should make the directory', async () => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
 
       assert(!fs.existsSync(dir));
 
-      fse
-        .mkdirs(dir)
-        .catch(err => err)
-        .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(dir));
-          done();
-        });
+      await fse.mkdirs(dir);
+      expect(fse.existsSync(dir)).toEqual(true);
     });
 
     it('should make the entire directory path', async () => {

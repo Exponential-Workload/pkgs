@@ -30,7 +30,7 @@ describe('symlink-type', () => {
     fse.mkdirsSync('./real-alpha/real-beta/real-gamma');
   });
 
-  afterEach(() => fse.rmSync(TEST_DIR, { recursive: true, force: true }));
+  afterEach(() => fse.emptyDirSync(TEST_DIR));
 
   afterAll(() => {
     process.chdir(CWD);
@@ -82,15 +82,10 @@ describe('symlink-type', () => {
     tests.forEach(test => {
       const args = (test[0] as any).slice(0);
       const expectedRelativePaths = test[1];
-      it(`should return '${JSON.stringify(expectedRelativePaths)}' when src '${args[0]}' and dst is '${args[1]}'`, done => {
-        const callback = (err, relativePaths) => {
-          if (err) done(err);
-          assert.deepStrictEqual(relativePaths, expectedRelativePaths);
-          done();
-        };
-        args.push(callback);
+      it(`should return '${JSON.stringify(expectedRelativePaths)}' when src '${args[0]}' and dst is '${args[1]}'`, async () => {
         // @ts-ignore
-        symlinkPaths(...args);
+        const relativePaths = await symlinkPaths(...args);
+        expect(relativePaths).toEqual(expectedRelativePaths);
       });
     });
   });

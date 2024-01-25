@@ -18,34 +18,24 @@ describe('mkdirp / mkdirp', () => {
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
-  it('should make the dir', done => {
+  it('should make the dir', async () => {
     const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
     const y = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
     const z = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
 
     const file = path.join(TEST_DIR, x, y, z);
 
-    fse
-      .mkdirp(file, 0o755)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        fse.pathExists(file, (err, ex) => {
-          assert.ifError(err);
-          assert.ok(ex, 'file created');
-          fs.stat(file, (err, stat) => {
-            assert.ifError(err);
+    await fse.mkdirp(file, 0o755);
+    const ex = await fse.pathExists(file);
+    assert.ok(ex, 'file created');
+    const stat = fs.statSync(file);
 
-            if (os.platform().indexOf('win') === 0) {
-              assert.strictEqual(stat.mode & 0o777, 0o666);
-            } else {
-              assert.strictEqual(stat.mode & 0o777, 0o755);
-            }
+    if (os.platform().indexOf('win') === 0) {
+      expect(stat.mode & 0o777).toEqual(0o666);
+    } else {
+      expect(stat.mode & 0o777).toEqual(0o755);
+    }
 
-            assert.ok(stat.isDirectory(), 'target not a directory');
-            done();
-          });
-        });
-      });
+    expect(stat.isDirectory()).toBeTruthy();
   });
 });

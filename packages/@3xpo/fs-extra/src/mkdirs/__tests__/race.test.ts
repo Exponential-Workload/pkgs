@@ -28,35 +28,22 @@ describe('mkdirp / race', () => {
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true }));
 
-  it('race', done => {
-    let res = 2;
+  it('race', async () => {
+    const mk = async (file: string) => {
+      await fse.mkdirp(file, 493);
+      const ex = await fse.pathExists(file);
+      expect(ex).toBeTruthy();
+      const stat = fs.statSync(file);
 
-    mk(file, () => (--res === 0 ? done() : undefined));
-    mk(file, () => (--res === 0 ? done() : undefined));
+      if (os.platform().indexOf('win') === 0) {
+        expect(stat.mode & 511).toStrictEqual(438);
+      } else {
+        expect(stat.mode & 511).toStrictEqual(493);
+      }
 
-    function mk(file, callback) {
-      fse
-        .mkdirp(file, 0o755)
-        .catch(err => err)
-        .then(err => {
-          assert.ifError(err);
-          fse.pathExists(file, (err, ex) => {
-            assert.ifError(err);
-            assert.ok(ex, 'file created');
-            fs.stat(file, (err, stat) => {
-              assert.ifError(err);
+      expect(stat.isDirectory()).toBeTruthy();
+    };
 
-              if (os.platform().indexOf('win') === 0) {
-                assert.strictEqual(stat.mode & 0o777, 0o666);
-              } else {
-                assert.strictEqual(stat.mode & 0o777, 0o755);
-              }
-
-              assert.ok(stat.isDirectory(), 'target not a directory');
-              if (callback) callback();
-            });
-          });
-        });
-    }
+    await Promise.all([mk(file), mk(file)]);
   });
 });

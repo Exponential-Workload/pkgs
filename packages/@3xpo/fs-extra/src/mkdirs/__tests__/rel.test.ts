@@ -28,32 +28,18 @@ describe('mkdirp / relative', () => {
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
   afterAll(() => process.chdir(CWD));
 
-  it('should make the directory with relative path', done => {
+  it('should make the directory with relative path', async () => {
     process.chdir(TEST_DIR);
 
-    fse
-      .mkdirp(file, 0o755)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        fse.pathExists(file, (err, ex) => {
-          assert.ifError(err);
-          assert.ok(ex, 'file created');
-          fs.stat(file, (err, stat) => {
-            assert.ifError(err);
-            // restore
-            process.chdir(CWD);
+    await fse.mkdirp(file, 0o755);
+    const e = await fse.pathExists(file);
+    expect(e).toEqual(true);
+    const stat = fs.statSync(file);
 
-            if (os.platform().indexOf('win') === 0) {
-              assert.strictEqual(stat.mode & 0o777, 0o666);
-            } else {
-              assert.strictEqual(stat.mode & 0o777, 0o755);
-            }
+    if (os.platform().indexOf('win') === 0)
+      expect(stat.mode & 0o777).toEqual(0o666);
+    else expect(stat.mode & 0o777).toEqual(0o755);
 
-            assert.ok(stat.isDirectory(), 'target not a directory');
-            done();
-          });
-        });
-      });
+    expect(stat.isDirectory()).toBeTruthy();
   });
 });

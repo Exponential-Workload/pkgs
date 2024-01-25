@@ -29,34 +29,19 @@ describe('mkdirp / chmod', () => {
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
-  it('chmod-pre', done => {
+  it('chmod-pre', async () => {
     const mode = 0o744;
-    fse
-      .mkdirp(TEST_SUBDIR, mode)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        fs.stat(TEST_SUBDIR, (err, stat) => {
-          assert.ifError(err);
-          assert.ok(stat && stat.isDirectory(), 'should be directory');
+    await fse.mkdirp(TEST_SUBDIR, mode);
+    expect(fs.existsSync(TEST_SUBDIR)).toBeTruthy();
+    const stat = fs.statSync(TEST_SUBDIR);
+    expect(stat).toBeTruthy();
+    expect(stat.isDirectory()).toBeTruthy();
 
-          if (os.platform().indexOf('win') === 0) {
-            assert.strictEqual(
-              stat && stat.mode & 0o777,
-              0o666,
-              'windows shit',
-            );
-          } else {
-            assert.strictEqual(
-              stat && stat.mode & 0o777,
-              mode,
-              'should be 0744',
-            );
-          }
-
-          done();
-        });
-      });
+    if (os.platform().indexOf('win') === 0) {
+      expect(stat && stat.mode & 0o777).toEqual(0o666);
+    } else {
+      expect(stat && stat.mode & 0o777).toEqual(mode);
+    }
   });
 
   it('chmod', async () => {

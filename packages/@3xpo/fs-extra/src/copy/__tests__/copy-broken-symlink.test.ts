@@ -24,13 +24,8 @@ describe('copy / broken symlink', () => {
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('when symlink is broken', () => {
-    it('should not throw error if dereference is false', done => {
-      copy(src, dest)
-        .catch(err => err)
-        .then(err => {
-          assert.strictEqual(err, null);
-          done();
-        });
+    it('should not throw error if dereference is false', () => {
+      return copy(src, dest);
     });
 
     it('should throw error if dereference is true', done => {

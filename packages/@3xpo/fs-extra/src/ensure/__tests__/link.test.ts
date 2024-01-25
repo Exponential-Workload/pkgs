@@ -7,6 +7,7 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
+import { fromCallback } from '@3xpo/universalify';
 const ensureLink = fse.ensureLink;
 const ensureLinkSync = fse.ensureLinkSync;
 
@@ -76,12 +77,11 @@ describe('fse-ensure-link', () => {
     ],
   ];
 
-  beforeAll(() => {
-    fse.emptyDirSync(TEST_DIR);
-    process.chdir(TEST_DIR);
-  });
-
   beforeEach(async () => {
+    fs.mkdirSync(TEST_DIR, {
+      recursive: true,
+    });
+    process.chdir(TEST_DIR);
     fs.writeFileSync('./foo.txt', 'foo\n');
     fse.mkdirsSync('empty-dir');
     fse.mkdirsSync('dir-foo');
@@ -92,21 +92,17 @@ describe('fse-ensure-link', () => {
     fs.linkSync('foo.txt', 'link-foo.txt');
   });
 
-  afterEach(() => fse.rmSync(TEST_DIR, { recursive: true, force: true }));
-
-  afterAll(() => {
+  afterEach(() => {
     process.chdir(CWD);
-    fse.removeSync(TEST_DIR);
+    fse.rmSync(TEST_DIR, { recursive: true, force: true });
   });
 
   function fileSuccess(args, fn) {
     const srcpath = args[0];
     const dstpath = args[1];
 
-    it(`should create link file using src ${srcpath} and dst ${dstpath}`, done => {
-      const callback = err => {
-        if (err) return done(err);
-
+    it(`should create link file using src ${srcpath} and dst ${dstpath}`, () => {
+      const callback = () => {
         const srcContent = fs.readFileSync(srcpath, 'utf8');
         const dstDir = path.dirname(dstpath);
         const dstBasename = path.basename(dstpath);
@@ -117,10 +113,9 @@ describe('fse-ensure-link', () => {
         assert.strictEqual(isSymlink, true);
         assert.strictEqual(srcContent, dstContent);
         assert(dstDirContents.indexOf(dstBasename) >= 0);
-        return done();
+        return;
       };
-      args.push(callback);
-      return fn(...args);
+      return fn(...args).then(callback);
     });
   }
 
@@ -128,17 +123,19 @@ describe('fse-ensure-link', () => {
     const srcpath = args[0];
     const dstpath = args[1];
 
-    it(`should return error when creating link file using src ${srcpath} and dst ${dstpath}`, done => {
+    it(`should return error when creating link file using src ${srcpath} and dst ${dstpath}`, () => {
       const dstdirExistsBefore = fs.existsSync(path.dirname(dstpath));
       const callback = err => {
-        assert.strictEqual(err instanceof Error, true);
+        expect(err).toBeTruthy();
         // ensure that directories aren't created if there's an error
         const dstdirExistsAfter = fs.existsSync(path.dirname(dstpath));
-        assert.strictEqual(dstdirExistsBefore, dstdirExistsAfter);
-        return done();
+        expect(dstdirExistsBefore).toStrictEqual(dstdirExistsAfter);
       };
-      args.push(callback);
-      return fn(...args);
+      return fn(...args)
+        .then(() => {
+          expect(false).toEqual(true);
+        })
+        .catch(callback);
     });
   }
 
@@ -167,13 +164,13 @@ describe('fse-ensure-link', () => {
     it(`should throw error using src ${srcpath} and dst ${dstpath}`, () => {
       // will fail if dstdir is created and there's an error
       const dstdirExistsBefore = fs.existsSync(path.dirname(dstpath));
-      let err = null;
+      let err = null as any;
       try {
         fn(...args);
       } catch (e) {
         err = e;
       }
-      assert.strictEqual(err instanceof Error, true);
+      expect(err).toBeTruthy();
       const dstdirExistsAfter = fs.existsSync(path.dirname(dstpath));
       assert.strictEqual(dstdirExistsBefore, dstdirExistsAfter);
     });
@@ -185,8 +182,9 @@ describe('fse-ensure-link', () => {
       const args = test[0].slice(0);
       const nativeBehavior = test[1];
       // const newBehavior = test[2]
-      if (nativeBehavior === 'file-success') fileSuccess(args, fn);
-      if (nativeBehavior === 'file-error') fileError(args, fn);
+      if (nativeBehavior === 'file-success')
+        fileSuccess(args, fromCallback(fn));
+      if (nativeBehavior === 'file-error') fileError(args, fromCallback(fn));
     });
   });
 
