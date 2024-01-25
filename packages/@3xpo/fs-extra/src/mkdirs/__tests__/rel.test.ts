@@ -11,6 +11,7 @@ import assert from 'assert';
 /* global afterEach, beforeEach, describe, it */
 
 describe('mkdirp / relative', () => {
+  const CWD = process.cwd();
   let TEST_DIR: string;
   let file: string;
 
@@ -25,6 +26,7 @@ describe('mkdirp / relative', () => {
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
+  afterAll(() => process.chdir(CWD));
 
   it('should make the directory with relative path', done => {
     process.chdir(TEST_DIR);
