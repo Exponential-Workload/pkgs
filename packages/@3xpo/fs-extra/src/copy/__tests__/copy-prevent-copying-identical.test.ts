@@ -19,15 +19,10 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
       'fs-extra',
       'copy-prevent-copying-identical',
     );
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   it('should return an error if src and dest are the same', done => {
     const fileSrc = path.join(TEST_DIR, 'TEST_fs-extra_copy');

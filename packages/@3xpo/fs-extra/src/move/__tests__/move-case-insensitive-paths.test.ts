@@ -18,15 +18,10 @@ describe('+ move() - case insensitive paths', () => {
       'fs-extra',
       'move-case-insensitive-paths',
     );
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('> when src is a directory', () => {
     it('should move successfully', done => {

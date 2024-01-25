@@ -11,15 +11,10 @@ describe('pathExists()', () => {
 
   beforeEach(done => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'path-exists');
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   it('should return false if file does not exist', () => {
     assert(!fs.pathExistsSync(path.join(TEST_DIR, 'somefile')));

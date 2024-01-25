@@ -17,15 +17,10 @@ describe('+ copySync() / dir', () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-sync-dir');
     src = path.join(TEST_DIR, 'src');
     dest = path.join(TEST_DIR, 'dest');
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('> when src is a directory', () => {
     describe('> when dest exists and is a file', () => {

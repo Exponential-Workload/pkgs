@@ -13,7 +13,7 @@ describe('util/stat', () => {
 
   beforeEach(done => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'util-stat');
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
   afterEach(done => fs.remove(TEST_DIR).then(done));

@@ -19,15 +19,10 @@ describe('+ copy() - case insensitive paths', () => {
       'fs-extra',
       'copy-case-insensitive-paths',
     );
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('> when src is a directory', () => {
     it('should behave correctly based on the OS', done => {

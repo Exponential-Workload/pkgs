@@ -19,7 +19,7 @@ describe('+ copySync() - case insensitive paths', () => {
       'fs-extra',
       'copy-sync-case-insensitive-paths',
     );
-    fs.emptyDir(TEST_DIR, done);
+    return fs.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.removeSync(TEST_DIR));

@@ -5,6 +5,7 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
+import { fromCallback } from '@3xpo/universalify';
 
 /* global afterEach, beforeEach, describe, it */
 
@@ -59,18 +60,10 @@ describe('mkdirp / chmod', () => {
       });
   });
 
-  it('chmod', done => {
+  it('chmod', async () => {
     const mode = 0o755;
-    fse
-      .mkdirp(TEST_SUBDIR, mode)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        fs.stat(TEST_SUBDIR, (err, stat) => {
-          assert.ifError(err);
-          assert.ok(stat && stat.isDirectory(), 'should be directory');
-          done();
-        });
-      });
+    await fse.mkdirp(TEST_SUBDIR, mode);
+    const stat = fs.statSync(TEST_SUBDIR);
+    assert.ok(stat && stat.isDirectory(), 'should be directory');
   });
 });

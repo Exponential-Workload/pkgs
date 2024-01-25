@@ -43,12 +43,7 @@ describeIfPractical('copySync() - preserveTimestamps option', () => {
     });
   }
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('> when preserveTimestamps option is true', () => {
     [

@@ -40,12 +40,7 @@ describe('+ moveSync() - prevent moving into itself', () => {
     done();
   });
 
-  afterEach(done =>
-    fs
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done),
-  );
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('> when source is a file', () => {
     it('should move the file successfully even if dest parent is a subdir of src', () => {

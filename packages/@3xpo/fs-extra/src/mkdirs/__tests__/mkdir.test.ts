@@ -34,20 +34,13 @@ describe('fs-extra', () => {
         });
     });
 
-    it('should make the entire directory path', done => {
+    it('should make the entire directory path', async () => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
       const newDir = path.join(TEST_DIR, 'dfdf', 'ffff', 'aaa');
 
       assert(!fs.existsSync(dir));
-
-      fse
-        .mkdirs(newDir)
-        .catch(err => err)
-        .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(newDir));
-          done();
-        });
+      await fse.mkdirs(newDir);
+      assert(fs.existsSync(newDir));
     });
   });
 
