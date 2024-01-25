@@ -35,17 +35,17 @@
     "@3xpo/universalify": "workspace:^",
     "graceful-fs": "^4.2.0"
   },
-  "main": "./dist/lib.node.bundle.min.cjs",
-  "module": "./dist/lib.node.bundle.min.mjs",
+  "main": "./dist/lib.node.bundle.cjs",
+  "module": "./dist/lib.node.bundle.mjs",
   "types": "./dist/index.d.ts",
   "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/lib.node.bundle.min.mjs",
-      "require": "./dist/lib.node.bundle.min.cjs",
-      "node": "./dist/lib.node.bundle.min.mjs",
-      "default": "./dist/lib.node.bundle.min.mjs"
+      "import": "./dist/lib.node.bundle.mjs",
+      "require": "./dist/lib.node.bundle.cjs",
+      "node": "./dist/lib.node.bundle.mjs",
+      "default": "./dist/lib.node.bundle.mjs"
     }
   },
   "files": [
@@ -54,7 +54,7 @@
   "scripts": {
     "build": "concurrently \"npm:build:*\"",
     "build:dts": "tsc --emitDeclarationOnly --declaration",
-    "build:js": "es-many --args \"src/index.ts --sourcemap --packages=external\" --output dist/lib --minify true --bundle true --format cjs,esm --platform node",
+    "build:js": "es-many --args \"src/index.ts --sourcemap --packages=external\" --output dist/lib --minify false --bundle true --format cjs,esm --platform node",
     "test-find": "find ./dist-test/**/__tests__ -name *.test.js | xargs mocha",
     "test": "jest"
   },
