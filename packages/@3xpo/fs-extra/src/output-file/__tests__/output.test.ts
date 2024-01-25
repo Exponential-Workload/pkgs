@@ -20,21 +20,16 @@ describe('output', () => {
 
   describe('+ outputFile', () => {
     describe('> when the file and directory does not exist', () => {
-      it('should create the file', done => {
+      it('should create the file', async () => {
         const file = path.join(
           TEST_DIR,
           Math.random() + 't-ne',
           Math.random() + '.txt',
         );
         assert(!fs.existsSync(file));
-        try {
-          fse.outputFile(file, 'hi jp');
-          assert(fs.existsSync(file));
-          assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hi jp');
-          done();
-        } catch (err) {
-          assert.ifError(err);
-        }
+        await fse.outputFile(file, 'hi jp');
+        assert(fs.existsSync(file));
+        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hi jp');
       });
       it('should support promises', () => {
         const file = path.join(
@@ -48,7 +43,7 @@ describe('output', () => {
     });
 
     describe('> when the file does exist', () => {
-      it('should still modify the file', async done => {
+      it('should still modify the file', async () => {
         const file = path.join(
           TEST_DIR,
           Math.random() + 't-e',
@@ -56,13 +51,8 @@ describe('output', () => {
         );
         fse.mkdirsSync(path.dirname(file));
         fs.writeFileSync(file, 'hello world');
-        try {
-          await fse.outputFile(file, 'hello jp');
-          assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello jp');
-          done();
-        } catch (err) {
-          if (err) return done(err);
-        }
+        await fse.outputFile(file, 'hello jp');
+        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello jp');
       });
     });
   });

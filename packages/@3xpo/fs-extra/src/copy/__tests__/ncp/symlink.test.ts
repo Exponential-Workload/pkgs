@@ -41,25 +41,16 @@ describe('ncp / symlink', () => {
       });
   });
 
-  it('copies file contents when dereference=true', done => {
-    ncp(src, out, { dereference: true })
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-
-        const fileSymlinkPath = path.join(out, 'file-symlink');
-        assert.ok(fs.lstatSync(fileSymlinkPath).isFile());
-        assert.strictEqual(
-          fs.readFileSync(fileSymlinkPath, 'utf8'),
-          'foo contents',
-        );
-
-        const dirSymlinkPath = path.join(out, 'dir-symlink');
-        assert.ok(fs.lstatSync(dirSymlinkPath).isDirectory());
-        assert.deepStrictEqual(fs.readdirSync(dirSymlinkPath), ['bar']);
-
-        done();
-      });
+  it('copies file contents when dereference=true', async () => {
+    await ncp(src, out, { dereference: true });
+    const fileSymlinkPath = path.join(out, 'file-symlink');
+    expect(fs.lstatSync(fileSymlinkPath).isFile()).toBeTruthy();
+    expect(fs.readFileSync(fileSymlinkPath, 'utf8')).toStrictEqual(
+      'foo contents',
+    );
+    const dirSymlinkPath = path.join(out, 'dir-symlink');
+    expect(fs.lstatSync(dirSymlinkPath).isDirectory()).toBeTruthy();
+    expect(fs.readdirSync(dirSymlinkPath)).toEqual(['bar']);
   });
 });
 
