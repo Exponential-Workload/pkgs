@@ -1,5 +1,8 @@
 'use strict';
 
+export type RemoveFirst<T extends any[]> = T extends [any, ...infer Rest]
+  ? Rest
+  : never;
 export type RemoveLast<T extends any[]> = T extends [...infer Rest, any]
   ? Rest
   : never;
