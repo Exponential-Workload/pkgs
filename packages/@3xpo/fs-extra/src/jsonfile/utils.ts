@@ -1,8 +1,8 @@
 export type StringifyOptions = {
   EOL?: string | undefined;
   finalEOL?: boolean | undefined;
-  replacer?: null | undefined;
-  spaces: any;
+  replacer?: ((this: any, key: string, value: any) => any) | null | undefined;
+  spaces: number;
 };
 export const stringify = (
   obj: any,

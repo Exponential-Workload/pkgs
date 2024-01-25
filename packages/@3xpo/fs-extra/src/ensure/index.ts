@@ -1,8 +1,33 @@
 'use strict';
 
-import { createFile, createFileSync } from './file';
-import { createLink, createLinkSync } from './link';
-import { createSymlink, createSymlinkSync } from './symlink';
+import {
+  createFile as _createFile,
+  createFileSync as _createFileSync,
+} from './file';
+import {
+  createLink as _createLink,
+  createLinkSync as _createLinkSync,
+} from './link';
+import {
+  createSymlink as _createSymlink,
+  createSymlinkSync as _createSymlinkSync,
+} from './symlink';
+
+// file
+export const createFile = _createFile;
+export const createFileSync = _createFileSync;
+export const ensureFile = _createFile;
+export const ensureFileSync = _createFileSync;
+// link
+export const createLink = _createLink;
+export const createLinkSync = _createLinkSync;
+export const ensureLink = _createLink;
+export const ensureLinkSync = _createLinkSync;
+// symlink
+export const createSymlink = _createSymlink;
+export const createSymlinkSync = _createSymlinkSync;
+export const ensureSymlink = _createSymlink;
+export const ensureSymlinkSync = _createSymlinkSync;
 
 export default {
   // file

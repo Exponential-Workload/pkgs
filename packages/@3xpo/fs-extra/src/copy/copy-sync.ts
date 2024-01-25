@@ -16,7 +16,11 @@ export type CopyOpts = {
   dereference?: boolean;
   errorOnExist?: boolean;
 };
-export const copySync = (src: string, dest: string, opts?: CopyOpts) => {
+export const copySync = (
+  src: string,
+  dest: string,
+  opts?: CopyOpts | CopyOpts['filter'],
+) => {
   if (typeof opts === 'function') {
     opts = { filter: opts };
   }

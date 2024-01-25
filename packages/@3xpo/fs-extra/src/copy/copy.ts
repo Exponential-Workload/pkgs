@@ -8,7 +8,11 @@ import { utimesMillis } from '../util/utimes';
 import stat from '../util/stat';
 import type { CopyOpts } from './copy-sync';
 
-export const copy = async (src: string, dest: string, opts: CopyOpts = {}) => {
+export const copy = async (
+  src: string,
+  dest: string,
+  opts: CopyOpts | CopyOpts['filter'] = {},
+) => {
   if (typeof opts === 'function') {
     opts = { filter: opts };
   }

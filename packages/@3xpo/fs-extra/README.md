@@ -29,7 +29,9 @@ I got tired of including `mkdirp`, `rimraf`, and `ncp` in most of my projects.
 
 ### CommonJS
 
-`fs-extra` is a drop in replacement for native `fs`. All methods in `fs` are attached to `fs-extra`. All `fs` methods return promises if the callback isn't passed.
+`fs-extra` is a drop in-ish replacement for native `fs`. All methods in `fs` are attached to `fs-extra`. All `fs` methods return promises if the callback isn't passed.
+
+This fork modifies the internal callback beahviour a bit, and you may not be able to use a callback everywhere. Unlike the upstream, promises are usually returned even if you do pass a callback.
 
 You don't ever need to include the original `fs` module again:
 

@@ -109,12 +109,13 @@ export const writeFile = fromCallback(
 export const exists = (
   filename: string,
   callback?: (exists: boolean) => void,
-): Promise<boolean> | void => {
-  if (typeof callback === 'function') {
-    fs.exists(filename, callback);
-  } else {
-    return new Promise<boolean>(resolve => fs.exists(filename, resolve));
-  }
+): Promise<boolean> => {
+  return new Promise<boolean>(resolve =>
+    fs.exists(filename, rt => {
+      callback?.(rt);
+      resolve(rt);
+    }),
+  );
 };
 
 export const read = (
@@ -122,17 +123,19 @@ export const read = (
   buffer: Buffer,
   offset: number,
   length: number,
-  position: number | null,
+  position?: number | null,
   callback?: (
     err: NodeJS.ErrnoException | null,
     bytesRead: number,
     buffer: Buffer,
   ) => void,
-): Promise<{ bytesRead: number; buffer: Buffer }> | void => {
-  if (typeof callback === 'function') {
-    fs.read(fd, buffer, offset, length, position, callback);
-  } else {
-    return new Promise((resolve, reject) => {
+): Promise<{ bytesRead: number; buffer: Buffer }> => {
+  const c = <P extends any>(v: Promise<P>) => {
+    if (callback) v.catch(() => void 0);
+    return v;
+  };
+  return c(
+    new Promise((resolve, reject) => {
       fs.read(
         fd,
         buffer,
@@ -140,15 +143,125 @@ export const read = (
         length,
         position,
         (err, bytesRead, buffer) => {
+          if (callback) callback(err, bytesRead, buffer);
           if (err) reject(err);
           else resolve({ bytesRead, buffer });
+        },
+      );
+    }),
+  );
+};
+
+// i don't care anymore
+export const write = (
+  fd: number,
+  buffer: Buffer | string,
+  offsetOrPosition?: number | null,
+  lengthOrEncoding?: number | string | null,
+  positionOrCallback?:
+    | number
+    | null
+    | ((
+        err: NodeJS.ErrnoException | null,
+        written: number,
+        bufferOrString: string | Uint8Array,
+      ) => void),
+  callback?: (
+    err: NodeJS.ErrnoException | null,
+    written: number,
+    bufferOrString: string | Uint8Array,
+  ) => void,
+): Promise<{ written: number; bufferOrString: string | Uint8Array }> => {
+  if (typeof positionOrCallback === 'function') {
+    return write(
+      fd,
+      buffer,
+      offsetOrPosition,
+      length,
+      undefined,
+      (err, written, bufferOrStr) => {
+        positionOrCallback(err, written, bufferOrStr);
+      },
+    ) as never;
+  } else if (typeof callback === 'function') {
+    return write(
+      fd,
+      buffer as any,
+      offsetOrPosition,
+      lengthOrEncoding as any,
+      positionOrCallback,
+      undefined,
+    )
+      .then(v => {
+        callback(null, v.written, v.bufferOrString);
+        return v;
+      })
+      .catch(e => {
+        callback(e, null, null);
+        return null as never;
+      });
+  } else {
+    return new Promise((resolve, reject) => {
+      fs.write(
+        fd,
+        buffer as any,
+        offsetOrPosition,
+        lengthOrEncoding as number,
+        positionOrCallback,
+        (err, written, bufferOrString) => {
+          if (err) reject(err);
+          else resolve({ written, bufferOrString });
         },
       );
     });
   }
 };
-
-// Similar rewrite for `write`, `readv`, and `writev` functions, handling the function overloads and optional parameters in TypeScript
+export const readv = (
+  fd: number,
+  buffers: NodeJS.ArrayBufferView[],
+  position?: number | null,
+  callback?: (
+    err: NodeJS.ErrnoException | null,
+    bytesRead: number,
+    buffers: NodeJS.ArrayBufferView[],
+  ) => void,
+): Promise<{ bytesRead: number; buffers: NodeJS.ArrayBufferView[] }> => {
+  const p = new Promise((resolve, reject) => {
+    fs.readv(fd, buffers, position, (err, bytesRead, buffers) => {
+      callback(err, bytesRead, buffers);
+      if (err) reject(err);
+      else resolve({ bytesRead, buffers });
+    });
+  });
+  if (callback) p.catch(() => void 0); // prevent ending process
+  return p as Promise<any>;
+};
+export const writev = (
+  fd: number,
+  buffers: NodeJS.ArrayBufferView[],
+  position?: number | null,
+  callback?: (
+    err: NodeJS.ErrnoException | null,
+    bytesWritten: number,
+    buffers: NodeJS.ArrayBufferView[],
+  ) => void,
+): Promise<{
+  bytesWritten: number;
+  buffers: NodeJS.ArrayBufferView[];
+}> => {
+  const c = <P extends any>(v: Promise<P>) => {
+    if (callback) v.catch(() => void 0);
+    return v;
+  };
+  return c(
+    new Promise((resolve, reject) => {
+      fs.writev(fd, buffers, position, (err, bytesWritten, buffers) => {
+        if (err) reject(err);
+        else resolve({ bytesWritten, buffers });
+      });
+    }),
+  );
+};
 
 // Handling fs.realpath.native, if available
 if (typeof fs.realpath.native === 'function') {

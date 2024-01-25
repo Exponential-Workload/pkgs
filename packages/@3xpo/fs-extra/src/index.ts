@@ -14,6 +14,7 @@ import * as remove from './remove';
 
 const defaultExport = {
   ...(fs as Record<never, never>), // hide the type
+  ...fs.constants,
   ...copy,
   ...empty,
   ...ensure,
@@ -27,6 +28,7 @@ const defaultExport = {
 
 export default defaultExport as typeof defaultExport & // re-show the type, and force overwrite all others, because why not
   typeof fs &
+  typeof fs.constants &
   typeof copy &
   typeof empty &
   typeof ensure &

@@ -9,11 +9,11 @@ Almost the same as `writeFileSync` (i.e. it overwrites), except that if the pare
 ## Example:
 
 ```js
-const fs = require('fs-extra')
+import fs from '@3xpo/fs-extra';
 
-const file = '/tmp/this/path/does/not/exist/file.txt'
-fs.outputFileSync(file, 'hello!')
+const file = '/tmp/this/path/does/not/exist/file.txt';
+fs.outputFileSync(file, 'hello!');
 
-const data = fs.readFileSync(file, 'utf8')
-console.log(data) // => hello!
+const data = fs.readFileSync(file, 'utf8');
+console.log(data); // => hello!
 ```

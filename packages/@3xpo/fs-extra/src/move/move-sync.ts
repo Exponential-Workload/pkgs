@@ -7,8 +7,16 @@ import { removeSync } from '../remove';
 import { mkdirpSync } from '../mkdirs';
 import stat from '../util/stat';
 
-export const moveSync = (src: string, dest: string, opts) => {
-  opts = opts || {};
+export const moveSync = (
+  src: string,
+  dest: string,
+  opts?: {
+    overwrite?: boolean;
+    clobber?: boolean;
+    dereference?: boolean;
+  },
+) => {
+  opts = opts ?? {};
   const overwrite = opts.overwrite || opts.clobber || false;
 
   const { srcStat, isChangingCase = false } = stat.checkPathsSync(

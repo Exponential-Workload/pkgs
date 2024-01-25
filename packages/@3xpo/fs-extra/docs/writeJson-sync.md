@@ -15,10 +15,11 @@ Writes an object to a JSON file.
 ## Example:
 
 ```js
-const fs = require('fs-extra')
+import fs from '@3xpo/fs-extra';
 
-fs.writeJsonSync('./package.json', {name: 'fs-extra'})
+fs.writeJsonSync('./package.json', { name: 'fs-extra' });
 ```
+
 ---
 
 **See also:** [`outputJsonSync()`](outputJson-sync.md)

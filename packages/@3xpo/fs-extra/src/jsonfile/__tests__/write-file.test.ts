@@ -8,7 +8,7 @@ import jf from '../';
 /* global describe it beforeEach afterEach */
 
 describe('+ writeFile()', () => {
-  let TEST_DIR;
+  let TEST_DIR: string;
 
   beforeEach(done => {
     TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile');
