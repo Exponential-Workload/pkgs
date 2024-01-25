@@ -1,9 +1,9 @@
+// @ts-nocheck
 'use strict';
-
 import * as fs from 'fs';
 import * as os from 'os';
-const fse = require('../../..');
-const { copy: ncp } = require('../../');
+import fse from '../../..';
+import { copy as ncp } from '../../';
 import path from 'path';
 import assert from 'assert';
 

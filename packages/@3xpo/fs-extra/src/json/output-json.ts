@@ -1,6 +1,6 @@
 'use strict';
 
-import { StringifyOptions, stringify } from 'jsonfile/utils';
+import { StringifyOptions, stringify } from '../jsonfile/utils';
 import { outputFile } from '../output-file';
 import { WriteFileOptions } from 'graceful-fs';
 

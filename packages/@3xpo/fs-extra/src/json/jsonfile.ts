@@ -1,6 +1,6 @@
 'use strict';
 
-import jsonFile from 'jsonfile';
+import jsonFile from '../jsonfile';
 
 export default {
   // jsonfile exports

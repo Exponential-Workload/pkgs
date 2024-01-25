@@ -33,13 +33,15 @@
   "license": "MIT",
   "dependencies": {
     "@3xpo/universalify": "workspace:^",
-    "@types/jsonfile": "^6.1.4",
     "graceful-fs": "^4.2.0"
   },
   "main": "./dist/lib.node.bundle.min.cjs",
   "module": "./dist/lib.node.bundle.min.mjs",
+  "types": "./dist/index.ts",
+  "typings": "./dist/index.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.ts",
       "import": "./dist/lib.node.bundle.min.mjs",
       "require": "./dist/lib.node.bundle.min.cjs",
       "node": "./dist/lib.node.bundle.min.mjs",
@@ -95,6 +97,7 @@
     "nyc": "^15.0.0",
     "proxyquire": "^2.0.1",
     "read-dir-files": "^0.1.1",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

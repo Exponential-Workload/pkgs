@@ -7,6 +7,7 @@ export type Options = Partial<
   {
     encoding: BufferEncoding | null;
     reviver: Parameters<typeof JSON.parse>[1] | null;
+    throws: boolean;
   } & StringifyOptions
 >;
 
