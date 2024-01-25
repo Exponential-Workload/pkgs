@@ -20,7 +20,10 @@ export type Callback<Return> = Return extends never
 export const fromCallback = <Args extends any[] = [], Return = void>(
   fn: (...args: [...Args, Callback<Return>]) => void,
 ) => {
-  if (!fn) throw new Error('fromCallback called with no function!');
+  if (!fn || typeof fn !== 'function')
+    throw new Error(
+      `fromCallback called with ${typeof fn} (${fn}), expected Function!`,
+    );
   return Object.defineProperty(
     function (...args: Args) {
       const lastArg = args[args.length - 1];
