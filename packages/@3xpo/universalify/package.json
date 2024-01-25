@@ -1,0 +1,53 @@
+{
+  "name": "@3xpo/universalify",
+  "version": "2.0.1",
+  "description": "Make a callback- or promise-based function support both promises and callbacks.",
+  "keywords": [
+    "callback",
+    "native",
+    "promise"
+  ],
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/universalify/",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/devtools/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "author": "Expo",
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/devtools.git",
+    "directory": "packages/@3xpo/universalify/"
+  },
+  "scripts": {
+    "test": "standard && nyc --reporter text --reporter lcovonly tape test/*.js | colortape"
+  },
+  "engines": {
+    "node": ">= 10.0.0"
+  },
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "type": "module",
+  "devDependencies": {
+    "colortape": "^0.1.2",
+    "coveralls": "^3.0.1",
+    "nyc": "^15.0.0",
+    "standard": "^14.3.1",
+    "tape": "^5.0.1"
+  }
+}
