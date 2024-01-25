@@ -7,46 +7,54 @@ import { pathExists } from '../path-exists';
 import { utimesMillis } from '../util/utimes';
 import stat from '../util/stat';
 import type { CopyOpts } from './copy-sync';
+import { fromPromise } from '@3xpo/universalify';
 
-export const copy = async (
-  src: string,
-  dest: string,
-  opts: CopyOpts | CopyOpts['filter'] = {},
-) => {
-  if (typeof opts === 'function') {
-    opts = { filter: opts };
-  }
+export const copy = fromPromise(
+  async (
+    src: string,
+    dest: string,
+    opts: CopyOpts | CopyOpts['filter'] = {},
+  ) => {
+    if (typeof opts === 'function') {
+      opts = { filter: opts };
+    }
 
-  opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
-  opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
+    opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
+    opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
 
-  // Warn about using preserveTimestamps on 32-bit node
-  if (opts.preserveTimestamps && process.arch === 'ia32') {
-    process.emitWarning(
-      'Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' +
-        '\tsee https://github.com/jprichardson/node-fs-extra/issues/269',
-      'Warning',
-      'fs-extra-WARN0001',
+    // Warn about using preserveTimestamps on 32-bit node
+    if (opts.preserveTimestamps && process.arch === 'ia32') {
+      process.emitWarning(
+        'Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' +
+          '\tsee https://github.com/jprichardson/node-fs-extra/issues/269',
+        'Warning',
+        'fs-extra-WARN0001',
+      );
+    }
+
+    const { srcStat, destStat } = await stat.checkPaths(
+      src,
+      dest,
+      'copy',
+      opts,
     );
-  }
 
-  const { srcStat, destStat } = await stat.checkPaths(src, dest, 'copy', opts);
+    await stat.checkParentPaths(src, srcStat, dest, 'copy');
 
-  await stat.checkParentPaths(src, srcStat, dest, 'copy');
+    const include = await runFilter(src, dest, opts);
 
-  const include = await runFilter(src, dest, opts);
+    if (!include) return;
 
-  if (!include) return;
+    // check if the parent of dest exists, and create it if it doesn't exist
+    const destParent = path.dirname(dest);
+    const dirExists = await pathExists(destParent);
+    if (!dirExists) {
+      await mkdirs(destParent);
+    }
 
-  // check if the parent of dest exists, and create it if it doesn't exist
-  const destParent = path.dirname(dest);
-  const dirExists = await pathExists(destParent);
-  if (!dirExists) {
-    await mkdirs(destParent);
-  }
-
-  await getStatsAndPerformCopy(destStat, src, dest, opts);
-};
+    await getStatsAndPerformCopy(destStat, src, dest, opts);
+  },
+);
 
 export const runFilter = async (src: string, dest: string, opts?: CopyOpts) => {
   if (!opts.filter) return true;

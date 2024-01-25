@@ -6,6 +6,7 @@ import fse from '../../..';
 import { copy as ncp } from '../../';
 import path from 'path';
 import assert from 'assert';
+import { fromCallback } from '@3xpo/universalify';
 
 /* global afterEach, beforeEach, describe, it */
 
@@ -14,14 +15,10 @@ describe('ncp / symlink', () => {
   const src = path.join(TEST_DIR, 'src');
   const out = path.join(TEST_DIR, 'out');
 
-  beforeEach(done => {
-    fse
-      .emptyDir(TEST_DIR)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        createFixtures(src, done);
-      });
+  beforeEach(async () => {
+    const err = await fse.emptyDir(TEST_DIR);
+    assert.ifError(err);
+    return await fromCallback(createFixtures)(src);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

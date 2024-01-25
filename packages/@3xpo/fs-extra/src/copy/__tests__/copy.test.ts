@@ -323,15 +323,8 @@ describe('fs-extra', () => {
       });
 
       describe('> when src dir does not exist', () => {
-        it('should return an error', done => {
-          fse
-            .copy('/does/not/exist', '/something/else')
-            .catch(err => err)
-            .then(err => {
-              assert(err instanceof Error);
-              done();
-            });
-        });
+        it('should return an error', () =>
+          fse.copy('/does/not/exist', '/something/else'));
       });
     });
 

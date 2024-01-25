@@ -16,10 +16,8 @@ describe('mkdirp / clobber', () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-clobber');
     fse
       .emptyDir(TEST_DIR)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-
+      .catch(err => assert.ifError(err))
+      .then(() => {
         const ps = [TEST_DIR];
 
         for (let i = 0; i < 15; i++) {

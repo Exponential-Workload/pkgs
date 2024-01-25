@@ -6,19 +6,21 @@ import path from 'path';
 import * as mkdir from '../mkdirs';
 import { pathExists } from '../path-exists';
 
-export const outputFile = async (
-  file: string,
-  data: string | NodeJS.ArrayBufferView,
-  encoding: fs.WriteFileOptions | BufferEncoding = 'utf-8',
-) => {
-  const dir = path.dirname(file);
+export const outputFile = fromPromise(
+  async (
+    file: string,
+    data: string | NodeJS.ArrayBufferView,
+    encoding: fs.WriteFileOptions | BufferEncoding = 'utf-8',
+  ) => {
+    const dir = path.dirname(file);
 
-  if (!(await pathExists(dir))) {
-    await mkdir.mkdirs(dir);
-  }
+    if (!(await pathExists(dir))) {
+      await mkdir.mkdirs(dir);
+    }
 
-  return fs.writeFile(file, data, encoding);
-};
+    return fs.writeFile(file, data, encoding);
+  },
+);
 
 export const outputFileSync = (
   file: string,

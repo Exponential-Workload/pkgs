@@ -1,5 +1,6 @@
 'use strict';
 
+import { fromPromise } from '@3xpo/universalify';
 import {
   createFile as _createFile,
   createFileSync as _createFileSync,
@@ -14,19 +15,19 @@ import {
 } from './symlink';
 
 // file
-export const createFile = _createFile;
+export const createFile = fromPromise(_createFile);
 export const createFileSync = _createFileSync;
-export const ensureFile = _createFile;
+export const ensureFile = fromPromise(_createFile);
 export const ensureFileSync = _createFileSync;
 // link
-export const createLink = _createLink;
+export const createLink = fromPromise(_createLink);
 export const createLinkSync = _createLinkSync;
-export const ensureLink = _createLink;
+export const ensureLink = fromPromise(_createLink);
 export const ensureLinkSync = _createLinkSync;
 // symlink
-export const createSymlink = _createSymlink;
+export const createSymlink = fromPromise(_createSymlink);
 export const createSymlinkSync = _createSymlinkSync;
-export const ensureSymlink = _createSymlink;
+export const ensureSymlink = fromPromise(_createSymlink);
 export const ensureSymlinkSync = _createSymlinkSync;
 
 export default {

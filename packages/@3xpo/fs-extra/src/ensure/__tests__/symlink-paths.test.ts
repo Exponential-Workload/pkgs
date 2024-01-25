@@ -30,7 +30,7 @@ describe('symlink-type', () => {
     fse.mkdirsSync('./real-alpha/real-beta/real-gamma');
   });
 
-  afterEach(done => fse.emptyDir(TEST_DIR, done));
+  afterEach(() => fse.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   afterAll(() => {
     process.chdir(CWD);
@@ -90,7 +90,7 @@ describe('symlink-type', () => {
         };
         args.push(callback);
         // @ts-ignore
-        return symlinkPaths(...args);
+        symlinkPaths(...args);
       });
     });
   });

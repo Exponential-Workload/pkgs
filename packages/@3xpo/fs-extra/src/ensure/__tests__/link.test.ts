@@ -92,7 +92,7 @@ describe('fse-ensure-link', () => {
     fs.linkSync('foo.txt', 'link-foo.txt');
   });
 
-  afterEach(done => fse.emptyDir(TEST_DIR, done));
+  afterEach(() => fse.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   afterAll(() => {
     process.chdir(CWD);
