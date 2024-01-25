@@ -5,10 +5,7 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-import proxyquire from 'proxyquire';
-
-let gracefulFsStub;
-let utimes;
+import utimes from '../utimes';
 
 /* global beforeEach, describe, it */
 
@@ -39,14 +36,11 @@ describe('utimes', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'utimes');
     await fse.emptyDir(TEST_DIR);
-    // reset stubs
-    gracefulFsStub = {};
-    utimes = proxyquire('../utimes', { '../fs': gracefulFsStub });
   });
 
   describe('utimesMillis()', () => {
     // see discussion https://github.com/jprichardson/node-fs-extra/pull/141
-    it('should set the utimes w/ millisecond precision', done => {
+    it('should set the utimes w/ millisecond precision', () => {
       const tmpFile = path.join(TEST_DIR, 'someFile');
       fs.writeFileSync(tmpFile, 'hello');
 
@@ -56,22 +50,26 @@ describe('utimes', () => {
       const awhileAgo = new Date(1334990868773);
       const awhileAgoNoMillis = new Date(1334990868000);
 
-      assert.notDeepStrictEqual(stats.mtime, awhileAgo);
-      assert.notDeepStrictEqual(stats.atime, awhileAgo);
+      assert.notDeepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime());
+      assert.notDeepStrictEqual(stats.atime.getTime(), awhileAgo.getTime());
 
-      utimes.utimesMillis(tmpFile, awhileAgo, awhileAgo, err => {
-        assert.ifError(err);
+      return utimes.utimesMillis(tmpFile, awhileAgo, awhileAgo).then(() => {
         stats = fs.statSync(tmpFile);
         if (hasMillisResSync()) {
-          assert.deepStrictEqual(stats.mtime, awhileAgo);
-          assert.deepStrictEqual(stats.atime, awhileAgo);
+          assert.deepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime);
+          assert.deepStrictEqual(stats.atime.getTime(), awhileAgo.getTime);
         } else {
-          assert.deepStrictEqual(stats.mtime, awhileAgoNoMillis);
-          assert.deepStrictEqual(stats.atime, awhileAgoNoMillis);
+          assert.deepStrictEqual(
+            stats.mtime.getTime(),
+            awhileAgoNoMillis.getTime(),
+          );
+          assert.deepStrictEqual(
+            stats.atime.getTime(),
+            awhileAgoNoMillis.getTime(),
+          );
         }
-        done();
       });
-    });
+    }, 10000);
 
     // TODO: atm i dont care, will fix later:
     // it('should close open file desciptors after encountering an error', done => {

@@ -193,6 +193,9 @@ describe('+ readFile()', () => {
     beforeEach(async () => {
       file = path.join(TEST_DIR, 'file-bom.json');
       obj = { name: 'JP' };
+      fs.mkdirSync(path.join(file, '..'), {
+        recursive: true,
+      });
       fs.writeFileSync(file, `\uFEFF${JSON.stringify(obj)}`);
     });
 
