@@ -25,4 +25,4 @@ export const stripBom = (content: Buffer | string) => {
   return content.replace(/^\uFEFF/, '');
 };
 
-module.exports = { stringify, stripBom };
+export default { stringify, stripBom };
