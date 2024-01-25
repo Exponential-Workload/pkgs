@@ -38,7 +38,7 @@ export const fromCallback = <Args extends any[] = [], Return = void>(
     },
     'name',
     { value: fn.name },
-  ) as (...args: Args) => Promise<Return> | void;
+  ) as (...args: Args) => Promise<Return>;
 };
 
 export const fromPromise = <TArgs extends any[], TResult>(
