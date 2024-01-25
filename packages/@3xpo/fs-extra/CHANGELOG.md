@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.2.2
+
+### Patch Changes
+
+- d9862e4: Export methods
+
 ## 11.2.1
 
 ### Patch Changes
