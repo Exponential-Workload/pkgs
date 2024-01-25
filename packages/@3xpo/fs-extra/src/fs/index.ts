@@ -4,6 +4,7 @@ import * as _fs from 'fs';
 import { fromCallback } from '@3xpo/universalify';
 
 // Export fs methods directly
+export * from 'fs';
 export * from 'graceful-fs';
 
 // Define the API with explicit types
