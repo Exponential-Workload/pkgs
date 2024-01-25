@@ -16,8 +16,7 @@ describe('ncp / symlink', () => {
   const out = path.join(TEST_DIR, 'out');
 
   beforeEach(async () => {
-    const err = await fse.emptyDir(TEST_DIR);
-    assert.ifError(err);
+    await fse.emptyDir(TEST_DIR);
     return await fromCallback(createFixtures)(src);
   });
 

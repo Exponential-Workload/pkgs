@@ -5,6 +5,7 @@ import path from 'path';
 import crypto from 'crypto';
 import * as os from 'os';
 import fs from '../../index';
+import { PathLike } from 'fs';
 
 const SIZE = 1000;
 
@@ -79,9 +80,9 @@ describe('fs.read()', () => {
 });
 
 describe('fs.write()', () => {
-  let TEST_FILE;
-  let TEST_DATA;
-  let TEST_FD;
+  let TEST_FILE: string;
+  let TEST_DATA: Buffer;
+  let TEST_FD: number;
 
   beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'write-test-file');

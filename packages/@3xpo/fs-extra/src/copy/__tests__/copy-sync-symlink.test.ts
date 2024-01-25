@@ -57,7 +57,7 @@ describe('copy-sync / symlink', () => {
 
     const dirSymlinkPath = path.join(out, 'dir-symlink');
     assert.ok(fs.lstatSync(dirSymlinkPath).isDirectory());
-    assert.deepStrictEqual(fs.readdirSync(dirSymlinkPath), ['bar']);
+    expect(fs.readdirSync(dirSymlinkPath)).toEqual(['bar']);
   });
 });
 

@@ -212,17 +212,28 @@ export const write = (
       });
   } else {
     return new Promise((resolve, reject) => {
-      fs.write(
-        fd,
-        buffer as any,
-        offsetOrPosition,
-        lengthOrEncoding as number,
-        positionOrCallback,
-        (err, written, bufferOrString) => {
-          if (err) reject(err);
-          else resolve({ written, bufferOrString });
-        },
-      );
+      callback = (err, written, bufferOrString) => {
+        if (err) reject(err);
+        else resolve({ written, bufferOrString });
+      };
+      switch (true) {
+        case typeof offsetOrPosition === 'undefined':
+          fs.write(fd, buffer as any, callback);
+          break;
+        case typeof lengthOrEncoding === 'undefined':
+          fs.write(fd, buffer as any, offsetOrPosition, callback);
+          break;
+        default:
+          fs.write(
+            fd,
+            buffer as any,
+            offsetOrPosition,
+            lengthOrEncoding as number,
+            positionOrCallback,
+            callback,
+          );
+          break;
+      }
     });
   }
 };
