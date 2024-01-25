@@ -1,12 +1,21 @@
-# proper-fs-extra: fs-extra, for the 21st century
+<div align="center">
+
+[![repo image](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/events.png)](https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/events)
+
+# proper-fs-extra: modern fs-extra
+
+[![npm Package](https://img.shields.io/npm/v/@3xpo/fs-extra.svg)](https://npm.im/@3xpo/fs-extra)
+[![License](https://img.shields.io/npm/l/@3xpo/fs-extra.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/LICENSE)
+[![build status](https://img.shields.io/github/actions/workflow/status/Exponential-Workload/proper-fs-extra/ci.yml?branch=master)](https://github.com/Exponential-Workload/proper-fs-extra/actions/workflows/ci.yml?query=branch%3Amaster)
+[![downloads per month](https://img.shields.io/npm/dm/@3xpo/fs-extra.svg)](https://npm.im/@3xpo/fs-extra)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-custom-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
+[![TypeScript](https://img.shields.io/badge/language-typescript-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
+
+</div>
+
+## Description
 
 `fs-extra` adds file system methods that aren't included in the native `fs` module and adds promise support to the `fs` methods. It also uses [`graceful-fs`](https://github.com/isaacs/node-graceful-fs) to prevent `EMFILE` errors. It should be a drop in replacement for `fs`.
-
-[![npm Package](https://img.shields.io/npm/v/fs-extra.svg)](https://www.npmjs.org/package/fs-extra)
-[![License](https://img.shields.io/npm/l/fs-extra.svg)](https://github.com/jprichardson/node-fs-extra/blob/master/LICENSE)
-[![build status](https://img.shields.io/github/actions/workflow/status/jprichardson/node-fs-extra/ci.yml?branch=master)](https://github.com/jprichardson/node-fs-extra/actions/workflows/ci.yml?query=branch%3Amaster)
-[![downloads per month](http://img.shields.io/npm/dm/fs-extra.svg)](https://www.npmjs.org/package/fs-extra)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Why?
 
@@ -236,7 +245,7 @@ So, if you want to remove a file or a directory regardless of whether it has con
 
 `@3xpo/fs-extra` wouldn't be possible without using the modules from the following authors:
 
-- [JP Richardson](https://github.com/jprichardson/node-fs-extra)
+- [JP Richardson](https://github.com/jprichardson) (Upstream Repo)
 - [Isaac Shlueter](https://github.com/isaacs)
 - [Charlie McConnel](https://github.com/avianflu)
 - [James Halliday](https://github.com/substack)
