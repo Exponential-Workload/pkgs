@@ -10,29 +10,23 @@ import assert from 'assert';
 
 describe('mkdirp / race', () => {
   let TEST_DIR: string;
-  let file;
+  let file: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-race');
-    fse
-      .emptyDir(TEST_DIR)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
+    await fse.emptyDir(TEST_DIR);
 
-        const ps = [TEST_DIR];
+    const ps = [TEST_DIR];
 
-        for (let i = 0; i < 15; i++) {
-          const dir = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
-          ps.push(dir);
-        }
+    for (let i = 0; i < 15; i++) {
+      const dir = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
+      ps.push(dir);
+    }
 
-        file = path.join(...ps);
-        done();
-      });
+    file = path.join(...ps);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true }));
 
   it('race', done => {
     let res = 2;

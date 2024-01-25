@@ -21,7 +21,7 @@ describe('copy / broken symlink', () => {
     });
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('when symlink is broken', () => {
     it('should not throw error if dereference is false', done => {

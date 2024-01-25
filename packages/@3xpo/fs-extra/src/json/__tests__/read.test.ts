@@ -16,7 +16,7 @@ describe('read', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('+ readJSON', () => {
     it('should read a file and parse the json', done => {

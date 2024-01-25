@@ -31,7 +31,7 @@ describe('remove', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('+ remove()', () => {
     it('should delete an empty directory', done => {

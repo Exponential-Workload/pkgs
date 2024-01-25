@@ -24,7 +24,7 @@ describe('ncp / symlink', () => {
       });
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('copies symlinks by default', done => {
     ncp(src, out)

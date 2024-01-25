@@ -18,7 +18,7 @@ describe('fs-extra', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('+ copy()', () => {
     it('should return an error if src and dest are the same', done => {

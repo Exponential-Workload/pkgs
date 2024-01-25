@@ -19,7 +19,7 @@ describe('+ emptyDir()', () => {
     fse.ensureDirSync(TEST_DIR);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('> when directory exists and contains items', () => {
     it('should delete all of the items', () => {

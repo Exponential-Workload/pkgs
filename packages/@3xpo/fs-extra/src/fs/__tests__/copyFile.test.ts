@@ -15,7 +15,7 @@ describe('fs.copyFile', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fse.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('supports promises', () => {
     const src = path.join(TEST_DIR, 'init.txt');

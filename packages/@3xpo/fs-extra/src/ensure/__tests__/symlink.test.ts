@@ -111,13 +111,15 @@ describe('fse-ensure-symlink', () => {
     ],
   ];
 
-  beforeAll(() => {
-    fse.emptyDirSync(TEST_DIR);
-    process.chdir(TEST_DIR);
-  });
-
   beforeEach(() => {
-    fse.ensureDirSync('.');
+    fs.rmSync(TEST_DIR, {
+      recursive: true,
+      force: true,
+    });
+    fs.mkdirSync(TEST_DIR, {
+      recursive: true,
+    });
+    process.chdir(TEST_DIR);
     fs.writeFileSync('./foo.txt', 'foo\n');
     fse.mkdirsSync('empty-dir');
     fse.mkdirsSync('dir-foo');

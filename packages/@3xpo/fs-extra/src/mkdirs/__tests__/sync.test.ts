@@ -27,7 +27,7 @@ describe('mkdirp / sync', () => {
     });
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('should', done => {
     try {

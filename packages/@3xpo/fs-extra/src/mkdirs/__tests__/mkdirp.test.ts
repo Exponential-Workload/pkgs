@@ -16,7 +16,7 @@ describe('mkdirp / mkdirp', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('should make the dir', done => {
     const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);

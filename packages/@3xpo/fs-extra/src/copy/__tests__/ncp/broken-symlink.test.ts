@@ -21,7 +21,7 @@ describe('ncp broken symlink', () => {
     });
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('should not error if symlink is broken', done => {
     ncp(src, out, err => {

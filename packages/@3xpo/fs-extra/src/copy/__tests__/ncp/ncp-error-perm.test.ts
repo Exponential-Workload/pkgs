@@ -32,7 +32,7 @@ describe('ncp / error / dest-permission', () => {
     });
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('should return an error', done => {
     const someFile = path.join(src, 'some-file');

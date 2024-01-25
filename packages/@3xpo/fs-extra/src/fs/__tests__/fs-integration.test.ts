@@ -16,7 +16,7 @@ describe('native fs', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('should use native fs methods', () => {
     const file = path.join(TEST_DIR, 'write.txt');

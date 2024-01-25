@@ -27,7 +27,7 @@ describe('mkdirp / chmod', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('chmod-pre', done => {
     const mode = 0o744;

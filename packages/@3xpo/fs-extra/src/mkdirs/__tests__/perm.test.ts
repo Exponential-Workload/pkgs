@@ -16,7 +16,7 @@ describe('mkdirp / perm', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   it('async perm', done => {
     const file = path.join(TEST_DIR, (Math.random() * (1 << 30)).toString(16));

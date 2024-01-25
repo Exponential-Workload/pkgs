@@ -53,7 +53,7 @@ describe('+ move()', () => {
     );
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('> when overwrite = true', () => {
     it('should overwrite file', done => {

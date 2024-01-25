@@ -16,7 +16,7 @@ describe('jsonfile-integration', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('+ writeJsonSync / spaces', () => {
     it('should read a file and parse the json', () => {

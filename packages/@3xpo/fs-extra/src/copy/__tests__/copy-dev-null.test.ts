@@ -16,7 +16,7 @@ describe('+ copy() - copy /dev/null', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(() => fse.remove(TEST_DIR));
+  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('> when src is /dev/null', () => {
     it('should copy successfully', done => {

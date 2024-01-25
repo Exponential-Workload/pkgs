@@ -16,13 +16,10 @@ describe('mkdirp: issue-93, win32, when drive does not exist, it should return a
 
   beforeAll(done => {
     TEST_DIR = path.join(os.tmpdir(), 'tests', 'fs-extra', 'mkdirp-issue-93');
-    fse
-      .emptyDir(TEST_DIR)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        done();
-      });
+    fse.rmSync(TEST_DIR, {
+      recursive: true,
+      force: true,
+    });
   });
 
   it('should return a cleaner error than inifinite loop, stack crash', done => {
