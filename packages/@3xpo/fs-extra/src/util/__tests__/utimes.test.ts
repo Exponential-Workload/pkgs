@@ -56,8 +56,8 @@ describe('utimes', () => {
       return utimes.utimesMillis(tmpFile, awhileAgo, awhileAgo).then(() => {
         stats = fs.statSync(tmpFile);
         if (hasMillisResSync()) {
-          assert.deepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime);
-          assert.deepStrictEqual(stats.atime.getTime(), awhileAgo.getTime);
+          assert.deepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime());
+          assert.deepStrictEqual(stats.atime.getTime(), awhileAgo.getTime());
         } else {
           assert.deepStrictEqual(
             stats.mtime.getTime(),
