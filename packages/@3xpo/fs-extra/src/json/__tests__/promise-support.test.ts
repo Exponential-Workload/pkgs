@@ -16,7 +16,7 @@ describe('json promise support', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
   ['writeJson', 'writeJSON'].forEach(method => {
     describe(method, () => {
       it('should support promises', () => {

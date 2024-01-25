@@ -27,7 +27,7 @@ describe('mkdirp / chmod', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('chmod-pre', done => {
     const mode = 0o744;

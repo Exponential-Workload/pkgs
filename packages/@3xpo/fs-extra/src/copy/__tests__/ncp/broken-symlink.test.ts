@@ -21,7 +21,7 @@ describe('ncp broken symlink', () => {
     });
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('should not error if symlink is broken', done => {
     ncp(src, out, err => {

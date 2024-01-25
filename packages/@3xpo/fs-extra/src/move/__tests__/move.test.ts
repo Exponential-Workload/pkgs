@@ -53,7 +53,7 @@ describe('+ move()', () => {
     );
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   describe('> when overwrite = true', () => {
     it('should overwrite file', done => {

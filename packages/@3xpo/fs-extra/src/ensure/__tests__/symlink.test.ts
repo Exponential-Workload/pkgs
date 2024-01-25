@@ -117,6 +117,7 @@ describe('fse-ensure-symlink', () => {
   });
 
   beforeEach(() => {
+    fse.ensureDirSync('.');
     fs.writeFileSync('./foo.txt', 'foo\n');
     fse.mkdirsSync('empty-dir');
     fse.mkdirsSync('dir-foo');
@@ -128,7 +129,9 @@ describe('fse-ensure-symlink', () => {
     fs.symlinkSync('dir-foo', 'real-symlink-dir-foo');
   });
 
-  afterEach(done => fse.emptyDir(TEST_DIR, done));
+  afterEach(done => {
+    fse.emptyDir(TEST_DIR, done);
+  });
 
   afterAll(() => {
     process.chdir(CWD);

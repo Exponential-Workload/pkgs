@@ -33,7 +33,7 @@ describe('mkdirp / relative', () => {
       });
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('should make the directory with relative path', done => {
     process.chdir(TEST_DIR);

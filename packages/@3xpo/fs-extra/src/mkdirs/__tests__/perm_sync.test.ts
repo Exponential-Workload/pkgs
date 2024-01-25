@@ -16,7 +16,7 @@ describe('mkdirp / perm_sync', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('sync perm', done => {
     const file = path.join(

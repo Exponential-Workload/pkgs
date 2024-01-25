@@ -16,7 +16,7 @@ describe('mkdirp / mkdirp', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('should make the dir', done => {
     const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);

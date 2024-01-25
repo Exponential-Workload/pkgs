@@ -32,7 +32,7 @@ describe('mkdirp / race', () => {
       });
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('race', done => {
     let res = 2;

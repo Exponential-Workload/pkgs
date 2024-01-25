@@ -16,7 +16,7 @@ describe('read', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   describe('+ readJSON', () => {
     it('should read a file and parse the json', done => {

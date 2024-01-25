@@ -16,7 +16,7 @@ describe('output', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   describe('+ outputFile', () => {
     describe('> when the file and directory does not exist', () => {

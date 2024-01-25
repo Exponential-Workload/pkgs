@@ -15,7 +15,7 @@ describe('fs.copyFile', () => {
     fse.emptyDir(TEST_DIR, done);
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('supports promises', () => {
     const src = path.join(TEST_DIR, 'init.txt');

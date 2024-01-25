@@ -27,7 +27,7 @@ describe('mkdirp / sync', () => {
     });
   });
 
-  afterEach(done => fse.remove(TEST_DIR).then(done));
+  afterEach(() => fse.remove(TEST_DIR));
 
   it('should', done => {
     try {
