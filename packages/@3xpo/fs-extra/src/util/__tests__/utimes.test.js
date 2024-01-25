@@ -5,7 +5,7 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-const proxyquire = require('proxyquire');
+import proxyquire from 'proxyquire';
 import { fromCallback } from '@3xpo/universalify';
 
 let gracefulFsStub;
@@ -77,7 +77,7 @@ describe('utimes', () => {
     it('should close open file desciptors after encountering an error', done => {
       const fakeFd = Math.random();
 
-      gracefulFsStub.open = u(
+      gracefulFsStub.open = fromCallback(
         (pathIgnored, flagsIgnored, modeIgnored, callback) => {
           if (typeof modeIgnored === 'function') callback = modeIgnored;
           process.nextTick(() => callback(null, fakeFd));
@@ -85,19 +85,21 @@ describe('utimes', () => {
       );
 
       let closeCalled = false;
-      gracefulFsStub.close = u((fd, callback) => {
+      gracefulFsStub.close = fromCallback((fd, callback) => {
         assert.strictEqual(fd, fakeFd);
         closeCalled = true;
         if (callback) process.nextTick(callback);
       });
 
       let testError;
-      gracefulFsStub.futimes = u((fd, atimeIgnored, mtimeIgnored, callback) => {
-        process.nextTick(() => {
-          testError = new Error('A test error');
-          callback(testError);
-        });
-      });
+      gracefulFsStub.futimes = fromCallback(
+        (fd, atimeIgnored, mtimeIgnored, callback) => {
+          process.nextTick(() => {
+            testError = new Error('A test error');
+            callback(testError);
+          });
+        },
+      );
 
       utimes.utimesMillis('ignored', 'ignored', 'ignored', err => {
         assert.strictEqual(err, testError);

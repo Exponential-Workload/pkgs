@@ -1,14 +1,17 @@
 'use strict';
 import * as fs from '../fs';
-const { checkPath } = require('./utils');
+import { checkPath } from './utils';
 
-const getMode = options => {
+const getMode = (options?: number | { mode?: number }) => {
   const defaults = { mode: 0o777 };
   if (typeof options === 'number') return options;
   return { ...defaults, ...options }.mode;
 };
 
-export const makeDir = async (dir, options) => {
+export const makeDir = async (
+  dir: string,
+  options: Parameters<typeof getMode>[0],
+) => {
   checkPath(dir);
 
   return fs.mkdir(dir, {

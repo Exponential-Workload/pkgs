@@ -7,7 +7,7 @@ import { removeSync } from '../remove';
 import { mkdirpSync } from '../mkdirs';
 import stat from '../util/stat';
 
-function moveSync(src, dest, opts) {
+export const moveSync = (src: string, dest: string, opts) => {
   opts = opts || {};
   const overwrite = opts.overwrite || opts.clobber || false;
 
@@ -20,15 +20,20 @@ function moveSync(src, dest, opts) {
   stat.checkParentPathsSync(src, srcStat, dest, 'move');
   if (!isParentRoot(dest)) mkdirpSync(path.dirname(dest));
   return doRename(src, dest, overwrite, isChangingCase);
-}
+};
 
-function isParentRoot(dest) {
+export const isParentRoot = (dest: string) => {
   const parent = path.dirname(dest);
   const parsedPath = path.parse(parent);
   return parsedPath.root === parent;
-}
+};
 
-function doRename(src, dest, overwrite, isChangingCase) {
+export const doRename = (
+  src: string,
+  dest: string,
+  overwrite?: boolean,
+  isChangingCase?: boolean,
+) => {
   if (isChangingCase) return rename(src, dest, overwrite);
   if (overwrite) {
     removeSync(dest);
@@ -36,18 +41,22 @@ function doRename(src, dest, overwrite, isChangingCase) {
   }
   if (fs.existsSync(dest)) throw new Error('dest already exists.');
   return rename(src, dest, overwrite);
-}
+};
 
-function rename(src, dest, overwrite) {
+export const rename = (src: string, dest: string, overwrite?: boolean) => {
   try {
     fs.renameSync(src, dest);
   } catch (err) {
     if (err.code !== 'EXDEV') throw err;
     return moveAcrossDevice(src, dest, overwrite);
   }
-}
+};
 
-function moveAcrossDevice(src, dest, overwrite) {
+export const moveAcrossDevice = (
+  src: string,
+  dest: string,
+  overwrite?: boolean,
+) => {
   const opts = {
     overwrite,
     errorOnExist: true,
@@ -55,6 +64,6 @@ function moveAcrossDevice(src, dest, overwrite) {
   };
   copySync(src, dest, opts);
   return removeSync(src);
-}
+};
 
 export default moveSync;

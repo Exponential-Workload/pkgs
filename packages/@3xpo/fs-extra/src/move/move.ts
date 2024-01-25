@@ -8,7 +8,14 @@ import { mkdirp } from '../mkdirs';
 import { pathExists } from '../path-exists';
 import stat from '../util/stat';
 
-async function move(src, dest, opts = {}) {
+export const move = async (
+  src: string,
+  dest: string,
+  opts: {
+    overwrite?: boolean;
+    clobber?: boolean;
+  } = {},
+) => {
   const overwrite = opts.overwrite || opts.clobber || false;
 
   const { srcStat, isChangingCase = false } = await stat.checkPaths(
@@ -28,9 +35,14 @@ async function move(src, dest, opts = {}) {
   }
 
   return doRename(src, dest, overwrite, isChangingCase);
-}
+};
 
-async function doRename(src, dest, overwrite, isChangingCase) {
+export const doRename = async (
+  src: string,
+  dest: string,
+  overwrite?: boolean,
+  isChangingCase?: boolean,
+) => {
   if (!isChangingCase) {
     if (overwrite) {
       await remove(dest);
@@ -48,9 +60,13 @@ async function doRename(src, dest, overwrite, isChangingCase) {
     }
     await moveAcrossDevice(src, dest, overwrite);
   }
-}
+};
 
-async function moveAcrossDevice(src, dest, overwrite) {
+export const moveAcrossDevice = async (
+  src: string,
+  dest: string,
+  overwrite?: boolean,
+) => {
   const opts = {
     overwrite,
     errorOnExist: true,
@@ -59,6 +75,6 @@ async function moveAcrossDevice(src, dest, overwrite) {
 
   await copy(src, dest, opts);
   return remove(src);
-}
+};
 
 export default move;

@@ -2,9 +2,9 @@
 
 import path from 'path';
 import * as fs from '../fs';
-const { pathExists } = require('../path-exists');
+import { pathExists } from '../path-exists';
 
-import { fromPromise as u } from '@3xpo/universalify';
+import { fromPromise } from '@3xpo/universalify';
 
 /**
  * Function that returns two types of paths, one relative to symlink, and one
@@ -28,7 +28,7 @@ import { fromPromise as u } from '@3xpo/universalify';
  * the ability to pass in `relative to current working direcotry` paths.
  */
 
-async function symlinkPaths(srcpath, dstpath) {
+export const symlinkPaths = async (srcpath: string, dstpath: string) => {
   if (path.isAbsolute(srcpath)) {
     try {
       await fs.lstat(srcpath);
@@ -65,9 +65,9 @@ async function symlinkPaths(srcpath, dstpath) {
     toCwd: srcpath,
     toDst: path.relative(dstdir, srcpath),
   };
-}
+};
 
-function symlinkPathsSync(srcpath, dstpath) {
+export const symlinkPathsSync = (srcpath: string, dstpath: string) => {
   if (path.isAbsolute(srcpath)) {
     const exists = fs.existsSync(srcpath);
     if (!exists) throw new Error('absolute srcpath does not exist');
@@ -93,9 +93,9 @@ function symlinkPathsSync(srcpath, dstpath) {
     toCwd: srcpath,
     toDst: path.relative(dstdir, srcpath),
   };
-}
+};
 
 export default {
-  symlinkPaths: u(symlinkPaths),
+  symlinkPaths,
   symlinkPathsSync,
 };

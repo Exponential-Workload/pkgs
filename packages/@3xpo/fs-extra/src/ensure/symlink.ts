@@ -4,14 +4,14 @@ import { fromPromise as u } from '@3xpo/universalify';
 import path from 'path';
 import * as fs from '../fs';
 
-const { mkdirs, mkdirsSync } = require('../mkdirs');
+import { mkdirs, mkdirsSync } from '../mkdirs';
 
-const { symlinkPaths, symlinkPathsSync } = require('./symlink-paths');
-const { symlinkType, symlinkTypeSync } = require('./symlink-type');
+import { symlinkPaths, symlinkPathsSync } from './symlink-paths';
+import { symlinkType, symlinkTypeSync } from './symlink-type';
 
-const { pathExists } = require('../path-exists');
+import { pathExists } from '../path-exists';
 
-const { areIdentical } = require('../util/stat');
+import { areIdentical } from '../util/stat';
 
 async function createSymlink(srcpath, dstpath, type) {
   let stats;
