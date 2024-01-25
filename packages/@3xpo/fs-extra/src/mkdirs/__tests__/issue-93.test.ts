@@ -12,9 +12,10 @@ describe('mkdirp: issue-93, win32, when drive does not exist, it should return a
   let TEST_DIR: string;
 
   // only seems to be an issue on Windows.
-  if (process.platform !== 'win32') return;
+  if (process.platform !== 'win32')
+    return it('skip on windows', () => expect(true).toEqual(true));
 
-  beforeAll(done => {
+  beforeAll(() => {
     TEST_DIR = path.join(os.tmpdir(), 'tests', 'fs-extra', 'mkdirp-issue-93');
     fse.rmSync(TEST_DIR, {
       recursive: true,

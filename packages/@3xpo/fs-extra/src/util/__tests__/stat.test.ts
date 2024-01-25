@@ -11,12 +11,12 @@ import stat from '../stat.js';
 describe('util/stat', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'util-stat');
     return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done => fs.remove(TEST_DIR).then(done));
+  afterEach(() => fs.remove(TEST_DIR));
 
   describe('should use stats with bigint type', () => {
     it('stat.checkPaths()', () => {
@@ -26,7 +26,7 @@ describe('util/stat', () => {
       fs.ensureFileSync(dest);
       stat.checkPaths(src, dest, 'copy', {}, (err, stats) => {
         assert.ifError(err);
-        assert.strictEqual(typeof stats.srcStat.ino, 'bigint');
+        assert.strictEqual(typeof stats?.srcStat.ino, 'bigint');
       });
     });
 

@@ -25,11 +25,8 @@ describe('ncp / error / dest-permission', () => {
   // we don't have the permissions to do so, so no point in running this test
   if (os.platform().indexOf('win') === 0 || os.userInfo().uid === 0) return;
 
-  beforeEach(done => {
-    fse.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
-      done();
-    });
+  beforeEach(() => {
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

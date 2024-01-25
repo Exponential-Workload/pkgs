@@ -11,9 +11,9 @@ import assert from 'assert';
 describe('copy', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   // pretty UNIX specific, may not pass on windows... only tested on Mac OS X 10.9

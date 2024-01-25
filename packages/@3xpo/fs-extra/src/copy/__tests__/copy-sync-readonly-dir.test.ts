@@ -19,16 +19,14 @@ const FILES = [
 ];
 
 describe('+ copySync() - copy a readonly directory with content', () => {
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'test', 'fs-extra', 'copy-readonly-dir');
     return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(done => {
+  afterEach(() => {
     klawSync(TEST_DIR).forEach(data => fs.chmodSync(data.path, 0o777));
-    fs.remove(TEST_DIR)
-      .catch(err => err)
-      .then(done);
+    return fs.remove(TEST_DIR);
   });
 
   describe('> when src is readonly directory with content', () => {

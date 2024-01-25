@@ -9,7 +9,7 @@ import assert from 'assert';
 describe('pathExists()', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'path-exists');
     return fs.emptyDir(TEST_DIR);
   });

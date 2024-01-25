@@ -13,7 +13,7 @@ const SIZE = 16 * 64 * 1024 + 7;
 describe('+ copySync() / file', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-sync-file');
     return fs.emptyDir(TEST_DIR);
   });
@@ -174,7 +174,7 @@ describe('+ copySync() / file', () => {
       const srcData = 'some src data';
       let src, dest;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         src = path.join(TEST_DIR, 'src-file');
         dest = path.join(TEST_DIR, 'des-file');
 
@@ -203,7 +203,7 @@ describe('+ copySync() / file', () => {
       describe('when destination file does exist', () => {
         let destData;
 
-        beforeEach(() => {
+        beforeEach(async () => {
           destData = 'some dest data';
           fs.writeFileSync(dest, destData);
         });
@@ -253,7 +253,7 @@ describe('+ copySync() / file', () => {
     describe('clobber', () => {
       let src, dest, srcData, destData;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         src = path.join(TEST_DIR, 'src-file');
         dest = path.join(TEST_DIR, 'des-file');
         srcData = 'some src data';

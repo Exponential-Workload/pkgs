@@ -13,7 +13,7 @@ describe('fs.read()', () => {
   let TEST_DATA;
   let TEST_FD;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'read-test-file');
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.writeFileSync(TEST_FILE, TEST_DATA);
@@ -83,7 +83,7 @@ describe('fs.write()', () => {
   let TEST_DATA;
   let TEST_FD;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'write-test-file');
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.ensureDirSync(path.dirname(TEST_FILE));
@@ -121,25 +121,11 @@ describe('fs.write()', () => {
       );
     });
 
-    it('works when writing a string', done => {
+    it('works when writing a string', async () => {
       const message = 'Hello World!';
-      return fs.write(
-        TEST_FD,
-        message,
-        undefined,
-        undefined,
-        undefined,
-        (err, bytesWritten, buffer) => {
-          assert.ifError(err);
-          assert.strictEqual(
-            bytesWritten,
-            message.length,
-            'bytesWritten is correct',
-          );
-          assert.strictEqual(buffer, message, 'data is correct');
-          done();
-        },
-      );
+      const rs = await fs.write(TEST_FD, message);
+      expect(rs.written).toEqual(message.length);
+      expect(rs.bufferOrString).toStrictEqual('data is correct');
     });
   });
 });
@@ -149,7 +135,7 @@ describe('fs.readv()', () => {
   let TEST_DATA;
   let TEST_FD;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'readv-test-file');
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.writeFileSync(TEST_FILE, TEST_DATA);
@@ -249,7 +235,7 @@ describe('fs.writev()', () => {
   let TEST_DATA: Buffer[] | NodeJS.ArrayBufferView[];
   let TEST_FD: number;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'writev-test-file');
     TEST_DATA = [crypto.randomBytes(SIZE / 2), crypto.randomBytes(SIZE / 2)];
     fs.ensureDirSync(path.dirname(TEST_FILE));

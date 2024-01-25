@@ -5,16 +5,15 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-import { fromCallback } from '@3xpo/universalify';
 
 /* global afterEach, beforeEach, describe, it */
 
 describe('mkdirp / chmod', () => {
   let TEST_DIR: string;
-  let TEST_SUBDIR;
+  let TEST_SUBDIR: string;
 
-  beforeEach(done => {
-    const ps = [];
+  beforeEach(() => {
+    const ps = [] as any[];
     for (let i = 0; i < 15; i++) {
       const dir = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
       ps.push(dir);
@@ -25,7 +24,7 @@ describe('mkdirp / chmod', () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-chmod');
     TEST_SUBDIR = path.join(TEST_DIR, TEST_SUBDIR);
 
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

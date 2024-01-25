@@ -14,5 +14,4 @@ if (runCrossDeviceTests) {
   }
 } else console.log('Skipping cross-device move tests');
 export const differentDevice = CROSS_DEVICE_PATH;
-export const ifCrossDeviceEnabled = (fn: jest.It | jest.Describe) =>
-  runCrossDeviceTests ? fn : fn.skip;
+export const ifCrossDeviceEnabled = fn => (runCrossDeviceTests ? fn : fn.skip);

@@ -12,25 +12,16 @@ import assert from 'assert';
 
 describe('mkdirp / relative', () => {
   let TEST_DIR: string;
-  let file;
+  let file: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-relative');
-    fse
-      .emptyDir(TEST_DIR)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-
-        const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
-        const y = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
-        const z = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
-
-        // relative path
-        file = path.join(x, y, z);
-
-        done();
-      });
+    await fse.emptyDir(TEST_DIR);
+    const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
+    const y = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
+    const z = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
+    // relative path
+    file = path.join(x, y, z);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

@@ -11,9 +11,9 @@ import assert from 'assert';
 describe('read', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'read-json');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

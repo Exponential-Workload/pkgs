@@ -2,7 +2,7 @@ import assert from 'assert';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import rimraf from 'rimraf';
+import * as rimraf from 'rimraf';
 import jf from '../';
 
 /* global describe it beforeEach afterEach */
@@ -10,10 +10,10 @@ import jf from '../';
 describe('+ writeFileSync()', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile-sync');
     rimraf.sync(TEST_DIR);
-    fs.mkdir(TEST_DIR, done);
+    fs.mkdirSync(TEST_DIR);
   });
 
   afterEach(done => {
@@ -83,10 +83,10 @@ describe('+ writeFileSync()', () => {
     });
   });
   describe('> when EOF option is set to a falsey value', () => {
-    beforeEach(done => {
+    beforeEach(() => {
       TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile-sync');
       rimraf.sync(TEST_DIR);
-      fs.mkdir(TEST_DIR, done);
+      fs.mkdirSync(TEST_DIR);
     });
 
     afterEach(done => {

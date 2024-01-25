@@ -33,7 +33,7 @@ function tearDownMockFs() {
 describe('moveSync()', () => {
   let TEST_DIR: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'move-sync');
     fse.emptyDirSync(TEST_DIR);
 

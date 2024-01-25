@@ -11,9 +11,9 @@ import assert from 'assert';
 describe('json', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra-output-json-sync');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   describe('+ outputJsonSync(file, data)', () => {

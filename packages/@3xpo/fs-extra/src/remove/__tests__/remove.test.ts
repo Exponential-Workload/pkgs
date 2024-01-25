@@ -26,9 +26,9 @@ function buildFixtureDir() {
 }
 
 describe('remove', () => {
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'remove');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
@@ -74,26 +74,23 @@ describe('remove', () => {
         });
     });
 
-    it('should delete without a callback', done => {
+    it('should delete without a callback', async () => {
       const file = path.join(TEST_DIR, 'file');
       fs.writeFileSync(file, 'hello');
 
       assert(fs.existsSync(file));
-      let existsChecker = setInterval(() => {
-        fse
-          .pathExists(file)
-          .then(v => [null, v])
-          .catch(err => [err])
-          .then(([err, itDoes]: [any, boolean]) => {
-            assert.ifError(err);
-            if (!itDoes && existsChecker) {
-              clearInterval(existsChecker);
-              existsChecker = null;
-              done();
-            }
-          });
+      let done = false;
+      let existsChecker: any = setInterval(() => {
+        fse.pathExists(file).then(itDoes => {
+          if (!itDoes && existsChecker) {
+            clearInterval(existsChecker);
+            existsChecker = null;
+            done = true;
+          }
+        });
       }, 25);
       fse.remove(file);
+      while (!done) await new Promise(rs => setTimeout(rs, 10));
     });
 
     it('shouldn’t delete glob matches', function (done) {

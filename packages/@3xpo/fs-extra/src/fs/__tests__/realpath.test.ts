@@ -27,7 +27,7 @@ describe('realpath.native does not exist', () => {
     }
   };
 
-  beforeEach(() => {
+  beforeEach(async () => {
     process.on('warning', warningListener);
 
     // clear existing require.cache

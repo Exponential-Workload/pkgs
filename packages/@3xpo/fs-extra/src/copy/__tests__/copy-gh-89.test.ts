@@ -14,15 +14,12 @@ import assert from 'assert';
 describe('copy() - gh #89', () => {
   const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-gh-89');
 
-  beforeEach(done => {
-    fse.emptyDir(TEST_DIR, done);
+  beforeEach(async () => {
+    return fse.emptyDir(TEST_DIR);
   });
 
-  afterEach(done => {
-    fse
-      .remove(TEST_DIR)
-      .catch(err => err)
-      .then(done);
+  afterEach(() => {
+    return fse.remove(TEST_DIR);
   });
 
   it('should copy successfully', done => {

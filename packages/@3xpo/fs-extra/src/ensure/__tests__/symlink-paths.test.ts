@@ -20,7 +20,7 @@ describe('symlink-type', () => {
     process.chdir(TEST_DIR);
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     fs.writeFileSync('./foo.txt', 'foo\n');
     fse.mkdirsSync('./empty-dir');
     fse.mkdirsSync('./dir-foo');

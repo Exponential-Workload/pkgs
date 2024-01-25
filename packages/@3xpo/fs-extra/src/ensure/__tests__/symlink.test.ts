@@ -115,7 +115,7 @@
 //     ],
 //   ];
 
-//   beforeEach(() => {
+//   beforeEach(async()=>{
 //     fs.rmSync(TEST_DIR, {
 //       recursive: true,
 //       force: true,

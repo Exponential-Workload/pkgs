@@ -14,11 +14,15 @@ describe('ncp broken symlink', () => {
   const src = path.join(TEST_DIR, 'src');
   const out = path.join(TEST_DIR, 'out');
 
-  beforeEach(done => {
-    fse.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
-      createFixtures(src, done);
-    });
+  beforeEach(() => {
+    return fse
+      .emptyDir(TEST_DIR)
+      .then(
+        () =>
+          new Promise((rs, rj) =>
+            createFixtures(src, e => (e ? rj(e) : rs(void 0))),
+          ),
+      );
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

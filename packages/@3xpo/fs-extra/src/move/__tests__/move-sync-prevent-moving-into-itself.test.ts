@@ -24,7 +24,7 @@ const dat3 = 'file3';
 describe('+ moveSync() - prevent moving into itself', () => {
   let TEST_DIR: string, src: string;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',
@@ -37,7 +37,6 @@ describe('+ moveSync() - prevent moving into itself', () => {
     fs.outputFileSync(path.join(src, FILES[1]), dat1);
     fs.outputFileSync(path.join(src, FILES[2]), dat2);
     fs.outputFileSync(path.join(src, FILES[3]), dat3);
-    done();
   });
 
   afterEach(() => fs.remove(TEST_DIR));

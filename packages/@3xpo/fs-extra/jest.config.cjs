@@ -2,6 +2,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  maxConcurrency: 2,
-  maxWorkers: 2,
+  maxConcurrency: 1,
+  maxWorkers: 8,
+  testPathIgnorePatterns: ['dist/'],
 };

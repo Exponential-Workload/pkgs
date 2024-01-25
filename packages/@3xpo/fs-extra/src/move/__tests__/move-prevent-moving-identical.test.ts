@@ -13,7 +13,7 @@ describe('+ move() - prevent moving identical files and dirs', () => {
   let src = '';
   let dest = '';
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',

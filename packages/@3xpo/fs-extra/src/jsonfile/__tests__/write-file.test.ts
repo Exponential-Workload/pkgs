@@ -2,7 +2,7 @@ import assert from 'assert';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import rimraf from 'rimraf';
+import * as rimraf from 'rimraf';
 import jf from '../';
 
 /* global describe it beforeEach afterEach */
@@ -10,10 +10,10 @@ import jf from '../';
 describe('+ writeFile()', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile');
     rimraf.sync(TEST_DIR);
-    fs.mkdir(TEST_DIR, done);
+    fs.mkdirSync(TEST_DIR);
   });
 
   afterEach(done => {
@@ -67,7 +67,7 @@ describe('+ writeFile()', () => {
   describe('> when JSON replacer is set', () => {
     let file, sillyReplacer, obj;
 
-    beforeEach(done => {
+    beforeEach(() => {
       file = path.join(TEST_DIR, 'somefile.json');
       sillyReplacer = function (k, v) {
         if (!(v instanceof RegExp)) return v;
@@ -78,8 +78,6 @@ describe('+ writeFile()', () => {
         name: 'jp',
         reg: /hello/g,
       };
-
-      done();
     });
 
     it('should replace JSON', done => {
@@ -112,10 +110,9 @@ describe('+ writeFile()', () => {
 
   describe('> when spaces passed as an option', () => {
     let file, obj;
-    beforeEach(done => {
+    beforeEach(() => {
       file = path.join(TEST_DIR, 'somefile.json');
       obj = { name: 'jp' };
-      done();
     });
 
     it('should write file with spaces', done => {
@@ -143,10 +140,9 @@ describe('+ writeFile()', () => {
 
   describe('> when spaces, EOL are passed as options', () => {
     let file, obj;
-    beforeEach(done => {
+    beforeEach(() => {
       file = path.join(TEST_DIR, 'somefile.json');
       obj = { name: 'jp' };
-      done();
     });
 
     it('should use EOL override', done => {
@@ -173,10 +169,9 @@ describe('+ writeFile()', () => {
   });
   describe('> when passing encoding string as options', () => {
     let file, obj;
-    beforeEach(done => {
+    beforeEach(() => {
       file = path.join(TEST_DIR, 'somefile.json');
       obj = { name: 'jp' };
-      done();
     });
 
     it('should not error', done => {
@@ -205,10 +200,10 @@ describe('+ writeFile()', () => {
   });
 
   describe('> when EOF option is set to a falsey value', () => {
-    beforeEach(done => {
+    beforeEach(() => {
       TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile');
       rimraf.sync(TEST_DIR);
-      fs.mkdir(TEST_DIR, done);
+      fs.mkdirSync(TEST_DIR);
     });
 
     afterEach(done => {

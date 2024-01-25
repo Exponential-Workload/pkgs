@@ -11,7 +11,7 @@ import assert from 'assert';
 describe('+ emptyDir()', () => {
   let TEST_DIR: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'test-fs-extra', 'empty-dir');
     if (fs.existsSync(TEST_DIR)) {
       fse.removeSync(TEST_DIR);

@@ -13,7 +13,7 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
   let src = '';
   let dest = '';
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',
@@ -22,7 +22,12 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
     return fs.emptyDir(TEST_DIR);
   });
 
-  afterEach(() => fs.remove(TEST_DIR));
+  afterEach(() =>
+    fs.rmSync(TEST_DIR, {
+      recursive: true,
+      force: true,
+    }),
+  );
 
   it('should return an error if src and dest are the same', () => {
     const fileSrc = path.join(TEST_DIR, 'TEST_fs-extra_copy_sync');

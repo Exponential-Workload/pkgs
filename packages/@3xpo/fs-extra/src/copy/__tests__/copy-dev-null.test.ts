@@ -11,9 +11,9 @@ import assert from 'assert';
 let TEST_DIR = '';
 
 describe('+ copy() - copy /dev/null', () => {
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'test', 'fs-extra', 'copy-dev-null');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));

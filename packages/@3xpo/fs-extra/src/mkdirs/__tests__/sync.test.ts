@@ -12,18 +12,14 @@ describe('mkdirp / sync', () => {
   let TEST_DIR: string;
   let file;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-sync');
-    fse.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
-
+    return fse.emptyDir(TEST_DIR).then(() => {
       const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
       const y = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
       const z = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
 
       file = path.join(TEST_DIR, x, y, z);
-
-      done();
     });
   });
 

@@ -10,12 +10,12 @@ import assert from 'assert';
 describe('fs.rm', () => {
   let TEST_FILE;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'fs-rm');
-    fse.remove(TEST_FILE).then(done);
+    return fse.remove(TEST_FILE);
   });
 
-  afterEach(done => fse.remove(TEST_FILE).then(done));
+  afterEach(() => fse.remove(TEST_FILE));
 
   it('supports promises', () => {
     fse.writeFileSync(TEST_FILE, 'hello');

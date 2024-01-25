@@ -11,9 +11,9 @@ import assert from 'assert';
 describe('remove/sync', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(() => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'remove-sync');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   describe('+ removeSync()', () => {

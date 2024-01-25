@@ -25,7 +25,7 @@ const dat3 = 'file3';
 describe('+ move() - prevent moving into itself', () => {
   let TEST_DIR: string, src: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',

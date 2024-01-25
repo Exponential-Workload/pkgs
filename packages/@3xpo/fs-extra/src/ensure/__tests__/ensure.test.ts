@@ -11,9 +11,9 @@ import assert from 'assert';
 describe('fs-extra', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ensure');
-    fse.emptyDir(TEST_DIR, done);
+    return fse.emptyDir(TEST_DIR);
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
@@ -127,18 +127,12 @@ describe('fs-extra', () => {
     });
 
     describe('> when dir does not exist', () => {
-      it('should create the dir', done => {
+      it('should create the dir', async () => {
         const dir = path.join(TEST_DIR, 'dir/that/does/not/exist');
 
-        assert(!fs.existsSync(dir));
-        fse
-          .ensureDir(dir)
-          .catch(err => err)
-          .then(err => {
-            assert.ifError(err);
-            assert(fs.existsSync(dir));
-            done();
-          });
+        expect(fs.existsSync(dir)).toBeFalsy();
+        await fse.ensureDir(dir);
+        expect(fs.existsSync(dir)).toBeTruthy();
       });
     });
   });

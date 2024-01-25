@@ -1,12 +1,12 @@
 'use strict';
 
-import { fromPromise as u } from '@3xpo/universalify';
+import { fromPromise } from '@3xpo/universalify';
 import * as fs from '../fs';
 import path from 'path';
 import * as mkdir from '../mkdirs';
 import remove from '../remove';
 
-export const emptyDir = u(async dir => {
+export const emptyDir = fromPromise(async dir => {
   let items: any[];
   try {
     items = await fs.readdir(dir);

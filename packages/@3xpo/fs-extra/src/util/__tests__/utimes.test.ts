@@ -6,7 +6,6 @@ import fse from '../..';
 import path from 'path';
 import assert from 'assert';
 import proxyquire from 'proxyquire';
-import { fromCallback } from '@3xpo/universalify';
 
 let gracefulFsStub;
 let utimes;
@@ -37,9 +36,9 @@ function hasMillisResSync() {
 describe('utimes', () => {
   let TEST_DIR: string;
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'utimes');
-    fse.emptyDir(TEST_DIR, done);
+    await fse.emptyDir(TEST_DIR);
     // reset stubs
     gracefulFsStub = {};
     utimes = proxyquire('../utimes', { '../fs': gracefulFsStub });

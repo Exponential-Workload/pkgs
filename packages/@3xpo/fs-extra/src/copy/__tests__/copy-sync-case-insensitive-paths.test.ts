@@ -13,7 +13,7 @@ describe('+ copySync() - case insensitive paths', () => {
   let src = '';
   let dest = '';
 
-  beforeEach(done => {
+  beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',

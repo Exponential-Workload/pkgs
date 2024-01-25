@@ -37,7 +37,7 @@ function tearDownMockFs() {
 describe('+ move()', () => {
   let TEST_DIR: string;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'move');
 
     fse.emptyDirSync(TEST_DIR);
@@ -375,12 +375,7 @@ describe('+ move()', () => {
   describeIfWindows('> when dest parent is root', () => {
     let dest;
 
-    afterEach(done =>
-      fse
-        .remove(dest)
-        .catch(err => err)
-        .then(done),
-    );
+    afterEach(() => fse.remove(dest));
 
     it('should not create parent directory', done => {
       const src = path.join(TEST_DIR, 'a-file');
@@ -455,7 +450,10 @@ describe('+ move()', () => {
     () => {
       describe('>> just the folder', () => {
         it('should move the folder', done => {
-          const src = path.join(differentDevice, 'some/weird/dir-really-weird');
+          const src = path.join(
+            differentDevice!,
+            'some/weird/dir-really-weird',
+          );
           const dest = path.join(TEST_DIR, 'device-weird');
 
           if (!fs.existsSync(src)) {
