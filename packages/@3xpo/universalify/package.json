@@ -21,8 +21,11 @@
   },
   "main": "./dist/lib.node.bundle.min.cjs",
   "module": "./dist/lib.node.bundle.min.mjs",
+  "types": "./dist/index.d.ts",
+  "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/lib.node.bundle.min.mjs",
       "require": "./dist/lib.node.bundle.min.cjs",
       "node": "./dist/lib.node.bundle.min.mjs",
