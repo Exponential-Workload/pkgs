@@ -2,12 +2,13 @@
 
 import * as fs from '../fs';
 import path from 'path';
-const { mkdirs } = require('../mkdirs');
-const { pathExists } = require('../path-exists');
-const { utimesMillis } = require('../util/utimes');
-const stat = require('../util/stat');
+import { mkdirs } from '../mkdirs';
+import { pathExists } from '../path-exists';
+import { utimesMillis } from '../util/utimes';
+import stat from '../util/stat';
+import type { CopyOpts } from './copy-sync';
 
-async function copy(src, dest, opts = {}) {
+export const copy = async (src: string, dest: string, opts: CopyOpts = {}) => {
   if (typeof opts === 'function') {
     opts = { filter: opts };
   }
@@ -41,14 +42,19 @@ async function copy(src, dest, opts = {}) {
   }
 
   await getStatsAndPerformCopy(destStat, src, dest, opts);
-}
+};
 
-async function runFilter(src, dest, opts) {
+export const runFilter = async (src: string, dest: string, opts?: CopyOpts) => {
   if (!opts.filter) return true;
   return opts.filter(src, dest);
-}
+};
 
-async function getStatsAndPerformCopy(destStat, src, dest, opts) {
+export const getStatsAndPerformCopy = async (
+  destStat: fs.Stats | fs.BigIntStats,
+  src,
+  dest,
+  opts?: CopyOpts,
+) => {
   const statFn = opts.dereference ? fs.stat : fs.lstat;
   const srcStat = await statFn(src);
 
@@ -65,9 +71,15 @@ async function getStatsAndPerformCopy(destStat, src, dest, opts) {
   if (srcStat.isSocket()) throw new Error(`Cannot copy a socket file: ${src}`);
   if (srcStat.isFIFO()) throw new Error(`Cannot copy a FIFO pipe: ${src}`);
   throw new Error(`Unknown file: ${src}`);
-}
+};
 
-async function onFile(srcStat, destStat, src, dest, opts) {
+export const onFile = async (
+  srcStat: fs.Stats | fs.BigIntStats,
+  destStat: fs.Stats | fs.BigIntStats,
+  src: string,
+  dest: string,
+  opts?: CopyOpts,
+) => {
   if (!destStat) return copyFile(srcStat, src, dest, opts);
 
   if (opts.overwrite) {
@@ -77,16 +89,24 @@ async function onFile(srcStat, destStat, src, dest, opts) {
   if (opts.errorOnExist) {
     throw new Error(`'${dest}' already exists`);
   }
-}
+};
 
-async function copyFile(srcStat, src, dest, opts) {
+export const copyFile = async (
+  srcStat: fs.Stats | fs.BigIntStats,
+  src: string,
+  dest: string,
+  opts?: CopyOpts,
+) => {
   await fs.copyFile(src, dest);
   if (opts.preserveTimestamps) {
     // Make sure the file is writable before setting the timestamp
     // otherwise open fails with EPERM when invoked with 'r+'
     // (through utimes call)
     if (fileIsNotWritable(srcStat.mode)) {
-      await makeFileWritable(dest, srcStat.mode);
+      await makeFileWritable(
+        dest,
+        typeof srcStat.mode === 'bigint' ? Number(srcStat.mode) : srcStat.mode,
+      );
     }
 
     // Set timestamps and mode correspondingly
@@ -98,18 +118,30 @@ async function copyFile(srcStat, src, dest, opts) {
     await utimesMillis(dest, updatedSrcStat.atime, updatedSrcStat.mtime);
   }
 
-  return fs.chmod(dest, srcStat.mode);
-}
+  return fs.chmod(
+    dest,
+    typeof srcStat.mode === 'bigint' ? Number(srcStat.mode) : srcStat.mode,
+  );
+};
 
-function fileIsNotWritable(srcMode) {
-  return (srcMode & 0o200) === 0;
-}
+export const fileIsNotWritable = <T extends number | bigint>(srcMode: T) => {
+  return (
+    (typeof srcMode === 'bigint' ? srcMode & BigInt(200) : srcMode & 0o200) ===
+    0
+  );
+};
 
-function makeFileWritable(dest, srcMode) {
+export const makeFileWritable = (dest: string, srcMode: number) => {
   return fs.chmod(dest, srcMode | 0o200);
-}
+};
 
-async function onDir(srcStat, destStat, src, dest, opts) {
+export const onDir = async (
+  srcStat: fs.Stats | fs.BigIntStats,
+  destStat: fs.Stats | fs.BigIntStats,
+  src: string,
+  dest: string,
+  opts?: CopyOpts,
+) => {
   // the dest directory might not exist, create it
   if (!destStat) {
     await fs.mkdir(dest);
@@ -141,11 +173,19 @@ async function onDir(srcStat, destStat, src, dest, opts) {
   );
 
   if (!destStat) {
-    await fs.chmod(dest, srcStat.mode);
+    await fs.chmod(
+      dest,
+      typeof srcStat.mode === 'bigint' ? Number(srcStat.mode) : srcStat.mode,
+    );
   }
-}
+};
 
-async function onLink(destStat, src, dest, opts) {
+export const onLink = async (
+  destStat: fs.Stats | fs.BigIntStats,
+  src: string,
+  dest: string,
+  opts?: CopyOpts,
+) => {
   let resolvedSrc = await fs.readlink(src);
   if (opts.dereference) {
     resolvedSrc = path.resolve(process.cwd(), resolvedSrc);
@@ -186,6 +226,6 @@ async function onLink(destStat, src, dest, opts) {
   // copy the link
   await fs.unlink(dest);
   return fs.symlink(resolvedSrc, dest);
-}
+};
 
 export default copy;

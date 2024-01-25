@@ -49,13 +49,18 @@ export const fromCallback = <Args extends any[] = [], Return = void>(
 
 export const fromPromise = <TArgs extends any[], TResult>(
   fn: (...args: TArgs) => Promise<TResult>,
-) => {
+): ((
+  ...args: [
+    ...TArgs,
+    callback?: undefined | void | ((err: any, result?: TResult) => void),
+  ]
+) => ReturnType<typeof fn>) => {
   return Object.defineProperty(
     function (
       ...args:
         | [...TArgs, callback: (err: any, result?: TResult) => void]
         | [...TArgs]
-    ): ReturnType<typeof fn> {
+    ) {
       const cb = args[args.length - 1] as (err: any, result?: TResult) => void;
       if (typeof cb !== 'function') {
         // If the last argument is not a function, assume it's a regular call and apply `fn`

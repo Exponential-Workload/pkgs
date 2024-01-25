@@ -71,9 +71,7 @@ export const readFile = fromCallback(
 export const readlink = fromCallback(
   fs.readlink,
 ) as typeof _fs.readlink.__promisify__ & typeof _fs.readlink;
-export const realpath = fromCallback(
-  fs.realpath,
-) as typeof _fs.realpath.__promisify__ &
+let _realpath = fromCallback(fs.realpath) as typeof _fs.realpath.__promisify__ &
   typeof _fs.realpath & {
     native(path: fs.PathLike, options?: fs.EncodingOption): Promise<string>;
 
@@ -154,7 +152,7 @@ export const read = (
 
 // Handling fs.realpath.native, if available
 if (typeof fs.realpath.native === 'function') {
-  exports.realpath = { native: fromCallback(fs.realpath.native) };
+  _realpath = { native: fromCallback(fs.realpath.native) } as any;
 } else {
   process.emitWarning(
     'fs.realpath.native is not a function. Is fs being monkey-patched?',
@@ -162,3 +160,5 @@ if (typeof fs.realpath.native === 'function') {
     'fs-extra-WARN0003',
   );
 }
+
+export const realpath = _realpath;

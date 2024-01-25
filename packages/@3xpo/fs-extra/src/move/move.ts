@@ -14,6 +14,7 @@ export const move = async (
   opts: {
     overwrite?: boolean;
     clobber?: boolean;
+    dereference?: boolean;
   } = {},
 ) => {
   const overwrite = opts.overwrite || opts.clobber || false;

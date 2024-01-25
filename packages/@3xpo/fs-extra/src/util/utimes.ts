@@ -3,7 +3,11 @@
 import * as fs from '../fs';
 import { fromPromise as u } from '@3xpo/universalify';
 
-async function utimesMillis(path, atime, mtime) {
+export const utimesMillis = async (
+  path: string,
+  atime: fs.TimeLike,
+  mtime: fs.TimeLike,
+) => {
   // if (!HAS_MILLIS_RES) return fs.utimes(path, atime, mtime, callback)
   const fd = await fs.open(path, 'r+');
 
@@ -22,13 +26,17 @@ async function utimesMillis(path, atime, mtime) {
   if (closeErr) {
     throw closeErr;
   }
-}
+};
 
-function utimesMillisSync(path, atime, mtime) {
+export const utimesMillisSync = (
+  path: fs.PathLike,
+  atime: fs.TimeLike,
+  mtime: fs.TimeLike,
+) => {
   const fd = fs.openSync(path, 'r+');
   fs.futimesSync(fd, atime, mtime);
   return fs.closeSync(fd);
-}
+};
 
 export default {
   utimesMillis: u(utimesMillis),

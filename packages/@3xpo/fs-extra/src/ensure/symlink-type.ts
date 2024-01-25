@@ -17,7 +17,6 @@ export const symlinkType = fromPromise(
     return stats && stats.isDirectory() ? 'dir' : 'file';
   },
 );
-
 export const symlinkTypeSync = (srcpath: string, type?: 'dir' | 'file') => {
   if (type) return type;
 

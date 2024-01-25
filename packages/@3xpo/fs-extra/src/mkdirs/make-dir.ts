@@ -10,7 +10,7 @@ const getMode = (options?: number | { mode?: number }) => {
 
 export const makeDir = async (
   dir: string,
-  options: Parameters<typeof getMode>[0],
+  options?: Parameters<typeof getMode>[0],
 ) => {
   checkPath(dir);
 
@@ -20,7 +20,10 @@ export const makeDir = async (
   });
 };
 
-export const makeDirSync = (dir, options) => {
+export const makeDirSync = (
+  dir: string,
+  options?: Parameters<typeof getMode>[0],
+) => {
   checkPath(dir);
 
   return fs.mkdirSync(dir, {

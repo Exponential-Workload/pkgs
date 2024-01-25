@@ -4,7 +4,7 @@ import assert from 'assert';
 import path from 'path';
 const crypto = require('crypto');
 import * as os from 'os';
-const fs = require('../..');
+import fs from '../../index';
 
 const SIZE = 1000;
 
