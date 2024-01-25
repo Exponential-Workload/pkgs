@@ -257,7 +257,8 @@ So, if you want to remove a file or a directory regardless of whether it has con
 
 Licensed under MIT
 
-Copyright (c) 2023 [Expo](https://codeberg.org/Expo)
+Copyright (c) 2024 [Expo](https://codeberg.org/Expo)
+
 Copyright (c) 2011-2017 [JP Richardson](https://github.com/jprichardson)
 
 [1]: http://nodejs.org/docs/latest/api/fs.html
