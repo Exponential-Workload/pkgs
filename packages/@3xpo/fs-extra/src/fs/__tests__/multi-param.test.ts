@@ -126,7 +126,7 @@ describe('fs.write()', () => {
       const message = 'Hello World!';
       const rs = await fs.write(TEST_FD, message);
       expect(rs.written).toEqual(message.length);
-      expect(rs.bufferOrString).toStrictEqual('data is correct');
+      expect(rs.bufferOrString).toStrictEqual(message);
     });
   });
 });
