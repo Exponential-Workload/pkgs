@@ -1,0 +1,100 @@
+{
+  "name": "@3xpo/fs-extra",
+  "version": "11.2.0",
+  "description": "fs-extra contains methods that aren't included in the vanilla Node.js fs package. Such as recursive mkdir, copy, and remove.",
+  "engines": {
+    "node": ">=14.14"
+  },
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/fs-extra/",
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/devtools.git",
+    "directory": "packages/@3xpo/fs-extra/"
+  },
+  "keywords": [
+    "fs",
+    "file",
+    "file system",
+    "copy",
+    "directory",
+    "extra",
+    "mkdirp",
+    "mkdir",
+    "mkdirs",
+    "recursive",
+    "json",
+    "read",
+    "write",
+    "extra",
+    "delete",
+    "remove",
+    "touch",
+    "create",
+    "text",
+    "output",
+    "move",
+    "promise"
+  ],
+  "author": "Expo",
+  "license": "MIT",
+  "dependencies": {
+    "@3xpo/universalify": "workspace:^",
+    "graceful-fs": "^4.2.0",
+    "jsonfile": "^6.0.1"
+  },
+  "main": "./dist/lib.node.bundle.min.cjs",
+  "module": "./dist/lib.node.bundle.min.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/lib.node.bundle.min.mjs",
+      "require": "./dist/lib.node.bundle.min.cjs",
+      "node": "./dist/lib.node.bundle.min.mjs",
+      "default": "./dist/lib.node.bundle.min.mjs"
+    }
+  },
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "concurrently \"npm:build:*\"",
+    "build:dts": "# tsc --emitDeclarationOnly --declaration",
+    "build:js": "es-many --args \"src/index.js --sourcemap --packages=external\" --output dist/lib --minify true --bundle true --format cjs,esm --platform node",
+    "build:test": "esbuild src/**/*.* src/*.* --outdir=dist-test --minify=true --format=esm --platform=node",
+    "test-find": "find ./dist-test/**/__tests__ -name *.test.js | xargs mocha",
+    "test": "npm run unit",
+    "unit": "nyc node test.js"
+  },
+  "sideEffects": false,
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "bugs": {
+    "url": "https://codeberg.org/Expo/devtools/issues",
+    "email": "expo@expo.moe"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@types/graceful-fs": "^4.1.9",
+    "@types/jsonfile": "^6.1.4",
+    "@types/universalify": "^1.0.3",
+    "klaw": "^2.1.1",
+    "klaw-sync": "^3.0.2",
+    "minimist": "^1.1.1",
+    "mocha": "^10.1.0",
+    "nyc": "^15.0.0",
+    "proxyquire": "^2.0.1",
+    "read-dir-files": "^0.1.1",
+    "standard": "^17.0.0"
+  }
+}

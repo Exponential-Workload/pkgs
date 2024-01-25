@@ -6,6 +6,9 @@ export type RemoveFirst<T extends any[]> = T extends [any, ...infer Rest]
 export type RemoveLast<T extends any[]> = T extends [...infer Rest, any]
   ? Rest
   : never;
+export type Last<T extends any[]> = T extends [...any[], infer Rest]
+  ? Rest
+  : never;
 
 // A generic type for the callback function
 export type Callback<Return> = Return extends never
