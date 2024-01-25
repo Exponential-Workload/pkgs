@@ -93,7 +93,7 @@ describe('fs-extra', () => {
           });
       });
 
-      it('should work with promises', () => {
+      it('should work with promises', async () => {
         const fileSrc = path.join(TEST_DIR, 'TEST_fs-extra_src');
         const fileDest = path.join(TEST_DIR, 'TEST_fs-extra_copy');
         fs.writeFileSync(fileSrc, crypto.randomBytes(SIZE));
@@ -103,13 +103,12 @@ describe('fs-extra', () => {
           .digest('hex');
         let destMd5 = '';
 
-        return fse.copy(fileSrc, fileDest).then(() => {
-          destMd5 = crypto
-            .createHash('md5')
-            .update(fs.readFileSync(fileDest))
-            .digest('hex');
-          assert.strictEqual(srcMd5, destMd5);
-        });
+        await fse.copy(fileSrc, fileDest);
+        destMd5 = crypto
+          .createHash('md5')
+          .update(fs.readFileSync(fileDest))
+          .digest('hex');
+        assert.strictEqual(srcMd5, destMd5);
       });
 
       it('should return an error if src file does not exist', done => {
@@ -335,7 +334,7 @@ describe('fs-extra', () => {
         fse.outputFileSync(srcFile, 'src contents');
         const destDir = path.join(TEST_DIR, 'dest');
         const destFile = path.join(destDir, 'destfile.css');
-        const filter = s =>
+        const filter = (s: string) =>
           path.extname(s) !== '.css' && !fs.statSync(s).isDirectory();
 
         fse
@@ -352,7 +351,7 @@ describe('fs-extra', () => {
         const srcFile1 = path.join(TEST_DIR, '1.css');
         fs.writeFileSync(srcFile1, '');
         const destFile1 = path.join(TEST_DIR, 'dest1.css');
-        const filter = s => s.split('.').pop() !== 'css';
+        const filter = (s: string) => s.split('.').pop() !== 'css';
 
         fse
           .copy(srcFile1, destFile1, filter)
@@ -390,7 +389,7 @@ describe('fs-extra', () => {
         const srcFile1 = path.join(TEST_DIR, '1.jade');
         fs.writeFileSync(srcFile1, '');
         const destFile1 = path.join(TEST_DIR, 'dest1.jade');
-        const options = { filter: s => /.html$|.css$/i.test(s) };
+        const options = { filter: (s: string) => /.html$|.css$/i.test(s) };
 
         fse
           .copy(srcFile1, destFile1, options)
@@ -406,7 +405,8 @@ describe('fs-extra', () => {
         const srcFile1 = path.join(TEST_DIR, '1.css');
         fs.writeFileSync(srcFile1, '');
         const destFile1 = path.join(TEST_DIR, 'dest1.css');
-        const filter = s => Promise.resolve(s.split('.').pop() !== 'css');
+        const filter = (s: string) =>
+          Promise.resolve(s.split('.').pop() !== 'css');
 
         fse
           .copy(srcFile1, destFile1, filter)
@@ -421,7 +421,7 @@ describe('fs-extra', () => {
       it('should apply filter recursively', done => {
         const FILES = 2;
         // Don't match anything that ends with a digit higher than 0:
-        const filter = s => /(0|\D)$/i.test(s);
+        const filter = (s: string) => /(0|\D)$/i.test(s);
 
         const src = path.join(TEST_DIR, 'src');
         fse.mkdirsSync(src);
@@ -475,7 +475,7 @@ describe('fs-extra', () => {
 
       it('should apply filter to directory names', done => {
         const IGNORE = 'ignore';
-        const filter = p => !~p.indexOf(IGNORE);
+        const filter = (p: string | string[]) => !~p.indexOf(IGNORE);
 
         const src = path.join(TEST_DIR, 'src');
         fse.mkdirsSync(src);
@@ -510,7 +510,8 @@ describe('fs-extra', () => {
       it('should apply filter when it is applied only to dest', done => {
         const timeCond = new Date().getTime();
 
-        const filter = (s, d) => fs.statSync(d).mtime.getTime() < timeCond;
+        const filter = (s: any, d: string) =>
+          fs.statSync(d).mtime.getTime() < timeCond;
 
         const src = path.join(TEST_DIR, 'src');
         fse.mkdirsSync(src);
@@ -535,12 +536,12 @@ describe('fs-extra', () => {
 
       it('should apply filter when it is applied to both src and dest', done => {
         const timeCond = new Date().getTime();
-        const filter = (s, d) =>
+        const filter = (s: string, d: string) =>
           s.split('.').pop() !== 'css' &&
           fs.statSync(path.dirname(d)).mtime.getTime() > timeCond;
 
         const dest = path.join(TEST_DIR, 'dest');
-        setTimeout(() => {
+        setTimeout(async () => {
           fse.mkdirsSync(dest);
 
           const srcFile1 = path.join(TEST_DIR, '1.html');
@@ -555,31 +556,31 @@ describe('fs-extra', () => {
           const destFile2 = path.join(dest, 'dest2.css');
           const destFile3 = path.join(dest, 'dest3.jade');
 
+          let err_1: any;
+          try {
+            err_1 = await fse.copy(srcFile1, destFile1, filter);
+          } catch (err) {
+            err_1 = err;
+          }
+          assert(!err_1);
+          assert(fs.existsSync(destFile1));
           fse
-            .copy(srcFile1, destFile1, filter)
-            .catch(err => err)
-            .then(err => {
-              assert(!err);
-              assert(fs.existsSync(destFile1));
+            .copy(srcFile2, destFile2, filter)
+            .catch(err_2 => err_2)
+            .then(err_3 => {
+              assert(!err_3);
+              assert(!fs.existsSync(destFile2));
 
               fse
-                .copy(srcFile2, destFile2, filter)
-                .catch(err => err)
-                .then(err => {
-                  assert(!err);
-                  assert(!fs.existsSync(destFile2));
-
-                  fse
-                    .copy(srcFile3, destFile3, filter)
-                    .catch(err => err)
-                    .then(err => {
-                      assert(!err);
-                      assert(fs.existsSync(destFile3));
-                      done();
-                    });
+                .copy(srcFile3, destFile3, filter)
+                .catch(err_4 => err_4)
+                .then(err_5 => {
+                  assert(!err_5);
+                  assert(fs.existsSync(destFile3));
+                  done();
                 });
             });
-        }, 1000);
+        }, 100);
       });
     });
   });

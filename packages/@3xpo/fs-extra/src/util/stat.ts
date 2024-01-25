@@ -5,13 +5,13 @@ import path from 'path';
 import { fromPromise as fromPromise } from '@3xpo/universalify';
 
 export const getStats = async (
-  src: fs.PathLike,
-  dest: fs.PathLike,
+  src: string,
+  dest: string,
   opts?: { dereference?: boolean },
 ) => {
   const statFunc = opts?.dereference
-    ? (file: fs.PathLike) => fs.stat(file, { bigint: true })
-    : (file: fs.PathLike) => fs.lstat(file, { bigint: true });
+    ? (file: string) => fs.stat(file, { bigint: true })
+    : (file: string) => fs.lstat(file, { bigint: true });
   const [srcStat, destStat] = await Promise.all([
     statFunc(src),
     statFunc(dest).catch(err => {
@@ -23,14 +23,14 @@ export const getStats = async (
 };
 
 export const getStatsSync = (
-  src: fs.PathLike,
-  dest: fs.PathLike,
+  src: string,
+  dest: string,
   opts?: { dereference?: boolean },
 ) => {
   let destStat: fs.BigIntStats;
   const statFunc = opts.dereference
-    ? (file: fs.PathLike) => fs.statSync(file, { bigint: true })
-    : (file: fs.PathLike) => fs.lstatSync(file, { bigint: true });
+    ? (file: string) => fs.statSync(file, { bigint: true })
+    : (file: string) => fs.lstatSync(file, { bigint: true });
   const srcStat = statFunc(src);
   try {
     destStat = statFunc(dest);

@@ -51,7 +51,7 @@ describe('copy-sync / broken symlink', () => {
 function createFixtures(srcDir: string, callback: any) {
   fs.mkdir(srcDir, err => {
     let brokenFile: string;
-    let brokenFileLink: fs.PathLike;
+    let brokenFileLink: string;
 
     if (err) return callback(err);
 

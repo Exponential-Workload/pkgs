@@ -29,7 +29,7 @@ export const utimesMillis = async (
 };
 
 export const utimesMillisSync = (
-  path: fs.PathLike,
+  path: string,
   atime: fs.TimeLike,
   mtime: fs.TimeLike,
 ) => {

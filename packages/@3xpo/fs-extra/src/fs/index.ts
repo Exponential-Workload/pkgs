@@ -84,12 +84,9 @@ let _realpath = fromCallback(
   fs.realpath ?? _fs.realpath,
 ) as typeof _fs.realpath.__promisify__ &
   typeof _fs.realpath & {
-    native(path: fs.PathLike, options?: fs.EncodingOption): Promise<string>;
+    native(path: string, options?: fs.EncodingOption): Promise<string>;
 
-    native(
-      path: fs.PathLike,
-      options: fs.BufferEncodingOption,
-    ): Promise<Buffer>;
+    native(path: string, options: fs.BufferEncodingOption): Promise<Buffer>;
   };
 export const rename = fromCallback(
   fs.rename ?? _fs.rename,
