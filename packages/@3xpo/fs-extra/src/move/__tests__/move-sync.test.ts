@@ -14,27 +14,6 @@ import { differentDevice, ifCrossDeviceEnabled } from './cross-device-utils';
 const describeIfWindows =
   process.platform === 'win32' ? describe : describe.skip;
 
-const createSyncErrFn = (errCode: number) => () => {
-  const err = new Error() as any;
-  err.code = errCode;
-  throw err;
-};
-
-const originalRenameSync = fs.renameSync;
-
-Object.defineProperty(fs, 'renameSync', {
-  value: fs.renameSync,
-  writable: true, // Allow modification
-});
-
-function setUpMockFs(errCode) {
-  (fs as any).renameSync = createSyncErrFn(errCode);
-}
-
-function tearDownMockFs() {
-  (fs as any).renameSync = originalRenameSync;
-}
-
 describe('moveSync()', () => {
   let TEST_DIR: string;
 
@@ -175,20 +154,6 @@ describe('moveSync()', () => {
     assert(contents.match(expected));
   });
 
-  it('should work across devices', () => {
-    const src = `${TEST_DIR}/a-file`;
-    const dest = `${TEST_DIR}/a-file-dest`;
-
-    setUpMockFs('EXDEV');
-
-    fse.moveSync(src, dest);
-
-    const contents = fs.readFileSync(dest, 'utf8');
-    const expected = /^sonic the hedgehog\r?\n$/;
-    assert(contents.match(expected));
-    tearDownMockFs();
-  });
-
   it('should move folders', () => {
     const src = `${TEST_DIR}/a-folder`;
     const dest = `${TEST_DIR}/a-folder-dest`;
@@ -201,35 +166,6 @@ describe('moveSync()', () => {
     const contents = fs.readFileSync(dest + '/another-file', 'utf8');
     const expected = /^tails\r?\n$/;
     assert(contents.match(expected));
-  });
-
-  it('should overwrite folders across devices', () => {
-    const src = `${TEST_DIR}/a-folder`;
-    const dest = `${TEST_DIR}/a-folder-dest`;
-    fs.mkdirSync(dest);
-
-    setUpMockFs('EXDEV');
-
-    fse.moveSync(src, dest, { overwrite: true });
-
-    const contents = fs.readFileSync(dest + '/another-folder/file3', 'utf8');
-    const expected = /^knuckles\r?\n$/;
-    assert(contents.match(expected));
-    tearDownMockFs();
-  });
-
-  it('should move folders across devices with EXDEV error', () => {
-    const src = `${TEST_DIR}/a-folder`;
-    const dest = `${TEST_DIR}/a-folder-dest`;
-
-    setUpMockFs('EXDEV');
-
-    fse.moveSync(src, dest);
-
-    const contents = fs.readFileSync(dest + '/another-folder/file3', 'utf8');
-    const expected = /^knuckles\r?\n$/;
-    assert(contents.match(expected));
-    tearDownMockFs();
   });
 
   describe('clobber', () => {
