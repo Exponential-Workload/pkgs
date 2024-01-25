@@ -19,7 +19,7 @@
 
 ## Why?
 
-I got tired of including `mkdirp`, `rimraf`, and `ncp` in most of my projects.
+I got tired of including `@types/fs-extra` in most of my projects. I also wanted a package that can do ESM and CJS without needing to include the package in my bundle.
 
 ## Installation
 
