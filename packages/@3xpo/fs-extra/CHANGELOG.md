@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.2.4
+
+### Patch Changes
+
+- 384fffe: Don't minify for better prod debugging
+
 ## 11.2.3
 
 ### Patch Changes
