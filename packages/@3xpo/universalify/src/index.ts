@@ -52,26 +52,26 @@ export const fromPromise = <TArgs extends any[], TResult>(
 ) => {
   return Object.defineProperty(
     function (
-      ...args: [...TArgs, (err: any, result?: TResult) => void] | TArgs
-    ) {
-      const cb = args[args.length - 1];
+      ...args:
+        | [...TArgs, callback: (err: any, result?: TResult) => void]
+        | [...TArgs]
+    ): ReturnType<typeof fn> {
+      const cb = args[args.length - 1] as (err: any, result?: TResult) => void;
       if (typeof cb !== 'function') {
         // If the last argument is not a function, assume it's a regular call and apply `fn`
-        return fn.apply(this, args as unknown as TArgs);
+        return fn.apply(this, args) as any;
       } else {
         // Remove the callback from the arguments list
         const fnArgs = args.slice(0, -1) as TArgs;
-        fn.apply(this, fnArgs)
-          .then(result => cb(null, result))
-          .catch(err => cb(err));
+        const result = fn.apply(this, fnArgs) as ReturnType<typeof fn>;
+        result.then(result => cb(null, result)).catch(err => cb(err));
+        return result;
       }
     },
     'name',
     { value: fn.name },
   );
 };
-
-fromCallback((cb: (err: any) => void) => {});
 
 export default {
   fromPromise,
