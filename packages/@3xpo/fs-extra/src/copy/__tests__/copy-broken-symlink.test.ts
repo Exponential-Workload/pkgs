@@ -5,7 +5,7 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-const { copy } = require('../');
+import { copy } from '../';
 
 /* global afterEach, beforeEach, describe, it */
 
@@ -25,17 +25,21 @@ describe('copy / broken symlink', () => {
 
   describe('when symlink is broken', () => {
     it('should not throw error if dereference is false', done => {
-      copy(src, dest, err => {
-        assert.strictEqual(err, null);
-        done();
-      });
+      copy(src, dest)
+        .catch(err => err)
+        .then(err => {
+          assert.strictEqual(err, null);
+          done();
+        });
     });
 
     it('should throw error if dereference is true', done => {
-      copy(src, dest, { dereference: true }, err => {
-        assert.strictEqual(err.code, 'ENOENT');
-        done();
-      });
+      copy(src, dest, { dereference: true })
+        .catch(err => err)
+        .then(err => {
+          assert.strictEqual(err.code, 'ENOENT');
+          done();
+        });
     });
   });
 });

@@ -3,8 +3,8 @@
 import fs from '../../';
 import * as os from 'os';
 import path from 'path';
-const { copy } = require('../');
-const utimesSync = require('../../util/utimes').utimesMillisSync;
+import { copy } from '../';
+import { utimesMillisSync as utimesSync } from '../../util/utimes';
 import assert from 'assert';
 
 /* global beforeEach, afterEach, describe, it */
@@ -55,11 +55,13 @@ describeIfPractical('copy() - preserve timestamp', () => {
         beforeEach(() => setupFixture(params.readonly));
 
         it('should have the same timestamps on copy', done => {
-          copy(SRC, DEST, { preserveTimestamps: true }, err => {
-            if (err) return done(err);
-            FILES.forEach(testFile({ preserveTimestamps: true }));
-            done();
-          });
+          copy(SRC, DEST, { preserveTimestamps: true })
+            .catch(e => e)
+            .then(err => {
+              if (err) return done(err);
+              FILES.forEach(testFile({ preserveTimestamps: true }));
+              done();
+            });
         });
       });
     });

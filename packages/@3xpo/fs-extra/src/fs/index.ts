@@ -46,9 +46,10 @@ export const ftruncate = fromCallback(
 export const futimes = fromCallback(
   fs.futimes ?? _fs.futimes,
 ) as typeof _fs.futimes.__promisify__ & typeof _fs.futimes;
-export const lchmod = fromCallback(
-  fs.lchmod ?? _fs.lchmod,
-) as typeof _fs.lchmod.__promisify__ & typeof _fs.lchmod;
+export const lchmod = _fs.lchmod
+  ? (fromCallback(fs.lchmod ?? _fs.lchmod) as typeof _fs.lchmod.__promisify__ &
+      typeof _fs.lchmod)
+  : null;
 export const lchown = fromCallback(
   fs.lchown ?? _fs.lchown,
 ) as typeof _fs.lchown.__promisify__ & typeof _fs.lchown;
@@ -240,7 +241,7 @@ export const readv = (
 ): Promise<{ bytesRead: number; buffers: NodeJS.ArrayBufferView[] }> => {
   const p = new Promise((resolve, reject) => {
     fs.readv(fd, buffers, position, (err, bytesRead, buffers) => {
-      callback(err, bytesRead, buffers);
+      if (callback) callback(err, bytesRead, buffers);
       if (err) reject(err);
       else resolve({ bytesRead, buffers });
     });
@@ -268,6 +269,7 @@ export const writev = (
   return c(
     new Promise((resolve, reject) => {
       fs.writev(fd, buffers, position, (err, bytesWritten, buffers) => {
+        if (callback) callback(err, bytesWritten, buffers);
         if (err) reject(err);
         else resolve({ bytesWritten, buffers });
       });
@@ -276,7 +278,7 @@ export const writev = (
 };
 
 // Handling fs.realpath.native, if available
-if (typeof fs.realpath.native === 'function') {
+if (typeof ((fs ?? _fs).realpath ?? _fs.realpath)?.native === 'function') {
   _realpath = {
     native: fromCallback(fs.realpath ?? _fs.realpath.native),
   } as any;

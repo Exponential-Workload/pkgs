@@ -7,24 +7,18 @@ import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-const {
-  differentDevice,
-  ifCrossDeviceEnabled,
-} = require('./cross-device-utils');
+import { differentDevice, ifCrossDeviceEnabled } from './cross-device-utils';
 
 /* global afterEach, beforeEach, describe, it */
 
 const describeIfWindows =
   process.platform === 'win32' ? describe : describe.skip;
 
-function createSyncErrFn(errCode) {
-  const fn = function () {
-    const err = new Error() as any;
-    err.code = errCode;
-    throw err;
-  };
-  return fn;
-}
+const createSyncErrFn = (errCode: number) => () => {
+  const err = new Error() as any;
+  err.code = errCode;
+  throw err;
+};
 
 const originalRenameSync = fs.renameSync;
 

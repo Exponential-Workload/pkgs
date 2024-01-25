@@ -2,12 +2,12 @@
 
 const CWD = process.cwd();
 
-const fs = require('graceful-fs');
+import fs from 'graceful-fs';
 import * as os from 'os';
 import fse from '../..';
 import path from 'path';
 import assert from 'assert';
-const _symlinkPaths = require('../symlink-paths');
+import _symlinkPaths from '../symlink-paths';
 const symlinkPathsSync = _symlinkPaths.symlinkPathsSync;
 const ensureSymlink = fse.ensureSymlink;
 const ensureSymlinkSync = fse.ensureSymlinkSync;
