@@ -174,13 +174,12 @@ describe('+ writeFile()', () => {
       obj = { name: 'jp' };
     });
 
-    it('should not error', done => {
-      jf.writeFile(file, obj, {
+    it('should not error', async () => {
+      await jf.writeFile(file, obj, {
         encoding: 'utf-8',
       });
       const data = fs.readFileSync(file, 'utf8');
       assert.strictEqual(data, `${JSON.stringify(obj)}\n`);
-      done();
     });
 
     it('should not error, resolve the promise', done => {
@@ -242,18 +241,22 @@ describe('+ writeFile()', () => {
 
   // Prevent https://github.com/jprichardson/node-jsonfile/issues/81 from happening
   describe("> when callback isn't passed & can't serialize", () => {
-    it('should not write an empty file, should reject the promise', function (done) {
-      this.slow(1100);
+    it('should not write an empty file, should reject the promise', async () => {
       const file = path.join(TEST_DIR, 'somefile.json');
       const obj1 = { name: 'JP', circular: null as any };
       const obj2 = { person: obj1 };
       obj1.circular = obj2;
 
-      jf.writeFile(file, obj1).catch(err => {
-        assert(err);
-        assert(!fs.existsSync(file));
-        done();
-      });
+      expect(
+        await jf
+          .writeFile(file, obj1)
+          .then(() => false)
+          .catch(err => {
+            assert(err);
+            assert(!fs.existsSync(file));
+            return true;
+          }),
+      ).toEqual(true);
     });
   });
 });

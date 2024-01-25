@@ -4,7 +4,7 @@ import fs from '../..';
 import * as os from 'os';
 import path from 'path';
 import assert from 'assert';
-import stat from '../stat.js';
+import stat from '../stat';
 
 /* global beforeEach, afterEach, describe, it */
 

@@ -22,6 +22,11 @@ const createSyncErrFn = (errCode: number) => () => {
 
 const originalRenameSync = fs.renameSync;
 
+Object.defineProperty(fs, 'renameSync', {
+  value: fs.renameSync,
+  writable: true, // Allow modification
+});
+
 function setUpMockFs(errCode) {
   (fs as any).renameSync = createSyncErrFn(errCode);
 }
@@ -297,7 +302,10 @@ describe('moveSync()', () => {
     () => {
       describe('> just the folder', () => {
         it('should move the folder', () => {
-          const src = path.join(differentDevice, 'some/weird/dir-really-weird');
+          const src = path.join(
+            differentDevice!,
+            'some/weird/dir-really-weird',
+          );
           const dest = path.join(TEST_DIR, 'device-weird');
 
           if (!fs.existsSync(src)) fse.mkdirpSync(src);
