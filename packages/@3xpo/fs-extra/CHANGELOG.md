@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.2.5
+
+### Patch Changes
+
+- export from fs, followed by graceful fs
+
 ## 11.2.4
 
 ### Patch Changes
