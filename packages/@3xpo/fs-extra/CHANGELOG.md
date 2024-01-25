@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.2.3
+
+### Patch Changes
+
+- 1c26c71: reword a tiny bit
+
 ## 11.2.2
 
 ### Patch Changes
