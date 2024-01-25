@@ -5,9 +5,13 @@ export type RemoveLast<T extends any[]> = T extends [...infer Rest, any]
   : never;
 
 // A generic type for the callback function
-type Callback<Return> = (err: any, res: Return) => void;
+export type Callback<Return> = Return extends never
+  ? (err: any) => void
+  : Return extends unknown
+    ? Callback<never> | ((err: any, res: Return) => void)
+    : (err: any, res: Return) => void;
 
-export const fromCallback = <Args extends any[], Return>(
+export const fromCallback = <Args extends any[] = [], Return = void>(
   fn: (...args: [...Args, Callback<Return>]) => void,
 ) => {
   return Object.defineProperty(
@@ -15,17 +19,19 @@ export const fromCallback = <Args extends any[], Return>(
       const lastArg = args[args.length - 1];
       if (typeof lastArg === 'function') {
         // Call the original function if the last argument is a function
-        fn.apply(this, args as any as [...Args, Callback<Return>]);
+        const rs = fn.apply(this, args as any as [...Args, Callback<Return>]);
+        if (rs instanceof Promise) return rs;
+        else return Promise.resolve(rs);
       } else {
         // Return a promise if the last argument is not a function
         return new Promise<Return>((resolve, reject) => {
-          const callback: Callback<Return> = (err, res) => {
+          const callback = ((err, res) => {
             if (err !== null && err !== undefined) {
               reject(err);
             } else {
               resolve(res);
             }
-          };
+          }) as Callback<Return>;
           fn.apply(this, [...args, callback]);
         });
       }
@@ -56,6 +62,8 @@ export const fromPromise = <TArgs extends any[], TResult>(
     { value: fn.name },
   );
 };
+
+fromCallback((cb: (err: any) => void) => {});
 
 export default {
   fromPromise,
