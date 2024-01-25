@@ -1,7 +1,7 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-export default {
+module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  maxConcurrency: 12,
-  maxWorkers: 12,
+  maxConcurrency: 2,
+  maxWorkers: 2,
 };
