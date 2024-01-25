@@ -1,6 +1,6 @@
 <div align="center">
 
-[![repo image](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/events.png)](https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/events)
+[![repo image](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/fs-extra.png)](https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/fs-extra)
 
 # proper-fs-extra: modern fs-extra
 
