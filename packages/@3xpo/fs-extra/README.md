@@ -24,53 +24,40 @@ I got tired of including `mkdirp`, `rimraf`, and `ncp` in most of my projects.
 
 You don't ever need to include the original `fs` module again:
 
-```js
+```ts
 import * as fs from 'fs'; // this is no longer necessary
 ```
 
 you can now do this:
 
-```js
-const fs = require('fs-extra');
+```ts
+import fs from '@3xpo/fs-extra';
 ```
 
 or if you prefer to make it clear that you're using `fs-extra` and not `fs`, you may want
 to name your `fs` variable `fse` like so:
 
-```js
-const fse = require('fs-extra');
+```ts
+import fse from '@3xpo/fs-extra';
 ```
 
 you can also keep both, but it's redundant:
 
-```js
+```ts
 import * as fs from 'fs';
-const fse = require('fs-extra');
+import fse from '@3xpo/fs-extra';
 ```
 
 ### ESM
 
-There is also an `fs-extra/esm` import, that supports both default and named exports. However, note that `fs` methods are not included in `fs-extra/esm`; you still need to import `fs` and/or `fs/promises` seperately:
+Unlike our [upstream](https://github.com/jprichardson/node-fs-extra), we package both native ESM and CJS variants - both `require()` and `import` will work just fine
 
-```js
-import { readFileSync } from 'fs';
-import { readFile } from 'fs/promises';
-import { outputFile, outputFileSync } from 'fs-extra/esm';
-```
+### CJS
 
-Default exports are supported:
+As mentioned above, you can simply use:
 
-```js
-import fs from 'fs';
-import fse from 'fs-extra/esm';
-// fse.readFileSync is not a function; must use fs.readFileSync
-```
-
-but you probably want to just use regular `fs-extra` instead of `fs-extra/esm` for default exports:
-
-```js
-import fs from 'fs-extra';
-// both fs and fs-extra methods are defined
+```ts
+const fs = require('@3xpo/fs-extra');
 ```
 
 ## Sync vs Async vs Async/Await
@@ -83,8 +70,8 @@ Also Async/Await will throw an error if one occurs.
 
 Example:
 
-```js
-const fs = require('fs-extra');
+```ts
+import fs from '@3xpo/fs-extra';
 
 // Async with promises:
 fs.copy('/tmp/myfile', '/tmp/mynewfile')
@@ -247,8 +234,9 @@ So, if you want to remove a file or a directory regardless of whether it has con
 
 ## Credit
 
-`fs-extra` wouldn't be possible without using the modules from the following authors:
+`@3xpo/fs-extra` wouldn't be possible without using the modules from the following authors:
 
+- [JP Richardson](https://github.com/jprichardson/node-fs-extra)
 - [Isaac Shlueter](https://github.com/isaacs)
 - [Charlie McConnel](https://github.com/avianflu)
 - [James Halliday](https://github.com/substack)
@@ -258,6 +246,7 @@ So, if you want to remove a file or a directory regardless of whether it has con
 
 Licensed under MIT
 
+Copyright (c) 2023 [Expo](https://codeberg.org/Expo)
 Copyright (c) 2011-2017 [JP Richardson](https://github.com/jprichardson)
 
 [1]: http://nodejs.org/docs/latest/api/fs.html
