@@ -1,16 +1,19 @@
+// @ts-nocheck
 'use strict';
 import test from 'tape';
 import universalify from '..';
 
-const fn = universalify.fromCallback(function (a, b, cb) {
-  setTimeout(() => cb(null, [this, a, b]), 15);
-});
+const fn = universalify.fromCallback(
+  (a, b, cb: (err: null, v: any[]) => void) => {
+    setTimeout(() => cb(null, [this, a, b]), 15);
+  },
+);
 
-const errFn = universalify.fromCallback(function (cb) {
+const errFn = universalify.fromCallback(cb => {
   setTimeout(() => cb(new Error('test')), 15);
 });
 
-const falseyErrFn = universalify.fromCallback(function (cb) {
+const falseyErrFn = universalify.fromCallback(cb => {
   setTimeout(() => cb(0, 15)); // eslint-disable-line standard/no-callback-literal
 });
 
