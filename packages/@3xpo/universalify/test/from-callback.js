@@ -1,13 +1,11 @@
 // @ts-nocheck
 'use strict';
 import test from 'tape';
-import universalify from '..';
+import universalify from '../dist/lib.bundle.min.mjs';
 
-const fn = universalify.fromCallback(
-  (a, b, cb: (err: null, v: any[]) => void) => {
-    setTimeout(() => cb(null, [this, a, b]), 15);
-  },
-);
+const fn = universalify.fromCallback(function (a, b, cb) {
+  setTimeout(() => cb(null, [this, a, b]), 15);
+});
 
 const errFn = universalify.fromCallback(cb => {
   setTimeout(() => cb(new Error('test')), 15);
