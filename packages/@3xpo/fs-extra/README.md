@@ -19,7 +19,7 @@
 
 ## Why?
 
-I got tired of including `@types/fs-extra` in most of my projects. I also wanted a package that can do ESM and CJS without needing to include the package in my bundle.
+I got tired of including `@types/fs-extra` in most of my projects. I also wanted a package that can do ESM and CJS without needing to inline the package in my output.
 
 ## Installation
 
