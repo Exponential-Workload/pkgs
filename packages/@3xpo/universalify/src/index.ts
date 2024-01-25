@@ -51,7 +51,9 @@ export const fromPromise = <TArgs extends any[], TResult>(
   fn: (...args: TArgs) => Promise<TResult>,
 ) => {
   return Object.defineProperty(
-    function (...args: [...TArgs, (err: any, result?: TResult) => void]) {
+    function (
+      ...args: [...TArgs, (err: any, result?: TResult) => void] | TArgs
+    ) {
       const cb = args[args.length - 1];
       if (typeof cb !== 'function') {
         // If the last argument is not a function, assume it's a regular call and apply `fn`
