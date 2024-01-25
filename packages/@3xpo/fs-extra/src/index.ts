@@ -1,3 +1,14 @@
+export * from './fs';
+export * from './copy';
+export * from './empty';
+export * from './ensure';
+export * from './json';
+export * from './mkdirs';
+export * from './move';
+export * from './output-file';
+export * from './path-exists';
+export * from './remove';
+
 // Import promiseified graceful-fs:
 import * as fs from './fs';
 
