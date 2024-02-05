@@ -5,7 +5,6 @@ import * as os from 'os';
 import fse from '../../..';
 import { copy as ncp } from '../../';
 import path from 'path';
-import assert from 'assert';
 import { fromCallback } from '@3xpo/universalify';
 
 /* global afterEach, beforeEach, describe, it */
@@ -28,8 +27,12 @@ describe('ncp / symlink', () => {
       .then(err => {
         expect(err).toBeFalsy();
 
-        expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(path.join(src, 'foo'));
-        expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(path.join(src, 'dir'));
+        expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(
+          path.join(src, 'foo'),
+        );
+        expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(
+          path.join(src, 'dir'),
+        );
 
         done();
       });

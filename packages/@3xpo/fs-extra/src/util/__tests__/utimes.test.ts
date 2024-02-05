@@ -4,7 +4,6 @@ import * as fs from 'fs';
 import * as os from 'os';
 import fse from '../..';
 import path from 'path';
-import assert from 'assert';
 import utimes from '../utimes';
 
 /* global beforeEach, describe, it */
@@ -59,8 +58,12 @@ describe('utimes', () => {
           expect(stats.mtime.getTime()).toStrictEqual(awhileAgo.getTime());
           expect(stats.atime.getTime()).toStrictEqual(awhileAgo.getTime());
         } else {
-          expect(stats.mtime.getTime()).toStrictEqual(awhileAgoNoMillis.getTime());
-          expect(stats.atime.getTime()).toStrictEqual(awhileAgoNoMillis.getTime());
+          expect(stats.mtime.getTime()).toStrictEqual(
+            awhileAgoNoMillis.getTime(),
+          );
+          expect(stats.atime.getTime()).toStrictEqual(
+            awhileAgoNoMillis.getTime(),
+          );
         }
       });
     }, 10000);
@@ -78,7 +81,7 @@ describe('utimes', () => {
 
     //   let closeCalled = false;
     //   gracefulFsStub.close = fromCallback((fd, callback) => {
-    //     assert.strictEqual(fd, fakeFd);
+    //     expect(fd).toStrictEqual(fakeFd);
     //     closeCalled = true;
     //     if (callback) process.nextTick(callback);
     //   });
@@ -94,8 +97,8 @@ describe('utimes', () => {
     //   );
 
     //   utimes.utimesMillis('ignored', 'ignored', 'ignored', err => {
-    //     assert.strictEqual(err, testError);
-    //     assert(closeCalled);
+    //     expect(err).toStrictEqual(testError);
+    //     expect(closeCalled).toBeTruthy();
     //     done();
     //   });
     // });

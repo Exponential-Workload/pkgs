@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as os from 'os';
 import path from 'path';
 import fs from '../../';
@@ -115,7 +114,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(src, dest)
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
             expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
@@ -145,7 +146,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(src, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const newlen = klawSync(src).length;
             expect(newlen).toBe(oldlen);
@@ -199,7 +202,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const srclenAfter = klawSync(srcLink).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -233,7 +238,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(src, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
             done();
           });
       });
@@ -250,7 +257,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(srcLink, dest, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const link = fs.readlinkSync(srcLink);
             expect(link).toBe(dest);
@@ -274,7 +283,9 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const srcln = fs.readlinkSync(srcLink);
             expect(srcln).toBe(src);

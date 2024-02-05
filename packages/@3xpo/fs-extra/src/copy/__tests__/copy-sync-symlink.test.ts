@@ -3,7 +3,6 @@
 import * as os from 'os';
 import fs from '../..';
 import path from 'path';
-import assert from 'assert';
 import copySync from '../copy-sync';
 
 /* global afterEach, beforeEach, describe, it */
@@ -31,8 +30,12 @@ describe('copy-sync / symlink', () => {
       copySync(src, out);
     }).not.toThrow();
 
-    expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(path.join(src, 'foo'));
-    expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(path.join(src, 'dir'));
+    expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(
+      path.join(src, 'foo'),
+    );
+    expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(
+      path.join(src, 'dir'),
+    );
   });
 
   it('copies file contents when dereference=true', () => {

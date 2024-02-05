@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as os from 'os';
 import path from 'path';
 import fs from '../../';

@@ -5,7 +5,6 @@ import * as os from 'os';
 import path from 'path';
 import { copy } from '../';
 import { utimesMillisSync as utimesSync } from '../../util/utimes';
-import assert from 'assert';
 
 /* global beforeEach, afterEach, describe, it */
 

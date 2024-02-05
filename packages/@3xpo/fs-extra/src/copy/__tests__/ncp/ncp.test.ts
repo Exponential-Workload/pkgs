@@ -1,10 +1,9 @@
-// 'use strict';
+'use strict';
 
 // import * as fs from 'fs';
 // import { copy as ncp } from '../../';
 // import path from 'path';
 // import { rimraf } from 'rimraf';
-// import assert from 'assert';
 // import { read as readDirFiles } from 'read-dir-files'; // temporary, will remove
 
 // /* eslint-env mocha */
@@ -23,8 +22,8 @@
 //       it('files are copied correctly', cb => {
 //         readDirFiles(src, 'utf8', (srcErr, srcFiles) => {
 //           readDirFiles(out, 'utf8', (outErr, outFiles) => {
-//             assert.ifError(srcErr);
-//             assert.deepStrictEqual(srcFiles, outFiles);
+//             expect(srcErr).toBeFalsy();
+//             expect(srcFiles).toStrictEqual(outFiles);
 //             cb();
 //           });
 //         });
@@ -55,8 +54,8 @@
 //           }
 //           filter(srcFiles);
 //           readDirFiles(out, 'utf8', (outErr, outFiles) => {
-//             assert.ifError(outErr);
-//             assert.deepStrictEqual(srcFiles, outFiles);
+//             expect(outErr).toBeFalsy();
+//             expect(srcFiles).toStrictEqual(outFiles);
 //             cb();
 //           });
 //         });
@@ -79,7 +78,7 @@
 //             (fs as any).createReadStream = () =>
 //               done(new Error('createReadStream after callback'));
 
-//             assert.ifError(err);
+//             expect(err).toBeFalsy();
 //             process.nextTick(done);
 //           });
 //       });
@@ -96,7 +95,7 @@
 //         ncp(src, out, { overwrite: false })
 //           .catch(err => err)
 //           .then(err => {
-//             assert.ifError(err);
+//             expect(err).toBeFalsy();
 //             cb();
 //           });
 //       });
@@ -106,7 +105,7 @@
 //           ncp(src, out, { overwrite: false })
 //             .catch(err => err)
 //             .then(err => {
-//               assert.ifError(err);
+//               expect(err).toBeFalsy();
 //               cb();
 //             });
 //         });
@@ -120,7 +119,7 @@
 //           })
 //             .catch(err => err)
 //             .then(err => err => {
-//               assert(err);
+//               expect(err).toBeTruthy();
 //               cb();
 //             });
 //         });
@@ -142,7 +141,7 @@
 //           })
 //             .catch(err => err)
 //             .then(err => err => {
-//               assert(err);
+//               expect(err).toBeTruthy();
 //               cb();
 //             });
 //         });
@@ -153,8 +152,8 @@
 //       it('file descriptors are passed correctly', cb => {
 //         ncp(src, out, {
 //           transform: (read, write, file) => {
-//             assert.notStrictEqual(file.name, undefined);
-//             assert.strictEqual(typeof file.mode, 'number');
+//             expect(file.name).not.toBe(undefined);
+//             expect(typeof file.mode).toBe('number');
 //             read.pipe(write);
 //           },
 //         })
@@ -177,12 +176,12 @@
 //       ncp(src, out)
 //         .catch(err => err)
 //         .then(err => {
-//           assert(!err);
+//           expect(!err).toBeTruthy();
 //           totalCallbacks += 1;
 //           readDirFiles(src, 'utf8', (srcErr, srcFiles) => {
 //             readDirFiles(out, 'utf8', (outErr, outFiles) => {
-//               assert.ifError(srcErr);
-//               assert.deepStrictEqual(srcFiles, outFiles);
+//               expect(srcErr).toBeFalsy();
+//               expect(srcFiles).toStrictEqual(outFiles);
 //               callback();
 //             });
 //           });
@@ -205,7 +204,7 @@
 //             }, 100);
 //           } else {
 //             // console.log('Total callback count is', totalCallbacks)
-//             assert.strictEqual(totalCallbacks, expected);
+//             expect(totalCallbacks).toBe(expected);
 //             done();
 //           }
 //         }
@@ -215,4 +214,5 @@
 //     });
 //   });
 // });
+
 it.todo('ncp.test.ts');

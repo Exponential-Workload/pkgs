@@ -4,7 +4,6 @@
 // import * as os from 'os';
 // import fse from '../..';
 // import path from 'path';
-// import assert from 'assert';
 // import crypto from 'crypto';
 
 // /* global afterEach, beforeEach, describe, it */
@@ -30,10 +29,7 @@
 //         .copy(fileSrc, fileDest)
 //         .catch(err => err)
 //         .then(err => {
-//           assert.strictEqual(
-//             err.message,
-//             'Source and destination must not be the same.',
-//           );
+//           expect(err.message).toBe('Source and destination must not be the same.');
 //           done();
 //         });
 //     });
@@ -48,7 +44,7 @@
 //         .copy(src, dest, { overwrite: false, errorOnExist: true })
 //         .catch(err => err)
 //         .then(err => {
-//           assert(err);
+//           expect(err).toBeTruthy();
 //           done();
 //         });
 //     });
@@ -63,7 +59,7 @@
 //         .copy(src, dest, { overwrite: false, errorOnExist: true })
 //         .catch(err => err)
 //         .then(err => {
-//           assert(err);
+//           expect(err).toBeTruthy();
 //           done();
 //         });
 //     });
@@ -83,12 +79,12 @@
 //           .copy(fileSrc, fileDest)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
+//             expect(!err).toBeTruthy();
 //             destMd5 = crypto
 //               .createHash('md5')
 //               .update(fs.readFileSync(fileDest))
 //               .digest('hex');
-//             assert.strictEqual(srcMd5, destMd5);
+//             expect(srcMd5).toBe(destMd5);
 //             done();
 //           });
 //       });
@@ -108,7 +104,7 @@
 //           .createHash('md5')
 //           .update(fs.readFileSync(fileDest))
 //           .digest('hex');
-//         assert.strictEqual(srcMd5, destMd5);
+//         expect(srcMd5).toBe(destMd5);
 //       });
 
 //       it('should return an error if src file does not exist', done => {
@@ -119,7 +115,7 @@
 //           .copy(fileSrc, fileDest)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(err);
+//             expect(err).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -134,7 +130,7 @@
 //           .copy(fileSrc, fileDest)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
+//             expect(!err).toBeTruthy();
 //             fs.statSync(fileDest);
 //             done();
 //           });
@@ -156,7 +152,7 @@
 //             .catch(err => err)
 //             .then(err => {
 //               const data2 = fs.readFileSync(dest, 'utf8');
-//               assert.strictEqual(data, data2);
+//               expect(data).toBe(data2);
 //               done(err);
 //             });
 //         });
@@ -173,10 +169,7 @@
 //             .copy(src, dest)
 //             .catch(err => err)
 //             .then(err => {
-//               assert.strictEqual(
-//                 err.message,
-//                 `Cannot overwrite directory '${dest}' with non-directory '${src}'.`,
-//               );
+//               expect(err.message).toBe(`Cannot overwrite directory '${dest}' with non-directory '${src}'.`);
 //               done();
 //             });
 //         });
@@ -192,7 +185,7 @@
 //             .copy(ts, td)
 //             .catch(err => err)
 //             .then(err => {
-//               assert(err);
+//               expect(err).toBeTruthy();
 //               done();
 //             });
 //         });
@@ -209,10 +202,7 @@
 //             .copy(src, dest)
 //             .catch(err => err)
 //             .then(err => {
-//               assert.strictEqual(
-//                 err.message,
-//                 `Cannot overwrite non-directory '${dest}' with directory '${src}'.`,
-//               );
+//               expect(err.message).toBe(`Cannot overwrite non-directory '${dest}' with directory '${src}'.`);
 //               done();
 //             });
 //         });
@@ -232,9 +222,9 @@
 //           .copy(src, dest)
 //           .catch(err => err)
 //           .then(err => {
-//             assert.ifError(err);
+//             expect(err).toBeFalsy();
 //             const link = fs.readlinkSync(path.join(dest, 'symlink'));
-//             assert.strictEqual(link, srcTarget);
+//             expect(link).toBe(srcTarget);
 //             done();
 //           });
 //       });
@@ -248,7 +238,7 @@
 //           .mkdirs(src)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
+//             expect(!err).toBeTruthy();
 //             for (let i = 0; i < FILES; ++i) {
 //               fs.writeFileSync(
 //                 path.join(src, i.toString()),
@@ -261,7 +251,7 @@
 //               .mkdirs(subdir)
 //               .catch(err => err)
 //               .then(err => {
-//                 assert(!err);
+//                 expect(!err).toBeTruthy();
 //                 for (let i = 0; i < FILES; ++i) {
 //                   fs.writeFileSync(
 //                     path.join(subdir, i.toString()),
@@ -273,16 +263,16 @@
 //                   .copy(src, dest)
 //                   .catch(err => err)
 //                   .then(err => {
-//                     assert.ifError(err);
-//                     assert(fs.existsSync(dest));
+//                     expect(err).toBeFalsy();
+//                     expect(fs.existsSync(dest)).toBeTruthy();
 
 //                     for (let i = 0; i < FILES; ++i) {
-//                       assert(fs.existsSync(path.join(dest, i.toString())));
+//                       expect(fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
 //                     }
 
 //                     const destSub = path.join(dest, 'subdir');
 //                     for (let j = 0; j < FILES; ++j) {
-//                       assert(fs.existsSync(path.join(destSub, j.toString())));
+//                       expect(fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
 //                     }
 
 //                     done();
@@ -313,8 +303,8 @@
 //               const o1 = fs.readFileSync(path.join(dest, 'f1.txt'), 'utf8');
 //               const o2 = fs.readFileSync(path.join(dest, 'f2.txt'), 'utf8');
 
-//               assert.strictEqual(d1, o1);
-//               assert.strictEqual(d2, o2);
+//               expect(d1).toBe(o1);
+//               expect(d2).toBe(o2);
 
 //               done(err);
 //             });
@@ -341,8 +331,8 @@
 //           .copy(srcFile, destFile, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert.ifError(err);
-//             assert(!fs.existsSync(destDir));
+//             expect(err).toBeFalsy();
+//             expect(!fs.existsSync(destDir)).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -357,8 +347,8 @@
 //           .copy(srcFile1, destFile1, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
-//             assert(!fs.existsSync(destFile1));
+//             expect(!err).toBeTruthy();
+//             expect(!fs.existsSync(destFile1)).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -378,9 +368,9 @@
 //           .copy(src, dest, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
-//             assert.strictEqual(filterCallCount, 1);
-//             assert(fs.existsSync(dest));
+//             expect(!err).toBeTruthy();
+//             expect(filterCallCount).toBe(1);
+//             expect(fs.existsSync(dest)).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -395,8 +385,8 @@
 //           .copy(srcFile1, destFile1, options)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
-//             assert(!fs.existsSync(destFile1));
+//             expect(!err).toBeTruthy();
+//             expect(!fs.existsSync(destFile1)).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -412,8 +402,8 @@
 //           .copy(srcFile1, destFile1, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
-//             assert(!fs.existsSync(destFile1));
+//             expect(!err).toBeTruthy();
+//             expect(!fs.existsSync(destFile1)).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -447,16 +437,16 @@
 //           .copy(src, dest, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert(!err);
+//             expect(!err).toBeTruthy();
 
-//             assert(fs.existsSync(dest));
-//             assert(FILES > 1);
+//             expect(fs.existsSync(dest)).toBeTruthy();
+//             expect(FILES > 1).toBeTruthy();
 
 //             for (let i = 0; i < FILES; ++i) {
 //               if (i === 0) {
-//                 assert(fs.existsSync(path.join(dest, i.toString())));
+//                 expect(fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
 //               } else {
-//                 assert(!fs.existsSync(path.join(dest, i.toString())));
+//                 expect(!fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
 //               }
 //             }
 
@@ -464,9 +454,9 @@
 
 //             for (let j = 0; j < FILES; ++j) {
 //               if (j === 0) {
-//                 assert(fs.existsSync(path.join(destSub, j.toString())));
+//                 expect(fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
 //               } else {
-//                 assert(!fs.existsSync(path.join(destSub, j.toString())));
+//                 expect(!fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
 //               }
 //             }
 //             done();
@@ -494,15 +484,9 @@
 //           .copy(src, dest, filter)
 //           .catch(err => err)
 //           .then(err => {
-//             assert.ifError(err);
-//             assert(
-//               !fs.existsSync(path.join(dest, IGNORE)),
-//               'directory was not ignored',
-//             );
-//             assert(
-//               !fs.existsSync(path.join(dest, IGNORE, 'file')),
-//               'file was not ignored',
-//             );
+//             expect(err).toBeFalsy();
+//             expect(!fs.existsSync(path.join(dest, IGNORE))).toBeTruthy();
+//             expect(!fs.existsSync(path.join(dest, IGNORE, 'file'))).toBeTruthy();
 //             done();
 //           });
 //       });
@@ -527,8 +511,8 @@
 //             .copy(src, dest, filter)
 //             .catch(err => err)
 //             .then(err => {
-//               assert(!err);
-//               assert(!fs.existsSync(path.join(dest, 'subdir')));
+//               expect(!err).toBeTruthy();
+//               expect(!fs.existsSync(path.join(dest, 'subdir'))).toBeTruthy();
 //               done();
 //             });
 //         }, 1000);
@@ -562,21 +546,21 @@
 //           } catch (err) {
 //             err_1 = err;
 //           }
-//           assert(!err_1);
-//           assert(fs.existsSync(destFile1));
+//           expect(!err_1).toBeTruthy();
+//           expect(fs.existsSync(destFile1)).toBeTruthy();
 //           fse
 //             .copy(srcFile2, destFile2, filter)
 //             .catch(err_2 => err_2)
 //             .then(err_3 => {
-//               assert(!err_3);
-//               assert(!fs.existsSync(destFile2));
+//               expect(!err_3).toBeTruthy();
+//               expect(!fs.existsSync(destFile2)).toBeTruthy();
 
 //               fse
 //                 .copy(srcFile3, destFile3, filter)
 //                 .catch(err_4 => err_4)
 //                 .then(err_5 => {
-//                   assert(!err_5);
-//                   assert(fs.existsSync(destFile3));
+//                   expect(!err_5).toBeTruthy();
+//                   expect(fs.existsSync(destFile3)).toBeTruthy();
 //                   done();
 //                 });
 //             });
