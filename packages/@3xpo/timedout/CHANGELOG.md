@@ -1,5 +1,11 @@
 # @3xpo/timedout
 
+## 0.1.7
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 0.1.6
 
 ### Patch Changes

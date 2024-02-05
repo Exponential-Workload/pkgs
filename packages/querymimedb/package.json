@@ -1,6 +1,6 @@
 {
   "name": "querymimedb",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Query the MIME DB on systems that support it.",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",

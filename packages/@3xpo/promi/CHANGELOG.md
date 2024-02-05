@@ -1,5 +1,11 @@
 # @3xpo/promi
 
+## 0.1.5
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 0.1.4
 
 ### Patch Changes

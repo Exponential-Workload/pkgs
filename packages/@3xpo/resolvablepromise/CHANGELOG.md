@@ -1,5 +1,11 @@
 # @3xpo/resolvablepromise
 
+## 0.2.4
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 0.2.3
 
 ### Patch Changes

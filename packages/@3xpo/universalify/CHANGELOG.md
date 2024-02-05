@@ -1,5 +1,11 @@
 # @3xpo/universalify
 
+## 2.0.4
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 2.0.3
 
 ### Patch Changes

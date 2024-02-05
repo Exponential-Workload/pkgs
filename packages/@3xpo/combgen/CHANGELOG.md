@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.10
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 0.2.9
 
 ### Patch Changes

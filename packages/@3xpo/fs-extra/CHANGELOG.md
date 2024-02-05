@@ -1,5 +1,14 @@
 11.2.0 / 2023-11-27
 
+## 11.2.8
+
+### Patch Changes
+
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+- 870983c: Revise a substantial amount of the README
+- Updated dependencies [0d5fdd8]
+  - @3xpo/universalify@2.0.4
+
 ## 11.2.7
 
 ### Patch Changes

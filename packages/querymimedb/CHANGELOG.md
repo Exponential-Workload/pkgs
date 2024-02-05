@@ -1,5 +1,12 @@
 # querymimedb
 
+## 0.1.5
+
+### Patch Changes
+
+- 56b3901: Mention handling magic errors at runtime
+- 0d5fdd8: Rename monorepo to Expo/pkgs
+
 ## 0.1.4
 
 ### Patch Changes
