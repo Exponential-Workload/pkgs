@@ -50,23 +50,17 @@ describe('utimes', () => {
       const awhileAgo = new Date(1334990868773);
       const awhileAgoNoMillis = new Date(1334990868000);
 
-      assert.notDeepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime());
-      assert.notDeepStrictEqual(stats.atime.getTime(), awhileAgo.getTime());
+      expect(stats.mtime.getTime()).not.toStrictEqual(awhileAgo.getTime());
+      expect(stats.atime.getTime()).not.toStrictEqual(awhileAgo.getTime());
 
       return utimes.utimesMillis(tmpFile, awhileAgo, awhileAgo).then(() => {
         stats = fs.statSync(tmpFile);
         if (hasMillisResSync()) {
-          assert.deepStrictEqual(stats.mtime.getTime(), awhileAgo.getTime());
-          assert.deepStrictEqual(stats.atime.getTime(), awhileAgo.getTime());
+          expect(stats.mtime.getTime()).toStrictEqual(awhileAgo.getTime());
+          expect(stats.atime.getTime()).toStrictEqual(awhileAgo.getTime());
         } else {
-          assert.deepStrictEqual(
-            stats.mtime.getTime(),
-            awhileAgoNoMillis.getTime(),
-          );
-          assert.deepStrictEqual(
-            stats.atime.getTime(),
-            awhileAgoNoMillis.getTime(),
-          );
+          expect(stats.mtime.getTime()).toStrictEqual(awhileAgoNoMillis.getTime());
+          expect(stats.atime.getTime()).toStrictEqual(awhileAgoNoMillis.getTime());
         }
       });
     }, 10000);

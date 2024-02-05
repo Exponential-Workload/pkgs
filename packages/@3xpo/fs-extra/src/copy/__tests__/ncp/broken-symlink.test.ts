@@ -29,14 +29,14 @@ describe('ncp broken symlink', () => {
 
   it('should not error if symlink is broken', done => {
     ncp(src, out, err => {
-      assert.strictEqual(err, null);
+      expect(err).toBe(null);
       done();
     });
   });
 
   it('should return an error if symlink is broken and dereference=true', done => {
     ncp(src, out, { dereference: true }, err => {
-      assert.strictEqual(err.code, 'ENOENT');
+      expect(err.code).toBe('ENOENT');
       done();
     });
   });

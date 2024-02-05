@@ -19,12 +19,12 @@ describe('remove / async / dir', () => {
   describe('> when dir does not exist', () => {
     it('should not throw an error', done => {
       const someDir = path.join(TEST_DIR, 'some-dir/');
-      assert.strictEqual(fs.existsSync(someDir), false);
+      expect(fs.existsSync(someDir)).toBe(false);
       fse
         .remove(someDir)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });

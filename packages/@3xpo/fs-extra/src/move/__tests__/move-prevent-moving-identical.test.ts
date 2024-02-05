@@ -32,10 +32,7 @@ describe('+ move() - prevent moving identical files and dirs', () => {
     fs.move(fileSrc, fileDest)
       .catch(err => err)
       .then(err => {
-        assert.strictEqual(
-          err.message,
-          'Source and destination must not be the same.',
-        );
+        expect(err.message).toBe('Source and destination must not be the same.');
         done();
       });
   });
@@ -53,11 +50,8 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
-            assert(fs.existsSync(src));
+            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });
@@ -73,11 +67,8 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
-            assert(fs.existsSync(src));
+            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });
@@ -95,11 +86,8 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
-            assert(fs.existsSync(src));
+            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });
@@ -115,11 +103,8 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
-            assert(fs.existsSync(src));
+            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });
@@ -148,15 +133,12 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
 
             const newlen = klawSync(src).length;
-            assert.strictEqual(newlen, oldlen);
+            expect(newlen).toBe(oldlen);
             const link = fs.readlinkSync(destLink);
-            assert.strictEqual(link, src);
+            expect(link).toBe(src);
             done();
           });
       });
@@ -178,13 +160,13 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(srcLink, dest)
           .catch(err => err)
           .then(err => {
-            assert.ok(err);
+            expect(err).toBeTruthy();
 
             // assert nothing copied
             const newlen = klawSync(dest).length;
-            assert.strictEqual(newlen, oldlen);
+            expect(newlen).toBe(oldlen);
             const link = fs.readlinkSync(srcLink);
-            assert.strictEqual(link, dest);
+            expect(link).toBe(dest);
             done();
           });
       });
@@ -205,28 +187,17 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
 
             const srclenAfter = klawSync(srcLink).length;
-            assert.strictEqual(
-              srclenAfter,
-              srclenBefore,
-              'src length should not change',
-            );
+            expect(srclenAfter).toBe(srclenBefore);
             const destlenAfter = klawSync(destLink).length;
-            assert.strictEqual(
-              destlenAfter,
-              destlenBefore,
-              'dest length should not change',
-            );
+            expect(destlenAfter).toBe(destlenBefore);
 
             const srcln = fs.readlinkSync(srcLink);
-            assert.strictEqual(srcln, src);
+            expect(srcln).toBe(src);
             const destln = fs.readlinkSync(destLink);
-            assert.strictEqual(destln, src);
+            expect(destln).toBe(src);
             done();
           });
       });
@@ -250,10 +221,7 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(src, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
             done();
           });
       });
@@ -270,14 +238,11 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(srcLink, dest, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
 
             const link = fs.readlinkSync(srcLink);
-            assert.strictEqual(link, dest);
-            assert(fs.readFileSync(link, 'utf8'), 'some data');
+            expect(link).toBe(dest);
+            expect(fs.readFileSync(link, 'utf8')).toBeTruthy();
             done();
           });
       });
@@ -297,17 +262,14 @@ describe('+ move() - prevent moving identical files and dirs', () => {
         fs.move(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
 
             const srcln = fs.readlinkSync(srcLink);
-            assert.strictEqual(srcln, src);
+            expect(srcln).toBe(src);
             const destln = fs.readlinkSync(destLink);
-            assert.strictEqual(destln, src);
-            assert(fs.readFileSync(srcln, 'utf8'), 'src data');
-            assert(fs.readFileSync(destln, 'utf8'), 'src data');
+            expect(destln).toBe(src);
+            expect(fs.readFileSync(srcln, 'utf8')).toBeTruthy();
+            expect(fs.readFileSync(destln, 'utf8')).toBeTruthy();
             done();
           });
       });

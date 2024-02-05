@@ -31,10 +31,7 @@ describe('+ copySync() / file', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          assert.strictEqual(
-            err.message,
-            `Cannot overwrite directory '${dest}' with non-directory '${src}'.`,
-          );
+          expect(err.message).toBe(`Cannot overwrite directory '${dest}' with non-directory '${src}'.`);
         }
       });
     });
@@ -57,7 +54,7 @@ describe('+ copySync() / file', () => {
         .createHash('md5')
         .update(fs.readFileSync(fileDest))
         .digest('hex');
-      assert.strictEqual(srcMd5, destMd5);
+      expect(srcMd5).toBe(destMd5);
     });
 
     it('should follow symlinks', () => {
@@ -79,7 +76,7 @@ describe('+ copySync() / file', () => {
         .createHash('md5')
         .update(fs.readFileSync(fileDest))
         .digest('hex');
-      assert.strictEqual(srcMd5, destMd5);
+      expect(srcMd5).toBe(destMd5);
     });
 
     it('should maintain file mode', () => {
@@ -92,7 +89,7 @@ describe('+ copySync() / file', () => {
 
       const statSrc = fs.statSync(fileSrc);
       const statDest = fs.statSync(fileDest);
-      assert.strictEqual(statSrc.mode, statDest.mode);
+      expect(statSrc.mode).toBe(statDest.mode);
     });
 
     it('should only copy files allowed by filter fn', () => {
@@ -114,9 +111,9 @@ describe('+ copySync() / file', () => {
       fs.copySync(srcFile2, destFile2, filter);
       fs.copySync(srcFile3, destFile3, filter);
 
-      assert(fs.existsSync(destFile1));
-      assert(!fs.existsSync(destFile2));
-      assert(fs.existsSync(destFile3));
+      expect(fs.existsSync(destFile1)).toBeTruthy();
+      expect(!fs.existsSync(destFile2)).toBeTruthy();
+      expect(fs.existsSync(destFile3)).toBeTruthy();
     });
 
     it('should not call filter fn more than needed', () => {
@@ -134,8 +131,8 @@ describe('+ copySync() / file', () => {
 
       fs.copySync(src, dest, filter);
 
-      assert.strictEqual(filterCallCount, 1);
-      assert(fs.existsSync(dest));
+      expect(filterCallCount).toBe(1);
+      expect(fs.existsSync(dest)).toBeTruthy();
     });
 
     describe('> when the destination dir does not exist', () => {
@@ -149,7 +146,7 @@ describe('+ copySync() / file', () => {
 
         const data2 = fs.readFileSync(dest, 'utf8');
 
-        assert.strictEqual(data, data2);
+        expect(data).toBe(data2);
       });
     });
 
@@ -166,7 +163,7 @@ describe('+ copySync() / file', () => {
 
         const data2 = fs.readFileSync(fileDest, 'utf8');
 
-        assert.strictEqual(data, data2);
+        expect(data).toBe(data2);
       });
     });
 
@@ -187,7 +184,7 @@ describe('+ copySync() / file', () => {
           it('should copy the file and not throw an error', () => {
             fs.copySync(src, dest, { overwrite: true });
             const destData = fs.readFileSync(dest, 'utf8');
-            assert.strictEqual(srcData, destData);
+            expect(srcData).toBe(destData);
           });
         });
 
@@ -195,7 +192,7 @@ describe('+ copySync() / file', () => {
           it('should copy the file and not throw an error', () => {
             fs.copySync(src, dest, { overwrite: false });
             const destData = fs.readFileSync(dest, 'utf8');
-            assert.strictEqual(srcData, destData);
+            expect(srcData).toBe(destData);
           });
         });
       });
@@ -212,7 +209,7 @@ describe('+ copySync() / file', () => {
           it('should copy the file and not throw an error', () => {
             fs.copySync(src, dest, { overwrite: true });
             destData = fs.readFileSync(dest, 'utf8');
-            assert.strictEqual(srcData, destData);
+            expect(srcData).toBe(destData);
           });
         });
 
@@ -222,16 +219,15 @@ describe('+ copySync() / file', () => {
 
             // copy never happened
             const destDataNew = fs.readFileSync(dest, 'utf8');
-            assert.strictEqual(destData, destDataNew);
+            expect(destData).toBe(destDataNew);
           });
           it('should throw an error when errorOnExist is true', () => {
-            assert.throws(() =>
-              fs.copySync(src, dest, { overwrite: false, errorOnExist: true }),
-            );
+            expect(() =>
+              fs.copySync(src, dest, { overwrite: false, errorOnExist: true })).toThrow();
 
             // copy never happened
             const destDataNew = fs.readFileSync(dest, 'utf8');
-            assert.strictEqual(destData, destDataNew);
+            expect(destData).toBe(destDataNew);
           });
         });
 
@@ -241,7 +237,7 @@ describe('+ copySync() / file', () => {
               fs.chmodSync(dest, 0o444);
               fs.copySync(src, dest, { overwrite: true });
               destData = fs.readFileSync(dest, 'utf8');
-              assert.strictEqual(srcData, destData);
+              expect(srcData).toBe(destData);
             } finally {
               // destination file is readonly so just remove it so we don't affect other tests
               fs.unlinkSync(dest);
@@ -267,7 +263,7 @@ describe('+ copySync() / file', () => {
 
         // copy never happened
         const destDataNew = fs.readFileSync(dest, 'utf8');
-        assert.strictEqual(destData, destDataNew);
+        expect(destData).toBe(destDataNew);
       });
     });
   });

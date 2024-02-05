@@ -19,21 +19,21 @@ describe('pathExists()', () => {
   it('should return false if file does not exist', () => {
     return fs
       .pathExists(path.join(TEST_DIR, 'somefile'))
-      .then(exists => assert(!exists));
+      .then(exists => expect(!exists).toBeTruthy());
   });
 
   it('should return true if file does exist', () => {
     const file = path.join(TEST_DIR, 'exists');
     fs.ensureFileSync(file);
-    return fs.pathExists(file).then(exists => assert(exists));
+    return fs.pathExists(file).then(exists => expect(exists).toBeTruthy());
   });
 
   it('should pass an empty error parameter to the callback', done => {
     const file = path.join(TEST_DIR, 'exists');
     fs.ensureFileSync(file);
     fs.pathExists(file, (err, exists) => {
-      assert.ifError(err);
-      assert(exists);
+      expect(err).toBeFalsy();
+      expect(exists).toBeTruthy();
       done();
     });
   });

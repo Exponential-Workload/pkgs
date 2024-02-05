@@ -27,10 +27,7 @@ describe('mkdirp: issue-93, win32, when drive does not exist, it should return a
     const file = 'R:\\afasd\\afaff\\fdfd'; // hopefully drive 'r' does not exist on appveyor
     // Different error codes on different Node versions (matches native mkdir behavior)
     const assertErr = err =>
-      assert(
-        ['EPERM', 'ENOENT'].includes(err.code),
-        `expected 'EPERM' or 'ENOENT', got ${util.inspect(err.code)}`,
-      );
+      expect(['EPERM', 'ENOENT'].includes(err.code)).toBeTruthy();
 
     fse
       .mkdirp(file)

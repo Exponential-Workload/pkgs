@@ -35,26 +35,26 @@ describe('remove', () => {
 
   describe('+ remove()', () => {
     it('should delete an empty directory', done => {
-      assert(fs.existsSync(TEST_DIR));
+      expect(fs.existsSync(TEST_DIR)).toBeTruthy();
       fse
         .remove(TEST_DIR)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(!fs.existsSync(TEST_DIR));
+          expect(err).toBeFalsy();
+          expect(!fs.existsSync(TEST_DIR)).toBeTruthy();
           done();
         });
     });
 
     it('should delete a directory full of directories and files', done => {
       buildFixtureDir();
-      assert(fs.existsSync(TEST_DIR));
+      expect(fs.existsSync(TEST_DIR)).toBeTruthy();
       fse
         .remove(TEST_DIR)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(!fs.existsSync(TEST_DIR));
+          expect(err).toBeFalsy();
+          expect(!fs.existsSync(TEST_DIR)).toBeTruthy();
           done();
         });
     });
@@ -63,13 +63,13 @@ describe('remove', () => {
       const file = path.join(TEST_DIR, 'file');
       fs.writeFileSync(file, 'hello');
 
-      assert(fs.existsSync(file));
+      expect(fs.existsSync(file)).toBeTruthy();
       fse
         .remove(file)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(!fs.existsSync(file));
+          expect(err).toBeFalsy();
+          expect(!fs.existsSync(file)).toBeTruthy();
           done();
         });
     });
@@ -78,7 +78,7 @@ describe('remove', () => {
       const file = path.join(TEST_DIR, 'file');
       fs.writeFileSync(file, 'hello');
 
-      assert(fs.existsSync(file));
+      expect(fs.existsSync(file)).toBeTruthy();
       let done = false;
       let existsChecker: any = setInterval(() => {
         fse.pathExists(file).then(itDoes => {
@@ -108,15 +108,15 @@ describe('remove', () => {
       const wrongFile = path.join(TEST_DIR, 'file1');
       fs.writeFileSync(wrongFile, 'yo');
 
-      assert(fs.existsSync(file));
-      assert(fs.existsSync(wrongFile));
+      expect(fs.existsSync(file)).toBeTruthy();
+      expect(fs.existsSync(wrongFile)).toBeTruthy();
       fse
         .remove(file)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(!fs.existsSync(file));
-          assert(fs.existsSync(wrongFile));
+          expect(err).toBeFalsy();
+          expect(!fs.existsSync(file)).toBeTruthy();
+          expect(fs.existsSync(wrongFile)).toBeTruthy();
           done();
         });
     });
@@ -127,15 +127,15 @@ describe('remove', () => {
       const wrongFile = path.join(TEST_DIR, 'file1');
       fs.writeFileSync(wrongFile, 'yo');
 
-      assert(!fs.existsSync(nonexistentFile));
-      assert(fs.existsSync(wrongFile));
+      expect(!fs.existsSync(nonexistentFile)).toBeTruthy();
+      expect(fs.existsSync(wrongFile)).toBeTruthy();
       fse
         .remove(nonexistentFile)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(!fs.existsSync(nonexistentFile));
-          assert(fs.existsSync(wrongFile));
+          expect(err).toBeFalsy();
+          expect(!fs.existsSync(nonexistentFile)).toBeTruthy();
+          expect(fs.existsSync(wrongFile)).toBeTruthy();
           done();
         });
     });

@@ -29,10 +29,10 @@ describe('read', () => {
       fs.writeFileSync(file, JSON.stringify(obj1));
       fse
         .readJSON(file)
-        .catch(err => assert.ifError(err) as never)
+        .catch(err => expect(err).toBeFalsy() as never)
         .then(obj2 => {
-          assert.strictEqual(obj1.firstName, obj2.firstName);
-          assert.strictEqual(obj1.lastName, obj2.lastName);
+          expect(obj1.firstName).toBe(obj2.firstName);
+          expect(obj1.lastName).toBe(obj2.lastName);
           done();
         });
     });
@@ -41,8 +41,8 @@ describe('read', () => {
       const file = path.join(TEST_DIR, 'file2.json');
       fs.writeFileSync(file, '%asdfasdff444');
       fse.readJSON(file, undefined, (err, obj) => {
-        assert(err);
-        assert(!obj);
+        expect(err).toBeTruthy();
+        expect(!obj).toBeTruthy();
         done();
       });
     });

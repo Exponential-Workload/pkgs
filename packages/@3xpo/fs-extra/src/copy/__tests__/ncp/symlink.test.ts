@@ -26,16 +26,10 @@ describe('ncp / symlink', () => {
     ncp(src, out)
       .catch(err => err)
       .then(err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
 
-        assert.strictEqual(
-          fs.readlinkSync(path.join(out, 'file-symlink')),
-          path.join(src, 'foo'),
-        );
-        assert.strictEqual(
-          fs.readlinkSync(path.join(out, 'dir-symlink')),
-          path.join(src, 'dir'),
-        );
+        expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(path.join(src, 'foo'));
+        expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(path.join(src, 'dir'));
 
         done();
       });

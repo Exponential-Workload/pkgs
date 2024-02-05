@@ -20,7 +20,7 @@ describe('fs.rm', () => {
   it('supports promises', () => {
     fse.writeFileSync(TEST_FILE, 'hello');
     return fse.rm(TEST_FILE).then(() => {
-      assert(!fse.pathExistsSync(TEST_FILE));
+      expect(!fse.pathExistsSync(TEST_FILE)).toBeTruthy();
     });
   });
 });

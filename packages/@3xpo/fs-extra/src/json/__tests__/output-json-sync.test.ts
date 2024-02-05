@@ -25,15 +25,15 @@ describe('json', () => {
         'exist',
         'file.json',
       );
-      assert(!fs.existsSync(file));
+      expect(!fs.existsSync(file)).toBeTruthy();
 
       const data = { name: 'JP' };
       fse.outputJsonSync(file, data);
 
-      assert(fs.existsSync(file));
+      expect(fs.existsSync(file)).toBeTruthy();
       const newData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-      assert.strictEqual(data.name, newData.name);
+      expect(data.name).toBe(newData.name);
     });
 
     describe('> when an option is passed, like JSON replacer', () => {
@@ -46,7 +46,7 @@ describe('json', () => {
           'really',
           'file.json',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
 
         const replacer = (k, v) => (v === 'JP' ? 'Jon Paul' : v);
         const data = { name: 'JP' };
@@ -54,7 +54,7 @@ describe('json', () => {
         fse.outputJsonSync(file, data, { replacer });
         const newData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-        assert.strictEqual(newData.name, 'Jon Paul');
+        expect(newData.name).toBe('Jon Paul');
       });
     });
   });

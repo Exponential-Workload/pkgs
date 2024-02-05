@@ -27,7 +27,7 @@ describe('mkdirp / mkdirp', () => {
 
     await fse.mkdirp(file, 0o755);
     const ex = await fse.pathExists(file);
-    assert.ok(ex, 'file created');
+    expect(ex).toBeTruthy();
     const stat = fs.statSync(file);
 
     if (os.platform().indexOf('win') === 0) {

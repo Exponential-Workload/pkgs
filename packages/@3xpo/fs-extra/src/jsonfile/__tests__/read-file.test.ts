@@ -45,8 +45,8 @@ describe('+ readFile()', () => {
 
     it('should reject the promise with filename in error', done => {
       jf.readFile(file).catch(err => {
-        assert(err instanceof Error);
-        assert(err.message.match(fn));
+        expect(err instanceof Error).toBeTruthy();
+        expect(err.message.match(fn)).toBeTruthy();
         done();
       });
     });
@@ -65,11 +65,11 @@ describe('+ readFile()', () => {
     it('should resolve the promise with null as data', done => {
       jf.readFile(file, { throws: false })
         .then(data => {
-          assert.strictEqual(data, null);
+          expect(data).toBe(null);
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -106,8 +106,8 @@ describe('+ readFile()', () => {
 
     it('should reject the promise', done => {
       jf.readFile(file, { throws: true }).catch(err => {
-        assert(err instanceof Error);
-        assert(err.message.match(fn));
+        expect(err instanceof Error).toBeTruthy();
+        expect(err.message.match(fn)).toBeTruthy();
         done();
       });
     });
@@ -131,24 +131,21 @@ describe('+ readFile()', () => {
 
     it('should transform the JSON', async () => {
       const data = await jf.readFile(file, { reviver: sillyReviver });
-      assert.strictEqual(data.name, 'jp');
-      assert(data.day instanceof Date);
-      assert.strictEqual(data.day.toISOString(), '2015-06-19T11:41:26.815Z');
+      expect(data.name).toBe('jp');
+      expect(data.day instanceof Date).toBeTruthy();
+      expect(data.day.toISOString()).toBe('2015-06-19T11:41:26.815Z');
     });
 
     it('should resolve the promise with transformed JSON', done => {
       jf.readFile(file, { reviver: sillyReviver })
         .then(data => {
-          assert.strictEqual(data.name, 'jp');
-          assert(data.day instanceof Date);
-          assert.strictEqual(
-            data.day.toISOString(),
-            '2015-06-19T11:41:26.815Z',
-          );
+          expect(data.name).toBe('jp');
+          expect(data.day instanceof Date).toBeTruthy();
+          expect(data.day.toISOString()).toBe('2015-06-19T11:41:26.815Z');
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -173,11 +170,11 @@ describe('+ readFile()', () => {
     it('should resolve the promise', done => {
       jf.readFile(file, 'utf8')
         .then(data => {
-          assert.strictEqual(data.name, obj.name);
+          expect(data.name).toBe(obj.name);
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -197,17 +194,17 @@ describe('+ readFile()', () => {
 
     it('should properly parse', async () => {
       const data = await jf.readFile(file);
-      assert.deepStrictEqual(obj, data);
+      expect(obj).toStrictEqual(data);
     });
 
     it('should resolve the promise with parsed JSON', done => {
       jf.readFile(file)
         .then(data => {
-          assert.deepStrictEqual(data, obj);
+          expect(data).toStrictEqual(obj);
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });

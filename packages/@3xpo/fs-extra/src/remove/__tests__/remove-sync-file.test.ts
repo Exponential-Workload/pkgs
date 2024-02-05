@@ -20,9 +20,9 @@ describe('remove/sync', () => {
     it('should delete a file synchronously', () => {
       const file = path.join(TEST_DIR, 'file');
       fs.writeFileSync(file, 'hello');
-      assert(fs.existsSync(file));
+      expect(fs.existsSync(file)).toBeTruthy();
       fse.removeSync(file);
-      assert(!fs.existsSync(file));
+      expect(!fs.existsSync(file)).toBeTruthy();
     });
   });
 });

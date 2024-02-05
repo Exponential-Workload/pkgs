@@ -15,7 +15,7 @@ describe('copy-sync / symlink', () => {
 
   beforeEach(done => {
     fs.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
+      expect(err).toBeFalsy();
       createFixtures(src, done);
     });
   });
@@ -27,36 +27,27 @@ describe('copy-sync / symlink', () => {
   });
 
   it('copies symlinks by default', () => {
-    assert.doesNotThrow(() => {
+    expect(() => {
       copySync(src, out);
-    });
+    }).not.toThrow();
 
-    assert.strictEqual(
-      fs.readlinkSync(path.join(out, 'file-symlink')),
-      path.join(src, 'foo'),
-    );
-    assert.strictEqual(
-      fs.readlinkSync(path.join(out, 'dir-symlink')),
-      path.join(src, 'dir'),
-    );
+    expect(fs.readlinkSync(path.join(out, 'file-symlink'))).toBe(path.join(src, 'foo'));
+    expect(fs.readlinkSync(path.join(out, 'dir-symlink'))).toBe(path.join(src, 'dir'));
   });
 
   it('copies file contents when dereference=true', () => {
     try {
       copySync(src, out, { dereference: true });
     } catch (err) {
-      assert.ifError(err);
+      expect(err).toBeFalsy();
     }
 
     const fileSymlinkPath = path.join(out, 'file-symlink');
-    assert.ok(fs.lstatSync(fileSymlinkPath).isFile());
-    assert.strictEqual(
-      fs.readFileSync(fileSymlinkPath, 'utf8'),
-      'foo contents',
-    );
+    expect(fs.lstatSync(fileSymlinkPath).isFile()).toBeTruthy();
+    expect(fs.readFileSync(fileSymlinkPath, 'utf8')).toBe('foo contents');
 
     const dirSymlinkPath = path.join(out, 'dir-symlink');
-    assert.ok(fs.lstatSync(dirSymlinkPath).isDirectory());
+    expect(fs.lstatSync(dirSymlinkPath).isDirectory()).toBeTruthy();
     expect(fs.readdirSync(dirSymlinkPath)).toEqual(['bar']);
   });
 });

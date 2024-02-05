@@ -81,16 +81,8 @@ describeIfPractical('move() - across different devices', () => {
       const originalTimestamp = originalTimestamps[idx];
       const currentPath = path.join(DEST, file);
       const currentStats = fs.statSync(currentPath);
-      assert.strictEqual(
-        currentStats.mtime.getTime(),
-        originalTimestamp.mtime,
-        'different mtime values',
-      );
-      assert.strictEqual(
-        currentStats.atime.getTime(),
-        originalTimestamp.atime,
-        'different atime values',
-      );
+      expect(currentStats.mtime.getTime()).toBe(originalTimestamp.mtime);
+      expect(currentStats.atime.getTime()).toBe(originalTimestamp.atime);
     };
   }
 });

@@ -101,7 +101,7 @@ describe('symlink-type', () => {
       it(`should return '${expectedType}' when src '${args[0]}'`, done => {
         const callback = (err, type) => {
           if (err) done(err);
-          assert.strictEqual(type, expectedType);
+          expect(type).toBe(expectedType);
           done();
         };
         args.push(callback);
@@ -118,7 +118,7 @@ describe('symlink-type', () => {
       it(`should return '${expectedType}' when src '${args[0]}'`, () => {
         // @ts-ignore
         const type = symlinkTypeSync(...args);
-        assert.strictEqual(type, expectedType);
+        expect(type).toBe(expectedType);
       });
     });
   });

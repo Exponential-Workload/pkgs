@@ -41,8 +41,8 @@ describe('ncp / error / dest-permission', () => {
     const subdest = path.join(dest, 'another-dir');
 
     ncp(src, subdest, err => {
-      assert(err);
-      assert.strictEqual(err.code, 'EACCES');
+      expect(err).toBeTruthy();
+      expect(err.code).toBe('EACCES');
       done();
     });
   });

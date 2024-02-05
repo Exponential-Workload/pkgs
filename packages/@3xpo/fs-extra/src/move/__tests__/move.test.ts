@@ -61,17 +61,17 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'a-folder', 'another-file');
 
       // verify file exists already
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       fse
         .move(src, dest, { overwrite: true })
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -88,23 +88,23 @@ describe('+ move()', () => {
 
       // verify dest has stuff in it
       const paths = fs.readdirSync(dest);
-      assert(paths.indexOf('another-file') >= 0);
-      assert(paths.indexOf('another-folder') >= 0);
+      expect(paths.indexOf('another-file') >= 0).toBeTruthy();
+      expect(paths.indexOf('another-folder') >= 0).toBeTruthy();
 
       fse
         .move(src, dest, { overwrite: true })
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
           // verify dest does not have old stuff
           const paths = fs.readdirSync(dest);
-          assert.strictEqual(paths.indexOf('another-file'), -1);
-          assert.strictEqual(paths.indexOf('another-folder'), -1);
+          expect(paths.indexOf('another-file')).toBe(-1);
+          expect(paths.indexOf('another-folder')).toBe(-1);
 
           // verify dest has new stuff
-          assert(paths.indexOf('some-file') >= 0);
-          assert(paths.indexOf('some-folder') >= 0);
+          expect(paths.indexOf('some-file') >= 0).toBeTruthy();
+          expect(paths.indexOf('some-folder') >= 0).toBeTruthy();
 
           done();
         });
@@ -122,15 +122,15 @@ describe('+ move()', () => {
         .move(src, dest, { overwrite: true })
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
           fs.readFile(
             path.join(dest, 'another-folder', 'file3'),
             'utf8',
             (err, contents) => {
               const expected = /^knuckles\r?\n$/;
-              assert.ifError(err);
-              assert.ok(contents.match(expected));
+              expect(err).toBeFalsy();
+              expect(contents.match(expected)).toBeTruthy();
               tearDownMockFs();
               done();
             },
@@ -148,11 +148,11 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -166,7 +166,7 @@ describe('+ move()', () => {
 
       const contents = fs.readFileSync(dest, 'utf8');
       const expected = /^sonic the hedgehog\r?\n$/;
-      assert.ok(contents.match(expected));
+      expect(contents.match(expected)).toBeTruthy();
     });
 
     it('should not move a file if source and destination are the same', done => {
@@ -177,10 +177,7 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           done();
         });
     });
@@ -193,7 +190,7 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert(err);
+          expect(err).toBeTruthy();
           done();
         });
     });
@@ -206,10 +203,7 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           done();
         });
     });
@@ -219,13 +213,13 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'a-folder', 'another-file');
 
       // verify file exists already
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       fse
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.strictEqual(err.message, 'dest already exists.');
+          expect(err.message).toBe('dest already exists.');
           done();
         });
     });
@@ -235,13 +229,13 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'a-folder', 'another-file');
 
       // verify file exists already
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       fse
         .move(src, dest, { overwrite: false })
         .catch(err => err)
         .then(err => {
-          assert.strictEqual(err.message, 'dest already exists.');
+          expect(err.message).toBe('dest already exists.');
           done();
         });
     });
@@ -251,17 +245,17 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'does', 'not', 'exist', 'a-file-dest');
 
       // verify dest directory does not exist
-      assert(!fs.existsSync(path.dirname(dest)));
+      expect(!fs.existsSync(path.dirname(dest))).toBeTruthy();
 
       fse
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -277,12 +271,12 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             tearDownMockFs();
             done();
           });
@@ -294,20 +288,20 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'a-folder-dest');
 
       // verify it doesn't exist
-      assert(!fs.existsSync(dest));
+      expect(!fs.existsSync(dest)).toBeTruthy();
 
       fse
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(
             path.join(dest, 'another-file'),
             'utf8',
             (err, contents) => {
               const expected = /^tails\r?\n$/;
-              assert.ifError(err);
-              assert.ok(contents.match(expected));
+              expect(err).toBeFalsy();
+              expect(contents.match(expected)).toBeTruthy();
               done();
             },
           );
@@ -324,15 +318,15 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
           fs.readFile(
             path.join(dest, 'another-folder', 'file3'),
             'utf8',
             (err, contents) => {
               const expected = /^knuckles\r?\n$/;
-              assert.ifError(err);
-              assert.ok(contents.match(expected));
+              expect(err).toBeFalsy();
+              expect(contents.match(expected)).toBeTruthy();
               tearDownMockFs();
               done();
             },
@@ -350,11 +344,11 @@ describe('+ move()', () => {
         .move(src, dest, undefined)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -368,7 +362,7 @@ describe('+ move()', () => {
 
       const contents = fs.readFileSync(dest, 'utf8');
       const expected = /^sonic the hedgehog\r?\n$/;
-      assert.ok(contents.match(expected));
+      expect(contents.match(expected)).toBeTruthy();
     });
   });
 
@@ -385,11 +379,11 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -402,17 +396,17 @@ describe('+ move()', () => {
       const dest = path.join(TEST_DIR, 'a-folder', 'another-file');
 
       // verify file exists already
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       fse
         .move(src, dest, { clobber: true })
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           fs.readFile(dest, 'utf8', (err, contents) => {
             const expected = /^sonic the hedgehog\r?\n$/;
-            assert.ifError(err);
-            assert.ok(contents.match(expected));
+            expect(err).toBeFalsy();
+            expect(contents.match(expected)).toBeTruthy();
             done();
           });
         });
@@ -424,19 +418,16 @@ describe('+ move()', () => {
       const SRC_DIR = path.join(TEST_DIR, 'test');
       const DEST_DIR = path.join(TEST_DIR, 'test', 'test');
 
-      assert(!fs.existsSync(SRC_DIR));
+      expect(!fs.existsSync(SRC_DIR)).toBeTruthy();
       fs.mkdirSync(SRC_DIR);
-      assert(fs.existsSync(SRC_DIR));
+      expect(fs.existsSync(SRC_DIR)).toBeTruthy();
 
       fse
         .move(SRC_DIR, DEST_DIR)
         .catch(err => err)
         .then(err => {
-          assert(fs.existsSync(SRC_DIR));
-          assert.strictEqual(
-            err.message,
-            `Cannot move '${SRC_DIR}' to a subdirectory of itself, '${DEST_DIR}'.`,
-          );
+          expect(fs.existsSync(SRC_DIR)).toBeTruthy();
+          expect(err.message).toBe(`Cannot move '${SRC_DIR}' to a subdirectory of itself, '${DEST_DIR}'.`);
           done();
         });
     });
@@ -460,17 +451,17 @@ describe('+ move()', () => {
             fse.mkdirpSync(src);
           }
 
-          assert(!fs.existsSync(dest));
+          expect(!fs.existsSync(dest)).toBeTruthy();
 
-          assert(fs.lstatSync(src).isDirectory());
+          expect(fs.lstatSync(src).isDirectory()).toBeTruthy();
 
           fse
             .move(src, dest)
             .catch(err => err)
             .then(err => {
-              assert.ifError(err);
-              assert(fs.existsSync(dest));
-              assert(fs.lstatSync(dest).isDirectory());
+              expect(err).toBeFalsy();
+              expect(fs.existsSync(dest)).toBeTruthy();
+              expect(fs.lstatSync(dest).isDirectory()).toBeTruthy();
               done();
             });
         });

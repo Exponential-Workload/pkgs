@@ -8,8 +8,8 @@ import fse from '../..';
 describe('realpath.native', () => {
   it('works with callbacks', () => {
     fse.realpath.native(__dirname, (err, path) => {
-      assert.ifError(err);
-      assert.strictEqual(path, __dirname);
+      expect(err).toBeFalsy();
+      expect(path).toBe(__dirname);
     });
   });
 
@@ -17,7 +17,7 @@ describe('realpath.native', () => {
     fse.realpath
       .native(__dirname)
       .then(path => {
-        assert.strictEqual(path, __dirname);
+        expect(path).toBe(__dirname);
         done();
       })
       .catch(done);
@@ -25,6 +25,6 @@ describe('realpath.native', () => {
 
   it('works with sync version', () => {
     const path = fse.realpathSync.native(__dirname);
-    assert.strictEqual(path, __dirname);
+    expect(path).toBe(__dirname);
   });
 });

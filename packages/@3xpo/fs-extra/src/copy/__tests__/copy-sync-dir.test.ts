@@ -33,10 +33,7 @@ describe('+ copySync() / dir', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          assert.strictEqual(
-            err.message,
-            `Cannot overwrite non-directory '${dest}' with directory '${src}'.`,
-          );
+          expect(err.message).toBe(`Cannot overwrite non-directory '${dest}' with directory '${src}'.`);
         }
       });
     });
@@ -68,15 +65,15 @@ describe('+ copySync() / dir', () => {
       }
 
       fs.copySync(src, dest);
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       for (let i = 0; i < FILES; ++i) {
-        assert(fs.existsSync(path.join(dest, i.toString())));
+        expect(fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
       }
 
       const destSub = path.join(dest, 'subdir');
       for (let j = 0; j < FILES; ++j) {
-        assert(fs.existsSync(path.join(destSub, j.toString())));
+        expect(fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
       }
     });
 
@@ -89,7 +86,7 @@ describe('+ copySync() / dir', () => {
       fs.copySync(src, dest);
 
       const link = fs.readlinkSync(path.join(dest, 'symlink'));
-      assert.strictEqual(link, srcTarget);
+      expect(link).toBe(srcTarget);
     });
 
     describe('> when the destination dir does not exist', () => {
@@ -110,8 +107,8 @@ describe('+ copySync() / dir', () => {
         const o1 = fs.readFileSync(path.join(dest, 'f1.txt'), 'utf8');
         const o2 = fs.readFileSync(path.join(dest, 'f2.txt'), 'utf8');
 
-        assert.strictEqual(d1, o1);
-        assert.strictEqual(d2, o2);
+        expect(d1).toBe(o1);
+        expect(d2).toBe(o2);
       });
     });
   });
@@ -127,7 +124,7 @@ describe('+ copySync() / dir', () => {
         path.extname(s) !== '.css' && !fs.statSync(s).isDirectory();
 
       fs.copySync(srcFile, destFile, filter);
-      assert(!fs.existsSync(destDir));
+      expect(!fs.existsSync(destDir)).toBeTruthy();
     });
 
     it('should apply filter recursively', () => {
@@ -156,14 +153,14 @@ describe('+ copySync() / dir', () => {
 
       fs.copySync(src, dest, filter);
 
-      assert(fs.existsSync(dest));
-      assert(FILES > 1);
+      expect(fs.existsSync(dest)).toBeTruthy();
+      expect(FILES > 1).toBeTruthy();
 
       for (let i = 0; i < FILES; ++i) {
         if (i === 0) {
-          assert(fs.existsSync(path.join(dest, i.toString())));
+          expect(fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
         } else {
-          assert(!fs.existsSync(path.join(dest, i.toString())));
+          expect(!fs.existsSync(path.join(dest, i.toString()))).toBeTruthy();
         }
       }
 
@@ -171,9 +168,9 @@ describe('+ copySync() / dir', () => {
 
       for (let j = 0; j < FILES; ++j) {
         if (j === 0) {
-          assert(fs.existsSync(path.join(destSub, j.toString())));
+          expect(fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
         } else {
-          assert(!fs.existsSync(path.join(destSub, j.toString())));
+          expect(!fs.existsSync(path.join(destSub, j.toString()))).toBeTruthy();
         }
       }
     });
@@ -191,14 +188,8 @@ describe('+ copySync() / dir', () => {
 
       fs.copySync(src, dest, filter);
 
-      assert(
-        !fs.existsSync(path.join(dest, IGNORE)),
-        'directory was not ignored',
-      );
-      assert(
-        !fs.existsSync(path.join(dest, IGNORE, 'file')),
-        'file was not ignored',
-      );
+      expect(!fs.existsSync(path.join(dest, IGNORE))).toBeTruthy();
+      expect(!fs.existsSync(path.join(dest, IGNORE, 'file'))).toBeTruthy();
     });
 
     it('should apply filter when it is applied only to dest', done => {
@@ -212,7 +203,7 @@ describe('+ copySync() / dir', () => {
         fs.outputFileSync(path.join(src, 'somefile.html'), 'some data');
         fs.mkdirSync(dest);
         fs.copySync(src, dest, filter);
-        assert(!fs.existsSync(path.join(dest, 'somefile.html')));
+        expect(!fs.existsSync(path.join(dest, 'somefile.html'))).toBeTruthy();
         done();
       }, 1000);
     });
@@ -244,9 +235,9 @@ describe('+ copySync() / dir', () => {
         fs.copySync(srcFile2, destFile2, filter);
         fs.copySync(srcFile3, destFile3, filter);
 
-        assert(fs.existsSync(destFile1));
-        assert(!fs.existsSync(destFile2));
-        assert(fs.existsSync(destFile3));
+        expect(fs.existsSync(destFile1)).toBeTruthy();
+        expect(!fs.existsSync(destFile2)).toBeTruthy();
+        expect(fs.existsSync(destFile3)).toBeTruthy();
         done();
       }, 1000);
     });

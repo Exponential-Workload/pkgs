@@ -16,7 +16,7 @@ describe('mkdirp / clobber', () => {
     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-clobber');
     fse
       .emptyDir(TEST_DIR)
-      .catch(err => assert.ifError(err))
+      .catch(err => expect(err).toBeFalsy())
       .then(() => {
         const ps = [TEST_DIR];
 
@@ -33,8 +33,8 @@ describe('mkdirp / clobber', () => {
         fs.writeFileSync(itw, 'I AM IN THE WAY, THE TRUTH, AND THE LIGHT.');
 
         fs.stat(itw, (err, stat) => {
-          assert.ifError(err);
-          assert.ok(stat && stat.isFile(), 'should be file');
+          expect(err).toBeFalsy();
+          expect(stat && stat.isFile()).toBeTruthy();
           done();
         });
       });
@@ -45,8 +45,8 @@ describe('mkdirp / clobber', () => {
       .mkdirp(file, 0o755)
       .catch(err => err)
       .then(err => {
-        assert.ok(err);
-        assert.strictEqual(err.code, 'ENOTDIR');
+        expect(err).toBeTruthy();
+        expect(err.code).toBe('ENOTDIR');
         done();
       });
   });

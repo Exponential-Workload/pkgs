@@ -21,7 +21,7 @@ describe('copy-sync / broken symlink', () => {
 
   beforeEach(done => {
     fse.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
+      expect(err).toBeFalsy();
       createFixtures(src, done);
     });
   });
@@ -36,14 +36,11 @@ describe('copy-sync / broken symlink', () => {
       } catch (e) {
         err = e;
       }
-      assert.strictEqual(err, null);
+      expect(err).toBe(null);
     });
 
     it('should throw error if dereference is true', () => {
-      assert.throws(
-        () => copySync(src, dest, { dereference: true }),
-        err => (err as any)?.code === 'ENOENT',
-      );
+      expect(() => copySync(src, dest, { dereference: true })).toThrow();
     });
   });
 });

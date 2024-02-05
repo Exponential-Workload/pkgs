@@ -22,11 +22,11 @@ describe('native fs', () => {
     const file = path.join(TEST_DIR, 'write.txt');
     fse.writeFileSync(file, 'hello');
     const data = fse.readFileSync(file, 'utf8');
-    assert.strictEqual(data, 'hello');
+    expect(data).toBe('hello');
   });
 
   it('should have native fs constants', () => {
-    assert.strictEqual(fse.constants.F_OK, fs.constants.F_OK);
-    assert.strictEqual(fse.F_OK, fs.constants.F_OK); // soft deprecated usage, but still available
+    expect(fse.constants.F_OK).toBe(fs.constants.F_OK);
+    expect(fse.F_OK).toBe(fs.constants.F_OK); // soft deprecated usage, but still available
   });
 });

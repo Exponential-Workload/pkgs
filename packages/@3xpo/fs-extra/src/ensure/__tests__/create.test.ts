@@ -26,13 +26,13 @@ describe('fs-extra', () => {
           Math.random() + 't-ne',
           Math.random() + '.txt',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         fse
           .createFile(file)
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
-            assert(fs.existsSync(file));
+            expect(err).toBeFalsy();
+            expect(fs.existsSync(file)).toBeTruthy();
             done();
           });
       });
@@ -51,8 +51,8 @@ describe('fs-extra', () => {
           .createFile(file)
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
-            assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello world');
+            expect(err).toBeFalsy();
+            expect(fs.readFileSync(file, 'utf8')).toBe('hello world');
             done();
           });
       });
@@ -71,7 +71,7 @@ describe('fs-extra', () => {
           .createFile(file)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(err.code, 'ENOTDIR');
+            expect(err.code).toBe('ENOTDIR');
             done();
           });
       });
@@ -86,9 +86,9 @@ describe('fs-extra', () => {
           Math.random() + 'ts-ne',
           Math.random() + '.txt',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         fse.createFileSync(file);
-        assert(fs.existsSync(file));
+        expect(fs.existsSync(file)).toBeTruthy();
       });
     });
 
@@ -102,7 +102,7 @@ describe('fs-extra', () => {
         fse.mkdirsSync(path.dirname(file));
         fs.writeFileSync(file, 'hello world');
         fse.createFileSync(file);
-        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello world');
+        expect(fs.readFileSync(file, 'utf8')).toBe('hello world');
       });
 
       it('should give clear error if node in directory tree is a file', () => {
@@ -117,9 +117,9 @@ describe('fs-extra', () => {
         const file = path.join(existingFile, Math.random() + '.txt');
         try {
           fse.createFileSync(file);
-          assert.fail();
+          expect(false).toBe(true);
         } catch (err) {
-          assert.strictEqual(err.code, 'ENOTDIR');
+          expect(err.code).toBe('ENOTDIR');
         }
       });
     });

@@ -23,7 +23,7 @@ describe('fs.copyFile', () => {
     fse.writeFileSync(src, 'hello');
     return fse.copyFile(src, dest).then(() => {
       const data = fse.readFileSync(dest, 'utf8');
-      assert.strictEqual(data, 'hello');
+      expect(data).toBe('hello');
     });
   });
 });

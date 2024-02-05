@@ -61,7 +61,7 @@ describe('+ copy() - case insensitive paths', () => {
         .then(err => {
           if (platform === 'linux') {
             expect(err).toBeFalsy();
-            assert(fs.existsSync(dest));
+            expect(fs.existsSync(dest)).toBeTruthy();
             expect(fs.readFileSync(dest, 'utf8')).toStrictEqual('some data');
           }
           if (platform === 'darwin' || platform === 'win32') {
@@ -87,7 +87,7 @@ describe('+ copy() - case insensitive paths', () => {
         .then(err => {
           if (platform === 'linux') {
             expect(err).toBeFalsy();
-            assert(fs.existsSync(dest));
+            expect(fs.existsSync(dest)).toBeTruthy();
             expect(
               fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
             ).toStrictEqual('some data');
@@ -115,7 +115,7 @@ describe('+ copy() - case insensitive paths', () => {
         .then(err => {
           if (platform === 'linux') {
             expect(err).toBeFalsy();
-            assert(fs.existsSync(dest));
+            expect(fs.existsSync(dest)).toBeTruthy();
             expect(fs.readFileSync(dest, 'utf8')).toStrictEqual('some data');
             const destLink = fs.readlinkSync(dest);
             expect(destLink).toStrictEqual(src);

@@ -28,7 +28,7 @@ describe('jsonfile-integration', () => {
       const file = path.join(TEST_DIR, 'file.json');
       fse.writeJsonSync(file, obj1);
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(data, JSON.stringify(obj1) + '\n');
+      expect(data).toBe(JSON.stringify(obj1) + '\n');
     });
   });
 
@@ -42,10 +42,7 @@ describe('jsonfile-integration', () => {
       const file = path.join(TEST_DIR, 'file.json');
       fse.writeJsonSync(file, obj1, { spaces: 2, EOL: '\r\n' });
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(
-        data,
-        JSON.stringify(obj1, null, 2).replace(/\n/g, '\r\n') + '\r\n',
-      );
+      expect(data).toBe(JSON.stringify(obj1, null, 2).replace(/\n/g, '\r\n') + '\r\n');
     });
   });
 });

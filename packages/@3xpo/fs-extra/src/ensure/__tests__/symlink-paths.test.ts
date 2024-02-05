@@ -97,7 +97,7 @@ describe('symlink-type', () => {
       it(`should return '${JSON.stringify(expectedRelativePaths)}' when src '${args[0]}' and dst is '${args[1]}'`, () => {
         // @ts-ignore
         const relativePaths = symlinkPathsSync(...args);
-        assert.deepStrictEqual(relativePaths, expectedRelativePaths);
+        expect(relativePaths).toStrictEqual(expectedRelativePaths);
       });
     });
   });

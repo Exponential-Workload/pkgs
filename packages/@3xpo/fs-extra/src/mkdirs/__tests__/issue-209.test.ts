@@ -16,16 +16,16 @@ describe('mkdirp: issue-209, win32, when bad path, should return a cleaner error
       .mkdirp(file)
       .catch(err => err)
       .then(err => {
-        assert(err, 'error is present');
-        assert.strictEqual(err.code, 'EINVAL');
+        expect(err).toBeTruthy();
+        expect(err.code).toBe('EINVAL');
 
         const file2 = 'c:\\tmp\foo:moo';
         fse
           .mkdirp(file2)
           .catch(err => err)
           .then(err => {
-            assert(err, 'error is present');
-            assert.strictEqual(err.code, 'EINVAL');
+            expect(err).toBeTruthy();
+            expect(err.code).toBe('EINVAL');
             done();
           });
       });
@@ -40,7 +40,7 @@ describe('mkdirp: issue-209, win32, when bad path, should return a cleaner error
       } catch {
         didErr = true;
       }
-      assert(didErr);
+      expect(didErr).toBeTruthy();
     });
   });
 });

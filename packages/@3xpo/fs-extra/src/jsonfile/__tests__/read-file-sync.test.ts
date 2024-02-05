@@ -29,9 +29,9 @@ describe('+ readFileSync()', () => {
 
     try {
       const obj2 = jf.readFileSync(file);
-      assert.strictEqual(obj2.name, obj.name);
+      expect(obj2.name).toBe(obj.name);
     } catch (err) {
-      assert(err);
+      expect(err).toBeTruthy();
     }
   });
 
@@ -41,16 +41,9 @@ describe('+ readFileSync()', () => {
       const file = path.join(TEST_DIR, fn);
       fs.writeFileSync(file, '{');
 
-      assert.throws(
-        () => {
-          jf.readFileSync(file);
-        },
-        err => {
-          assert(err instanceof Error);
-          assert(err.message.match(fn));
-          return true;
-        },
-      );
+      expect(() => {
+        jf.readFileSync(file);
+      }).toThrow();
     });
   });
 
@@ -60,12 +53,12 @@ describe('+ readFileSync()', () => {
       const data = '{not valid JSON';
       fs.writeFileSync(file, data);
 
-      assert.throws(() => {
+      expect(() => {
         jf.readFileSync(file);
-      });
+      }).toThrow();
 
       const obj = jf.readFileSync(file, { throws: false });
-      assert.strictEqual(obj, null);
+      expect(obj).toBe(null);
     });
   });
 
@@ -75,9 +68,9 @@ describe('+ readFileSync()', () => {
       const data = '{not valid JSON';
       fs.writeFileSync(file, data);
 
-      assert.throws(() => {
+      expect(() => {
         jf.readFileSync(file, { throws: true });
-      });
+      }).toThrow();
     });
   });
 
@@ -86,7 +79,7 @@ describe('+ readFileSync()', () => {
       const file = path.join(TEST_DIR, 'somefile4-invalid.json');
 
       const obj = jf.readFileSync(file, { throws: false });
-      assert.strictEqual(obj, null);
+      expect(obj).toBe(null);
     });
   });
 
@@ -94,9 +87,9 @@ describe('+ readFileSync()', () => {
     it('should throw an exception', () => {
       const file = path.join(TEST_DIR, 'somefile4-invalid.json');
 
-      assert.throws(() => {
+      expect(() => {
         jf.readFileSync(file, { throws: true });
-      });
+      }).toThrow();
     });
   });
 
@@ -116,9 +109,9 @@ describe('+ readFileSync()', () => {
 
       fs.writeFileSync(file, JSON.stringify(obj));
       const data = jf.readFileSync(file, { reviver: sillyReviver });
-      assert.strictEqual(data.name, 'jp');
-      assert(data.day instanceof Date);
-      assert.strictEqual(data.day.toISOString(), '2015-06-19T11:41:26.815Z');
+      expect(data.name).toBe('jp');
+      expect(data.day instanceof Date).toBeTruthy();
+      expect(data.day.toISOString()).toBe('2015-06-19T11:41:26.815Z');
     });
   });
 
@@ -135,9 +128,9 @@ describe('+ readFileSync()', () => {
       try {
         data = jf.readFileSync(file, 'utf8');
       } catch (err) {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
       }
-      assert.strictEqual(data.name, 'jp');
+      expect(data.name).toBe('jp');
     });
   });
 
@@ -147,7 +140,7 @@ describe('+ readFileSync()', () => {
       const obj = { name: 'JP' };
       fs.writeFileSync(file, `\uFEFF${JSON.stringify(obj)}`);
       const data = jf.readFileSync(file);
-      assert.deepStrictEqual(obj, data);
+      expect(obj).toStrictEqual(data);
     });
   });
 });

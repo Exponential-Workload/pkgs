@@ -110,9 +110,9 @@ describe('fse-ensure-link', () => {
         const dstContent = fs.readFileSync(dstpath, 'utf8');
         const dstDirContents = fs.readdirSync(dstDir);
 
-        assert.strictEqual(isSymlink, true);
-        assert.strictEqual(srcContent, dstContent);
-        assert(dstDirContents.indexOf(dstBasename) >= 0);
+        expect(isSymlink).toBe(true);
+        expect(srcContent).toBe(dstContent);
+        expect(dstDirContents.indexOf(dstBasename) >= 0).toBeTruthy();
         return;
       };
       return fn(...args).then(callback);
@@ -151,9 +151,9 @@ describe('fse-ensure-link', () => {
       const isSymlink = fs.lstatSync(dstpath).isFile();
       const dstContent = fs.readFileSync(dstpath, 'utf8');
       const dstDirContents = fs.readdirSync(dstDir);
-      assert.strictEqual(isSymlink, true);
-      assert.strictEqual(srcContent, dstContent);
-      assert(dstDirContents.indexOf(dstBasename) >= 0);
+      expect(isSymlink).toBe(true);
+      expect(srcContent).toBe(dstContent);
+      expect(dstDirContents.indexOf(dstBasename) >= 0).toBeTruthy();
     });
   }
 
@@ -172,7 +172,7 @@ describe('fse-ensure-link', () => {
       }
       expect(err).toBeTruthy();
       const dstdirExistsAfter = fs.existsSync(path.dirname(dstpath));
-      assert.strictEqual(dstdirExistsBefore, dstdirExistsAfter);
+      expect(dstdirExistsBefore).toBe(dstdirExistsAfter);
     });
   }
 
@@ -216,9 +216,9 @@ describe('fse-ensure-link', () => {
             const dstContent = fs.readFileSync(dstpath, 'utf8');
             const dstDirContents = fs.readdirSync(dstDir);
 
-            assert.strictEqual(isSymlink, true);
-            assert.strictEqual(srcContent, dstContent);
-            assert(dstDirContents.indexOf(dstBasename) >= 0);
+            expect(isSymlink).toBe(true);
+            expect(srcContent).toBe(dstContent);
+            expect(dstDirContents.indexOf(dstBasename) >= 0).toBeTruthy();
           });
         });
       });

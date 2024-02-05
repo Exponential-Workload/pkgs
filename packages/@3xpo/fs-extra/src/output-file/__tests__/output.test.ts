@@ -26,10 +26,10 @@ describe('output', () => {
           Math.random() + 't-ne',
           Math.random() + '.txt',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         await fse.outputFile(file, 'hi jp');
-        assert(fs.existsSync(file));
-        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hi jp');
+        expect(fs.existsSync(file)).toBeTruthy();
+        expect(fs.readFileSync(file, 'utf8')).toBe('hi jp');
       });
       it('should support promises', () => {
         const file = path.join(
@@ -37,7 +37,7 @@ describe('output', () => {
           Math.random() + 't-ne',
           Math.random() + '.txt',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         return fse.outputFile(file, 'hi jp');
       });
     });
@@ -52,7 +52,7 @@ describe('output', () => {
         fse.mkdirsSync(path.dirname(file));
         fs.writeFileSync(file, 'hello world');
         await fse.outputFile(file, 'hello jp');
-        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello jp');
+        expect(fs.readFileSync(file, 'utf8')).toBe('hello jp');
       });
     });
   });
@@ -65,10 +65,10 @@ describe('output', () => {
           Math.random() + 'ts-ne',
           Math.random() + '.txt',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         fse.outputFileSync(file, 'hello man');
-        assert(fs.existsSync(file));
-        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello man');
+        expect(fs.existsSync(file)).toBeTruthy();
+        expect(fs.readFileSync(file, 'utf8')).toBe('hello man');
       });
     });
 
@@ -82,7 +82,7 @@ describe('output', () => {
         fse.mkdirsSync(path.dirname(file));
         fs.writeFileSync(file, 'hello world');
         fse.outputFileSync(file, 'hello man');
-        assert.strictEqual(fs.readFileSync(file, 'utf8'), 'hello man');
+        expect(fs.readFileSync(file, 'utf8')).toBe('hello man');
       });
     });
   });

@@ -29,9 +29,9 @@ describe('+ writeFileSync()', () => {
 
     const data = fs.readFileSync(file, 'utf8');
     const obj2 = JSON.parse(data);
-    assert.strictEqual(obj2.name, obj.name);
-    assert.strictEqual(data[data.length - 1], '\n');
-    assert.strictEqual(data, '{"name":"JP"}\n');
+    expect(obj2.name).toBe(obj.name);
+    expect(data[data.length - 1]).toBe('\n');
+    expect(data).toBe('{"name":"JP"}\n');
   });
 
   describe('> when JSON replacer is set', () => {
@@ -49,9 +49,9 @@ describe('+ writeFileSync()', () => {
 
       jf.writeFileSync(file, obj, { replacer: sillyReplacer });
       const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
-      assert.strictEqual(data.name, 'jp');
-      assert.strictEqual(typeof data.reg, 'string');
-      assert.strictEqual(data.reg, 'regex:/hello/g');
+      expect(data.name).toBe('jp');
+      expect(typeof data.reg).toBe('string');
+      expect(data.reg).toBe('regex:/hello/g');
     });
   });
 
@@ -61,7 +61,7 @@ describe('+ writeFileSync()', () => {
       const obj = { name: 'JP' };
       jf.writeFileSync(file, obj, { spaces: 8 });
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(data, `${JSON.stringify(obj, null, 8)}\n`);
+      expect(data).toBe(`${JSON.stringify(obj, null, 8)}\n`);
     });
 
     it('should use EOL override', () => {
@@ -69,7 +69,7 @@ describe('+ writeFileSync()', () => {
       const obj = { name: 'JP' };
       jf.writeFileSync(file, obj, { spaces: 2, EOL: '***' });
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(data, '{***  "name": "JP"***}***');
+      expect(data).toBe('{***  "name": "JP"***}***');
     });
   });
 
@@ -79,7 +79,7 @@ describe('+ writeFileSync()', () => {
       const obj = { name: 'jp' };
       jf.writeFileSync(file, obj, 'utf8');
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(data, `${JSON.stringify(obj)}\n`);
+      expect(data).toBe(`${JSON.stringify(obj)}\n`);
     });
   });
   describe('> when EOF option is set to a falsey value', () => {
@@ -100,8 +100,8 @@ describe('+ writeFileSync()', () => {
       jf.writeFileSync(file, obj, { finalEOL: false });
       const rawData = fs.readFileSync(file, 'utf8');
       const data = JSON.parse(rawData);
-      assert.strictEqual(rawData[rawData.length - 1], '}');
-      assert.strictEqual(data.name, obj.name);
+      expect(rawData[rawData.length - 1]).toBe('}');
+      expect(data.name).toBe(obj.name);
       done();
     });
 
@@ -111,8 +111,8 @@ describe('+ writeFileSync()', () => {
       jf.writeFileSync(file, obj, { finalEOL: true });
       const rawData = fs.readFileSync(file, 'utf8');
       const data = JSON.parse(rawData);
-      assert.strictEqual(rawData[rawData.length - 1], '\n');
-      assert.strictEqual(data.name, obj.name);
+      expect(rawData[rawData.length - 1]).toBe('\n');
+      expect(data.name).toBe(obj.name);
       done();
     });
   });

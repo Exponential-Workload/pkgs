@@ -28,17 +28,17 @@ describe('+ writeFile()', () => {
     jf.writeFile(file, obj)
       .then(() => {
         fs.readFile(file, 'utf8', (err, data) => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           const obj2 = JSON.parse(data);
-          assert.strictEqual(obj2.name, obj.name);
+          expect(obj2.name).toBe(obj.name);
 
           // verify EOL
-          assert.strictEqual(data[data.length - 1], '\n');
+          expect(data[data.length - 1]).toBe('\n');
           done();
         });
       })
       .catch(err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
       });
   });
 
@@ -49,17 +49,17 @@ describe('+ writeFile()', () => {
     jf.writeFile(file, obj)
       .then(res => {
         fs.readFile(file, 'utf8', (err, data) => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           const obj2 = JSON.parse(data);
-          assert.strictEqual(obj2.name, obj.name);
+          expect(obj2.name).toBe(obj.name);
 
           // verify EOL
-          assert.strictEqual(data[data.length - 1], '\n');
+          expect(data[data.length - 1]).toBe('\n');
           done();
         });
       })
       .catch(err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
         done();
       });
   });
@@ -82,12 +82,12 @@ describe('+ writeFile()', () => {
 
     it('should replace JSON', done => {
       jf.writeFile(file, obj, { replacer: sillyReplacer }, err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
 
         const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        assert.strictEqual(data.name, 'jp');
-        assert.strictEqual(typeof data.reg, 'string');
-        assert.strictEqual(data.reg, 'regex:/hello/g');
+        expect(data.name).toBe('jp');
+        expect(typeof data.reg).toBe('string');
+        expect(data.reg).toBe('regex:/hello/g');
         done();
       });
     });
@@ -96,13 +96,13 @@ describe('+ writeFile()', () => {
       jf.writeFile(file, obj, { replacer: sillyReplacer })
         .then(res => {
           const data = JSON.parse(fs.readFileSync(file, 'utf-8'));
-          assert.strictEqual(data.name, 'jp');
-          assert.strictEqual(typeof data.reg, 'string');
-          assert.strictEqual(data.reg, 'regex:/hello/g');
+          expect(data.name).toBe('jp');
+          expect(typeof data.reg).toBe('string');
+          expect(data.reg).toBe('regex:/hello/g');
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -117,9 +117,9 @@ describe('+ writeFile()', () => {
 
     it('should write file with spaces', done => {
       jf.writeFile(file, obj, { spaces: 8 }, err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
         const data = fs.readFileSync(file, 'utf8');
-        assert.strictEqual(data, `${JSON.stringify(obj, null, 8)}\n`);
+        expect(data).toBe(`${JSON.stringify(obj, null, 8)}\n`);
         done();
       });
     });
@@ -128,11 +128,11 @@ describe('+ writeFile()', () => {
       jf.writeFile(file, obj, { spaces: 8 })
         .then(res => {
           const data = fs.readFileSync(file, 'utf8');
-          assert.strictEqual(data, `${JSON.stringify(obj, null, 8)}\n`);
+          expect(data).toBe(`${JSON.stringify(obj, null, 8)}\n`);
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -147,9 +147,9 @@ describe('+ writeFile()', () => {
 
     it('should use EOL override', done => {
       jf.writeFile(file, obj, { spaces: 2, EOL: '***' }, err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
         const data = fs.readFileSync(file, 'utf8');
-        assert.strictEqual(data, '{***  "name": "jp"***}***');
+        expect(data).toBe('{***  "name": "jp"***}***');
         done();
       });
     });
@@ -158,11 +158,11 @@ describe('+ writeFile()', () => {
       jf.writeFile(file, obj, { spaces: 2, EOL: '***' })
         .then(res => {
           const data = fs.readFileSync(file, 'utf8');
-          assert.strictEqual(data, '{***  "name": "jp"***}***');
+          expect(data).toBe('{***  "name": "jp"***}***');
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -179,7 +179,7 @@ describe('+ writeFile()', () => {
         encoding: 'utf-8',
       });
       const data = fs.readFileSync(file, 'utf8');
-      assert.strictEqual(data, `${JSON.stringify(obj)}\n`);
+      expect(data).toBe(`${JSON.stringify(obj)}\n`);
     });
 
     it('should not error, resolve the promise', done => {
@@ -188,11 +188,11 @@ describe('+ writeFile()', () => {
       })
         .then(res => {
           const data = fs.readFileSync(file, 'utf8');
-          assert.strictEqual(data, `${JSON.stringify(obj)}\n`);
+          expect(data).toBe(`${JSON.stringify(obj)}\n`);
           done();
         })
         .catch(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
           done();
         });
     });
@@ -214,11 +214,11 @@ describe('+ writeFile()', () => {
       const file = path.join(TEST_DIR, 'somefile2.json');
       const obj = { name: 'jp' };
       jf.writeFile(file, obj, { finalEOL: false }, err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
         fs.readFile(file, 'utf8', (_, rawData) => {
           const data = JSON.parse(rawData);
-          assert.strictEqual(rawData[rawData.length - 1], '}');
-          assert.strictEqual(data.name, obj.name);
+          expect(rawData[rawData.length - 1]).toBe('}');
+          expect(data.name).toBe(obj.name);
           done();
         });
       });
@@ -228,11 +228,11 @@ describe('+ writeFile()', () => {
       const file = path.join(TEST_DIR, 'somefile2.json');
       const obj = { name: 'jp' };
       jf.writeFile(file, obj, { finalEOL: true }, err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
         fs.readFile(file, 'utf8', (_, rawData) => {
           const data = JSON.parse(rawData);
-          assert.strictEqual(rawData[rawData.length - 1], '\n');
-          assert.strictEqual(data.name, obj.name);
+          expect(rawData[rawData.length - 1]).toBe('\n');
+          expect(data.name).toBe(obj.name);
           done();
         });
       });
@@ -252,8 +252,8 @@ describe('+ writeFile()', () => {
           .writeFile(file, obj1)
           .then(() => false)
           .catch(err => {
-            assert(err);
-            assert(!fs.existsSync(file));
+            expect(err).toBeTruthy();
+            expect(!fs.existsSync(file)).toBeTruthy();
             return true;
           }),
       ).toEqual(true);

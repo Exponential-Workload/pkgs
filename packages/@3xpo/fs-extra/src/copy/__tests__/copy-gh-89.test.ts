@@ -51,10 +51,10 @@ describe('copy() - gh #89', () => {
           .then(err => {
             if (err) return done(err);
 
-            assert(fs.existsSync(path.join(C, 'one.txt')));
-            assert(fs.existsSync(path.join(C, 'two.txt')));
-            assert(fs.existsSync(path.join(C, 'three.txt')));
-            assert(fs.existsSync(path.join(C, 'four.txt')));
+            expect(fs.existsSync(path.join(C, 'one.txt'))).toBeTruthy();
+            expect(fs.existsSync(path.join(C, 'two.txt'))).toBeTruthy();
+            expect(fs.existsSync(path.join(C, 'three.txt'))).toBeTruthy();
+            expect(fs.existsSync(path.join(C, 'four.txt'))).toBeTruthy();
             done();
           });
       });

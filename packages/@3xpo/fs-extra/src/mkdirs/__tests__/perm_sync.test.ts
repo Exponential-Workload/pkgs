@@ -26,18 +26,18 @@ describe('mkdirp / perm_sync', () => {
 
     fse.mkdirpSync(file, 0o755);
     fse.pathExists(file, (err, ex) => {
-      assert.ifError(err);
-      assert.ok(ex, 'file created');
+      expect(err).toBeFalsy();
+      expect(ex).toBeTruthy();
       fs.stat(file, (err, stat) => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
 
         if (os.platform().indexOf('win') === 0) {
-          assert.strictEqual(stat.mode & 0o777, 0o666);
+          expect(stat.mode & 0o777).toBe(0o666);
         } else {
-          assert.strictEqual(stat.mode & 0o777, 0o755);
+          expect(stat.mode & 0o777).toBe(0o755);
         }
 
-        assert.ok(stat.isDirectory(), 'target not a directory');
+        expect(stat.isDirectory()).toBeTruthy();
         done();
       });
     });
@@ -47,11 +47,11 @@ describe('mkdirp / perm_sync', () => {
     const file = TEST_DIR;
     fse.mkdirpSync(file, 0o755);
     fse.pathExists(file, (err, ex) => {
-      assert.ifError(err);
-      assert.ok(ex, 'file created');
+      expect(err).toBeFalsy();
+      expect(ex).toBeTruthy();
       fs.stat(file, (err, stat) => {
-        assert.ifError(err);
-        assert.ok(stat.isDirectory(), 'target not a directory');
+        expect(err).toBeFalsy();
+        expect(stat.isDirectory()).toBeTruthy();
         done();
       });
     });

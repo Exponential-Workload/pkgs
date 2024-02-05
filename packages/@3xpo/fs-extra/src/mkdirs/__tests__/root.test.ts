@@ -22,7 +22,7 @@ describe('mkdirp / root', () => {
         if (err) return done(err);
         fs.stat(dir, (er, stat) => {
           if (er) return done(er);
-          assert.ok(stat.isDirectory(), 'target is a directory');
+          expect(stat.isDirectory()).toBeTruthy();
           done();
         });
       });

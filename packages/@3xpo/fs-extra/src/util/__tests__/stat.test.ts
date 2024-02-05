@@ -25,8 +25,8 @@ describe('util/stat', () => {
       fs.ensureFileSync(src);
       fs.ensureFileSync(dest);
       stat.checkPaths(src, dest, 'copy', {}, (err, stats) => {
-        assert.ifError(err);
-        assert.strictEqual(typeof stats?.srcStat.ino, 'bigint');
+        expect(err).toBeFalsy();
+        expect(typeof stats?.srcStat.ino).toBe('bigint');
       });
     });
 
@@ -36,7 +36,7 @@ describe('util/stat', () => {
       fs.ensureFileSync(src);
       fs.ensureFileSync(dest);
       const { srcStat } = stat.checkPathsSync(src, dest, 'copy', {});
-      assert.strictEqual(typeof srcStat.ino, 'bigint');
+      expect(typeof srcStat.ino).toBe('bigint');
     });
   });
 
@@ -51,7 +51,7 @@ describe('util/stat', () => {
         bigint: true,
       });
       stat.checkParentPaths(src, srcStat, dest, 'copy', err => {
-        assert.ifError(err);
+        expect(err).toBeFalsy();
       });
     });
 

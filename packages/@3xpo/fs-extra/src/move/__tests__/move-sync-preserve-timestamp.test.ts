@@ -79,16 +79,8 @@ describeIfPractical('moveSync() - across different devices', () => {
       const currentPath = path.join(DEST, file);
       const currentStats = fs.statSync(currentPath);
       // Windows sub-second precision fixed: https://github.com/nodejs/io.js/issues/2069
-      assert.strictEqual(
-        currentStats.mtime.getTime(),
-        originalTimestamp.mtime,
-        'different mtime values',
-      );
-      assert.strictEqual(
-        currentStats.atime.getTime(),
-        originalTimestamp.atime,
-        'different atime values',
-      );
+      expect(currentStats.mtime.getTime()).toBe(originalTimestamp.mtime);
+      expect(currentStats.atime.getTime()).toBe(originalTimestamp.atime);
     };
   }
 });

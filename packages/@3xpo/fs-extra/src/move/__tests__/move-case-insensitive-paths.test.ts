@@ -32,12 +32,9 @@ describe('+ move() - case insensitive paths', () => {
       fs.move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(dest));
-          assert.strictEqual(
-            fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-            'some data',
-          );
+          expect(err).toBeFalsy();
+          expect(fs.existsSync(dest)).toBeTruthy();
+          expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
           done();
         });
     });
@@ -52,9 +49,9 @@ describe('+ move() - case insensitive paths', () => {
       fs.move(src, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(dest));
-          assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+          expect(err).toBeFalsy();
+          expect(fs.existsSync(dest)).toBeTruthy();
+          expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
           done();
         });
     });
@@ -71,14 +68,11 @@ describe('+ move() - case insensitive paths', () => {
       fs.move(srcLink, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(dest));
-          assert.strictEqual(
-            fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-            'some data',
-          );
+          expect(err).toBeFalsy();
+          expect(fs.existsSync(dest)).toBeTruthy();
+          expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
           const destLink = fs.readlinkSync(dest);
-          assert.strictEqual(destLink, src);
+          expect(destLink).toBe(src);
           done();
         });
     });
@@ -93,11 +87,11 @@ describe('+ move() - case insensitive paths', () => {
       fs.move(srcLink, dest)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
-          assert(fs.existsSync(dest));
-          assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+          expect(err).toBeFalsy();
+          expect(fs.existsSync(dest)).toBeTruthy();
+          expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
           const destLink = fs.readlinkSync(dest);
-          assert.strictEqual(destLink, src);
+          expect(destLink).toBe(src);
           done();
         });
     });

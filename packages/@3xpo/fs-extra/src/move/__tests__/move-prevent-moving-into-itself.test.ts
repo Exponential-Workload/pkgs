@@ -51,11 +51,11 @@ describe('+ move() - prevent moving into itself', () => {
       fs.move(srcFile, destFile)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
-          assert(fs.existsSync(destFile));
+          expect(fs.existsSync(destFile)).toBeTruthy();
           const out = fs.readFileSync(destFile, 'utf8');
-          assert.strictEqual(out, dat0, 'file contents matched');
+          expect(out).toBe(dat0);
           done();
         });
     });
@@ -206,27 +206,20 @@ describe('+ move() - prevent moving into itself', () => {
         fs.symlinkSync(src, destLink, 'dir');
 
         const srclenBefore = klawSync(src).length;
-        assert(srclenBefore > 2);
+        expect(srclenBefore > 2).toBeTruthy();
 
         const dest = path.join(destLink, 'dir1');
-        assert(fs.existsSync(dest));
+        expect(fs.existsSync(dest)).toBeTruthy();
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
-            );
+            expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
 
             const srclenAfter = klawSync(src).length;
-            assert.strictEqual(
-              srclenAfter,
-              srclenBefore,
-              'src length should not change',
-            );
+            expect(srclenAfter).toBe(srclenBefore);
 
             const link = fs.readlinkSync(destLink);
-            assert.strictEqual(link, src);
+            expect(link).toBe(src);
             done();
           });
       });
@@ -236,27 +229,22 @@ describe('+ move() - prevent moving into itself', () => {
         fs.symlinkSync(src, destLink, 'dir');
 
         const srclenBefore = klawSync(src).length;
-        assert(srclenBefore > 2);
+        expect(srclenBefore > 2).toBeTruthy();
 
         const dest = path.join(destLink, 'dir1', 'dir2');
-        assert(fs.existsSync(dest));
+        expect(fs.existsSync(dest)).toBeTruthy();
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`,
+            expect(err.message).toBe(
+              `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`
             );
 
             const srclenAfter = klawSync(src).length;
-            assert.strictEqual(
-              srclenAfter,
-              srclenBefore,
-              'src length should not change',
-            );
+            expect(srclenAfter).toBe(srclenBefore);
 
             const link = fs.readlinkSync(destLink);
-            assert.strictEqual(link, src);
+            expect(link).toBe(src);
             done();
           });
       });
@@ -274,10 +262,10 @@ describe('+ move() - prevent moving into itself', () => {
         fs.move(srcLink, dest)
           .catch(err => err)
           .then(err => {
-            assert(err);
+            expect(err).toBeTruthy();
             // assert source not affected
             const link = fs.readlinkSync(srcLink);
-            assert.strictEqual(link, src);
+            expect(link).toBe(src);
             done();
           });
       });
@@ -292,9 +280,9 @@ describe('+ move() - prevent moving into itself', () => {
         fs.move(srcLink, dest)
           .catch(err => err)
           .then(err => {
-            assert(err);
+            expect(err).toBeTruthy();
             const link = fs.readlinkSync(srcLink);
-            assert.strictEqual(link, src);
+            expect(link).toBe(src);
             done();
           });
       });
@@ -312,7 +300,7 @@ describe('+ move() - prevent moving into itself', () => {
         fs.move(srcLink, dest)
           .catch(err => err)
           .then(err => {
-            assert(err);
+            expect(err).toBeTruthy();
             done();
           });
       });
@@ -324,7 +312,7 @@ describe('+ move() - prevent moving into itself', () => {
         const dest = path.join(TEST_DIR, 'src_src', 'dest');
         testSuccessDir(srcLink, dest, () => {
           const link = fs.readlinkSync(dest);
-          assert.strictEqual(link, src);
+          expect(link).toBe(src);
           done();
         });
       });
@@ -336,7 +324,7 @@ describe('+ move() - prevent moving into itself', () => {
         const dest = path.join(TEST_DIR, 'srcsrc', 'dest');
         testSuccessDir(srcLink, dest, () => {
           const link = fs.readlinkSync(dest);
-          assert.strictEqual(link, src);
+          expect(link).toBe(src);
           done();
         });
       });
@@ -351,34 +339,23 @@ describe('+ move() - prevent moving into itself', () => {
 
         const srclenBefore = klawSync(srcLink).length;
         const destlenBefore = klawSync(destLink).length;
-        assert(srclenBefore > 2);
-        assert(destlenBefore > 2);
+        expect(srclenBefore > 2).toBeTruthy();
+        expect(destlenBefore > 2).toBeTruthy();
 
         fs.move(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
+            expect(err.message).toBe('Source and destination must not be the same.');
 
             const srclenAfter = klawSync(srcLink).length;
-            assert.strictEqual(
-              srclenAfter,
-              srclenBefore,
-              'src length should not change',
-            );
+            expect(srclenAfter).toBe(srclenBefore);
             const destlenAfter = klawSync(destLink).length;
-            assert.strictEqual(
-              destlenAfter,
-              destlenBefore,
-              'dest length should not change',
-            );
+            expect(destlenAfter).toBe(destlenBefore);
 
             const srcln = fs.readlinkSync(srcLink);
-            assert.strictEqual(srcln, src);
+            expect(srcln).toBe(src);
             const destln = fs.readlinkSync(destLink);
-            assert.strictEqual(destln, src);
+            expect(destln).toBe(src);
             done();
           });
       });
@@ -392,10 +369,10 @@ function testSuccessFile(src, destFile, done) {
   fs.move(srcFile, destFile)
     .catch(err => err)
     .then(err => {
-      assert.ifError(err);
+      expect(err).toBeFalsy();
       const f0 = fs.readFileSync(destFile, 'utf8');
-      assert.strictEqual(f0, dat0, 'file contents matched');
-      assert(!fs.existsSync(srcFile));
+      expect(f0).toBe(dat0);
+      expect(!fs.existsSync(srcFile)).toBeTruthy();
       return done();
     });
 }
@@ -403,30 +380,26 @@ function testSuccessFile(src, destFile, done) {
 function testSuccessDir(src, dest, done) {
   const srclen = klawSync(src).length;
 
-  assert(srclen > 2); // assert src has contents
+  expect(srclen > 2).toBeTruthy(); // assert src has contents
 
   fs.move(src, dest)
     .catch(err => err)
     .then(err => {
-      assert.ifError(err);
+      expect(err).toBeFalsy();
       const destlen = klawSync(dest).length;
 
-      assert.strictEqual(
-        destlen,
-        srclen,
-        'src and dest length should be equal',
-      );
+      expect(destlen).toBe(srclen);
 
       const f0 = fs.readFileSync(path.join(dest, FILES[0]), 'utf8');
       const f1 = fs.readFileSync(path.join(dest, FILES[1]), 'utf8');
       const f2 = fs.readFileSync(path.join(dest, FILES[2]), 'utf8');
       const f3 = fs.readFileSync(path.join(dest, FILES[3]), 'utf8');
 
-      assert.strictEqual(f0, dat0, 'file contents matched');
-      assert.strictEqual(f1, dat1, 'file contents matched');
-      assert.strictEqual(f2, dat2, 'file contents matched');
-      assert.strictEqual(f3, dat3, 'file contents matched');
-      assert(!fs.existsSync(src));
+      expect(f0).toBe(dat0);
+      expect(f1).toBe(dat1);
+      expect(f2).toBe(dat2);
+      expect(f3).toBe(dat3);
+      expect(!fs.existsSync(src)).toBeTruthy();
       return done();
     });
 }
@@ -435,13 +408,10 @@ function testError(src, dest, done) {
   fs.move(src, dest)
     .catch(err => err)
     .then(err => {
-      assert(err);
-      assert.strictEqual(
-        err.message,
-        `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
-      );
-      assert(fs.existsSync(src));
-      assert(!fs.existsSync(dest));
+      expect(err).toBeTruthy();
+      expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
+      expect(fs.existsSync(src)).toBeTruthy();
+      expect(!fs.existsSync(dest)).toBeTruthy();
       return done();
     });
 }

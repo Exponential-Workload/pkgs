@@ -40,25 +40,22 @@ describe('moveSync()', () => {
     try {
       fse.moveSync(src, dest);
     } catch (err) {
-      assert.strictEqual(
-        err.message,
-        'Source and destination must not be the same.',
-      );
+      expect(err.message).toBe('Source and destination must not be the same.');
       errThrown = true;
     } finally {
-      assert(errThrown);
+      expect(errThrown).toBeTruthy();
     }
 
     // assert src not affected
     const contents = fs.readFileSync(src, 'utf8');
     const expected = /^sonic the hedgehog\r?\n$/;
-    assert(contents.match(expected));
+    expect(contents.match(expected)).toBeTruthy();
   });
 
   it('should error if src and dest are the same and src does not exist', () => {
     const src = `${TEST_DIR}/non-existent`;
     const dest = src;
-    assert.throws(() => fse.moveSync(src, dest));
+    expect(() => fse.moveSync(src, dest)).toThrow();
   });
 
   it('should rename a file on the same device', () => {
@@ -69,7 +66,7 @@ describe('moveSync()', () => {
 
     const contents = fs.readFileSync(dest, 'utf8');
     const expected = /^sonic the hedgehog\r?\n$/;
-    assert(contents.match(expected));
+    expect(contents.match(expected)).toBeTruthy();
   });
 
   it('should not overwrite the destination by default', () => {
@@ -77,12 +74,12 @@ describe('moveSync()', () => {
     const dest = `${TEST_DIR}/a-folder/another-file`;
 
     // verify file exists already
-    assert(fs.existsSync(dest));
+    expect(fs.existsSync(dest)).toBeTruthy();
 
     try {
       fse.moveSync(src, dest);
     } catch (err) {
-      assert.strictEqual(err.message, 'dest already exists.');
+      expect(err.message).toBe('dest already exists.');
     }
   });
 
@@ -91,12 +88,12 @@ describe('moveSync()', () => {
     const dest = `${TEST_DIR}/a-folder/another-file`;
 
     // verify file exists already
-    assert(fs.existsSync(dest));
+    expect(fs.existsSync(dest)).toBeTruthy();
 
     try {
       fse.moveSync(src, dest, { overwrite: false });
     } catch (err) {
-      assert.strictEqual(err.message, 'dest already exists.');
+      expect(err.message).toBe('dest already exists.');
     }
   });
 
@@ -105,13 +102,13 @@ describe('moveSync()', () => {
     const dest = `${TEST_DIR}/a-folder/another-file`;
 
     // verify file exists already
-    assert(fs.existsSync(dest));
+    expect(fs.existsSync(dest)).toBeTruthy();
 
     fse.moveSync(src, dest, { overwrite: true });
 
     const contents = fs.readFileSync(dest, 'utf8');
     const expected = /^sonic the hedgehog\r?\n$/;
-    assert.ok(contents.match(expected));
+    expect(contents.match(expected)).toBeTruthy();
   });
 
   it('should overwrite the destination directory if overwrite = true', () => {
@@ -125,19 +122,19 @@ describe('moveSync()', () => {
 
     // verify dest has stuff in it
     const pathsBefore = fs.readdirSync(dest);
-    assert(pathsBefore.indexOf('another-file') >= 0);
-    assert(pathsBefore.indexOf('another-folder') >= 0);
+    expect(pathsBefore.indexOf('another-file') >= 0).toBeTruthy();
+    expect(pathsBefore.indexOf('another-folder') >= 0).toBeTruthy();
 
     fse.moveSync(src, dest, { overwrite: true });
 
     // verify dest does not have old stuff
     const pathsAfter = fs.readdirSync(dest);
-    assert.strictEqual(pathsAfter.indexOf('another-file'), -1);
-    assert.strictEqual(pathsAfter.indexOf('another-folder'), -1);
+    expect(pathsAfter.indexOf('another-file')).toBe(-1);
+    expect(pathsAfter.indexOf('another-folder')).toBe(-1);
 
     // verify dest has new stuff
-    assert(pathsAfter.indexOf('some-file') >= 0);
-    assert(pathsAfter.indexOf('some-folder') >= 0);
+    expect(pathsAfter.indexOf('some-file') >= 0).toBeTruthy();
+    expect(pathsAfter.indexOf('some-folder') >= 0).toBeTruthy();
   });
 
   it('should create directory structure by default', () => {
@@ -145,13 +142,13 @@ describe('moveSync()', () => {
     const dest = `${TEST_DIR}/does/not/exist/a-file-dest`;
 
     // verify dest directory does not exist
-    assert(!fs.existsSync(path.dirname(dest)));
+    expect(!fs.existsSync(path.dirname(dest))).toBeTruthy();
 
     fse.moveSync(src, dest);
 
     const contents = fs.readFileSync(dest, 'utf8');
     const expected = /^sonic the hedgehog\r?\n$/;
-    assert(contents.match(expected));
+    expect(contents.match(expected)).toBeTruthy();
   });
 
   it('should move folders', () => {
@@ -159,13 +156,13 @@ describe('moveSync()', () => {
     const dest = `${TEST_DIR}/a-folder-dest`;
 
     // verify it doesn't exist
-    assert(!fs.existsSync(dest));
+    expect(!fs.existsSync(dest)).toBeTruthy();
 
     fse.moveSync(src, dest);
 
     const contents = fs.readFileSync(dest + '/another-file', 'utf8');
     const expected = /^tails\r?\n$/;
-    assert(contents.match(expected));
+    expect(contents.match(expected)).toBeTruthy();
   });
 
   describe('clobber', () => {
@@ -174,13 +171,13 @@ describe('moveSync()', () => {
       const dest = `${TEST_DIR}/a-folder/another-file`;
 
       // verify file exists already
-      assert(fs.existsSync(dest));
+      expect(fs.existsSync(dest)).toBeTruthy();
 
       fse.moveSync(src, dest, { clobber: true });
 
       const contents = fs.readFileSync(dest, 'utf8');
       const expected = /^sonic the hedgehog\r?\n$/;
-      assert(contents.match(expected));
+      expect(contents.match(expected)).toBeTruthy();
     });
   });
 
@@ -189,16 +186,16 @@ describe('moveSync()', () => {
       const SRC_DIR = path.join(TEST_DIR, 'src');
       const DEST_DIR = path.join(TEST_DIR, 'src', 'dest');
 
-      assert(!fs.existsSync(SRC_DIR));
+      expect(!fs.existsSync(SRC_DIR)).toBeTruthy();
       fs.mkdirSync(SRC_DIR);
-      assert(fs.existsSync(SRC_DIR));
+      expect(fs.existsSync(SRC_DIR)).toBeTruthy();
 
       try {
         fse.moveSync(SRC_DIR, DEST_DIR);
       } catch (err) {
-        assert(err.message, `Cannot move ${SRC_DIR} into itself ${DEST_DIR}.`);
-        assert(fs.existsSync(SRC_DIR));
-        assert(!fs.existsSync(DEST_DIR));
+        expect(err.message).toBeTruthy();
+        expect(fs.existsSync(SRC_DIR)).toBeTruthy();
+        expect(!fs.existsSync(DEST_DIR)).toBeTruthy();
       }
     });
   });
@@ -212,7 +209,7 @@ describe('moveSync()', () => {
 
       const contents = fs.readFileSync(dest, 'utf8');
       const expected = /^sonic the hedgehog\r?\n$/;
-      assert(contents.match(expected));
+      expect(contents.match(expected)).toBeTruthy();
     });
   });
 
@@ -229,7 +226,7 @@ describe('moveSync()', () => {
 
       const contents = fs.readFileSync(dest, 'utf8');
       const expected = /^sonic the hedgehog\r?\n$/;
-      assert(contents.match(expected));
+      expect(contents.match(expected)).toBeTruthy();
     });
   });
 
@@ -245,13 +242,13 @@ describe('moveSync()', () => {
           const dest = path.join(TEST_DIR, 'device-weird');
 
           if (!fs.existsSync(src)) fse.mkdirpSync(src);
-          assert(!fs.existsSync(dest));
-          assert(fs.lstatSync(src).isDirectory());
+          expect(!fs.existsSync(dest)).toBeTruthy();
+          expect(fs.lstatSync(src).isDirectory()).toBeTruthy();
 
           fse.moveSync(src, dest);
 
-          assert(fs.existsSync(dest));
-          assert(fs.lstatSync(dest).isDirectory());
+          expect(fs.existsSync(dest)).toBeTruthy();
+          expect(fs.lstatSync(dest).isDirectory()).toBeTruthy();
         });
       });
     },

@@ -1,18 +1,27 @@
 'use strict';
 /* eslint-env mocha */
-import assert from 'assert';
 import path from 'path';
 import crypto from 'crypto';
 import * as os from 'os';
 import fs from '../../index';
-import { PathLike } from 'fs';
+
+const arrayBufferViewToUInt8Array = (buffers: ArrayBufferView[]) =>
+  buffers.map(view =>
+    view instanceof Uint8Array
+      ? view
+      : new Uint8Array(
+          view.buffer,
+          view.byteOffset,
+          view.byteLength / Uint8Array.BYTES_PER_ELEMENT,
+        ),
+  );
 
 const SIZE = 1000;
 
 describe('fs.read()', () => {
-  let TEST_FILE;
-  let TEST_DATA;
-  let TEST_FD;
+  let TEST_FILE: string;
+  let TEST_DATA: Buffer;
+  let TEST_FD: number;
 
   beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'read-test-file');
@@ -31,16 +40,16 @@ describe('fs.read()', () => {
       const results = await fs.read(TEST_FD, Buffer.alloc(SIZE), 0, SIZE, 0);
       const bytesRead = results.bytesRead;
       const buffer = results.buffer;
-      assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-      assert(buffer.equals(TEST_DATA), 'data is correct');
+      expect(bytesRead).toBe(SIZE);
+      expect(buffer.equals(TEST_DATA)).toBeTruthy();
     });
 
     it('returns an object when position is not set', async () => {
       const results = await fs.read(TEST_FD, Buffer.alloc(SIZE), 0, SIZE);
       const bytesRead = results.bytesRead;
       const buffer = results.buffer;
-      assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-      assert(buffer.equals(TEST_DATA), 'data is correct');
+      expect(bytesRead).toBe(SIZE);
+      expect(buffer.equals(TEST_DATA)).toBeTruthy();
     });
   });
 
@@ -53,9 +62,9 @@ describe('fs.read()', () => {
         SIZE,
         0,
         (err, bytesRead, buffer) => {
-          assert.ifError(err);
-          assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-          assert(buffer.equals(TEST_DATA), 'data is correct');
+          expect(err).toBeFalsy();
+          expect(bytesRead).toBe(SIZE);
+          expect(buffer.equals(TEST_DATA)).toBeTruthy();
           done();
         },
       );
@@ -69,9 +78,9 @@ describe('fs.read()', () => {
         SIZE,
         null,
         (err, bytesRead, buffer) => {
-          assert.ifError(err);
-          assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-          assert(buffer.equals(TEST_DATA), 'data is correct');
+          expect(err).toBeFalsy();
+          expect(bytesRead).toBe(SIZE);
+          expect(buffer.equals(TEST_DATA)).toBeTruthy();
           done();
         },
       );
@@ -99,9 +108,9 @@ describe('fs.write()', () => {
   describe('with callbacks', () => {
     it('works', done => {
       fs.write(TEST_FD, TEST_DATA, 0, SIZE, 0, (err, bytesWritten, buffer) => {
-        assert.ifError(err);
-        assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-        assert(Buffer.from(buffer).equals(TEST_DATA), 'data is correct');
+        expect(err).toBeFalsy();
+        expect(bytesWritten).toBe(SIZE);
+        expect(Buffer.from(buffer).equals(TEST_DATA)).toBeTruthy();
         done();
       });
     });
@@ -114,9 +123,9 @@ describe('fs.write()', () => {
         undefined,
         undefined,
         (err, bytesWritten, buffer) => {
-          assert.ifError(err);
-          assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-          assert(Buffer.from(buffer).equals(TEST_DATA), 'data is correct');
+          expect(err).toBeFalsy();
+          expect(bytesWritten).toBe(SIZE);
+          expect(Buffer.from(buffer).equals(TEST_DATA)).toBeTruthy();
           done();
         },
       );
@@ -132,9 +141,9 @@ describe('fs.write()', () => {
 });
 
 describe('fs.readv()', () => {
-  let TEST_FILE;
-  let TEST_DATA;
-  let TEST_FD;
+  let TEST_FILE: string;
+  let TEST_DATA: string | Buffer | NodeJS.ArrayBufferView;
+  let TEST_FD: number;
 
   beforeEach(async () => {
     TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'readv-test-file');
@@ -160,32 +169,20 @@ describe('fs.readv()', () => {
         bytesRead: number;
         buffers: ArrayBufferView[];
       }>);
-      assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-      assert.deepStrictEqual(
-        buffers,
-        bufferArray,
-        'returned data matches mutated input param',
-      );
-      assert.deepStrictEqual(
-        Buffer.concat(buffers),
+      expect(bytesRead).toBe(SIZE);
+      expect(buffers).toStrictEqual(bufferArray);
+      expect(Buffer.concat(arrayBufferViewToUInt8Array(buffers))).toStrictEqual(
         TEST_DATA,
-        'data is correct',
       );
     });
 
     it('returns an object when minimal arguments are passed', async () => {
       const bufferArray = [Buffer.alloc(SIZE / 2), Buffer.alloc(SIZE / 2)];
       const { bytesRead, buffers } = await fs.readv(TEST_FD, bufferArray);
-      assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-      assert.deepStrictEqual(
-        buffers,
-        bufferArray,
-        'returned data matches mutated input param',
-      );
-      assert.deepStrictEqual(
-        Buffer.concat(buffers),
+      expect(bytesRead).toBe(SIZE);
+      expect(buffers).toStrictEqual(bufferArray);
+      expect(Buffer.concat(arrayBufferViewToUInt8Array(buffers))).toStrictEqual(
         TEST_DATA,
-        'data is correct',
       );
     });
   });
@@ -194,18 +191,12 @@ describe('fs.readv()', () => {
     it('works', done => {
       const bufferArray = [Buffer.alloc(SIZE / 2), Buffer.alloc(SIZE / 2)];
       fs.readv(TEST_FD, bufferArray, 0, (err, bytesRead, buffers) => {
-        assert.ifError(err);
-        assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-        assert.deepStrictEqual(
-          buffers,
-          bufferArray,
-          'returned data matches mutated input param',
-        );
-        assert.deepStrictEqual(
-          Buffer.concat(buffers),
-          TEST_DATA,
-          'data is correct',
-        );
+        expect(err).toBeFalsy();
+        expect(bytesRead).toBe(SIZE);
+        expect(buffers).toStrictEqual(bufferArray);
+        expect(
+          Buffer.concat(arrayBufferViewToUInt8Array(buffers)),
+        ).toStrictEqual(TEST_DATA);
         done();
       });
     });
@@ -213,18 +204,12 @@ describe('fs.readv()', () => {
     it('works when minimal arguments are passed', done => {
       const bufferArray = [Buffer.alloc(SIZE / 2), Buffer.alloc(SIZE / 2)];
       fs.readv(TEST_FD, bufferArray, undefined, (err, bytesRead, buffers) => {
-        assert.ifError(err);
-        assert.strictEqual(bytesRead, SIZE, 'bytesRead is correct');
-        assert.deepStrictEqual(
-          buffers,
-          bufferArray,
-          'returned data matches mutated input param',
-        );
-        assert.deepStrictEqual(
-          Buffer.concat(buffers),
-          TEST_DATA,
-          'data is correct',
-        );
+        expect(err).toBeFalsy();
+        expect(bytesRead).toBe(SIZE);
+        expect(buffers).toStrictEqual(bufferArray);
+        expect(
+          Buffer.concat(arrayBufferViewToUInt8Array(buffers)),
+        ).toStrictEqual(TEST_DATA);
         done();
       });
     });
@@ -251,32 +236,32 @@ describe('fs.writev()', () => {
   describe('with promises', () => {
     it('returns an object', async () => {
       const { bytesWritten, buffers } = await fs.writev(TEST_FD, TEST_DATA, 0);
-      assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-      assert.deepStrictEqual(buffers, TEST_DATA, 'data is correct');
+      expect(bytesWritten).toBe(SIZE);
+      expect(buffers).toStrictEqual(TEST_DATA);
     });
 
     it('returns an object when minimal arguments are passed', async () => {
       const { bytesWritten, buffers } = await fs.writev(TEST_FD, TEST_DATA);
-      assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-      assert.deepStrictEqual(buffers, TEST_DATA, 'data is correct');
+      expect(bytesWritten).toBe(SIZE);
+      expect(buffers).toStrictEqual(TEST_DATA);
     });
   });
 
   describe('with callbacks', () => {
     it('works', done => {
       fs.writev(TEST_FD, TEST_DATA, 0, (err, bytesWritten, buffers) => {
-        assert.ifError(err);
-        assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-        assert.deepStrictEqual(buffers, TEST_DATA, 'data is correct');
+        expect(err).toBeFalsy();
+        expect(bytesWritten).toBe(SIZE);
+        expect(buffers).toStrictEqual(TEST_DATA);
         done();
       });
     });
 
     it('works when minimal arguments are passed', done => {
       fs.writev(TEST_FD, TEST_DATA, undefined, (err, bytesWritten, buffers) => {
-        assert.ifError(err);
-        assert.strictEqual(bytesWritten, SIZE, 'bytesWritten is correct');
-        assert.deepStrictEqual(buffers, TEST_DATA, 'data is correct');
+        expect(err).toBeFalsy();
+        expect(bytesWritten).toBe(SIZE);
+        expect(buffers).toStrictEqual(TEST_DATA);
         done();
       });
     });

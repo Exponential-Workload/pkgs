@@ -22,7 +22,7 @@ describe('fs-extra', () => {
     it('should make the directory', async () => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
 
-      assert(!fs.existsSync(dir));
+      expect(!fs.existsSync(dir)).toBeTruthy();
 
       await fse.mkdirs(dir);
       expect(fse.existsSync(dir)).toEqual(true);
@@ -32,9 +32,9 @@ describe('fs-extra', () => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
       const newDir = path.join(TEST_DIR, 'dfdf', 'ffff', 'aaa');
 
-      assert(!fs.existsSync(dir));
+      expect(!fs.existsSync(dir)).toBeTruthy();
       await fse.mkdirs(newDir);
-      assert(fs.existsSync(newDir));
+      expect(fs.existsSync(newDir)).toBeTruthy();
     });
   });
 
@@ -42,9 +42,9 @@ describe('fs-extra', () => {
     it('should make the directory', done => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
 
-      assert(!fs.existsSync(dir));
+      expect(!fs.existsSync(dir)).toBeTruthy();
       fse.mkdirsSync(dir);
-      assert(fs.existsSync(dir));
+      expect(fs.existsSync(dir)).toBeTruthy();
 
       done();
     });
@@ -53,9 +53,9 @@ describe('fs-extra', () => {
       const dir = path.join(TEST_DIR, 'tmp-' + Date.now() + Math.random());
       const newDir = path.join(dir, 'dfdf', 'ffff', 'aaa');
 
-      assert(!fs.existsSync(newDir));
+      expect(!fs.existsSync(newDir)).toBeTruthy();
       fse.mkdirsSync(newDir);
-      assert(fs.existsSync(newDir));
+      expect(fs.existsSync(newDir)).toBeTruthy();
 
       done();
     });

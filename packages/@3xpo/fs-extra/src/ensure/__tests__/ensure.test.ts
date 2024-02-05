@@ -24,13 +24,13 @@ describe('fs-extra', () => {
         const file = path.join(TEST_DIR, 'file.txt');
         fs.writeFileSync(file, 'blah');
 
-        assert(fs.existsSync(file));
+        expect(fs.existsSync(file)).toBeTruthy();
         fse
           .ensureFile(file)
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
-            assert(fs.existsSync(file));
+            expect(err).toBeFalsy();
+            expect(fs.existsSync(file)).toBeTruthy();
             done();
           });
       });
@@ -40,13 +40,13 @@ describe('fs-extra', () => {
       it('should create the file', done => {
         const file = path.join(TEST_DIR, 'dir/that/does/not/exist', 'file.txt');
 
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         fse
           .ensureFile(file)
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
-            assert(fs.existsSync(file));
+            expect(err).toBeFalsy();
+            expect(fs.existsSync(file)).toBeTruthy();
             done();
           });
       });
@@ -61,8 +61,8 @@ describe('fs-extra', () => {
           .ensureFile(p)
           .catch(err => err)
           .then(err => {
-            assert(err);
-            assert.strictEqual(err.code, 'EISDIR');
+            expect(err).toBeTruthy();
+            expect(err.code).toBe('EISDIR');
             done();
           });
       });
@@ -75,9 +75,9 @@ describe('fs-extra', () => {
         const file = path.join(TEST_DIR, 'file.txt');
         fs.writeFileSync(file, 'blah');
 
-        assert(fs.existsSync(file));
+        expect(fs.existsSync(file)).toBeTruthy();
         fse.ensureFileSync(file);
-        assert(fs.existsSync(file));
+        expect(fs.existsSync(file)).toBeTruthy();
       });
     });
 
@@ -85,9 +85,9 @@ describe('fs-extra', () => {
       it('should create the file', () => {
         const file = path.join(TEST_DIR, 'dir/that/does/not/exist', 'file.txt');
 
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
         fse.ensureFileSync(file);
-        assert(fs.existsSync(file));
+        expect(fs.existsSync(file)).toBeTruthy();
       });
     });
 
@@ -96,14 +96,14 @@ describe('fs-extra', () => {
         const p = path.join(TEST_DIR, 'somedir2');
         fs.mkdirSync(p);
 
-        assert.throws(() => {
+        expect(() => {
           try {
             fse.ensureFileSync(p);
           } catch (e) {
-            assert.strictEqual(e.code, 'EISDIR');
+            expect(e.code).toBe('EISDIR');
             throw e;
           }
-        });
+        }).toThrow();
       });
     });
   });
@@ -114,13 +114,13 @@ describe('fs-extra', () => {
         const dir = path.join(TEST_DIR, 'dir/does/not/exist');
         fse.mkdirpSync(dir);
 
-        assert(fs.existsSync(dir));
+        expect(fs.existsSync(dir)).toBeTruthy();
         fse
           .ensureDir(dir)
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
-            assert(fs.existsSync(dir));
+            expect(err).toBeFalsy();
+            expect(fs.existsSync(dir)).toBeTruthy();
             done();
           });
       });
@@ -143,9 +143,9 @@ describe('fs-extra', () => {
         const dir = path.join(TEST_DIR, 'dir/does/not/exist');
         fse.mkdirpSync(dir);
 
-        assert(fs.existsSync(dir));
+        expect(fs.existsSync(dir)).toBeTruthy();
         fse.ensureDirSync(dir);
-        assert(fs.existsSync(dir));
+        expect(fs.existsSync(dir)).toBeTruthy();
       });
     });
 
@@ -153,9 +153,9 @@ describe('fs-extra', () => {
       it('should create the dir', () => {
         const dir = path.join(TEST_DIR, 'dir/that/does/not/exist');
 
-        assert(!fs.existsSync(dir));
+        expect(!fs.existsSync(dir)).toBeTruthy();
         fse.ensureDirSync(dir);
-        assert(fs.existsSync(dir));
+        expect(fs.existsSync(dir)).toBeTruthy();
       });
     });
   });

@@ -69,23 +69,11 @@ describeIfPractical('copySync() - preserveTimestamps option', () => {
       const toStat = fs.statSync(b);
       if (options.preserveTimestamps) {
         // Windows sub-second precision fixed: https://github.com/nodejs/io.js/issues/2069
-        assert.strictEqual(
-          toStat.mtime.getTime(),
-          fromStat.mtime.getTime(),
-          'different mtime values',
-        );
-        assert.strictEqual(
-          toStat.atime.getTime(),
-          fromStat.atime.getTime(),
-          'different atime values',
-        );
+        expect(toStat.mtime.getTime()).toBe(fromStat.mtime.getTime());
+        expect(toStat.atime.getTime()).toBe(fromStat.atime.getTime());
       } else {
         // the access time might actually be the same, so check only modification time
-        assert.notStrictEqual(
-          toStat.mtime.getTime(),
-          fromStat.mtime.getTime(),
-          'same mtime values',
-        );
+        expect(toStat.mtime.getTime()).not.toBe(fromStat.mtime.getTime());
       }
     };
   }

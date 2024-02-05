@@ -25,7 +25,7 @@ describe('json', () => {
         'exist',
         'file.json',
       );
-      assert(!fs.existsSync(file));
+      expect(!fs.existsSync(file)).toBeTruthy();
 
       const data = { name: 'JP' };
       fse
@@ -34,10 +34,10 @@ describe('json', () => {
         .then(err => {
           if (err) return done(err);
 
-          assert(fs.existsSync(file));
+          expect(fs.existsSync(file)).toBeTruthy();
           const newData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
-          assert.strictEqual(data.name, newData.name);
+          expect(data.name).toBe(newData.name);
           done();
         });
     });
@@ -45,7 +45,7 @@ describe('json', () => {
     it('should be mutation-proof', async () => {
       const dir = path.join(TEST_DIR, 'this-dir', 'certanly-does-not', 'exist');
       const file = path.join(dir, 'file.json');
-      assert(!fs.existsSync(dir), 'directory cannot exist');
+      expect(!fs.existsSync(dir)).toBeTruthy();
 
       const name = 'JP';
       const data = { name };
@@ -55,11 +55,11 @@ describe('json', () => {
       // now await for the call to finish
       await promise;
 
-      assert(fs.existsSync(file));
+      expect(fs.existsSync(file)).toBeTruthy();
       const newData = JSON.parse(fs.readFileSync(file, 'utf8'));
 
       // mutation did not change data
-      assert.strictEqual(newData.name, name);
+      expect(newData.name).toBe(name);
     });
 
     it('should support Promises', () => {
@@ -70,7 +70,7 @@ describe('json', () => {
         'exist',
         'file.json',
       );
-      assert(!fs.existsSync(file));
+      expect(!fs.existsSync(file)).toBeTruthy();
 
       const data = { name: 'JP' };
       return fse.outputJson(file, data);
@@ -86,7 +86,7 @@ describe('json', () => {
           'really',
           'file.json',
         );
-        assert(!fs.existsSync(file));
+        expect(!fs.existsSync(file)).toBeTruthy();
 
         const replacer = (k, v) => (v === 'JP' ? 'Jon Paul' : v);
         const data = { name: 'JP' };
@@ -95,9 +95,9 @@ describe('json', () => {
           .outputJson(file, data, { replacer })
           .catch(err => err)
           .then(err => {
-            assert.ifError(err);
+            expect(err).toBeFalsy();
             const newData = JSON.parse(fs.readFileSync(file, 'utf8'));
-            assert.strictEqual(newData.name, 'Jon Paul');
+            expect(newData.name).toBe('Jon Paul');
             done();
           });
       });

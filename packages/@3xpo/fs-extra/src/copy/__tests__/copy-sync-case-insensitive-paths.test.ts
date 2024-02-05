@@ -35,21 +35,15 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(src, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') assert(errThrown);
+      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
-        assert(fs.existsSync(dest));
-        assert.strictEqual(
-          fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-          'some data',
-        );
-        assert(!errThrown);
+        expect(fs.existsSync(dest)).toBeTruthy();
+        expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
+        expect(!errThrown).toBeTruthy();
       }
     });
   });
@@ -65,18 +59,15 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(src, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') assert(errThrown);
+      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
-        assert(fs.existsSync(dest));
-        assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
-        assert(!errThrown);
+        expect(fs.existsSync(dest)).toBeTruthy();
+        expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
+        expect(!errThrown).toBeTruthy();
       }
     });
   });
@@ -94,23 +85,17 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(srcLink, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') assert(errThrown);
+      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
-        assert(fs.existsSync(dest));
-        assert.strictEqual(
-          fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-          'some data',
-        );
+        expect(fs.existsSync(dest)).toBeTruthy();
+        expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
         const destLink = fs.readlinkSync(dest);
-        assert.strictEqual(destLink, src);
-        assert(!errThrown);
+        expect(destLink).toBe(src);
+        expect(!errThrown).toBeTruthy();
       }
     });
 
@@ -126,20 +111,17 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(srcLink, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          assert.strictEqual(
-            err.message,
-            'Source and destination must not be the same.',
-          );
+          expect(err.message).toBe('Source and destination must not be the same.');
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') assert(errThrown);
+      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
-        assert(fs.existsSync(dest));
-        assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+        expect(fs.existsSync(dest)).toBeTruthy();
+        expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
         const destLink = fs.readlinkSync(dest);
-        assert.strictEqual(destLink, src);
-        assert(!errThrown);
+        expect(destLink).toBe(src);
+        expect(!errThrown).toBeTruthy();
       }
     });
   });

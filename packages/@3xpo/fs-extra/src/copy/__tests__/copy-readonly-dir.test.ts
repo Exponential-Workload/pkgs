@@ -50,16 +50,14 @@ describe('+ copy() - copy a readonly directory with content', () => {
         .copy(sourceDir, targetDir)
         .catch(err => err)
         .then(err => {
-          assert.ifError(err);
+          expect(err).toBeFalsy();
 
           // Make sure copy was made and mode was preserved
-          assert(fs.existsSync(targetDir));
+          expect(fs.existsSync(targetDir)).toBeTruthy();
           const targetHierarchy = klawSync(targetDir);
-          assert(targetHierarchy.length === sourceHierarchy.length);
+          expect(targetHierarchy.length === sourceHierarchy.length).toBeTruthy();
           targetHierarchy.forEach(target =>
-            assert(
-              target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444,
-            ),
+            expect(target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444).toBeTruthy(),
           );
           done();
         });

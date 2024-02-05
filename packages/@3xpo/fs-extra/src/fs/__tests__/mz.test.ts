@@ -10,7 +10,7 @@ describe('fs', () => {
   it('.stat()', done => {
     fs.stat(__filename)
       .then(stats => {
-        assert.strictEqual(typeof stats.size, 'number');
+        expect(typeof stats.size).toBe('number');
         done();
       })
       .catch(done);
@@ -18,13 +18,13 @@ describe('fs', () => {
 
   it('.statSync()', () => {
     const stats = fs.statSync(__filename);
-    assert.strictEqual(typeof stats.size, 'number');
+    expect(typeof stats.size).toBe('number');
   });
 
   it('.exists()', done => {
     fs.exists(__filename)
       .then(exists => {
-        assert(exists);
+        expect(exists).toBeTruthy();
         done();
       })
       .catch(done);
@@ -32,14 +32,14 @@ describe('fs', () => {
 
   it('.existsSync()', () => {
     const exists = fs.existsSync(__filename);
-    assert(exists);
+    expect(exists).toBeTruthy();
   });
 
   describe('callback support', () => {
     it('.stat()', done => {
       fs.stat(__filename, (err, stats) => {
-        assert(!err);
-        assert.strictEqual(typeof stats.size, 'number');
+        expect(!err).toBeTruthy();
+        expect(typeof stats.size).toBe('number');
         done();
       });
     });
@@ -47,7 +47,7 @@ describe('fs', () => {
     // This test is different from mz/fs, since we are a drop-in replacement for native fs
     it('.exists()', done => {
       fs.exists(__filename, exists => {
-        assert(exists);
+        expect(exists).toBeTruthy();
         done();
       });
     });

@@ -48,6 +48,6 @@ describe('mkdirp / chmod', () => {
     const mode = 0o755;
     await fse.mkdirp(TEST_SUBDIR, mode);
     const stat = fs.statSync(TEST_SUBDIR);
-    assert.ok(stat && stat.isDirectory(), 'should be directory');
+    expect(stat && stat.isDirectory()).toBeTruthy();
   });
 });

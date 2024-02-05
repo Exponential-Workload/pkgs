@@ -28,7 +28,7 @@ describe('json promise support', () => {
         const file = path.join(TEST_DIR, 'promise.json');
         return fse[method](file, obj1).then(() => {
           const data = fs.readFileSync(file, 'utf8');
-          assert.strictEqual(data, JSON.stringify(obj1) + '\n');
+          expect(data).toBe(JSON.stringify(obj1) + '\n');
         });
       });
     });

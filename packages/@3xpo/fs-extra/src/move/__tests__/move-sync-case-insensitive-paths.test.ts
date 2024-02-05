@@ -30,11 +30,8 @@ describe('+ moveSync() - case insensitive paths', () => {
       dest = path.join(TEST_DIR, 'srcDir');
 
       fs.moveSync(src, dest);
-      assert(fs.existsSync(dest));
-      assert.strictEqual(
-        fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-        'some data',
-      );
+      expect(fs.existsSync(dest)).toBeTruthy();
+      expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
     });
   });
 
@@ -45,8 +42,8 @@ describe('+ moveSync() - case insensitive paths', () => {
       dest = path.join(TEST_DIR, 'srcFile');
 
       fs.moveSync(src, dest);
-      assert(fs.existsSync(dest));
-      assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+      expect(fs.existsSync(dest)).toBeTruthy();
+      expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
     });
   });
 
@@ -59,13 +56,10 @@ describe('+ moveSync() - case insensitive paths', () => {
       dest = path.join(TEST_DIR, 'src-Symlink');
 
       fs.moveSync(srcLink, dest);
-      assert(fs.existsSync(dest));
-      assert.strictEqual(
-        fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-        'some data',
-      );
+      expect(fs.existsSync(dest)).toBeTruthy();
+      expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
       const destLink = fs.readlinkSync(dest);
-      assert.strictEqual(destLink, src);
+      expect(destLink).toBe(src);
     });
 
     it('should move successfully, symlink file', () => {
@@ -76,10 +70,10 @@ describe('+ moveSync() - case insensitive paths', () => {
       dest = path.join(TEST_DIR, 'src-Symlink');
 
       fs.moveSync(srcLink, dest);
-      assert(fs.existsSync(dest));
-      assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+      expect(fs.existsSync(dest)).toBeTruthy();
+      expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
       const destLink = fs.readlinkSync(dest);
-      assert.strictEqual(destLink, src);
+      expect(destLink).toBe(src);
     });
   });
 });
