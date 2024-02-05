@@ -17,7 +17,7 @@ Writes an object to a JSON file.
 ```js
 import fs from '@3xpo/fs-extra';
 
-fs.writeJsonSync('./package.json', { name: 'fs-extra' });
+fs.writeJsonSync('./package.json', { name: '@3xpo/fs-extra' });
 ```
 
 ---

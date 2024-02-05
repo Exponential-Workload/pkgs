@@ -11,7 +11,7 @@
 // const SIZE = 16 * 64 * 1024 + 7;
 // let TEST_DIR = '';
 
-// describe('fs-extra', () => {
+// describe('@3xpo/fs-extra -> copy', () => {
 //   beforeEach(() => {
 //     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy');
 //     return fse.emptyDir(TEST_DIR);

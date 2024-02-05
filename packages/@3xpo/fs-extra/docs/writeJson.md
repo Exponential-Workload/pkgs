@@ -20,13 +20,13 @@ Writes an object to a JSON file.
 import fs from '@3xpo/fs-extra';
 
 // With a callback:
-fs.writeJson('./package.json', { name: 'fs-extra' }, err => {
+fs.writeJson('./package.json', { name: '@3xpo/fs-extra' }, err => {
   if (err) return console.error(err);
   console.log('success!');
 });
 
 // With Promises:
-fs.writeJson('./package.json', { name: 'fs-extra' })
+fs.writeJson('./package.json', { name: '@3xpo/fs-extra' })
   .then(() => {
     console.log('success!');
   })
@@ -37,7 +37,7 @@ fs.writeJson('./package.json', { name: 'fs-extra' })
 // With async/await:
 async function example() {
   try {
-    await fs.writeJson('./package.json', { name: 'fs-extra' });
+    await fs.writeJson('./package.json', { name: '@3xpo/fs-extra' });
     console.log('success!');
   } catch (err) {
     console.error(err);

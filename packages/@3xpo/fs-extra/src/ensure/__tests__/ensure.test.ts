@@ -8,7 +8,7 @@ import assert from 'assert';
 
 /* global afterEach, beforeEach, describe, it */
 
-describe('fs-extra', () => {
+describe('@3xpo/fs-extra -> ensure -> ensure', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {

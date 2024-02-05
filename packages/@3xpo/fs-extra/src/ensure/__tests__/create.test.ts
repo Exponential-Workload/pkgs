@@ -4,11 +4,10 @@ import * as fs from 'fs';
 import * as os from 'os';
 import fse from '../..';
 import path from 'path';
-import assert from 'assert';
 
 /* global afterEach, beforeEach, describe, it */
 
-describe('fs-extra', () => {
+describe('@3xpo/fs-extra -> ensure -> create', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
