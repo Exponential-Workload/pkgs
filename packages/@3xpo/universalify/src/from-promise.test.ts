@@ -2,17 +2,19 @@
 'use strict';
 import universalify from './index';
 
-const fn = universalify.fromPromise(function (a, b) {
-  return new Promise(resolve => {
-    setTimeout(() => resolve([this, a, b]), 15);
-  });
-});
+const fn = universalify.fromPromise(
+  (a, b) =>
+    new Promise(resolve => {
+      setTimeout(() => resolve([this, a, b]), 15);
+    }),
+);
 
-const errFn = universalify.fromPromise(function () {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => reject(new Error('test')), 15);
-  });
-});
+const errFn = universalify.fromPromise(
+  () =>
+    new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error('test')), 15),
+    ),
+);
 
 test('promise function works with callbacks', done => {
   expect.assertions(4);
@@ -85,19 +87,3 @@ test('fromPromise() sets correct .name', () => {
   const res = universalify.fromPromise(function hello() {});
   expect(res.name).toBe('hello');
 });
-
-// i hate this testing framework, ill fix this later:
-// test('fromPromise() handles an error in callback correctly', t => {
-//   // We need to make sure that the callback isn't called twice if there's an
-//   // error inside the callback. This should instead generate an unhandled
-//   // promise rejection. We verify one is created, with the correct message.
-//   t.plan(2);
-//   const errMsg = 'some callback error';
-//   process.once('unhandledRejection', err => {
-//     if (err.message !== errMsg) t.error('incorrect error message');
-//     else t.ok(true, 'correct error message');
-//   });
-//   fn(1, 2, () => {
-//     throw new Error(errMsg);
-//   });
-// });
