@@ -4,21 +4,20 @@ import os from 'os';
 import path from 'path';
 import * as rimraf from 'rimraf';
 import jf from '../index';
-import { fromCallback } from '@3xpo/universalify';
 
 /* global describe it beforeEach afterEach */
 
 describe('+ readFileSync()', () => {
   let TEST_DIR: string;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
       'fs-extra',
       'jsonfile-tests-readfile-sync',
     );
-    rimraf.sync(TEST_DIR);
-    fromCallback(fs.mkdir)(TEST_DIR);
+    fs.rmSync(TEST_DIR, { recursive: true, force: true });
+    fs.mkdirSync(TEST_DIR);
   });
 
   afterEach(done => {
