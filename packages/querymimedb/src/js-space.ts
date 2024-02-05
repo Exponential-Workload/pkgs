@@ -39,6 +39,14 @@ export default (addon: Addon): QueryFunc =>
             result,
           );
 
+        case 'ERR_NOT_BUILT_WITH_LIBMAGIC':
+          if (dieOnNoLibMagic)
+            throw new NoLibMagicException(
+              `Package was not built with libmagic. Pass \`false\` as the 2nd arg to silence and have us return null, so you can handle the query yourself when we can't handle it.`,
+              result,
+            );
+          else return null;
+
         case 'ERR_NO_LIBMAGIC':
           if (dieOnNoLibMagic)
             throw new NoLibMagicException(

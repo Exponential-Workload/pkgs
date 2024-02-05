@@ -1,9 +1,13 @@
+
+#include <napi.h>
+
+#ifdef LIBMAGIC_AVAILABLE
 #include <filesystem>
 #include <iostream>
 #include <magic.h>
-#include <napi.h>
 
 namespace fs = std::filesystem;
+#endif
 
 Napi::String QueryMimeType(const Napi::CallbackInfo &info) {
   Napi::Env env = info.Env();
@@ -13,6 +17,7 @@ Napi::String QueryMimeType(const Napi::CallbackInfo &info) {
     return Napi::String::New(env, "");
   }
 
+#ifdef LIBMAGIC_AVAILABLE
   Napi::String fileName = info[0].As<Napi::String>();
   std::string fileStr = fileName.Utf8Value();
 
@@ -36,12 +41,15 @@ Napi::String QueryMimeType(const Napi::CallbackInfo &info) {
   if (mime != NULL) {
     mimeType = std::string(mime);
   } else {
-    mimeType = std::string("ERR_CANNOT_FIND_MIME_TYPE");
+    mimeType = "ERR_CANNOT_FIND_MIME_TYPE";
   }
 
   magic_close(magic);
 
   return Napi::String::New(env, mimeType);
+#else
+  return Napi::String::New(env, "ERR_NOT_BUILT_WITH_LIBMAGIC");
+#endif
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
