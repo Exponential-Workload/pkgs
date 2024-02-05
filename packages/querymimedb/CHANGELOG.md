@@ -1,5 +1,12 @@
 # querymimedb
 
+## 0.1.3
+
+### Patch Changes
+
+- c6d5991: update jsdocs properly
+- 9b96ab1: Build without libmagic
+
 ## 0.1.2
 
 ### Patch Changes
