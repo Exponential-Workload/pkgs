@@ -44,6 +44,8 @@
   "files": [
     "dist/**/*",
     "dist/*",
+    "src/*.c*",
+    "src/**/*.c*",
     "package.json",
     "README.md",
     "tsconfig.json",
