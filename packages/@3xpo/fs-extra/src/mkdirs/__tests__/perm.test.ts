@@ -36,5 +36,6 @@ describe('mkdirp / perm', () => {
     expect(stat.isDirectory()).toBeTruthy();
   });
 
-  it('async root perm', () => fse.mkdirp(path.join(os.tmpdir(), 'tmp'), 0o755));
+  it('async root perm', () =>
+    fse.mkdirp(path.join(os.tmpdir(), 'fs-extra', '_tmp'), 0o755));
 });

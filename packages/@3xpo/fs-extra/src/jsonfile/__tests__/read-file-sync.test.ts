@@ -12,7 +12,11 @@ describe('+ readFileSync()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-readfile-sync');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra',
+      'jsonfile-tests-readfile-sync',
+    );
     rimraf.sync(TEST_DIR);
     fromCallback(fs.mkdir)(TEST_DIR);
   });

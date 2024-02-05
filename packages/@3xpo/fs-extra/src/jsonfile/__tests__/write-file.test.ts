@@ -11,7 +11,7 @@ describe('+ writeFile()', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'jsonfile-tests-writefile');
     rimraf.sync(TEST_DIR);
     fs.mkdirSync(TEST_DIR);
   });
@@ -200,7 +200,7 @@ describe('+ writeFile()', () => {
 
   describe('> when EOF option is set to a falsey value', () => {
     beforeEach(() => {
-      TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile');
+      TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'jsonfile-tests-writefile');
       rimraf.sync(TEST_DIR);
       fs.mkdirSync(TEST_DIR);
     });

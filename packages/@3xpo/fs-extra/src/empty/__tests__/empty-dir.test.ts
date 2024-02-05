@@ -12,7 +12,7 @@ describe('+ emptyDir()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'test-fs-extra', 'empty-dir');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'empty-dir');
     if (fs.existsSync(TEST_DIR)) {
       fse.removeSync(TEST_DIR);
     }

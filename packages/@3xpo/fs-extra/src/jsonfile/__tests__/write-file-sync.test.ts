@@ -11,7 +11,11 @@ describe('+ writeFileSync()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile-sync');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra',
+      'jsonfile-tests-writefile-sync',
+    );
     rimraf.sync(TEST_DIR);
     fs.mkdirSync(TEST_DIR);
   });
@@ -84,7 +88,11 @@ describe('+ writeFileSync()', () => {
   });
   describe('> when EOF option is set to a falsey value', () => {
     beforeEach(() => {
-      TEST_DIR = path.join(os.tmpdir(), 'jsonfile-tests-writefile-sync');
+      TEST_DIR = path.join(
+        os.tmpdir(),
+        'fs-extra',
+        'jsonfile-tests-writefile-sync',
+      );
       rimraf.sync(TEST_DIR);
       fs.mkdirSync(TEST_DIR);
     });

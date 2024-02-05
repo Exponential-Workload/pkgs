@@ -20,7 +20,7 @@ const FILES = [
 
 describe('+ copySync() - copy a readonly directory with content', () => {
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'test', 'fs-extra', 'copy-readonly-dir');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-readonly-dir');
     return fs.emptyDir(TEST_DIR);
   });
 
@@ -48,7 +48,9 @@ describe('+ copySync() - copy a readonly directory with content', () => {
       const targetHierarchy = klawSync(targetDir);
       expect(targetHierarchy.length === sourceHierarchy.length).toBeTruthy();
       targetHierarchy.forEach(target =>
-        expect(target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444).toBeTruthy(),
+        expect(
+          target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444,
+        ).toBeTruthy(),
       );
     });
   });

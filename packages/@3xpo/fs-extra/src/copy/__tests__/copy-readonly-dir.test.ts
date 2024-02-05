@@ -21,7 +21,7 @@ const FILES = [
 
 describe('+ copy() - copy a readonly directory with content', () => {
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'test', 'fs-extra', 'copy-readonly-dir');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-readonly-dir');
     return fse.emptyDir(TEST_DIR);
   });
 
@@ -55,9 +55,13 @@ describe('+ copy() - copy a readonly directory with content', () => {
           // Make sure copy was made and mode was preserved
           expect(fs.existsSync(targetDir)).toBeTruthy();
           const targetHierarchy = klawSync(targetDir);
-          expect(targetHierarchy.length === sourceHierarchy.length).toBeTruthy();
+          expect(
+            targetHierarchy.length === sourceHierarchy.length,
+          ).toBeTruthy();
           targetHierarchy.forEach(target =>
-            expect(target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444).toBeTruthy(),
+            expect(
+              target.stats.mode === target.stats.isDirectory() ? 0o555 : 0o444,
+            ).toBeTruthy(),
           );
           done();
         });
