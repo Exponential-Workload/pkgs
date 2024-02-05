@@ -28,21 +28,13 @@ describe('mkdirp / perm', () => {
     const stat = fs.statSync(file);
 
     if (os.platform().indexOf('win') === 0) {
-      assert.strictEqual(stat.mode & 0o777, 0o666);
+      expect(stat.mode & 0o777).toStrictEqual(0o666);
     } else {
-      assert.strictEqual(stat.mode & 0o777, 0o755);
+      expect(stat.mode & 0o777).toStrictEqual(0o755);
     }
 
-    assert.ok(stat.isDirectory(), 'target not a directory');
+    expect(stat.isDirectory()).toBeTruthy();
   });
 
-  it('async root perm', done => {
-    fse
-      .mkdirp(path.join(os.tmpdir(), 'tmp'), 0o755)
-      .catch(err => err)
-      .then(err => {
-        assert.ifError(err);
-        done();
-      });
-  });
+  it('async root perm', () => fse.mkdirp(path.join(os.tmpdir(), 'tmp'), 0o755));
 });
