@@ -22,7 +22,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
       - name: Clone repository
         run: |
-          git clone -b master --single-branch git@github.com:Exponential-Workload/proper-fs-extra.git ../ev-repo
+          git clone -b master --single-branch git@github.com:Exponential-Workload/modern-fs-extra.git ../ev-repo
           cd ../ev-repo
           git config user.email "eventpush@no"
           git config user.name "Codeberg Actions"
@@ -45,4 +45,4 @@ jobs:
           echo .rev >> .gitignore
           git add .
           git commit -m "chore: Update to Codeberg/$(cat .rev)" --allow-empty
-          git push --force git@github.com:Exponential-Workload/proper-fs-extra.git master
+          git push --force git@github.com:Exponential-Workload/modern-fs-extra.git master
