@@ -27,7 +27,7 @@ describe('ncp / error / dest-permission', () => {
   // when we are root, then we will be able to create the subdirectory even if
   // we don't have the permissions to do so, so no point in running this test
   if (process.platform === 'win32' || os.userInfo().uid === 0)
-    return it.skip('skip platform/uid');
+    return it.skip('skip platform/uid', () => void 0);
 
   beforeEach(() => {
     return fse.emptyDir(TEST_DIR);
