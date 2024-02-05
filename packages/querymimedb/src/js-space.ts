@@ -8,7 +8,8 @@ import {
 } from './exceptions';
 
 /**
- * Queries the path's MIME type.
+ * @name Query
+ * @description Queries a path's MIME type.
  * @throws {import('./exceptions').QueryException} When we don't know what happened
  * @throws {import('./exceptions').NoTypeException} When no MIME type was found
  * @throws {import('./exceptions').NotFoundException} When the file doesn't exist

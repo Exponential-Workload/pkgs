@@ -6,6 +6,7 @@ import jsSpace, { QueryFunc } from './js-space';
 const cjsRequire = createRequire(import.meta.url);
 
 export const addon: Addon = cjsRequire('../build/Release/querymimedb.node');
+/** See {@link QueryFunc Query} for information. */
 export const query: QueryFunc = jsSpace(addon);
 
 export * as exceptions from './exceptions';
