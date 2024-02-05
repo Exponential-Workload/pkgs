@@ -7,7 +7,6 @@ import * as os from 'os';
 import fse from '../../..';
 import { copy as ncp } from '../../';
 import path from 'path';
-import assert from 'assert';
 
 /* global afterEach, beforeEach, describe, it */
 
@@ -27,7 +26,8 @@ describe('ncp / error / dest-permission', () => {
 
   // when we are root, then we will be able to create the subdirectory even if
   // we don't have the permissions to do so, so no point in running this test
-  if (os.platform().indexOf('win') === 0 || os.userInfo().uid === 0) return;
+  if (process.platform === 'win32' || os.userInfo().uid === 0)
+    return it.skip('skip platform/uid');
 
   beforeEach(() => {
     return fse.emptyDir(TEST_DIR);
