@@ -1,5 +1,14 @@
 11.2.0 / 2023-11-27
 
+## 11.2.7
+
+### Patch Changes
+
+- ed16fb8: use /tmp/fs-extra-test-suite instead of /tmp/fs-extra amonsgt other small test fixes
+- ff9f189: make all tests run in tmp/fs-extra
+- Updated dependencies [9db6c0c]
+  - @3xpo/universalify@2.0.3
+
 ## 11.2.6
 
 ### Patch Changes
