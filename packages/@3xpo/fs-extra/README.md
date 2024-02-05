@@ -2,22 +2,24 @@
 
 [![repo image](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/fs-extra.png)](https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/fs-extra)
 
-# proper-fs-extra: modern fs-extra
+# modern-fs-extra: fs-extra for the 21st century
 
 [![npm Package](https://img.shields.io/npm/v/@3xpo/fs-extra.svg)](https://npm.im/@3xpo/fs-extra)
 [![License](https://img.shields.io/npm/l/@3xpo/fs-extra.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/LICENSE)
-[![build status](https://img.shields.io/github/actions/workflow/status/Exponential-Workload/proper-fs-extra/ci.yml?branch=master)](https://github.com/Exponential-Workload/proper-fs-extra/actions/workflows/ci.yml?query=branch%3Amaster)
-[![downloads per month](https://img.shields.io/npm/dm/@3xpo/fs-extra.svg)](https://npm.im/@3xpo/fs-extra)
+[![build status](https://img.shields.io/github/actions/workflow/status/Exponential-Workload/modern-fs-extra/ci.yml?branch=master)](https://github.com/Exponential-Workload/modern-fs-extra/actions/workflows/ci.yml?query=branch%3Amaster)
+[![downloads per month](https://raster.shields.io/npm/dm/@3xpo/fs-extra.png)](https://npm.im/@3xpo/fs-extra)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-custom-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
 [![TypeScript](https://img.shields.io/badge/language-typescript-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
+
+<!-- idk why the raster downloads fails, however i'll put it here for if i ever get it to render on npm: https://img.shields.io/npm/dm/@3xpo/fs-extra.svg -->
 
 </div>
 
 ## Description
 
-`fs-extra` adds file system methods that aren't included in the native `fs` module and adds promise support to the `fs` methods. It also uses [`graceful-fs`](https://github.com/isaacs/node-graceful-fs) to prevent `EMFILE` errors. It should be a drop in replacement for `fs`.
+`@3xpo/fs-extra` (alongside [upstream fs-extra](https://npmjs.com/package/fs-extra)) adds file system methods that aren't included in the native `fs` module and adds promise support to the `fs` methods. It also uses [`graceful-fs`](https://github.com/isaacs/node-graceful-fs) to prevent `EMFILE` errors. It should be a drop in replacement for `fs`.
 
-## Why?
+## Why the fork?
 
 I got tired of including `@types/fs-extra` in most of my projects. I also wanted a package that can do ESM and CJS without needing to inline the package in my output.
 
@@ -164,11 +166,11 @@ They were removed from `fs-extra` in v2.0.0. If you need the functionality, `wal
 
 ### CLI
 
-[fse-cli](https://www.npmjs.com/package/@atao60/fse-cli) allows you to run `fs-extra` from a console or from [npm](https://www.npmjs.com) scripts.
+~~[fse-cli](https://www.npmjs.com/package/@atao60/fse-cli) allows you to run `fs-extra` from a console or from [npm](https://www.npmjs.com) scripts.~~ fse-cli uses upstream fs-extra. it does not support this fork.
 
 ### TypeScript
 
-If you like TypeScript, you can use `fs-extra` with it: https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/fs-extra
+If you like TypeScript, you can use `fs-extra` with it; we ship types!
 
 ### File / Directory Watching
 
@@ -176,20 +178,26 @@ If you want to watch for changes to files or directories, then you should use [c
 
 ### Obtain Filesystem (Devices, Partitions) Information
 
-[fs-filesystem](https://github.com/arthurintelligence/node-fs-filesystem) allows you to read the state of the filesystem of the host on which it is run. It returns information about both the devices and the partitions (volumes) of the system.
+~~[fs-filesystem](https://github.com/arthurintelligence/node-fs-filesystem) allows you to read the state of the filesystem of the host on which it is run. It returns information about both the devices and the partitions (volumes) of the system.~~ fs-filesystem is deprecated.
 
 ### Misc.
 
-- [fs-extra-debug](https://github.com/jdxcode/fs-extra-debug) - Send your fs-extra calls to [debug](https://npmjs.org/package/debug).
-- [mfs](https://github.com/cadorn/mfs) - Monitor your fs-extra calls.
+- ~~[fs-extra-debug](https://github.com/jdxcode/fs-extra-debug) - Send your fs-extra calls to [debug](https://npmjs.org/package/debug).~~
+- ~~[mfs](https://github.com/cadorn/mfs) - Monitor your fs-extra calls.~~
+
+Both of these use upstream fs-extra. They don't support this fork out of the box.
+
+If someone's interested in me maintaining a variant of either of these, [open an issue](https://codeberg.org/Expo/devtools/issues/new)!
 
 ## Hacking on fs-extra
 
-Wanna hack on `fs-extra`? Great! Your help is needed! [fs-extra is one of the most depended upon Node.js packages](http://nodei.co/npm/fs-extra.png?downloads=true&downloadRank=true&stars=true). This project
-uses [JavaScript Standard Style](https://github.com/feross/standard) - if the name or style choices bother you,
-you're gonna have to get over it :) If `standard` is good enough for `npm`, it's good enough for `fs-extra`.
+Wanna hack on `fs-extra`? Great! Your help is needed! [fs-extra is one of the most depended upon Node.js packages](https://nodei.co/npm/fs-extra.png?downloads=true&downloadRank=true&stars=true) (although this fork [isn't](https://nodei.co/npm/@3xpo/fs-extra.png?downloads=true&downloadRank=true&stars=true), contribs are still nice).
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+~~This project
+uses [JavaScript Standard Style](https://github.com/feross/standard) - if the name or style choices bother you,
+you're gonna have to get over it :) If `standard` is good enough for `npm`, it's good enough for `fs-extra`~~ JS Standard Style is overcomplicated & overly strict for no reason; we use a minimal [prettier](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc) configuration. If you use single quotes & an indent size of 2, and don't code like a maniac, you're basically fine. `camelCase` is preferred for everything except classes; where `PascalCase` is used.
+
+You'll need [pnpm](https://pnpm.io), aswell as the [monorepo](https://codeberg.org/Expo/devtools) this package is housed in. You shouldn't need much else.
 
 What's needed?
 
@@ -201,32 +209,25 @@ Note: If you make any big changes, **you should definitely file an issue for dis
 
 ### Running the Test Suite
 
-fs-extra contains hundreds of tests.
+@3xpo/fs-extra contains hundreds of tests.
 
-- `npm run lint`: runs the linter ([standard](http://standardjs.com/))
-- `npm run unit`: runs the unit tests
-- `npm run unit-esm`: runs tests for `fs-extra/esm` exports
-- `npm test`: runs the linter and all tests
+- `pnpm build`: builds the project
+- `pnpm test`: runs the test suite
+- you don't need anything else
 
-When running unit tests, set the environment variable `CROSS_DEVICE_PATH` to the absolute path of an empty directory on another device (like a thumb drive) to enable cross-device move tests.
+When running unit tests, when possible, set the environment variable `CROSS_DEVICE_PATH` to the absolute path of an empty directory on another device (like a thumb drive) to enable cross-device move tests.
 
 ### Windows
 
-If you run the tests on the Windows and receive a lot of symbolic link `EPERM` permission errors, it's
-because on Windows you need elevated privilege to create symbolic links. You can add this to your Windows's
-account by following the instructions here: http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windows-7
-However, I didn't have much luck doing this.
+If you run the tests on the Windows and receive a lot of symbolic link `EPERM` permission errors, it's because on Windows you need elevated privilege to create symbolic links. You can add this to your Windows's account by following the instructions here: http://superuser.com/questions/104845/permission-to-make-symbolic-links-in-windows-7
 
-Since I develop on Mac OS X, I use VMWare Fusion for Windows testing. I create a shared folder that I map to a drive on Windows.
-I open the `Node.js command prompt` and run as `Administrator`. I then map the network drive running the following command:
+However, the upstream author didn't have much luck doing this.
 
-    net use z: "\\vmware-host\Shared Folders"
-
-I can then navigate to my `fs-extra` directory and run the tests.
+In regards to shared folders, [the upstream author's suggestions should likely be followed](https://www.npmjs.com/package/fs-extra#windows).
 
 ## Naming
 
-I put a lot of thought into the naming of these functions. Inspired by @coolaj86's request. So he deserves much of the credit for raising the issue. See discussion(s) here:
+I put a lot of thought into the naming of these functions. Inspired by @coolaj86's request, so he deserves much of the credit for raising the issue. See discussion(s) here:
 
 - https://github.com/jprichardson/node-fs-extra/issues/2
 - https://github.com/flatiron/utile/issues/11
