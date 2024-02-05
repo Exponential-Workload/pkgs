@@ -11,7 +11,7 @@ let TEST_DIR = '';
 
 describe('+ copy() - copy /dev/null', () => {
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-dev-null');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'copy-dev-null');
     return fse.emptyDir(TEST_DIR);
   });
 

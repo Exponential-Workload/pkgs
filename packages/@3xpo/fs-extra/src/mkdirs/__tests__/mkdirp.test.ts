@@ -12,7 +12,7 @@ describe('mkdirp / mkdirp', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp');
     return fse.emptyDir(TEST_DIR);
   });
 

@@ -10,7 +10,11 @@ describe('+ readFile()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'jsonfile-tests-readfile');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'jsonfile-tests-readfile',
+    );
     fs.rmSync(TEST_DIR, { recursive: true, force: true });
     fs.mkdirSync(TEST_DIR);
   });

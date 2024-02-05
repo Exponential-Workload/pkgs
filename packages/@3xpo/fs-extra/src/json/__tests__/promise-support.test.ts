@@ -12,7 +12,7 @@ describe('json promise support', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'json');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'json');
     return fse.emptyDir(TEST_DIR);
   });
 

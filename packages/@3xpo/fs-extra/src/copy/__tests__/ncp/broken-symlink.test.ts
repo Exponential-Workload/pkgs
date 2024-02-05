@@ -10,7 +10,11 @@ import assert from 'assert';
 /* global afterEach, beforeEach, describe, it */
 
 describe('ncp broken symlink', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ncp-broken-symlinks');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'ncp-broken-symlinks',
+  );
   const src = path.join(TEST_DIR, 'src');
   const out = path.join(TEST_DIR, 'out');
 

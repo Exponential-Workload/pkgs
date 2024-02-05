@@ -13,7 +13,7 @@ describe('+ writeFileSync()', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'jsonfile-tests-writefile-sync',
     );
     rimraf.sync(TEST_DIR);
@@ -90,7 +90,7 @@ describe('+ writeFileSync()', () => {
     beforeEach(() => {
       TEST_DIR = path.join(
         os.tmpdir(),
-        'fs-extra',
+        'fs-extra-test-suite',
         'jsonfile-tests-writefile-sync',
       );
       rimraf.sync(TEST_DIR);

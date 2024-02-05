@@ -12,7 +12,7 @@ describe('mkdirp / race', () => {
   let file: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-race');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-race');
     await fse.emptyDir(TEST_DIR);
 
     const ps = [TEST_DIR];

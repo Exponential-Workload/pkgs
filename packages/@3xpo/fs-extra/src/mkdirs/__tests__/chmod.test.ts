@@ -21,7 +21,7 @@ describe('mkdirp / chmod', () => {
 
     TEST_SUBDIR = ps.join(path.sep);
 
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-chmod');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-chmod');
     TEST_SUBDIR = path.join(TEST_DIR, TEST_SUBDIR);
 
     return fse.emptyDir(TEST_DIR);

@@ -10,7 +10,7 @@ describe('pathExists()', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'path-exists');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'path-exists');
     return fs.emptyDir(TEST_DIR);
   });
 

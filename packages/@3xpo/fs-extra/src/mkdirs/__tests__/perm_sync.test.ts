@@ -12,7 +12,11 @@ describe('mkdirp / perm_sync', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-perm-sync');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'mkdirp-perm-sync',
+    );
     return fse.emptyDir(TEST_DIR);
   });
 

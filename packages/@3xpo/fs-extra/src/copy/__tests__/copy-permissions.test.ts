@@ -11,7 +11,7 @@ describe('copy', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'copy');
     return fse.emptyDir(TEST_DIR);
   });
 

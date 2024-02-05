@@ -16,7 +16,7 @@ describe('mkdirp: issue-93, win32, when drive does not exist, it should return a
     return it('skip on windows', () => expect(true).toEqual(true));
 
   beforeAll(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-issue-93');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-issue-93');
     fse.rmSync(TEST_DIR, {
       recursive: true,
       force: true,

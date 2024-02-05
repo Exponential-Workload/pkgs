@@ -21,7 +21,7 @@ describeIfPractical('move() - across different devices', () => {
   function setupFixture(readonly: boolean) {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'move-sync-preserve-timestamp',
     );
     SRC = path.join(differentDevice, 'some/weird/dir-really-weird');

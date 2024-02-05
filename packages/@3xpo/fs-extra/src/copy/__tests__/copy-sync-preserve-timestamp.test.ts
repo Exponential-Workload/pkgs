@@ -20,7 +20,7 @@ describeIfPractical('copySync() - preserveTimestamps option', () => {
   function setupFixture(readonly) {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-sync-preserve-timestamp',
     );
     SRC = path.join(TEST_DIR, 'src');

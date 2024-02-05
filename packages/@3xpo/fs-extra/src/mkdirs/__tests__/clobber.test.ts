@@ -13,7 +13,7 @@ describe('mkdirp / clobber', () => {
   let file;
 
   beforeAll(done => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-clobber');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-clobber');
     fse
       .emptyDir(TEST_DIR)
       .catch(err => expect(err).toBeFalsy())

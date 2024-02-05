@@ -12,7 +12,7 @@ describe('json', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'output-json');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'output-json');
     return fse.emptyDir(TEST_DIR);
   });
 

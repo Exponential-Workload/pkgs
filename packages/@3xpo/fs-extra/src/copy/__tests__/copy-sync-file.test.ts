@@ -14,7 +14,7 @@ describe('+ copySync() / file', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-sync-file');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'copy-sync-file');
     return fs.emptyDir(TEST_DIR);
   });
 
@@ -31,7 +31,9 @@ describe('+ copySync() / file', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          expect(err.message).toBe(`Cannot overwrite directory '${dest}' with non-directory '${src}'.`);
+          expect(err.message).toBe(
+            `Cannot overwrite directory '${dest}' with non-directory '${src}'.`,
+          );
         }
       });
     });
@@ -223,7 +225,8 @@ describe('+ copySync() / file', () => {
           });
           it('should throw an error when errorOnExist is true', () => {
             expect(() =>
-              fs.copySync(src, dest, { overwrite: false, errorOnExist: true })).toThrow();
+              fs.copySync(src, dest, { overwrite: false, errorOnExist: true }),
+            ).toThrow();
 
             // copy never happened
             const destDataNew = fs.readFileSync(dest, 'utf8');

@@ -15,7 +15,7 @@ function hasMillisResSync() {
       Date.now().toString() +
       Math.random().toString().slice(2),
   );
-  tmpfile = path.join(os.tmpdir(), 'fs-extra', tmpfile);
+  tmpfile = path.join(os.tmpdir(), 'fs-extra-test-suite', tmpfile);
 
   // 550 millis past UNIX epoch
   const d = new Date(1435410243862);
@@ -33,7 +33,7 @@ describe('utimes', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'utimes');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'utimes');
     await fse.emptyDir(TEST_DIR);
   });
 

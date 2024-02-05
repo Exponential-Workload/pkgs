@@ -28,7 +28,7 @@ describe('+ move() - prevent moving into itself', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'move-prevent-moving-into-itself',
     );
     src = path.join(TEST_DIR, 'src');
@@ -213,7 +213,9 @@ describe('+ move() - prevent moving into itself', () => {
         fs.move(src, dest)
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
+            expect(err.message).toBe(
+              `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
+            );
 
             const srclenAfter = klawSync(src).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -237,7 +239,7 @@ describe('+ move() - prevent moving into itself', () => {
           .catch(err => err)
           .then(err => {
             expect(err.message).toBe(
-              `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`
+              `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`,
             );
 
             const srclenAfter = klawSync(src).length;
@@ -345,7 +347,9 @@ describe('+ move() - prevent moving into itself', () => {
         fs.move(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const srclenAfter = klawSync(srcLink).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -409,7 +413,9 @@ function testError(src, dest, done) {
     .catch(err => err)
     .then(err => {
       expect(err).toBeTruthy();
-      expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
+      expect(err.message).toBe(
+        `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
+      );
       expect(fs.existsSync(src)).toBeTruthy();
       expect(!fs.existsSync(dest)).toBeTruthy();
       return done();

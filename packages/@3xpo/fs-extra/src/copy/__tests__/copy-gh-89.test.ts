@@ -12,7 +12,7 @@ import assert from 'assert';
 /* global afterEach, beforeEach, describe, it */
 
 describe('copy() - gh #89', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-gh-89');
+  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'copy-gh-89');
 
   beforeEach(async () => {
     return fse.emptyDir(TEST_DIR);

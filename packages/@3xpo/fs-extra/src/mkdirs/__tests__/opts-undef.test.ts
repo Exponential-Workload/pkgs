@@ -11,7 +11,7 @@ describe('mkdirs / opts-undef', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirs');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirs');
     return fse.emptyDir(TEST_DIR);
   });
 

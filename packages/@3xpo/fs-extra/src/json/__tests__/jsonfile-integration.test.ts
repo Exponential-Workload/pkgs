@@ -12,7 +12,7 @@ describe('jsonfile-integration', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'json');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'json');
     return fse.emptyDir(TEST_DIR);
   });
 
@@ -42,7 +42,9 @@ describe('jsonfile-integration', () => {
       const file = path.join(TEST_DIR, 'file.json');
       fse.writeJsonSync(file, obj1, { spaces: 2, EOL: '\r\n' });
       const data = fs.readFileSync(file, 'utf8');
-      expect(data).toBe(JSON.stringify(obj1, null, 2).replace(/\n/g, '\r\n') + '\r\n');
+      expect(data).toBe(
+        JSON.stringify(obj1, null, 2).replace(/\n/g, '\r\n') + '\r\n',
+      );
     });
   });
 });

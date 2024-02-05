@@ -14,7 +14,11 @@ const ensureLinkSync = fse.ensureLinkSync;
 /* global afterEach, beforeEach, describe, it, after, before */
 
 describe('fse-ensure-link', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ensure-symlink');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'ensure-symlink',
+  );
 
   const tests = [
     // [[srcpath, dstpath], fs.link expect, ensureLink expect]

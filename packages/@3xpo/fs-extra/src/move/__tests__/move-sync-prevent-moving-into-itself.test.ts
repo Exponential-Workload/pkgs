@@ -27,7 +27,7 @@ describe('+ moveSync() - prevent moving into itself', () => {
   beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'move-sync-prevent-moving-into-itself',
     );
     src = path.join(TEST_DIR, 'src');
@@ -208,7 +208,9 @@ describe('+ moveSync() - prevent moving into itself', () => {
         try {
           fs.moveSync(src, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         } finally {
           expect(errThrown).toBeTruthy();
@@ -232,7 +234,9 @@ describe('+ moveSync() - prevent moving into itself', () => {
         try {
           fs.moveSync(src, dest);
         } catch (err) {
-          expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
+          expect(err.message).toBe(
+            `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
+          );
           errThrown = true;
         } finally {
           expect(errThrown).toBeTruthy();
@@ -257,7 +261,7 @@ describe('+ moveSync() - prevent moving into itself', () => {
           fs.moveSync(src, dest);
         } catch (err) {
           expect(err.message).toBe(
-            `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`
+            `Cannot move '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`,
           );
           errThrown = true;
         } finally {
@@ -368,7 +372,9 @@ describe('+ moveSync() - prevent moving into itself', () => {
         try {
           fs.moveSync(srcLink, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         } finally {
           expect(errThrown).toBeTruthy();
@@ -423,7 +429,9 @@ function testError(src, dest) {
   try {
     fs.moveSync(src, dest);
   } catch (err) {
-    expect(err.message).toBe(`Cannot move '${src}' to a subdirectory of itself, '${dest}'.`);
+    expect(err.message).toBe(
+      `Cannot move '${src}' to a subdirectory of itself, '${dest}'.`,
+    );
     expect(fs.existsSync(src)).toBeTruthy();
     expect(!fs.existsSync(dest)).toBeTruthy();
     errThrown = true;

@@ -10,7 +10,11 @@ import assert from 'assert';
 import _symlinkPaths from '../symlink-paths';
 const symlinkPaths = _symlinkPaths.symlinkPaths;
 const symlinkPathsSync = _symlinkPaths.symlinkPathsSync;
-const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ensure-symlink');
+const TEST_DIR = path.join(
+  os.tmpdir(),
+  'fs-extra-test-suite',
+  'ensure-symlink',
+);
 
 /* global afterEach, beforeEach, describe, it, after, before */
 

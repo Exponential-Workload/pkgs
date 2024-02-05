@@ -13,7 +13,7 @@ import { URL } from 'url';
 describe('copy-sync / broken symlink', () => {
   const TEST_DIR = path.join(
     os.tmpdir(),
-    'fs-extra',
+    'fs-extra-test-suite',
     'copy-sync-broken-symlink',
   );
   const src = path.join(TEST_DIR, 'src');

@@ -17,7 +17,11 @@ describeIfPractical('copy() - preserve timestamp', () => {
   let TEST_DIR, SRC, DEST, FILES;
 
   function setupFixture(readonly) {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-preserve-timestamp');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'copy-preserve-timestamp',
+    );
     SRC = path.join(TEST_DIR, 'src');
     DEST = path.join(TEST_DIR, 'dest');
     FILES = [

@@ -38,7 +38,7 @@ describe('+ move()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'move');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'move');
 
     fse.emptyDirSync(TEST_DIR);
 
@@ -177,7 +177,9 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           done();
         });
     });
@@ -203,7 +205,9 @@ describe('+ move()', () => {
         .move(src, dest)
         .catch(err => err)
         .then(err => {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           done();
         });
     });
@@ -427,7 +431,9 @@ describe('+ move()', () => {
         .catch(err => err)
         .then(err => {
           expect(fs.existsSync(SRC_DIR)).toBeTruthy();
-          expect(err.message).toBe(`Cannot move '${SRC_DIR}' to a subdirectory of itself, '${DEST_DIR}'.`);
+          expect(err.message).toBe(
+            `Cannot move '${SRC_DIR}' to a subdirectory of itself, '${DEST_DIR}'.`,
+          );
           done();
         });
     });

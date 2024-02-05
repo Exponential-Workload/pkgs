@@ -16,7 +16,7 @@ describe('mkdirp / relative', () => {
   let file: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-relative');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-relative');
     await fse.emptyDir(TEST_DIR);
     const x = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);
     const y = Math.floor(Math.random() * Math.pow(16, 4)).toString(16);

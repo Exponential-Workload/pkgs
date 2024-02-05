@@ -12,7 +12,7 @@ describe('output', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'output');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'output');
     return fse.emptyDir(TEST_DIR);
   });
 

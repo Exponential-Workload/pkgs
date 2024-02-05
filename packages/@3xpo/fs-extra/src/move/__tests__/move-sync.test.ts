@@ -18,7 +18,7 @@ describe('moveSync()', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'move-sync');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'move-sync');
     fse.emptyDirSync(TEST_DIR);
 
     // Create fixtures

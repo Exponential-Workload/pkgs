@@ -12,7 +12,7 @@ describe('remove/sync', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'remove-sync');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'remove-sync');
     return fse.emptyDir(TEST_DIR);
   });
 

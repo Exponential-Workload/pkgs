@@ -17,7 +17,11 @@ import assert from 'assert';
 // eslint-enable globalReturn */
 
 describe('ncp / error / dest-permission', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ncp-error-dest-perm');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'ncp-error-dest-perm',
+  );
   const src = path.join(TEST_DIR, 'src');
   const dest = path.join(TEST_DIR, 'dest');
 

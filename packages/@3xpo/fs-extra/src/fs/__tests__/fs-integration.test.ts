@@ -12,7 +12,7 @@ describe('native fs', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'native-fs');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'native-fs');
     return fse.emptyDir(TEST_DIR);
   });
 

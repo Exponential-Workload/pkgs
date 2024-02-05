@@ -8,7 +8,11 @@ import copySync from '../copy-sync';
 /* global afterEach, beforeEach, describe, it */
 
 describe('copy-sync / symlink', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-sync-symlinks');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'copy-sync-symlinks',
+  );
   const src = path.join(TEST_DIR, 'src');
   const out = path.join(TEST_DIR, 'out');
 

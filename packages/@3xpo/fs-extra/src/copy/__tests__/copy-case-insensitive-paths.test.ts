@@ -15,7 +15,7 @@ describe('+ copy() - case insensitive paths', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-case-insensitive-paths',
     );
     return fs.emptyDir(TEST_DIR);

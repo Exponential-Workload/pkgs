@@ -15,7 +15,7 @@ describe('+ moveSync() - case insensitive paths', () => {
   beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'move-sync-case-insensitive-paths',
     );
     return fs.emptyDir(TEST_DIR);
@@ -31,7 +31,9 @@ describe('+ moveSync() - case insensitive paths', () => {
 
       fs.moveSync(src, dest);
       expect(fs.existsSync(dest)).toBeTruthy();
-      expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
+      expect(
+        fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
+      ).toBe('some data');
     });
   });
 
@@ -57,7 +59,9 @@ describe('+ moveSync() - case insensitive paths', () => {
 
       fs.moveSync(srcLink, dest);
       expect(fs.existsSync(dest)).toBeTruthy();
-      expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
+      expect(
+        fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
+      ).toBe('some data');
       const destLink = fs.readlinkSync(dest);
       expect(destLink).toBe(src);
     });

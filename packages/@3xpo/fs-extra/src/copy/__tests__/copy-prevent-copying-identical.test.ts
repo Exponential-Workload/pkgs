@@ -15,7 +15,7 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
   beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-prevent-copying-identical',
     );
     return fs.emptyDir(TEST_DIR);

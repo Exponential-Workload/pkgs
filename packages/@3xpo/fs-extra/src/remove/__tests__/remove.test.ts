@@ -27,7 +27,7 @@ function buildFixtureDir() {
 
 describe('remove', () => {
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'remove');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'remove');
     return fse.emptyDir(TEST_DIR);
   });
 

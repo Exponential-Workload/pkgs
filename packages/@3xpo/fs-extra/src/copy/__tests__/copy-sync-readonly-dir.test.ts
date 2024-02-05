@@ -20,7 +20,11 @@ const FILES = [
 
 describe('+ copySync() - copy a readonly directory with content', () => {
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-readonly-dir');
+    TEST_DIR = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'copy-readonly-dir',
+    );
     return fs.emptyDir(TEST_DIR);
   });
 

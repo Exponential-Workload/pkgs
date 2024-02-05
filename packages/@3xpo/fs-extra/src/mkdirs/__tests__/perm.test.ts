@@ -12,7 +12,7 @@ describe('mkdirp / perm', () => {
   let TEST_DIR: string;
 
   beforeEach(() => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'mkdirp-perm');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'mkdirp-perm');
     return fse.emptyDir(TEST_DIR);
   });
 
@@ -37,5 +37,5 @@ describe('mkdirp / perm', () => {
   });
 
   it('async root perm', () =>
-    fse.mkdirp(path.join(os.tmpdir(), 'fs-extra', '_tmp'), 0o755));
+    fse.mkdirp(path.join(os.tmpdir(), 'fs-extra-test-suite', '_tmp'), 0o755));
 });

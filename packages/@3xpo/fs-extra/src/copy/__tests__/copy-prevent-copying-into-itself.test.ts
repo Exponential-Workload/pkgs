@@ -27,7 +27,7 @@ describe('+ copy() - prevent copying into itself', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-prevent-copying-into-itself',
     );
     src = path.join(TEST_DIR, 'src');
@@ -186,7 +186,9 @@ describe('+ copy() - prevent copying into itself', () => {
         fs.copy(src, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const srclenAfter = klawSync(src).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -209,7 +211,9 @@ describe('+ copy() - prevent copying into itself', () => {
         fs.copy(src, dest)
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe(`Cannot copy '${src}' to a subdirectory of itself, '${dest}'.`);
+            expect(err.message).toBe(
+              `Cannot copy '${src}' to a subdirectory of itself, '${dest}'.`,
+            );
 
             const srclenAfter = klawSync(src).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -233,7 +237,7 @@ describe('+ copy() - prevent copying into itself', () => {
           .catch(err => err)
           .then(err => {
             expect(err.message).toBe(
-              `Cannot copy '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`
+              `Cannot copy '${src}' to a subdirectory of itself, '${path.join(destLink, 'dir1')}'.`,
             );
 
             const srclenAfter = klawSync(src).length;
@@ -380,7 +384,9 @@ describe('+ copy() - prevent copying into itself', () => {
         fs.copy(srcLink, destLink, { dereference: true })
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe('Source and destination must not be the same.');
+            expect(err.message).toBe(
+              'Source and destination must not be the same.',
+            );
 
             const srclenAfter = klawSync(srcLink).length;
             expect(srclenAfter).toBe(srclenBefore);
@@ -415,7 +421,9 @@ describe('+ copy() - prevent copying into itself', () => {
         fs.copy(srcLink, destLink)
           .catch(err => err)
           .then(err => {
-            expect(err.message).toBe(`Cannot copy '${src}' to a subdirectory of itself, '${resolvedDestPath}'.`);
+            expect(err.message).toBe(
+              `Cannot copy '${src}' to a subdirectory of itself, '${resolvedDestPath}'.`,
+            );
             const destln = fs.readlinkSync(destLink);
             expect(destln).toBe(resolvedDestPath);
             done();
@@ -454,7 +462,9 @@ function testError(src, dest, done) {
   fs.copy(src, dest)
     .catch(err => err)
     .then(err => {
-      expect(err.message).toBe(`Cannot copy '${src}' to a subdirectory of itself, '${dest}'.`);
+      expect(err.message).toBe(
+        `Cannot copy '${src}' to a subdirectory of itself, '${dest}'.`,
+      );
       done();
     });
 }

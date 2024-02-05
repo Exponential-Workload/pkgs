@@ -24,7 +24,7 @@ describe('fs.read()', () => {
   let TEST_FD: number;
 
   beforeEach(async () => {
-    TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'read-test-file');
+    TEST_FILE = path.join(os.tmpdir(), 'fs-extra-test-suite', 'read-test-file');
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.writeFileSync(TEST_FILE, TEST_DATA);
     TEST_FD = fs.openSync(TEST_FILE, 'r');
@@ -94,7 +94,11 @@ describe('fs.write()', () => {
   let TEST_FD: number;
 
   beforeEach(async () => {
-    TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'write-test-file');
+    TEST_FILE = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'write-test-file',
+    );
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.ensureDirSync(path.dirname(TEST_FILE));
     TEST_FD = fs.openSync(TEST_FILE, 'w');
@@ -146,7 +150,11 @@ describe('fs.readv()', () => {
   let TEST_FD: number;
 
   beforeEach(async () => {
-    TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'readv-test-file');
+    TEST_FILE = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'readv-test-file',
+    );
     TEST_DATA = crypto.randomBytes(SIZE);
     fs.writeFileSync(TEST_FILE, TEST_DATA);
     TEST_FD = fs.openSync(TEST_FILE, 'r');
@@ -222,7 +230,11 @@ describe('fs.writev()', () => {
   let TEST_FD: number;
 
   beforeEach(async () => {
-    TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'writev-test-file');
+    TEST_FILE = path.join(
+      os.tmpdir(),
+      'fs-extra-test-suite',
+      'writev-test-file',
+    );
     TEST_DATA = [crypto.randomBytes(SIZE / 2), crypto.randomBytes(SIZE / 2)];
     fs.ensureDirSync(path.dirname(TEST_FILE));
     TEST_FD = fs.openSync(TEST_FILE, 'w');

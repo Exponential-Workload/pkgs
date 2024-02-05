@@ -12,7 +12,7 @@ describe('@3xpo/fs-extra -> ensure -> ensure', () => {
   let TEST_DIR: string;
 
   beforeEach(async () => {
-    TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ensure');
+    TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'ensure');
     return fse.emptyDir(TEST_DIR);
   });
 

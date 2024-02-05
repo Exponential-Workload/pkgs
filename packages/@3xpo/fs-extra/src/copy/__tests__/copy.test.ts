@@ -13,7 +13,7 @@
 
 // describe('@3xpo/fs-extra -> copy', () => {
 //   beforeEach(() => {
-//     TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy');
+//     TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'copy');
 //     return fse.emptyDir(TEST_DIR);
 //   });
 

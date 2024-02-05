@@ -9,7 +9,11 @@ import { copy } from '../';
 /* global afterEach, beforeEach, describe, it */
 
 describe('copy / broken symlink', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'copy-broken-symlink');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'copy-broken-symlink',
+  );
   const src = path.join(TEST_DIR, 'src');
   const dest = path.join(TEST_DIR, 'dest');
 

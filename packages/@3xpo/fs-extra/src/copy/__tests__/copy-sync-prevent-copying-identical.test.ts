@@ -16,7 +16,7 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-sync-prevent-copying-identical',
     );
     return fs.emptyDir(TEST_DIR);
@@ -54,7 +54,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         } finally {
           expect(fs.existsSync(src)).toBeTruthy();
         }
@@ -71,7 +73,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         } finally {
           expect(fs.existsSync(src)).toBeTruthy();
         }
@@ -90,7 +94,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         } finally {
           expect(fs.existsSync(src)).toBeTruthy();
         }
@@ -107,7 +113,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, dest);
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         } finally {
           expect(fs.existsSync(src)).toBeTruthy();
         }
@@ -137,7 +145,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         }
 
         const newlen = klawSync(src).length;
@@ -189,7 +199,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(srcLink, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         }
 
         const srclenAfter = klawSync(srcLink).length;
@@ -223,7 +235,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(src, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         }
 
         const link = fs.readlinkSync(destLink);
@@ -265,7 +279,9 @@ describe('+ copySync() - prevent copying identical files and dirs', () => {
         try {
           fs.copySync(srcLink, destLink, { dereference: true });
         } catch (err) {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
         }
 
         const srcln = fs.readlinkSync(srcLink);

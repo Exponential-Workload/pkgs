@@ -16,7 +16,7 @@ describe('+ copySync() - case insensitive paths', () => {
   beforeEach(async () => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'copy-sync-case-insensitive-paths',
     );
     return fs.emptyDir(TEST_DIR);
@@ -35,14 +35,19 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(src, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
+      if (platform === 'darwin' || platform === 'win32')
+        expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
         expect(fs.existsSync(dest)).toBeTruthy();
-        expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
+        expect(
+          fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
+        ).toBe('some data');
         expect(!errThrown).toBeTruthy();
       }
     });
@@ -59,11 +64,14 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(src, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
+      if (platform === 'darwin' || platform === 'win32')
+        expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
         expect(fs.existsSync(dest)).toBeTruthy();
         expect(fs.readFileSync(dest, 'utf8')).toBe('some data');
@@ -85,14 +93,19 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(srcLink, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
+      if (platform === 'darwin' || platform === 'win32')
+        expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
         expect(fs.existsSync(dest)).toBeTruthy();
-        expect(fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8')).toBe('some data');
+        expect(
+          fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
+        ).toBe('some data');
         const destLink = fs.readlinkSync(dest);
         expect(destLink).toBe(src);
         expect(!errThrown).toBeTruthy();
@@ -111,11 +124,14 @@ describe('+ copySync() - case insensitive paths', () => {
         fs.copySync(srcLink, dest);
       } catch (err) {
         if (platform === 'darwin' || platform === 'win32') {
-          expect(err.message).toBe('Source and destination must not be the same.');
+          expect(err.message).toBe(
+            'Source and destination must not be the same.',
+          );
           errThrown = true;
         }
       }
-      if (platform === 'darwin' || platform === 'win32') expect(errThrown).toBeTruthy();
+      if (platform === 'darwin' || platform === 'win32')
+        expect(errThrown).toBeTruthy();
       if (platform === 'linux') {
         expect(fs.existsSync(dest)).toBeTruthy();
         expect(fs.readFileSync(dest, 'utf8')).toBe('some data');

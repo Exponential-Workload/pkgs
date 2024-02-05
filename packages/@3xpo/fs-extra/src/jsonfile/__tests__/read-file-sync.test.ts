@@ -13,7 +13,7 @@ describe('+ readFileSync()', () => {
   beforeEach(() => {
     TEST_DIR = path.join(
       os.tmpdir(),
-      'fs-extra',
+      'fs-extra-test-suite',
       'jsonfile-tests-readfile-sync',
     );
     fs.rmSync(TEST_DIR, { recursive: true, force: true });

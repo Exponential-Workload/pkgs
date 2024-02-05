@@ -11,7 +11,7 @@ describe('fs.rm', () => {
   let TEST_FILE;
 
   beforeEach(async () => {
-    TEST_FILE = path.join(os.tmpdir(), 'fs-extra', 'fs-rm');
+    TEST_FILE = path.join(os.tmpdir(), 'fs-extra-test-suite', 'fs-rm');
     return fse.remove(TEST_FILE);
   });
 

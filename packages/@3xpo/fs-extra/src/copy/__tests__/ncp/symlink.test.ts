@@ -10,7 +10,11 @@ import { fromCallback } from '@3xpo/universalify';
 /* global afterEach, beforeEach, describe, it */
 
 describe('ncp / symlink', () => {
-  const TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ncp-symlinks');
+  const TEST_DIR = path.join(
+    os.tmpdir(),
+    'fs-extra-test-suite',
+    'ncp-symlinks',
+  );
   const src = path.join(TEST_DIR, 'src');
   const out = path.join(TEST_DIR, 'out');
 

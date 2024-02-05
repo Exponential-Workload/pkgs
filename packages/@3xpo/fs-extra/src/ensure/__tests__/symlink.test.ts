@@ -18,7 +18,7 @@ test.todo('create fse symlink test');
 // let TEST_DIR: string;
 
 // describe('fse-ensure-symlink', () => {
-//   TEST_DIR = path.join(os.tmpdir(), 'fs-extra', 'ensure-symlink');
+//   TEST_DIR = path.join(os.tmpdir(), 'fs-extra-test-suite', 'ensure-symlink');
 
 //   const tests: [
 //     [srcpath: string, dstpath: string],
