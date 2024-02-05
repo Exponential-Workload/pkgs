@@ -34,16 +34,14 @@ describe('+ copy() - case insensitive paths', () => {
         .catch(err => err)
         .then(err => {
           if (platform === 'linux') {
-            assert.ifError(err);
-            assert(fs.existsSync(dest));
-            assert.strictEqual(
+            expect(err).toBeFalsy();
+            expect(fs.existsSync(dest)).toBeTruthy();
+            expect(
               fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-              'some data',
-            );
+            ).toStrictEqual('some data');
           }
           if (platform === 'darwin' || platform === 'win32') {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
           }
@@ -62,13 +60,12 @@ describe('+ copy() - case insensitive paths', () => {
         .catch(err => err)
         .then(err => {
           if (platform === 'linux') {
-            assert.ifError(err);
+            expect(err).toBeFalsy();
             assert(fs.existsSync(dest));
-            assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+            expect(fs.readFileSync(dest, 'utf8')).toStrictEqual('some data');
           }
           if (platform === 'darwin' || platform === 'win32') {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
           }
@@ -89,18 +86,16 @@ describe('+ copy() - case insensitive paths', () => {
         .catch(err => err)
         .then(err => {
           if (platform === 'linux') {
-            assert.ifError(err);
+            expect(err).toBeFalsy();
             assert(fs.existsSync(dest));
-            assert.strictEqual(
+            expect(
               fs.readFileSync(path.join(dest, 'subdir', 'file.txt'), 'utf8'),
-              'some data',
-            );
+            ).toStrictEqual('some data');
             const destLink = fs.readlinkSync(dest);
-            assert.strictEqual(destLink, src);
+            expect(destLink).toStrictEqual(src);
           }
           if (platform === 'darwin' || platform === 'win32') {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
           }
@@ -119,15 +114,14 @@ describe('+ copy() - case insensitive paths', () => {
         .catch(err => err)
         .then(err => {
           if (platform === 'linux') {
-            assert.ifError(err);
+            expect(err).toBeFalsy();
             assert(fs.existsSync(dest));
-            assert.strictEqual(fs.readFileSync(dest, 'utf8'), 'some data');
+            expect(fs.readFileSync(dest, 'utf8')).toStrictEqual('some data');
             const destLink = fs.readlinkSync(dest);
-            assert.strictEqual(destLink, src);
+            expect(destLink).toStrictEqual(src);
           }
           if (platform === 'darwin' || platform === 'win32') {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
           }

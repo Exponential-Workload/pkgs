@@ -19,21 +19,15 @@ describe('+ copy() - copy /dev/null', () => {
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
 
   describe('> when src is /dev/null', () => {
-    it('should copy successfully', done => {
+    it('should copy successfully', async () => {
       // no /dev/null on windows
-      if (process.platform === 'win32') return done();
+      if (process.platform === 'win32') return;
 
       const tmpFile = path.join(TEST_DIR, 'foo');
 
-      fse
-        .copy('/dev/null', tmpFile)
-        .catch(err => err)
-        .then(err => {
-          assert.ifError(err);
-          const stats = fs.lstatSync(tmpFile);
-          assert.strictEqual(stats.size, 0);
-          done();
-        });
+      await fse.copy('/dev/null', tmpFile);
+      const stats = fs.lstatSync(tmpFile);
+      expect(stats.size).toStrictEqual(0);
     });
   });
 });

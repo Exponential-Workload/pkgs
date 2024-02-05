@@ -62,31 +62,19 @@ describeIfPractical('copy() - preserve timestamp', () => {
     });
   });
 
-  function testFile(options) {
-    return function (file) {
+  function testFile(options?: { preserveTimestamps?: boolean }) {
+    return (file: string) => {
       const a = path.join(SRC, file);
       const b = path.join(DEST, file);
       const fromStat = fs.statSync(a);
       const toStat = fs.statSync(b);
-      if (options.preserveTimestamps) {
+      if (options?.preserveTimestamps) {
         // Windows sub-second precision fixed: https://github.com/nodejs/io.js/issues/2069
-        assert.strictEqual(
-          toStat.mtime.getTime(),
-          fromStat.mtime.getTime(),
-          'different mtime values',
-        );
-        assert.strictEqual(
-          toStat.atime.getTime(),
-          fromStat.atime.getTime(),
-          'different atime values',
-        );
+        expect(toStat.mtime.getTime()).toStrictEqual(fromStat.mtime.getTime());
+        expect(toStat.atime.getTime()).toStrictEqual(fromStat.atime.getTime());
       } else {
         // the access time might actually be the same, so check only modification time
-        assert.notStrictEqual(
-          toStat.mtime.getTime(),
-          fromStat.mtime.getTime(),
-          'same mtime values',
-        );
+        expect(toStat.mtime.getTime()).toStrictEqual(fromStat.mtime.getTime());
       }
     };
   }

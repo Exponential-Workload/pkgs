@@ -24,25 +24,26 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
 
   afterEach(() => fs.remove(TEST_DIR));
 
-  it('should return an error if src and dest are the same', done => {
+  it('should return an error if src and dest are the same', async () => {
     const fileSrc = path.join(TEST_DIR, 'TEST_fs-extra_copy');
     const fileDest = path.join(TEST_DIR, 'TEST_fs-extra_copy');
     fs.ensureFileSync(fileSrc);
 
-    fs.copy(fileSrc, fileDest)
-      .catch(err => err)
-      .then(err => {
-        assert.strictEqual(
-          err.message,
-          'Source and destination must not be the same.',
-        );
-        done();
-      });
+    let success = false;
+    try {
+      await fs.copy(fileSrc, fileDest);
+      success = true;
+    } catch (error) {
+      expect(error.message).toStrictEqual(
+        'Source and destination must not be the same.',
+      );
+    }
+    if (success === true) throw new Error('Did not throw');
   });
 
   describe('dest with parent symlink', () => {
     describe('first parent is symlink', () => {
-      it('should error when src is file', done => {
+      it('should error when src is file', async () => {
         const src = path.join(TEST_DIR, 'a', 'file.txt');
         const dest = path.join(TEST_DIR, 'b', 'file.txt');
         const srcParent = path.join(TEST_DIR, 'a');
@@ -50,16 +51,17 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.ensureFileSync(src);
         fs.ensureSymlinkSync(srcParent, destParent, 'dir');
 
-        fs.copy(src, dest)
-          .catch(err => err)
-          .then(err => {
-            assert.strictEqual(
-              err.message,
-              'Source and destination must not be the same.',
-            );
-            assert(fs.existsSync(src));
-            done();
-          });
+        let success = false;
+        try {
+          await fs.copy(src, dest);
+          success = true;
+        } catch (error) {
+          expect(error.message).toStrictEqual(
+            'Source and destination must not be the same.',
+          );
+          expect(fs.existsSync(src)).toBeTruthy();
+        }
+        if (success === true) throw new Error('Did not throw');
       });
 
       it('should error when src is directory', done => {
@@ -73,11 +75,10 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
-            assert(fs.existsSync(src));
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });
@@ -95,11 +96,10 @@ describe('+ copy() - prevent copying identical files and dirs', () => {
         fs.copy(src, dest)
           .catch(err => err)
           .then(err => {
-            assert.strictEqual(
-              err.message,
+            expect(err.message).toStrictEqual(
               'Source and destination must not be the same.',
             );
-            assert(fs.existsSync(src));
+            expect(fs.existsSync(src)).toBeTruthy();
             done();
           });
       });

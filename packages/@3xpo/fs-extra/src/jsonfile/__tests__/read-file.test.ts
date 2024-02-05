@@ -22,20 +22,16 @@ describe('+ readFile()', () => {
     done();
   });
 
-  it('should resolve a promise with parsed JSON', done => {
+  it('should resolve a promise with parsed JSON', async () => {
     const file = path.join(TEST_DIR, 'somefile.json');
     const obj = { name: 'JP' };
+    fs.mkdirSync(path.dirname(file), {
+      recursive: true,
+    });
     fs.writeFileSync(file, JSON.stringify(obj));
 
-    jf.readFile(file)
-      .then(data => {
-        assert.strictEqual(data.name, obj.name);
-        done();
-      })
-      .catch(err => {
-        assert.ifError(err);
-        done();
-      });
+    const data = await jf.readFile(file);
+    expect(data.name).toStrictEqual(obj.name);
   });
 
   describe('> when invalid JSON', () => {

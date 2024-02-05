@@ -23,7 +23,7 @@ describe('promise support', () => {
   });
 
   it('provides fse.promises API', () => {
-    assert.ok(fse.promises);
-    assert.strictEqual(typeof fse.promises.writeFile, 'function');
+    expect(fse.promises).toBeTruthy();
+    expect(typeof fse.promises.writeFile).toStrictEqual('function');
   });
 });

@@ -14,11 +14,9 @@ describe('copy / broken symlink', () => {
   const src = path.join(TEST_DIR, 'src');
   const dest = path.join(TEST_DIR, 'dest');
 
-  beforeEach(done => {
-    fse.emptyDir(TEST_DIR, err => {
-      assert.ifError(err);
-      createFixtures(src, done);
-    });
+  beforeEach(async () => {
+    await fse.emptyDir(TEST_DIR);
+    await new Promise(rs => createFixtures(src, rs));
   });
 
   afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
@@ -32,7 +30,7 @@ describe('copy / broken symlink', () => {
       copy(src, dest, { dereference: true })
         .catch(err => err)
         .then(err => {
-          assert.strictEqual(err.code, 'ENOENT');
+          expect(err.code).toStrictEqual('ENOENT');
           done();
         });
     });
