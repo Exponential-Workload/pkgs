@@ -1,5 +1,4 @@
-if (process.platform !== 'win32')
-  require('fs').rmSync('/tmp/fs-extra', {
-    recursive: true,
-    force: true,
-  });
+require('fs').rmSync(require('path').join(require('os').tmpdir(), 'fs-extra'), {
+  recursive: true,
+  force: true,
+});
