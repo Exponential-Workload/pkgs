@@ -8,7 +8,7 @@ jobs:
     container:
       image: node:slim
     steps:
-      - name: Install Git
+      - name: Install System Dependencies
         run: apt update && apt install git g++ -y
       - name: Checkout
         uses: actions/checkout@v3
