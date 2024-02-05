@@ -1,10 +1,5 @@
 # @3xpo/universalify: Universalify, in TypeScript
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/RyanZim/universalify/ci.yml?branch=master)
-![Coveralls github branch](https://img.shields.io/coveralls/github/RyanZim/universalify/master.svg)
-![npm](https://img.shields.io/npm/dm/universalify.svg)
-![npm](https://img.shields.io/npm/l/universalify.svg)
-
 Make a callback- or promise-based function support both promises and callbacks.
 
 Uses the native promise implementation.
@@ -12,7 +7,7 @@ Uses the native promise implementation.
 ## Installation
 
 ```bash
-npm install universalify
+pnpm i @3xpo/universalify
 ```
 
 ## API

@@ -39,7 +39,7 @@
     "build": "concurrently \"npm:build:*\"",
     "build:dts": "tsc --emitDeclarationOnly --declaration",
     "build:js": "es-many --args \"src/index.ts --sourcemap --packages=external\" --output dist/lib --minify true --bundle true --format cjs,esm --platform neutral",
-    "test": "nyc --reporter text --reporter lcovonly tape test/*.js | colortape"
+    "test": "jest"
   },
   "engines": {
     "node": ">= 10.0.0"
@@ -60,11 +60,8 @@
   ],
   "type": "module",
   "devDependencies": {
-    "@types/tape": "^5.6.4",
-    "colortape": "^0.1.2",
     "concurrently": "^8.2.2",
-    "coveralls": "^3.1.1",
-    "nyc": "^15.1.0",
-    "tape": "^5.7.4"
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2"
   }
 }
