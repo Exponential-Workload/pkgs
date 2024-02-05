@@ -1,0 +1,93 @@
+{
+  "name": "querymimedb",
+  "version": "0.1.0",
+  "description": "Query the MIME DB on systems that support it.",
+  "scripts": {
+    "build": "concurrently \"npm:build:*\"",
+    "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
+    "build:ts": "tsc --emitDeclarationOnly",
+    "build:js": "esmany --args \"\\\"src/cjs.cts\\\" --sourcemap --packages=external  --resolve-extensions=.ts,.js,.mts,.cts,.mjs,.cjs\" --platform node --format cjs --bundle true --output dist/cjs",
+    "build:js-esm": "esmany --args \"\\\"src/esm.mts\\\" --sourcemap --packages=external  --resolve-extensions=.ts,.js,.mts,.cts,.mjs,.cjs\" --platform node --format esm --bundle true --output dist/esm",
+    "build:cmake": "cmake-js install && cmake-js configure && cmake-js compile",
+    "install": "npm run build:cmake"
+  },
+  "author": "Expo",
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/devtools.git",
+    "directory": "packages/querymimedb/"
+  },
+  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/querymimedb/",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/devtools/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json",
+    "CMakeLists.txt"
+  ],
+  "source": "./src/esm.mts",
+  "types": "./dist/esm.d.mts",
+  "typings": "./dist/esm.d.mts",
+  "main": "./dist/cjs.node.bundle.min.cjs",
+  "module": "./dist/esm.node.bundle.min.mjs",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/esm.node.bundle.min.mjs",
+        "types": "./dist/esm.d.mts"
+      },
+      "require": {
+        "default": "./dist/cjs.node.bundle.min.cjs",
+        "types": "./dist/cjs.d.cts"
+      },
+      "node": {
+        "default": "./dist/esm.node.bundle.min.mjs",
+        "types": "./dist/esm.d.mts"
+      },
+      "default": {
+        "default": "./dist/esm.node.bundle.min.mjs",
+        "types": "./dist/esm.d.mts"
+      }
+    }
+  },
+  "displayName": "QueryMimeDB",
+  "binary": {
+    "napi_versions": [
+      7
+    ]
+  },
+  "dependencies": {
+    "cmake-js": "^7.3.0",
+    "node-addon-api": "^7.1.0"
+  },
+  "devDependencies": {
+    "@3xpo/es-many": "workspace:^",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.20.0",
+    "nodemon": "^3.0.3"
+  }
+}
