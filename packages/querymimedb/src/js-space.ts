@@ -7,20 +7,25 @@ import {
   NoTypeException,
 } from './exceptions';
 
+/**
+ * Queries the path's MIME type.
+ * @throws {import('./exceptions').QueryException} When we don't know what happened
+ * @throws {import('./exceptions').NoTypeException} When no MIME type was found
+ * @throws {import('./exceptions').NotFoundException} When the file doesn't exist
+ * @throws {import('./exceptions').NoMagicDbException} When the magicdb does not exist and {@link dieOnNoLibMagic} is true or undefined
+ * @throws {import('./exceptions').NoLibMagicException} When libmagic is not installed and {@link dieOnNoLibMagic} is true or undefined
+ * @param {string} path The path to query the mime type for
+ * @param {boolean} [dieOnNoLibMagic=true] If libmagic isn't found & this is true, error.
+ * @returns {string|null} The MIME Type. If libmagic failed to be imported, or the magic db doesn't exist, returns null when {@link dieOnNoLibMagic} is false, and throws a {@link import('./exceptions').NoLibMagicException NoLibMagicException} or {@link import('./exceptions').NoMagicDbException NoMagicDbException} if it's true or blank.
+ */
+export type QueryFunc = <DieOnNoLibMagic extends boolean = true>(
+  path: string,
+  dieOnNoLibMagic?: DieOnNoLibMagic,
+) => DieOnNoLibMagic extends true ? string : string | null;
+
 /** JS-Space Wrapper Function; takes the Node API (imported via CJS or ESM), and outputs a callable function that properly returns errors */
-export default (addon: Addon) => {
-  /**
-   * Queries the path's MIME type.
-   * @throws {QueryException} When we don't know what happened
-   * @throws {NoTypeException} When no MIME type was found
-   * @throws {NotFoundException} When the file doesn't exist
-   * @throws {NoMagicDbException} When the magicdb does not exist and {@link dieOnNoLibMagic} is true or undefined
-   * @throws {NoLibMagicException} When libmagic is not installed and {@link dieOnNoLibMagic} is true or undefined
-   * @param {string} path The path to query the mime type for
-   * @param {boolean} [dieOnNoLibMagic=true] If libmagic isn't found & this is true, error.
-   * @returns {string|null} The MIME Type. If libmagic failed to be imported, or the magic db doesn't exist, returns null when {@link dieOnNoLibMagic} is false, and throws a {@link NoLibMagicException} or {@link NoMagicDbException} if it's true or blank.
-   */
-  return <DieOnNoLibMagic extends boolean = true>(
+export default (addon: Addon): QueryFunc =>
+  <DieOnNoLibMagic extends boolean = true>(
     path: string,
     dieOnNoLibMagic: DieOnNoLibMagic = true as DieOnNoLibMagic,
   ): DieOnNoLibMagic extends true ? string : string | null => {
@@ -64,4 +69,3 @@ export default (addon: Addon) => {
       return result;
     }
   };
-};
