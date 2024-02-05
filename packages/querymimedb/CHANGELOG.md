@@ -1,5 +1,11 @@
 # querymimedb
 
+## 0.1.4
+
+### Patch Changes
+
+- 27a8bb8: no declarationmap (we're using an external str manipulation tool on the output)
+
 ## 0.1.3
 
 ### Patch Changes
