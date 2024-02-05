@@ -2,12 +2,11 @@
 'use strict';
 import universalify from './index';
 
-const fn = universalify.fromPromise(
-  (a, b) =>
-    new Promise(resolve => {
-      setTimeout(() => resolve([this, a, b]), 15);
-    }),
-);
+const fn = universalify.fromPromise(function (a, b) {
+  return new Promise(resolve => {
+    setTimeout(() => resolve([this, a, b]), 15);
+  });
+});
 
 const errFn = universalify.fromPromise(
   () =>
@@ -50,16 +49,11 @@ test('promise function optional param works with callbacks', done => {
   });
 });
 
-test('promise function optional param works with promises', done => {
-  expect.assertions(3);
-  fn.call({ a: 'a' }, 1)
-    .then(arr => {
-      expect(arr[0].a).toBe('a');
-      expect(arr[1]).toBe(1);
-      expect(arr[2]).toBe(undefined);
-      done();
-    })
-    .catch(done);
+test('promise function optional param works with promises', async () => {
+  const arr = await fn.call({ a: 'a' }, 1);
+  expect(arr[0].a).toBe('a');
+  expect(arr[1]).toBe(1);
+  expect(arr[2]).toBe(undefined);
 });
 
 test('promise function error works with callbacks', done => {
