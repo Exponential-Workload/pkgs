@@ -15,7 +15,7 @@ function hasMillisResSync() {
       Date.now().toString() +
       Math.random().toString().slice(2),
   );
-  tmpfile = path.join(os.tmpdir(), 'fs-extra', '_tmp_utimes', tmpfile);
+  tmpfile = path.join(os.tmpdir(), 'fs-extra', tmpfile);
 
   // 550 millis past UNIX epoch
   const d = new Date(1435410243862);
