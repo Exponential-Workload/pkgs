@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: docker
     container:
-      image: node:slim
+      image: node
     steps:
       - name: Install System Dependencies
-        run: apt update && apt install git g++ -y
+        run: apt update && apt install git g++ cmake -y
       - name: Checkout
         uses: actions/checkout@v3
       - name: Enable Corepack
