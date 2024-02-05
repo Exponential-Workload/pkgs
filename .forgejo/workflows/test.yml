@@ -9,7 +9,7 @@ jobs:
       image: node:slim
     steps:
       - name: Install Git
-        run: apt update && apt install git -y
+        run: apt update && apt install git g++ -y
       - name: Checkout
         uses: actions/checkout@v3
       - name: Enable Corepack
