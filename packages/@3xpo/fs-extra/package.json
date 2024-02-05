@@ -55,7 +55,6 @@
     "build": "concurrently \"npm:build:*\"",
     "build:dts": "tsc --emitDeclarationOnly --declaration",
     "build:js": "es-many --args \"src/index.ts --sourcemap --packages=external\" --output dist/lib --minify false --bundle true --format cjs,esm --platform node",
-    "test-find": "find ./dist-test/**/__tests__ -name *.test.js | xargs mocha",
     "test": "node pretest.cjs && jest"
   },
   "sideEffects": false,
