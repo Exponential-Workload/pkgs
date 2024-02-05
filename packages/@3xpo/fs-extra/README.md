@@ -201,11 +201,13 @@ You'll need [pnpm](https://pnpm.io), aswell as the [monorepo](https://codeberg.o
 
 What's needed?
 
-- First, take a look at existing issues. Those are probably going to be where the priority lies.
+- First, take a look at existing issues, both in [upstream](https://github.com/jprichardson/node-fs-extra) and in the [monorepo](https://codeberg.org/Expo/devtools/projects/7795). Those are probably going to be where the priority lies.
 - More tests for edge cases. Specifically on different platforms. There can never be enough tests.
 - Improve test coverage.
+- Get new upstream commits into this fork! We split off of upstream at [acf5585](https://github.com/jprichardson/node-fs-extra/commit/acf55855580db460fd5532b22d73c4543798cd7d); getting anything done since then on the upstream `fs-extra` repository implemented here would be amazing. Sadly, if and when this happens, this is a significant amount of work due to the entire codebase being refactoed in a different language. As such, wherever possible, just re-implement equivalent changes in the fork.
+- Provide more features! If you have a use-case for `@3xpo/fs-extra` that it isn't fulfilling, feel free to [open an issue](https://codeberg.org/Expo/devtools/issues/new)! [Make sure to prefix the issue's title with `fs-extra:`](https://codeberg.org/Expo/devtools/issues/1) :)
 
-Note: If you make any big changes, **you should definitely file an issue for discussion first.**
+Note: If you make any extremely large changes, **you should definitely file an issue for discussion first** - however if you decide you want the feature in your fork regardless of if it gets merged, feel free to open a PR without a prior issue existing.
 
 ### Running the Test Suite
 
