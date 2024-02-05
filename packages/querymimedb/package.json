@@ -57,20 +57,23 @@
   "exports": {
     ".": {
       "import": {
-        "default": "./dist/esm.node.bundle.min.mjs",
-        "types": "./dist/esm.d.mts"
+        "types": "./dist/esm.d.mts",
+        "import": "./dist/esm.node.bundle.min.mjs",
+        "default": "./dist/esm.node.bundle.min.mjs"
       },
       "require": {
-        "default": "./dist/cjs.node.bundle.min.cjs",
-        "types": "./dist/cjs.d.cts"
+        "types": "./dist/cjs.d.cts",
+        "require": "./dist/cjs.node.bundle.min.cjs",
+        "default": "./dist/cjs.node.bundle.min.cjs"
       },
       "node": {
-        "default": "./dist/esm.node.bundle.min.mjs",
-        "types": "./dist/esm.d.mts"
+        "types": "./dist/esm.d.mts",
+        "node": "./dist/esm.node.bundle.min.mjs",
+        "default": "./dist/esm.node.bundle.min.mjs"
       },
       "default": {
-        "default": "./dist/esm.node.bundle.min.mjs",
-        "types": "./dist/esm.d.mts"
+        "types": "./dist/esm.d.mts",
+        "default": "./dist/esm.node.bundle.min.mjs"
       }
     }
   },
