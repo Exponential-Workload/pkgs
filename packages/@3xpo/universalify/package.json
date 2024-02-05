@@ -63,8 +63,8 @@
     "@types/tape": "^5.6.4",
     "colortape": "^0.1.2",
     "concurrently": "^8.2.2",
-    "coveralls": "^3.0.1",
-    "nyc": "^15.0.0",
-    "tape": "^5.0.1"
+    "coveralls": "^3.1.1",
+    "nyc": "^15.1.0",
+    "tape": "^5.7.4"
   }
 }
