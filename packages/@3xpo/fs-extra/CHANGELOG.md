@@ -1,5 +1,14 @@
 11.2.0 / 2023-11-27
 
+## 11.2.6
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+- 6f1ce79: migrate tests to jest assert system
+- Updated dependencies [da3a0a6]
+  - @3xpo/universalify@2.0.2
+
 ## 11.2.5
 
 ### Patch Changes

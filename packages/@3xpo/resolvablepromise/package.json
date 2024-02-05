@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/resolvablepromise",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Promises which can be resolved from their object",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",

@@ -1,5 +1,13 @@
 # @3xpo/conf
 
+## 0.2.5
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+- Updated dependencies [da3a0a6]
+  - @3xpo/events@1.0.10
+
 ## 0.2.4
 
 ### Patch Changes

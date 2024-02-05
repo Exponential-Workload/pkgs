@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/combgen",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Generating combinations of all possible values in an object",
   "source": "src/main.ts",
   "main": "dist/main.cjs",

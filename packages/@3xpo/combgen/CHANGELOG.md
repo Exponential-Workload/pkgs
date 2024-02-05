@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.9
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+
 ## 0.2.8
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @3xpo/events
 
+## 1.0.10
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+
 ## 1.0.9
 
 ### Patch Changes

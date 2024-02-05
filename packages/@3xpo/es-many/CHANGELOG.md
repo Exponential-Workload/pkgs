@@ -1,5 +1,13 @@
 # @3xpo/es-many
 
+## 0.2.9
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+- Updated dependencies [da3a0a6]
+  - @3xpo/combgen@0.2.9
+
 ## 0.2.8
 
 ### Patch Changes

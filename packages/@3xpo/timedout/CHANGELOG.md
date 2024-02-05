@@ -1,5 +1,11 @@
 # @3xpo/timedout
 
+## 0.1.6
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+
 ## 0.1.5
 
 ### Patch Changes

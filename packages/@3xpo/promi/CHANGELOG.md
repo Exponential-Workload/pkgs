@@ -1,5 +1,11 @@
 # @3xpo/promi
 
+## 0.1.4
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+
 ## 0.1.3
 
 ### Patch Changes

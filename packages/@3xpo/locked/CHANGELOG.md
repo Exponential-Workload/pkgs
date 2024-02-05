@@ -1,5 +1,13 @@
 # @3xpo/locked
 
+## 0.1.7
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+- Updated dependencies [da3a0a6]
+  - @3xpo/resolvablepromise@0.2.3
+
 ## 0.1.6
 
 ### Patch Changes

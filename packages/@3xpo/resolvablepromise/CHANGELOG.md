@@ -1,5 +1,11 @@
 # @3xpo/resolvablepromise
 
+## 0.2.3
+
+### Patch Changes
+
+- da3a0a6: upgrade dependencies
+
 ## 0.2.2
 
 ### Patch Changes
