@@ -1,15 +1,15 @@
 <div align="center">
 
-[![repo image](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/fs-extra.png)](https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/fs-extra)
+[![repo image](https://codeberg.org/Expo/pkgs/raw/branch/senpai/img/fs-extra.png)](https://codeberg.org/Expo/pkgs/src/branch/senpai/packages/@3xpo/fs-extra)
 
 # modern-fs-extra: fs-extra for the 21st century
 
 [![npm Package](https://img.shields.io/npm/v/@3xpo/fs-extra.svg)](https://npm.im/@3xpo/fs-extra)
-[![License](https://img.shields.io/npm/l/@3xpo/fs-extra.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/LICENSE)
+[![License](https://img.shields.io/npm/l/@3xpo/fs-extra.svg)](https://codeberg.org/Expo/pkgs/src/branch/senpai/LICENSE)
 [![build status](https://img.shields.io/github/actions/workflow/status/Exponential-Workload/modern-fs-extra/ci.yml?branch=master)](https://github.com/Exponential-Workload/modern-fs-extra/actions/workflows/ci.yml?query=branch%3Amaster)
 [![downloads per month](https://raster.shields.io/npm/dm/@3xpo/fs-extra.png)](https://npm.im/@3xpo/fs-extra)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-custom-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
-[![TypeScript](https://img.shields.io/badge/language-typescript-blue.svg)](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-custom-blue.svg)](https://codeberg.org/Expo/pkgs/src/branch/senpai/.prettierrc)
+[![TypeScript](https://img.shields.io/badge/language-typescript-blue.svg)](https://codeberg.org/Expo/pkgs/src/branch/senpai/.prettierrc)
 
 <!-- idk why the raster downloads fails, however i'll put it here for if i ever get it to render on npm: https://img.shields.io/npm/dm/@3xpo/fs-extra.svg -->
 
@@ -187,7 +187,7 @@ If you want to watch for changes to files or directories, then you should use [c
 
 Both of these use upstream fs-extra. They don't support this fork out of the box.
 
-If someone's interested in me maintaining a variant of either of these, [open an issue](https://codeberg.org/Expo/devtools/issues/new)!
+If someone's interested in me maintaining a variant of either of these, [open an issue](https://codeberg.org/Expo/pkgs/issues/new)!
 
 ## Hacking on fs-extra
 
@@ -195,17 +195,17 @@ Wanna hack on `fs-extra`? Great! Your help is needed! [fs-extra is one of the mo
 
 ~~This project
 uses [JavaScript Standard Style](https://github.com/feross/standard) - if the name or style choices bother you,
-you're gonna have to get over it :) If `standard` is good enough for `npm`, it's good enough for `fs-extra`~~ JS Standard Style is overcomplicated & overly strict for no reason; we use a minimal [prettier](https://codeberg.org/Expo/devtools/src/branch/senpai/.prettierrc) configuration. If you use single quotes & an indent size of 2, and don't code like a maniac, you're basically fine. `camelCase` is preferred for everything except classes; where `PascalCase` is used.
+you're gonna have to get over it :) If `standard` is good enough for `npm`, it's good enough for `fs-extra`~~ JS Standard Style is overcomplicated & overly strict for no reason; we use a minimal [prettier](https://codeberg.org/Expo/pkgs/src/branch/senpai/.prettierrc) configuration. If you use single quotes & an indent size of 2, and don't code like a maniac, you're basically fine. `camelCase` is preferred for everything except classes; where `PascalCase` is used.
 
-You'll need [pnpm](https://pnpm.io), aswell as the [monorepo](https://codeberg.org/Expo/devtools) this package is housed in. You shouldn't need much else.
+You'll need [pnpm](https://pnpm.io), aswell as the [monorepo](https://codeberg.org/Expo/pkgs) this package is housed in. You shouldn't need much else.
 
 What's needed?
 
-- First, take a look at existing issues, both in [upstream](https://github.com/jprichardson/node-fs-extra) and in the [monorepo](https://codeberg.org/Expo/devtools/projects/7795). Those are probably going to be where the priority lies.
+- First, take a look at existing issues, both in [upstream](https://github.com/jprichardson/node-fs-extra) and in the [monorepo](https://codeberg.org/Expo/pkgs/projects/7795). Those are probably going to be where the priority lies.
 - More tests for edge cases. Specifically on different platforms. There can never be enough tests.
 - Improve test coverage.
 - Get new upstream commits into this fork! We split off of upstream at [acf5585](https://github.com/jprichardson/node-fs-extra/commit/acf55855580db460fd5532b22d73c4543798cd7d); getting anything done since then on the upstream `fs-extra` repository implemented here would be amazing. Sadly, if and when this happens, this is a significant amount of work due to the entire codebase being refactoed in a different language. As such, wherever possible, just re-implement equivalent changes in the fork.
-- Provide more features! If you have a use-case for `@3xpo/fs-extra` that it isn't fulfilling, feel free to [open an issue](https://codeberg.org/Expo/devtools/issues/new)! [Make sure to prefix the issue's title with `fs-extra:`](https://codeberg.org/Expo/devtools/issues/1) :)
+- Provide more features! If you have a use-case for `@3xpo/fs-extra` that it isn't fulfilling, feel free to [open an issue](https://codeberg.org/Expo/pkgs/issues/new)! [Make sure to prefix the issue's title with `fs-extra:`](https://codeberg.org/Expo/pkgs/issues/1) :)
 
 Note: If you make any extremely large changes, **you should definitely file an issue for discussion first** - however if you decide you want the feature in your fork regardless of if it gets merged, feel free to open a PR without a prior issue existing.
 

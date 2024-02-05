@@ -1,6 +1,6 @@
-[![](https://codeberg.org/Expo/devtools/raw/branch/senpai/img/devtools.png)](#3xpo-devtools)
+[![](https://codeberg.org/Expo/pkgs/raw/branch/senpai/img/pkgs.png)](#3xpo-pkgs)
 
-# @3xpo/devtools
+# @3xpo/pkgs
 
 TypeScript libraries & tools for creating things.
 

@@ -26,12 +26,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/devtools.git",
+    "url": "https://codeberg.org/Expo/pkgs.git",
     "directory": "packages/@3xpo/conf/"
   },
-  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/@3xpo/conf/",
+  "homepage": "https://codeberg.org/Expo/pkgs/src/branch/senpai/packages/@3xpo/conf/",
   "bugs": {
-    "url": "https://codeberg.org/Expo/devtools/issues",
+    "url": "https://codeberg.org/Expo/pkgs/issues",
     "email": "expo@expo.moe"
   },
   "license": "MIT",

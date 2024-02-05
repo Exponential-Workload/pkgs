@@ -1,5 +1,5 @@
 {
-  "name": "@3xpo/devtools",
+  "name": "@3xpo/pkgs",
   "version": "0.1.0",
   "description": "Development Tool Things",
   "scripts": {
@@ -41,11 +41,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/devtools.git"
+    "url": "https://codeberg.org/Expo/pkgs.git"
   },
-  "homepage": "https://codeberg.org/Expo/devtools",
+  "homepage": "https://codeberg.org/Expo/pkgs",
   "bugs": {
-    "url": "https://codeberg.org/Expo/devtools/issues",
+    "url": "https://codeberg.org/Expo/pkgs/issues",
     "email": "expo@expo.moe"
   },
   "license": "MIT",

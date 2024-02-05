@@ -28,12 +28,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://codeberg.org/Expo/devtools.git",
+    "url": "https://codeberg.org/Expo/pkgs.git",
     "directory": "packages/querymimedb/"
   },
-  "homepage": "https://codeberg.org/Expo/devtools/src/branch/senpai/packages/querymimedb/",
+  "homepage": "https://codeberg.org/Expo/pkgs/src/branch/senpai/packages/querymimedb/",
   "bugs": {
-    "url": "https://codeberg.org/Expo/devtools/issues",
+    "url": "https://codeberg.org/Expo/pkgs/issues",
     "email": "expo@expo.moe"
   },
   "license": "MIT",
