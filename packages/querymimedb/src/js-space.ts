@@ -16,7 +16,7 @@ import {
  * @throws {import('./exceptions').NoMagicDbException} When the magicdb does not exist and {@link dieOnNoLibMagic} is true or undefined
  * @throws {import('./exceptions').NoLibMagicException} When libmagic is not installed and {@link dieOnNoLibMagic} is true or undefined
  * @param {string} path The path to query the mime type for
- * @param {boolean} [dieOnNoLibMagic=true] If libmagic isn't found & this is true, error.
+ * @param {boolean} [dieOnNoLibMagic=true] If libmagic isn't found & this is true or undefined, error.
  * @returns {string|null} The MIME Type. If libmagic failed to be imported, or the magic db doesn't exist, returns null when {@link dieOnNoLibMagic} is false, and throws a {@link import('./exceptions').NoLibMagicException NoLibMagicException} or {@link import('./exceptions').NoMagicDbException NoMagicDbException} if it's true or blank.
  */
 export type QueryFunc = <DieOnNoLibMagic extends boolean = true>(
