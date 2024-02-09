@@ -1,0 +1,73 @@
+{
+  "name": "@3xpo/fetch-prisma",
+  "version": "0.1.0",
+  "description": "Tool for fetching prisma engines at runtime so you can nicely bundle everything",
+  "scripts": {
+    "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
+    "build": "esbuild src/ensure-virt.ts --outfile=src/ensure.js --sourcemap --platform=node --format=esm --bundle && node ./create-dynamically-loadable-ensure.mjs && concurrently \"npm:build:*\"",
+    "build:ts": "tsc --emitDeclarationOnly",
+    "build:js": "esmany --args \"\\\"src/main.ts\\\" --sourcemap --packages=external\" --platform node --format esm,cjs --bundle true --output dist/main"
+  },
+  "author": "Expo",
+  "contributors": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Expo",
+      "url": "https://codeberg.org/Expo",
+      "email": "expo@expo.moe"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/Expo/pkgs.git",
+    "directory": "packages/@3xpo/fetch-prisma/"
+  },
+  "homepage": "https://codeberg.org/Expo/pkgs/src/branch/senpai/packages/@3xpo/fetch-prisma/",
+  "bugs": {
+    "url": "https://codeberg.org/Expo/pkgs/issues",
+    "email": "expo@expo.moe"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=v20.0.0"
+  },
+  "type": "module",
+  "files": [
+    "dist/**/*",
+    "dist/*",
+    "package.json",
+    "README.md",
+    "tsconfig.json"
+  ],
+  "source": "./src/main.ts",
+  "types": "./dist/main.d.ts",
+  "main": "./dist/main.node.bundle.min.cjs",
+  "module": "./dist/main.node.bundle.min.mjs",
+  "typings": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/main.node.bundle.min.mjs",
+      "require": "./dist/main.node.bundle.min.cjs",
+      "node": "./dist/main.node.bundle.min.mjs",
+      "default": "./dist/main.node.bundle.min.mjs"
+    }
+  },
+  "displayName": "fetch prisma",
+  "devDependencies": {
+    "@3xpo/es-many": "workspace:^",
+    "@prisma/engines": "^5.9.1",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.20.0",
+    "nodemon": "^3.0.3"
+  },
+  "dependencies": {
+    "@3xpo/fs-extra": "workspace:^"
+  }
+}
