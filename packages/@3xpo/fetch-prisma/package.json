@@ -60,14 +60,14 @@
     }
   },
   "displayName": "fetch prisma",
+  "dependencies": {
+    "@3xpo/fs-extra": "workspace:^"
+  },
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
     "@prisma/engines": "^5.9.1",
     "concurrently": "^8.2.2",
     "esbuild": "^0.20.0",
     "nodemon": "^3.0.3"
-  },
-  "dependencies": {
-    "@3xpo/fs-extra": "workspace:^"
   }
 }
