@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/fetch-prisma",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tool for fetching prisma engines at runtime so you can nicely bundle everything",
   "scripts": {
     "build": "esbuild src/ensure-virt.ts --outfile=src/ensure.js --sourcemap --platform=node --format=cjs --bundle && node ./create-dynamically-loadable-ensure.mjs && concurrently \"npm:build:*\"",
