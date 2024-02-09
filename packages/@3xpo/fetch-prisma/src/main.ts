@@ -28,7 +28,9 @@ export const run = (
   });
   fs.ensureDirSync(outputLocation);
   fs.readdirSync(enginesDir).forEach(v =>
-    fs.moveSync(resolve(enginesDir, v), resolve(outputLocation, v)),
+    fs.moveSync(resolve(enginesDir, v), resolve(outputLocation, v), {
+      overwrite: true,
+    }),
   );
   fs.rmSync(enginesDir, {
     recursive: true,
