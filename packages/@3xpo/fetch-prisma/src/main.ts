@@ -5,8 +5,12 @@ import { resolve } from 'node:path';
 import fs from '@3xpo/fs-extra';
 
 /** Ensures the binaries exist; runs synchronously */
-export const run = () => {
-  const filepath = resolve(os.tmpdir() ?? process.cwd(), '.ensure-prisma.js');
+export const run = (outputLocation = process.cwd()) => {
+  const enginesDir = resolve(
+    os.tmpdir() ?? process.cwd(),
+    '.get-prisma-engines',
+  );
+  const filepath = resolve(enginesDir, '.fetcher', '.ensure-prisma.cjs');
   fs.outputFileSync(filepath, ensureRaw);
   execSync(`${JSON.stringify(process.argv[0])} ${JSON.stringify(filepath)}`, {
     cwd: process.cwd(),
@@ -14,8 +18,19 @@ export const run = () => {
       ...process.env,
       PROC_IS_ENSURE_BINS_EXIST_PROC: 'YES',
     },
+    stdio: 'inherit',
   });
-  fs.rmSync(filepath);
+  fs.rmSync(resolve(filepath, '..'), {
+    recursive: true,
+    force: true,
+  });
+  fs.readdirSync(enginesDir).forEach(v =>
+    fs.moveSync(resolve(enginesDir, v), resolve(outputLocation, v)),
+  );
+  fs.rmSync(enginesDir, {
+    recursive: true,
+    force: true,
+  });
 };
 
 export default run;

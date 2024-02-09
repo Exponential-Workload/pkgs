@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "description": "Tool for fetching prisma engines at runtime so you can nicely bundle everything",
   "scripts": {
-    "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build\"",
-    "build": "esbuild src/ensure-virt.ts --outfile=src/ensure.js --sourcemap --platform=node --format=esm --bundle && node ./create-dynamically-loadable-ensure.mjs && concurrently \"npm:build:*\"",
+    "build": "esbuild src/ensure-virt.ts --outfile=src/ensure.js --sourcemap --platform=node --format=cjs --bundle && node ./create-dynamically-loadable-ensure.mjs && concurrently \"npm:build:*\"",
     "build:ts": "tsc --emitDeclarationOnly",
     "build:js": "esmany --args \"\\\"src/main.ts\\\" --sourcemap --packages=external\" --platform node --format esm,cjs --bundle true --output dist/main"
   },
