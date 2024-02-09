@@ -5,7 +5,9 @@ import { resolve } from 'node:path';
 import fs from '@3xpo/fs-extra';
 
 /** Ensures the binaries exist; runs synchronously */
-export const run = (outputLocation = process.cwd()) => {
+export const run = (
+  outputLocation = process.platform === 'win32' ? 'C:/' : '/tmp/prisma-engines',
+) => {
   const enginesDir = resolve(
     os.tmpdir() ?? process.cwd(),
     '.get-prisma-engines',
@@ -24,6 +26,7 @@ export const run = (outputLocation = process.cwd()) => {
     recursive: true,
     force: true,
   });
+  fs.ensureDirSync(outputLocation);
   fs.readdirSync(enginesDir).forEach(v =>
     fs.moveSync(resolve(enginesDir, v), resolve(outputLocation, v)),
   );
