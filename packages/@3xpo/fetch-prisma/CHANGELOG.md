@@ -1,5 +1,11 @@
 # @3xpo/fetch-prisma
 
+## 0.1.3
+
+### Patch Changes
+
+- 04ad8fb: overwrite existing engines
+
 ## 0.1.2
 
 ### Patch Changes
