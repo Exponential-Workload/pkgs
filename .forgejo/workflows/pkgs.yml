@@ -36,7 +36,7 @@ jobs:
       - name: Update README
         run: |
           cd ../ev-out;
-          find . -type f -name 'README.md' -exec 'cat' 'README.github.md' '{}' '>' '{}.new' \;
+          find . -type f -name 'README.md' -exec 'bash' '-c' 'cat README.github.md "{}" > "{}.new"' \;
           find . -type f -name 'README.md' -exec 'mv' '{}.new' '{}' \;
       - name: Commit and push changes
         run: |
