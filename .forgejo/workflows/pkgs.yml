@@ -1,0 +1,47 @@
+name: Deploy pkgs
+run-name: Deploy pkgs
+on: [push]
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/senpai'
+    runs-on: docker
+    container:
+      image: node:slim
+    steps:
+      - name: Install Git
+        run: apt update && apt install git openssh-client -y
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure Git
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVK }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.PUBK }}" > ~/.ssh/id_ed25519.pub
+          chmod 700 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Clone repository
+        run: |
+          git clone -b senpai --single-branch git@github.com:Exponential-Workload/pkgs.git ../ev-repo
+          cd ../ev-repo
+          git config user.email "eventpush@no"
+          git config user.name "Codeberg Actions"
+          git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
+          cd -
+      - name: Setup package
+        run: |
+          cp -r . ../ev-out
+          cp -r ../ev-repo/.git ../ev-out/.git
+          git rev-parse HEAD > ../ev-out/.rev
+      - name: Update README
+        run: |
+          cd ../ev-out;
+          find . -type f -name 'README.md' -exec 'cat' 'README.github.md' '{}' '>' '{}.new' \;
+          find . -type f -name 'README.md' -exec 'mv' '{}.new' '{}' \;
+      - name: Commit and push changes
+        run: |
+          cd ../ev-out
+          echo .rev >> .gitignore
+          git add .
+          git commit -m "chore: Update to Codeberg/$(cat .rev)" --allow-empty
+          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
