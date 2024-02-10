@@ -21,10 +21,11 @@ jobs:
             2. Verify it's email.
             3. Add your SSH key to your Codeberg account.
             4. Fork the repository.
-            5. Run `git remote set-url origin git@codeberg.org:[your username]/pkgs.git` in your fork's git repository.
-            6. Run `git push`, as you normally would.
-            7. Open a PR on Codeberg.
-            8. Enjoy!
+            5. Clone the fork.
+            6. Copy over any modified files, and commit them.<br/>Alternatively: Create a [patchfile](https://www.git-tower.com/learn/git/faq/create-and-apply-patch/) in your old Github fork, then apply it to your new fork using `git apply file.patch`.
+            7. Run `git push`, as you normally would.
+            8. Open a PR on Codeberg.
+            9. Enjoy!
 
             This PR will be closed automatically.
             `.split('\n').map(v=>v.trim()).join('\n').trim();
