@@ -5,20 +5,12 @@ on:
     branches: ['master']
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     strategy:
       matrix:
         node: [14.x, 16.x, 18.x, 19.x, 20.x, 21.x]
@@ -28,8 +20,6 @@ jobs:
       - name: Clone Repo
         run: |
           git clone https://codeberg.org/Expo/pkgs.git .
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3.6.0
         with:
