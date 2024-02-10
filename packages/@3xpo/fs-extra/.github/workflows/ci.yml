@@ -38,11 +38,9 @@ jobs:
         run: corepack enable
       - name: Install dependencies
         run: pnpm i --no-frozen-lockfile
-      - name: Build es-many
-        run: pnpm nx build @3xpo/es-many
       - name: Install dependencies, again
-        run: cd packages/@3xpo/events && pnpm i --no-frozen-lockfile
+        run: cd packages/@3xpo/fs-extra && pnpm i --no-frozen-lockfile
       - name: Build
-        run: pnpm nx build @3xpo/events
+        run: pnpm nx build @3xpo/fs-extra
       - name: Test
-        run: pnpm nx run @3xpo/events:test
+        run: pnpm nx run @3xpo/fs-extra:test
