@@ -34,4 +34,4 @@ jobs:
         run: |
           git add .
           git commit -m "chore: Update READMEs @ $(git rev-parse HEAD)" --allow-empty
-          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
+          git push --force git@github.com:Exponential-Workload/pkgs.git senpai || git push --force git@github.com:Exponential-Workload/pkgs.git senpai || git push --force git@github.com:Exponential-Workload/pkgs.git senpai
