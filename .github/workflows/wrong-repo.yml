@@ -1,49 +1,35 @@
-name: gtfo
+name: Auto Close Issues and PRs
 
 on:
+  issues:
+    types: [opened]
   pull_request:
     types: [opened]
 
 jobs:
-  redirect-and-close:
+  auto-close:
     runs-on: ubuntu-latest
     steps:
-      - name: Comment on PR
-        uses: actions/github-script@v7
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Close Issue or PR
+        uses: peter-evans/close-issue@v1
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const message = `
-            Hello @${{ github.event.pull_request.user.login }},
+          comment: >
+            Hello @{{ github.actor }},
 
             Thank you for your contribution! However, this repository is a read-only mirror. Please re-open this over at https://codeberg.org/Expo/pkgs - this should take no more than a few minutes:
             1. Create an account on Codeberg, if you don't already have one.
-            2. Verify it's email.
+            2. Verify its email.
             3. Add your SSH key to your Codeberg account.
             4. Fork the repository.
             5. Clone the fork.
-            6. Copy over any modified files, and commit them.<br/>Alternatively: Create a [patchfile](https://www.git-tower.com/learn/git/faq/create-and-apply-patch/) in your old Github fork, then apply it to your new fork using ${'`git apply file.patch`'}.
-            7. Run ${'`git push`'}, as you normally would.
+            6. Copy over any modified files, and commit them.<br/>Alternatively: Create a [patchfile](https://www.git-tower.com/learn/git/faq/create-and-apply-patch/) in your old Github fork, then apply it to your new fork using `git apply file.patch`.
+            7. Run `git push`, as you normally would.
             8. Open a PR on Codeberg.
             9. Enjoy!
 
             This PR will be closed automatically.
-            `.split('\n').map(v=>v.trim()).join('\n').trim();
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: message
-            });
-
-      - name: Close PR
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.pulls.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              state: "closed"
-            });
+          issue_number: ${{ github.event.issue.number || github.event.pull_request.number }}
+          token: ${{ secrets.GITHUB_TOKEN }}
