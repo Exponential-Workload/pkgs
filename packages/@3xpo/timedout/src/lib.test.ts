@@ -5,7 +5,7 @@ describe('@3xpo/timedout', () => {
 
   it('should resolve with the value when the promise resolves within the timeout', async () => {
     const result = await timedout(
-      mockPromise('success', 500),
+      mockPromise('success', 50),
       'Timeout error',
       1000,
     );
@@ -14,7 +14,7 @@ describe('@3xpo/timedout', () => {
 
   it('should reject with the specified timeout error when the promise takes too long', async () => {
     await expect(
-      timedout(mockPromise('success', 1500), 'Timeout error', 1000),
+      timedout(mockPromise('success', 150), 'Timeout error', 100),
     ).rejects.toThrow('Timeout error');
   });
 
@@ -22,7 +22,7 @@ describe('@3xpo/timedout', () => {
     const onTimeoutMock = jest.fn();
     await expect(
       timedout(
-        mockPromise('success', 1500),
+        mockPromise('success', 150),
         'Timeout error',
         1000,
         onTimeoutMock,
