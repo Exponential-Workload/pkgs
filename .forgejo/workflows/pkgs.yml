@@ -26,13 +26,16 @@ jobs:
           git config user.name "Codeberg Actions"
           git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
           git remote set-url origin git@github.com:Exponential-Workload/pkgs.git
+      - name: Commit and push changes
+        run: |
+          git remote set-url origin git@codoeberg.org:Expo/pkgs.git
+          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
       - name: Update READMEs
         run: |
           find . -type f -name 'README.md' -exec 'bash' '-c' 'cat README.github.md "{}" > "{}.new"' \;
           find . -type f -name 'README.md' -exec 'mv' '{}.new' '{}' \;
-      - name: Commit and push changes
+      - name: Commit and push new READMEs
         run: |
           git add .
           git commit -m "chore: Update READMEs @ $(git rev-parse HEAD)" --allow-empty
-          git push --force git@github.com:Exponential-Workload/pkgs.git senpai || git push --force git@github.com:Exponential-Workload/pkgs.git senpai || git push --force git@github.com:Exponential-Workload/pkgs.git senpai
-          git remote set-url origin git@codoeberg.org:Expo/pkgs.git
+          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
