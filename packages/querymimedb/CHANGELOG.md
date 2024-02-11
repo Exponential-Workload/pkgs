@@ -1,5 +1,11 @@
 # querymimedb
 
+## 0.1.8
+
+### Patch Changes
+
+- fallback to gyp
+
 ## 0.1.7
 
 ### Patch Changes
