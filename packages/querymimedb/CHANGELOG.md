@@ -1,5 +1,11 @@
 # querymimedb
 
+## 0.1.7
+
+### Patch Changes
+
+- 0e2746e: move cmakelists' apple specific stuff down a bit
+
 ## 0.1.6
 
 ### Patch Changes
