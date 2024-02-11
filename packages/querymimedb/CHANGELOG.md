@@ -1,5 +1,11 @@
 # querymimedb
 
+## 0.1.9
+
+### Patch Changes
+
+- 51dea90: include binding in files arr
+
 ## 0.1.8
 
 ### Patch Changes
