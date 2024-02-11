@@ -9,6 +9,7 @@
     "build:js": "esmany --args \"\\\"src/cjs.cts\\\" --sourcemap --packages=external  --resolve-extensions=.ts,.js,.mts,.cts,.mjs,.cjs\" --platform node --format cjs --bundle true --output dist/cjs",
     "build:js-esm": "esmany --args \"\\\"src/esm.mts\\\" --sourcemap --packages=external  --resolve-extensions=.ts,.js,.mts,.cts,.mjs,.cjs\" --platform node --format esm --bundle true --output dist/esm",
     "build:cmake": "cmake-js install && cmake-js configure && cmake-js compile",
+    "build-alt:gyp": "node-gyp clean && node-gyp configure && node-gyp build",
     "install": "npm run build:cmake"
   },
   "author": "Expo",
