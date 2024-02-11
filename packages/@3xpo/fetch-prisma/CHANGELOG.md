@@ -1,5 +1,12 @@
 # @3xpo/fetch-prisma
 
+## 0.1.4
+
+### Patch Changes
+
+- Updated dependencies [f8d96d5]
+  - @3xpo/fs-extra@11.2.9
+
 ## 0.1.3
 
 ### Patch Changes

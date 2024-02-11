@@ -1,5 +1,11 @@
 # @3xpo/events
 
+## 1.0.12
+
+### Patch Changes
+
+- f8d96d5: upgrade deps
+
 ## 1.0.11
 
 ### Patch Changes

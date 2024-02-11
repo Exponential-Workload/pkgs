@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/events",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "NodeJS EventEmitter Polyfill in TS, with event type support",
   "main": "dist/lib.bundle.min.cjs",
   "module": "dist/lib.bundle.min.mjs",

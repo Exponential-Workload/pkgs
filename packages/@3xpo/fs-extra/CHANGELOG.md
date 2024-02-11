@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.2.9
+
+### Patch Changes
+
+- f8d96d5: upgrade deps
+
 ## 11.2.8
 
 ### Patch Changes

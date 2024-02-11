@@ -1,5 +1,12 @@
 # querymimedb
 
+## 0.1.6
+
+### Patch Changes
+
+- 894fd43: experimental node-gyp fallback
+- 894fd43: macos cmake support
+
 ## 0.1.5
 
 ### Patch Changes
