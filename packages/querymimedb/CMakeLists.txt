@@ -9,18 +9,6 @@ add_definitions(-DNAPI_VERSION=7)
 include_directories(${CMAKE_JS_INC})
 include_directories(${NODE_ADDON_API_DIR})
 
-# Check if the operating system is macOS
-if(APPLE)
-  # Add compile flags for macOS
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
-
-  # For Xcode or Makefile projects, set the GCC_SYMBOLS_PRIVATE_EXTERN property to YES
-  set_target_properties(querymimedb PROPERTIES
-    XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN YES
-  )
-endif()
-
 # Attempt to find libmagic
 find_library(LIBMAGIC_LIBRARY NAMES magic)
 find_path(LIBMAGIC_INCLUDE_DIR NAMES magic.h)
@@ -37,6 +25,18 @@ file(GLOB SOURCE_FILES "src/binding.cpp")
 
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES} ${CMAKE_JS_SRC})
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "" SUFFIX ".node")
+
+# Check if the operating system is macOS
+if(APPLE)
+  # Add compile flags for macOS
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden")
+
+  # For Xcode or Makefile projects, set the GCC_SYMBOLS_PRIVATE_EXTERN property to YES
+  set_target_properties(querymimedb PROPERTIES
+    XCODE_ATTRIBUTE_GCC_SYMBOLS_PRIVATE_EXTERN YES
+  )
+endif()
 
 # Conditionally link against libmagic only if found
 if(LIBMAGIC_LIBRARY)
