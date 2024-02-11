@@ -50,7 +50,8 @@
     "package.json",
     "README.md",
     "tsconfig.json",
-    "CMakeLists.txt"
+    "CMakeLists.txt",
+    "binding.gyp"
   ],
   "source": "./src/esm.mts",
   "types": "./dist/esm.d.mts",
