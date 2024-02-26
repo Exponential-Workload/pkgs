@@ -10,7 +10,7 @@ jobs:
       image: archlinux
     steps:
       - name: Install System Deps
-        run: pacman -Syu --noconfirm git openssh base-devel findutils
+        run: pacman -Syu --noconfirm git openssh base-devel findutils nodejs
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure Git
