@@ -7,10 +7,8 @@ jobs:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
-      image: archlinux
+      image: 3xpo/base
     steps:
-      - name: Install System Deps
-        run: pacman -Syu --noconfirm git openssh base-devel findutils nodejs
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure Git

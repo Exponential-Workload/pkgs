@@ -7,10 +7,8 @@ jobs:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
-      image: node:slim
+      image: 3xpo/base
     steps:
-      - name: Install Git
-        run: apt update && apt install git openssh-client -y
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure Git

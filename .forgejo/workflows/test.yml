@@ -6,10 +6,10 @@ jobs:
   build:
     runs-on: docker
     container:
-      image: node
+      image: 3xpo/base
     steps:
       - name: Install System Dependencies
-        run: apt update && apt install git g++ cmake -y
+        run: pacman -S --no-confirm --needed g++ cmake
       - name: Checkout
         uses: actions/checkout@v3
       - name: Enable Corepack
