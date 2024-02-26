@@ -1,5 +1,11 @@
 # querymimedb
 
+## 0.1.10
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+
 ## 0.1.9
 
 ### Patch Changes

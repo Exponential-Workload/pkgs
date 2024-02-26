@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/timedout",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Promises with timeouts",
   "scripts": {
     "build": "concurrently \"npm:build:*\"",

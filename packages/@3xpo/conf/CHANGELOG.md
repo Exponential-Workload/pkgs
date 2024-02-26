@@ -1,5 +1,13 @@
 # @3xpo/conf
 
+## 0.2.8
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+- Updated dependencies [89fb2b5]
+  - @3xpo/events@1.0.13
+
 ## 0.2.7
 
 ### Patch Changes

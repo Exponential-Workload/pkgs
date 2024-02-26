@@ -1,5 +1,11 @@
 # @3xpo/promi
 
+## 0.1.6
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+
 ## 0.1.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@3xpo/promi",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Promisify a callback function",
   "scripts": {
     "dev": "nodemon --watch src -e ts,json,env --delay 50ms --exec \"npm run build && npm run test\"",

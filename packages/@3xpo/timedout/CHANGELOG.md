@@ -1,5 +1,11 @@
 # @3xpo/timedout
 
+## 0.1.8
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+
 ## 0.1.7
 
 ### Patch Changes

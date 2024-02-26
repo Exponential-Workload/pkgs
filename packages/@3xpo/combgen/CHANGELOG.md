@@ -1,5 +1,11 @@
 # @3xpo/combgen
 
+## 0.2.11
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+
 ## 0.2.10
 
 ### Patch Changes

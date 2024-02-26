@@ -1,5 +1,11 @@
 # @3xpo/events
 
+## 1.0.13
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+
 ## 1.0.12
 
 ### Patch Changes

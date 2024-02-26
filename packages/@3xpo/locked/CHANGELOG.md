@@ -1,5 +1,13 @@
 # @3xpo/locked
 
+## 0.1.9
+
+### Patch Changes
+
+- 89fb2b5: upgrade dependencies to latest
+- Updated dependencies [89fb2b5]
+  - @3xpo/resolvablepromise@0.2.5
+
 ## 0.1.8
 
 ### Patch Changes
