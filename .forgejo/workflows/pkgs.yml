@@ -7,10 +7,10 @@ jobs:
     if: github.ref == 'refs/heads/senpai'
     runs-on: docker
     container:
-      image: node:slim
+      image: archlinux
     steps:
-      - name: Install Git
-        run: apt update && apt install git openssh-client -y
+      - name: Install System Deps
+        run: pacman -S --noconfirm git openssh base-devel findutils
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure Git
