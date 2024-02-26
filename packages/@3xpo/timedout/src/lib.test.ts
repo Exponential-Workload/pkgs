@@ -24,7 +24,7 @@ describe('@3xpo/timedout', () => {
       timedout(
         mockPromise('success', 150),
         'Timeout error',
-        1000,
+        100,
         onTimeoutMock,
       ),
     ).rejects.toThrow('Timeout error');
