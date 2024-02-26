@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Expo's NX-(P)NPM bootstrap script
+# This file is licensed under the terms of the MIT license.
+# See the LICENSE file for details.
+
+set -ea
+
+# Standard logging functions
+log() {
+  echo -e "\033[1;32mlog\033[0m: $1";
+}
+info() {
+  echo -e "\033[1;36minfo\033[0m: $1";
+}
+warn() {
+  echo -e "\033[1;33mwarn\033[0m: $1";
+}
+error() {
+  echo -e "\033[1;31merror\033[0m: $1";
+}
+fatal() {
+  echo -e "\033[1;31mfatal\033[0m: $1";
+  exit 1;
+}
+
+# Helper function to ensure a command exists
+ensure_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    if [ "$2" == "silent" ]; then
+      return 1;
+    fi;
+    echo "${2:-"Error: $1 is not installed."}" 1>&2;
+    exit 1;
+  fi;
+  echo -n "$1";
+}
+
+# Find the package manager
+info "Detecting package manager...";
+PACKAGE_MANAGER="$(ensure_command pnpm silent || ensure_command npm silent || ensure_command yarn 'Error: No package manager found. Please install pnpm, npm or yarn.')";
+info "Using $PACKAGE_MANAGER v$($PACKAGE_MANAGER --version) as the package manager";
+
+# Ensure required commands are installed
+info "Checking for required commands...";
+ensure_command git > /dev/null;
+ensure_command node > /dev/null;
+
+# Install Dependencies
+info "Installing dependencies...";
+$PACKAGE_MANAGER i;
+log "Done!";
