@@ -29,8 +29,7 @@ jobs:
           git remote set-url origin git@codeberg.org:Expo/pkgs.git
           git pull --no-rebase
       - name: Push changes
-        run: |
-          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
+        run: git push --force git@github.com:Exponential-Workload/pkgs.git senpai
       - name: Update READMEs
         run: |
           find . -type f -name 'README.md' -exec 'bash' '-c' 'cat README.github.md "{}" > "{}.new"' \;
