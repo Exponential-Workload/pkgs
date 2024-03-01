@@ -20,26 +20,26 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
       - name: Clone repository
         run: |
-          git clone -b master --single-branch git@github.com:Exponential-Workload/events.git ../ev-repo
-          cd ../ev-repo
+          git clone -b master --single-branch git@github.com:Exponential-Workload/events.git ~/ev-repo
+          cd ~/ev-repo
           git config user.email "eventpush@no"
           git config user.name "Codeberg Actions"
           git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
           cd -
       - name: Setup package
         run: |
-          cp -r packages/@3xpo/events ../ev-out
-          cp -r ../ev-repo/.git ../ev-out/.git
-          git rev-parse HEAD > ../ev-out/.rev
+          cp -r packages/@3xpo/events ~/ev-out
+          cp -r ~/ev-repo/.git ~/ev-out/.git
+          git rev-parse HEAD > ~/ev-out/.rev
       - name: Update README
         run: |
-          cd ../ev-out;
+          cd ~/ev-out;
           mv README.md R
           cat README.github.md R > README.md
           rm README.github.md R
       - name: Commit and push changes
         run: |
-          cd ../ev-out
+          cd ~/ev-out
           echo .rev >> .gitignore
           git add .
           git commit -m "chore: Update to Codeberg/$(cat .rev)" --allow-empty
