@@ -157,7 +157,17 @@ export const mkDirAndCopy = (
 };
 
 export const copyDir = (src: string, dest: string, opts?: CopyOpts) => {
-  fs.readdirSync(src).forEach(item => copyDirItem(item, src, dest, opts));
+  const dir = fs.opendirSync(src);
+
+  try {
+    let dirent: fs.Dirent;
+
+    while ((dirent = dir.readSync()) !== null) {
+      copyDirItem(dirent.name, src, dest, opts);
+    }
+  } finally {
+    dir.closeSync();
+  }
 };
 
 export const copyDirItem = (

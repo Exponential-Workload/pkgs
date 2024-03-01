@@ -159,30 +159,29 @@ export const onDir = async (
     await fs.mkdir(dest);
   }
 
-  const items = await fs.readdir(src);
+  const promises = [] as Promise<void>[];
 
   // loop through the files in the current directory to copy everything
-  await Promise.all(
-    items.map(async item => {
-      const srcItem = path.join(src, item);
-      const destItem = path.join(dest, item);
+  for await (const item of await fs.opendir(src)) {
+    const srcItem = path.join(src, item.name);
+    const destItem = path.join(dest, item.name);
 
-      // skip the item if it is matches by the filter function
-      const include = await runFilter(srcItem, destItem, opts);
-      if (!include) return;
-
-      const { destStat } = await stat.checkPaths(
-        srcItem,
-        destItem,
-        'copy',
-        opts,
-      );
-
-      // If the item is a copyable file, `getStatsAndPerformCopy` will copy it
-      // If the item is a directory, `getStatsAndPerformCopy` will call `onDir` recursively
-      return getStatsAndPerformCopy(destStat, srcItem, destItem, opts);
-    }),
-  );
+    promises.push(
+      runFilter(srcItem, destItem, opts).then(include => {
+        if (include) {
+          // only copy the item if it matches the filter function
+          return stat
+            .checkPaths(srcItem, destItem, 'copy', opts)
+            .then(({ destStat }) => {
+              // If the item is a copyable file, `getStatsAndPerformCopy` will copy it
+              // If the item is a directory, `getStatsAndPerformCopy` will call `onDir` recursively
+              return getStatsAndPerformCopy(destStat, srcItem, destItem, opts);
+            });
+        }
+      }),
+    );
+  }
+  await Promise.all(promises);
 
   if (!destStat) {
     await fs.chmod(
