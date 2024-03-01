@@ -20,6 +20,10 @@ jobs:
       - name: Clone Repo
         run: |
           git clone https://codeberg.org/Expo/pkgs.git .
+      - name: 'MacOS: Install distutils/setuptools'
+        if: matrix.os == 'macos-latest'
+        run: |
+          pip install setuptools
       - name: Setup Node.js
         uses: actions/setup-node@v3.6.0
         with:
