@@ -26,7 +26,7 @@ describe('mkdirp / relative', () => {
   });
 
   afterEach(async () => {
-    await new Promise(rs => setTimeout(rs, 100));
+    process.chdir(CWD);
     await fse.rm(TEST_DIR, { recursive: true, force: true });
   });
   afterAll(() => process.chdir(CWD));
