@@ -9,7 +9,7 @@ jobs:
       image: 3xpo/base
     steps:
       - name: Install System Dependencies
-        run: sudo pacman -S --noconfirm --needed g++ cmake
+        run: sudo pacman -S --noconfirm --needed gcc cmake
       - name: Checkout
         uses: actions/checkout@v4
       - name: Enable Corepack
