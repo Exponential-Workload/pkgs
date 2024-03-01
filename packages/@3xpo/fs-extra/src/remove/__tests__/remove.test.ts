@@ -93,13 +93,13 @@ describe('remove', () => {
       while (!done) await new Promise(rs => setTimeout(rs, 10));
     });
 
-    it('shouldn’t delete glob matches', function (done) {
+    it('shouldn’t delete glob matches', async () => {
       const file = path.join(TEST_DIR, 'file?');
       try {
         fs.writeFileSync(file, 'hello');
       } catch (ex) {
         if (ex.code === 'ENOENT')
-          return this.skip(
+          return test.skip(
             'Windows does not support filenames with ‘?’ or ‘*’ in them.',
           );
         throw ex;
@@ -110,15 +110,9 @@ describe('remove', () => {
 
       expect(fs.existsSync(file)).toBeTruthy();
       expect(fs.existsSync(wrongFile)).toBeTruthy();
-      fse
-        .remove(file)
-        .catch(err => err)
-        .then(err => {
-          expect(err).toBeFalsy();
-          expect(!fs.existsSync(file)).toBeTruthy();
-          expect(fs.existsSync(wrongFile)).toBeTruthy();
-          done();
-        });
+      await fse.remove(file);
+      expect(!fs.existsSync(file)).toBeTruthy();
+      expect(fs.existsSync(wrongFile)).toBeTruthy();
     });
 
     it('shouldn’t delete glob matches when file doesn’t exist', done => {
