@@ -24,10 +24,9 @@ jobs:
           git config user.name "Codeberg Actions"
           git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
           git remote set-url origin git@github.com:Exponential-Workload/pkgs.git
-      - name: Pull from remote
+      - name: Fetch from remote
         run: |
-          git remote set-url origin git@codeberg.org:Expo/pkgs.git
-          git pull --no-rebase
+          git fetch --all
       - name: Push changes
         run: git push --force git@github.com:Exponential-Workload/pkgs.git senpai
       - name: Update READMEs
