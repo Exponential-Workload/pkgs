@@ -16,7 +16,7 @@
     "pub": "pnpm pub-prepare && pnpm pub-git && pnpm pub-release",
     "new": "node scripts/new",
     "clean:nx": "nx reset",
-    "clean:pkg-out": "nx exec -- rm -rf dist build"
+    "clean:pkg-out": "nx exec -- rm -rf dist build coverage"
   },
   "keywords": [
     "written",
