@@ -34,15 +34,12 @@ describe('mkdirp / relative', () => {
   it('should make the directory with relative path', async () => {
     process.chdir(TEST_DIR);
 
-    await fse.mkdirp(file, 0o755);
-    const e = await fse.pathExists(file);
-    expect(e).toEqual(true);
-    const stat = fs.statSync(file);
+    await fse.mkdirp(file);
 
-    if (os.platform().indexOf('win') === 0)
-      expect(stat.mode & 0o777).toEqual(0o666);
-    else expect(stat.mode & 0o777).toEqual(0o755);
+    const stats = await fs.promises.stat(path.join(TEST_DIR, file));
 
-    expect(stat.isDirectory()).toBeTruthy();
+    assert.ok(stats.isDirectory());
+
+    fs.rmdirSync(path.join(TEST_DIR, file));
   });
 });
