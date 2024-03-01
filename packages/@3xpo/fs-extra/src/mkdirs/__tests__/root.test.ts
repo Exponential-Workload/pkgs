@@ -3,7 +3,6 @@
 import * as fs from 'fs';
 import fse from '../..';
 import path from 'path';
-import assert from 'assert';
 
 /* global describe, it */
 
@@ -12,7 +11,9 @@ describe('mkdirp / root', () => {
   const dir = path.normalize(path.resolve(path.sep)).toLowerCase();
 
   // Windows does not have permission to mkdir on root
-  if (process.platform === 'win32') return;
+  if (process.platform === 'win32')
+    return it.skip('Windows does not have permission to mkdir on root', () =>
+      void 0);
 
   it('should', done => {
     fse
