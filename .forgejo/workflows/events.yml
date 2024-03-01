@@ -10,7 +10,7 @@ jobs:
       image: 3xpo/base
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Configure Git
         run: |
           mkdir -p ~/.ssh

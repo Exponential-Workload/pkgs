@@ -11,7 +11,7 @@ jobs:
       - name: Install System Dependencies
         run: pacman -S --noconfirm --needed g++ cmake
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Enable Corepack
         run: corepack enable
       - name: Install Dependencies
