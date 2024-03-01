@@ -12,8 +12,6 @@ jobs:
         run: sudo pacman -S --noconfirm --needed gcc cmake
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Enable Corepack
-        run: corepack enable
       - name: Install Dependencies
         run: pnpm i --no-frozen-lockfile
       - name: Build
