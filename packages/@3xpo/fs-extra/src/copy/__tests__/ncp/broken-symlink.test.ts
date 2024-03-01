@@ -67,15 +67,23 @@ describe('ncp broken symlink', () => {
   });
 
   it('should return an error if symlink is broken and dereference=true', async () => {
-    const rt = await ncp(src, out, { dereference: true })
-      .then(v => ({
-        err: false,
-        val: v,
-      }))
-      .catch(e => ({
+    let rt: { err: false; val: void } | { err: true; val: any };
+    try {
+      rt = await ncp(src, out, { dereference: true })
+        .then(v => ({
+          err: false,
+          val: v,
+        }))
+        .catch(e => ({
+          err: true,
+          val: e,
+        }));
+    } catch (error) {
+      rt = {
         err: true,
-        val: e,
-      }));
+        val: error,
+      };
+    }
 
     expect(rt.err).toBe(true);
     expect(rt.val.code).toBe('ENOENT');
