@@ -31,6 +31,8 @@ jobs:
           cp -r packages/@3xpo/events ~/ev-out
           cp -r ~/ev-repo/.git ~/ev-out/.git
           git rev-parse HEAD > ~/ev-out/.rev
+          echo '' >> ~/ev-out/.rev
+          git log -1 --pretty=%B >> ~/ev-out/.rev
       - name: Update README
         run: |
           cd ~/ev-out;
