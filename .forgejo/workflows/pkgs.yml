@@ -34,8 +34,6 @@ jobs:
         run: |
           find . -type f -name 'README.md' -exec 'bash' '-c' 'cat README.github.md "{}" > "{}.new"' \;
           find . -type f -name 'README.md' -exec 'mv' '{}.new' '{}' \;
-      - name: Push existing content
-          git push --force git@github.com:Exponential-Workload/pkgs.git senpai
       - name: Commit and push new READMEs
         run: |
           git add .
