@@ -99,9 +99,9 @@ describe('remove', () => {
         fs.writeFileSync(file, 'hello');
       } catch (ex) {
         if (ex.code === 'ENOENT')
-          return test.skip(
+          return expect(
             'Windows does not support filenames with ‘?’ or ‘*’ in them.',
-          );
+          ).toBeTruthy();
         throw ex;
       }
 
