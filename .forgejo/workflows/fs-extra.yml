@@ -43,6 +43,7 @@ jobs:
         run: |
           cd ~/fse-out
           echo .rev >> .gitignore
+          git log --pretty=format:"%h - %an, %ai - %s" > .git-history
           git add .
           git commit -m "chore: Update to Codeberg/$(cat .rev)" --allow-empty
           git push --force git@github.com:Exponential-Workload/modern-fs-extra.git master
