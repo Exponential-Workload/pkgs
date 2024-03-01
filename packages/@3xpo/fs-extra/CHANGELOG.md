@@ -1,5 +1,11 @@
 11.2.0 / 2023-11-27
 
+## 11.3.0
+
+### Minor Changes
+
+- c24a253: Specify a minimum node engine version of 16
+
 ## 11.2.9
 
 ### Patch Changes
