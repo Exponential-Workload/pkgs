@@ -82,6 +82,9 @@
     "url": "https://codeberg.org/Expo/pkgs/issues",
     "email": "expo@expo.moe"
   },
+  "engines": {
+    "node": ">=16"
+  },
   "type": "module",
   "devDependencies": {
     "@3xpo/es-many": "workspace:^",
