@@ -25,7 +25,10 @@ describe('mkdirp / relative', () => {
     file = path.join(x, y, z);
   });
 
-  afterEach(() => fs.rmSync(TEST_DIR, { recursive: true, force: true }));
+  afterEach(async () => {
+    await new Promise(rs => setTimeout(rs, 100));
+    await fse.rm(TEST_DIR, { recursive: true, force: true });
+  });
   afterAll(() => process.chdir(CWD));
 
   it('should make the directory with relative path', async () => {
