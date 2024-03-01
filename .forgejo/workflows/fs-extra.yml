@@ -30,6 +30,7 @@ jobs:
         run: |
           cp -r packages/@3xpo/fs-extra ~/fse-out
           cp -r ~/fse-repo/.git ~/fse-out/.git
+          git fetch --all --unshallow
           git rev-parse HEAD > ~/fse-out/.rev
           echo '' >> ~/fse-out/.rev
           git log -1 --pretty=%B >> ~/fse-out/.rev
