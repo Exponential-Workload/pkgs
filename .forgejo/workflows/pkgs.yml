@@ -18,15 +18,15 @@ jobs:
           echo "${{ secrets.PUBK }}" > ~/.ssh/id_ed25519.pub
           chmod 700 ~/.ssh/id_ed25519
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - name: Unshallowly fetch from remote
+        run: |
+          git fetch --all --unshallow
       - name: Setup package
         run: |
           git config user.email "eventpush@no"
           git config user.name "Codeberg Actions"
           git config --local http.extraheader "AUTHORIZATION: basic ${{ secrets.EVENT_PAT }}"
           git remote set-url origin git@github.com:Exponential-Workload/pkgs.git
-      - name: Fetch from remote
-        run: |
-          git fetch --all
       - name: Push changes
         run: git push --force git@github.com:Exponential-Workload/pkgs.git senpai
       - name: Update READMEs
